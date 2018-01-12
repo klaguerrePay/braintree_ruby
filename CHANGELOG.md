@@ -1,3 +1,6 @@
+## Unreleased
+* Add support for tagged evidence in DisputeGateway#addTextEvidence (Beta release)
+
 # 2.81.0
 * Add support for line_items
 * Update README to use instance methods
