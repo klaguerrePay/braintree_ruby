@@ -1,5 +1,6 @@
 ## Unreleased
 * Add support for tagged evidence in DisputeGateway#addTextEvidence (Beta release)
+* Update https certificate bundle
 
 # 2.81.0
 * Add support for line_items
