@@ -1,3 +1,6 @@
+# Unreleased
+* Add support for `source_merchant_id` on webhooks
+
 ## 2.82.0
 * Add support for tagged evidence in DisputeGateway#add_text_evidence (Beta release)
 * Update https certificate bundle

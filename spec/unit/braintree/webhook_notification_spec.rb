@@ -58,6 +58,29 @@ describe Braintree::WebhookNotification do
       notification.timestamp.should be_within(10).of(Time.now.utc)
     end
 
+    it "builds a sample notification with a source merchant ID" do
+      sample_notification = Braintree::WebhookTesting.sample_notification(
+        Braintree::WebhookNotification::Kind::SubscriptionWentPastDue,
+        "my_id",
+        "my_source_merchant_id"
+      )
+
+      notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+
+      notification.source_merchant_id.should == "my_source_merchant_id"
+    end
+
+    it "doesn't include source merchant IDs if not supplied" do
+      sample_notification = Braintree::WebhookTesting.sample_notification(
+        Braintree::WebhookNotification::Kind::PartnerMerchantDeclined,
+        "my_id"
+      )
+
+      notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+
+      notification.source_merchant_id.should be_nil
+    end
+
     context "auth" do
       it "builds a sample notification for a status transitioned webhook" do
         sample_notification = Braintree::WebhookTesting.sample_notification(
