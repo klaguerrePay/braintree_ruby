@@ -1,6 +1,8 @@
 # Unreleased
 * Add support for tax_amount field on transaction line_items
 * Add support for `source_merchant_id` on webhooks
+* Deprecated DiscountAmountMustBeGreaterThanZero error in favor of DiscountAmountCannotBeNegative.
+* Deprecated UnitTaxAmountMustBeGreaterThanZero error in favor of UnitTaxAmountCannotBeNegative.
 
 ## 2.82.0
 * Add support for tagged evidence in DisputeGateway#add_text_evidence (Beta release)
