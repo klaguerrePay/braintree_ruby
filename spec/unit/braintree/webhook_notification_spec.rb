@@ -423,6 +423,18 @@ describe Braintree::WebhookNotification do
   end
 
   describe "parse" do
+    it "raises InvalidSignature error when the signature is nil" do
+      expect do
+        Braintree::WebhookNotification.parse(nil, "payload")
+      end.to raise_error(Braintree::InvalidSignature, "signature cannot be nil")
+    end
+
+    it "raises InvalidSignature error when the payload is nil" do
+      expect do
+        Braintree::WebhookNotification.parse("signature", nil)
+      end.to raise_error(Braintree::InvalidSignature, "payload cannot be nil")
+    end
+
     it "raises InvalidSignature error when the signature is completely invalid" do
       sample_notification = Braintree::WebhookTesting.sample_notification(
         Braintree::WebhookNotification::Kind::SubscriptionWentPastDue,
