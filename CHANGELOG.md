@@ -4,6 +4,7 @@
 * Deprecated `DiscountAmountMustBeGreaterThanZero` error in favor of `DiscountAmountCannotBeNegative`.
 * Deprecated `UnitTaxAmountMustBeGreaterThanZero` error in favor of `UnitTaxAmountCannotBeNegative`.
 * Add `find_all` static method to `TransactionLineItem` class
+* Add support for `profile_id` in Transaction#create options for VenmoAccounts
 
 ## 2.82.0
 * Add support for tagged evidence in DisputeGateway#add_text_evidence (Beta release)

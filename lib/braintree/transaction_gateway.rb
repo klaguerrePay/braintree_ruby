@@ -180,7 +180,9 @@ module Braintree
           :skip_cvv,
           {:paypal => [:custom_field, :payee_email, :description, {:supplementary_data => :_any_key_}]},
           {:three_d_secure => [:required]},
-          {:amex_rewards => [:request_id, :points, :currency_amount, :currency_iso_code]}]
+          {:amex_rewards => [:request_id, :points, :currency_amount, :currency_iso_code]},
+          {:venmo => [:profile_id]}
+        ]
         },
         {:custom_fields => :_any_key_},
         {:descriptor => [:name, :phone, :url]},

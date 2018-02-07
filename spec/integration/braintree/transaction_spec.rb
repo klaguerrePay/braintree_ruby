@@ -1472,6 +1472,17 @@ describe Braintree::Transaction do
         venmo_account_details.source_description.should == "Venmo Account: venmojoe"
       end
 
+      it "can create a transaction with a fake venmo account nonce specifying a profile" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::FakeVenmoAccountMerchantAccountId,
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :payment_method_nonce => Braintree::Test::Nonce::VenmoAccount,
+          :options => {:store_in_vault => true, :venmo => {:profile_id => "integration_venmo_merchant_public_id" }}
+        )
+        result.should be_success
+      end
+
       it "can create a transaction with an unknown nonce" do
         customer = Braintree::Customer.create!
         result = Braintree::Transaction.create(
