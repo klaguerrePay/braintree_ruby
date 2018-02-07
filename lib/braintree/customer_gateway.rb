@@ -38,10 +38,12 @@ module Braintree
       SuccessfulResult.new
     end
 
-    def find(customer_id)
+    def find(customer_id, options = {})
       raise ArgumentError, "customer_id contains invalid characters" unless customer_id.to_s =~ /\A[\w-]+\z/
       raise ArgumentError, "customer_id cannot be blank" if customer_id.nil?|| customer_id.to_s.strip == ""
-      response = @config.http.get("#{@config.base_merchant_path}/customers/#{customer_id}")
+
+      query_params = options[:association_filter_id].nil? ? "" : "?association_filter_id=#{options[:association_filter_id]}"
+      response = @config.http.get("#{@config.base_merchant_path}/customers/#{customer_id}#{query_params}")
       Customer._new(@gateway, response[:customer])
     rescue NotFoundError
       raise NotFoundError, "customer with id #{customer_id.inspect} not found"
