@@ -32,5 +32,9 @@ module Braintree
         self.new *args
       end
     end
+
+    def self.find_all(*args)
+      Configuration.gateway.transaction_line_item.find_all(*args)
+    end
   end
 end

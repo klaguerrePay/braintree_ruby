@@ -3,6 +3,7 @@
 * Add support for `source_merchant_id` on webhooks
 * Deprecated DiscountAmountMustBeGreaterThanZero error in favor of DiscountAmountCannotBeNegative.
 * Deprecated UnitTaxAmountMustBeGreaterThanZero error in favor of UnitTaxAmountCannotBeNegative.
+* Add `find_all` static method to TransactionLineItem class
 
 ## 2.82.0
 * Add support for tagged evidence in DisputeGateway#add_text_evidence (Beta release)
