@@ -117,10 +117,10 @@ describe Braintree::PaymentMethod do
       android_pay_card.expiration_year.to_i.should > 0
       android_pay_card.default.should == true
       android_pay_card.image_url.should =~ /android_pay/
-      android_pay_card.source_card_type.should == Braintree::CreditCard::CardType::Visa
+      android_pay_card.source_card_type.should == Braintree::CreditCard::CardType::Discover
       android_pay_card.source_card_last_4.should == "1111"
       android_pay_card.google_transaction_id.should == "google_transaction_id"
-      android_pay_card.source_description.should == "Visa 1111"
+      android_pay_card.source_description.should == "Discover 1111"
       android_pay_card.customer_id.should == customer.id
     end
 
@@ -882,10 +882,10 @@ describe Braintree::PaymentMethod do
         android_pay_card.expiration_year.to_i.should > 0
         android_pay_card.default.should == true
         android_pay_card.image_url.should =~ /android_pay/
-        android_pay_card.source_card_type.should == Braintree::CreditCard::CardType::Visa
+        android_pay_card.source_card_type.should == Braintree::CreditCard::CardType::Discover
         android_pay_card.source_card_last_4.should == "1111"
         android_pay_card.google_transaction_id.should == "google_transaction_id"
-        android_pay_card.source_description.should == "Visa 1111"
+        android_pay_card.source_description.should == "Discover 1111"
         android_pay_card.customer_id.should == customer.id
       end
 

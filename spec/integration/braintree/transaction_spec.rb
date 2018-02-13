@@ -1402,7 +1402,7 @@ describe Braintree::Transaction do
         android_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::Discover
         android_pay_details.last_4.should == "1117"
         android_pay_details.virtual_card_last_4.should == "1117"
-        android_pay_details.source_description.should == "Visa 1111"
+        android_pay_details.source_description.should == "Discover 1111"
         android_pay_details.expiration_month.to_i.should > 0
         android_pay_details.expiration_year.to_i.should > 0
         android_pay_details.google_transaction_id.should == "google_transaction_id"
