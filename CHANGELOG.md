@@ -1,4 +1,4 @@
-## 2.83.0
+# 2.83.0
 * Add support for `tax_amount` field on transaction `line_items`
 * Add support for `source_merchant_id` on webhooks
 * Deprecated `DiscountAmountMustBeGreaterThanZero` error in favor of `DiscountAmountCannotBeNegative`.
