@@ -1,3 +1,31 @@
+# unreleased
+
+* Add support for `address.create!` to gateway instance
+* Add support for `address.update!` to gateway instance
+* Add support for `credit_card.create!` to gateway instance
+* Add support for `customer.create!` to gateway instance
+* Add support for `customer.update!` to gateway instance
+* Add support for `document_upload.create!` to gateway instance
+* Add support for `merchant_account.create!` to gateway instance
+* Add support for `merchant_account.update!` to gateway instance
+* Add support for `payment_method.create!` to gateway instance
+* Add support for `payment_method.update!` to gateway instance
+* Add support for `payment_method_nonce.create!` to gateway instance
+* Add support for `subscription.cancel!` to gateway instance
+* Add support for `subscription.create!` to gateway instance
+* Add support for `subscription.update!` to gateway instance
+* Add support for `subscription.retry_charge` to gateway instance
+* Add support for `transaction.cancel_release!` to gateway instance
+* Add support for `transaction.hold_in_escrow!` to gateway instance
+* Add support for `transaction.clone_transction!` to gateway instance
+* Add support for `transaction.credit!` to gateway instance
+* Add support for `transaction.refund!` to gateway instance
+* Add support for `transaction.release_from_escrow!` to gateway instance
+* Add support for `transaction.sale!` to gateway instance
+* Add support for `transaction.submit_for_settlement!` to gateway instance
+* Add support for `transaction.submit_for_partial_settlement!` to gateway instance
+* Add support for `transaction.void!` to gateway instance
+
 # 2.83.0
 * Add support for `tax_amount` field on transaction `line_items`
 * Add support for `source_merchant_id` on webhooks

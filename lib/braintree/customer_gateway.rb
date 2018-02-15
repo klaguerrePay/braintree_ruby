@@ -1,5 +1,7 @@
 module Braintree
   class CustomerGateway # :nodoc:
+    include BaseModule
+
     def initialize(gateway)
       @gateway = gateway
       @config = gateway.config
@@ -14,6 +16,10 @@ module Braintree
     def create(attributes = {})
       Util.verify_keys(CustomerGateway._create_signature, attributes)
       _do_create "/customers", :customer => attributes
+    end
+
+    def create!(*args)
+      return_object_or_raise(:customer) { create(*args) }
     end
 
     # Deprecated
@@ -57,6 +63,10 @@ module Braintree
     def update(customer_id, attributes)
       Util.verify_keys(CustomerGateway._update_signature, attributes)
       _do_update(:put, "/customers/#{customer_id}", :customer => attributes)
+    end
+
+    def update!(*args)
+      return_object_or_raise(:customer) { update(*args) }
     end
 
     # Deprecated

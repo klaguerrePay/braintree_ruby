@@ -750,6 +750,41 @@ describe Braintree::PaymentMethod do
     end
   end
 
+  describe "self.create!" do
+    it "creates a payment method from a vaulted credit card nonce" do
+      config = Braintree::Configuration.instantiate
+      customer = Braintree::Customer.create.customer
+      raw_client_token = Braintree::ClientToken.generate(:customer_id => customer.id)
+      client_token = decode_client_token(raw_client_token)
+      authorization_fingerprint = client_token["authorizationFingerprint"]
+      http = ClientApiHttp.new(
+        config,
+        :authorization_fingerprint => authorization_fingerprint,
+        :shared_customer_identifier => "fake_identifier",
+        :shared_customer_identifier_type => "testing"
+      )
+
+      response = http.create_credit_card(
+        :number => 4111111111111111,
+        :expirationMonth => 12,
+        :expirationYear => 2020
+      )
+      response.code.should == "201"
+
+      nonce = JSON.parse(response.body)["creditCards"].first["nonce"]
+      payment_method = Braintree::PaymentMethod.create!(
+        :payment_method_nonce => nonce,
+        :customer_id => customer.id
+      )
+
+      payment_method.should be_a(Braintree::CreditCard)
+      token = payment_method.token
+
+      found_credit_card = Braintree::CreditCard.find(token)
+      found_credit_card.should_not be_nil
+    end
+  end
+
   describe "self.find" do
     context "credit cards" do
       it "finds the payment method with the given token" do
@@ -1390,6 +1425,30 @@ describe Braintree::PaymentMethod do
         updated_result.should_not be_success
         updated_result.errors.first.code.should == "92906"
       end
+    end
+  end
+
+  describe "self.update!" do
+    it "updates the credit card" do
+      customer = Braintree::Customer.create!
+      credit_card = Braintree::CreditCard.create!(
+        :cardholder_name => "Original Holder",
+        :customer_id => customer.id,
+        :cvv => "123",
+        :number => Braintree::Test::CreditCardNumbers::Visa,
+        :expiration_date => "05/2012"
+      )
+      payment_method = Braintree::PaymentMethod.update!(credit_card.token,
+        :cardholder_name => "New Holder",
+        :cvv => "456",
+        :number => Braintree::Test::CreditCardNumbers::MasterCard,
+        :expiration_date => "06/2013"
+      )
+      payment_method.should == credit_card
+      payment_method.cardholder_name.should == "New Holder"
+      payment_method.bin.should == Braintree::Test::CreditCardNumbers::MasterCard[0, 6]
+      payment_method.last_4.should == Braintree::Test::CreditCardNumbers::MasterCard[-4..-1]
+      payment_method.expiration_date.should == "06/2013"
     end
   end
 
