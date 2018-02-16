@@ -25,6 +25,7 @@
 * Add support for `transaction.submit_for_settlement!` to gateway instance
 * Add support for `transaction.submit_for_partial_settlement!` to gateway instance
 * Add support for `transaction.void!` to gateway instance
+* Add support for `profile_id` in Transaction#create options for VenmoAccounts
 
 # 2.83.0
 * Add support for `tax_amount` field on transaction `line_items`
@@ -32,7 +33,6 @@
 * Deprecated `DiscountAmountMustBeGreaterThanZero` error in favor of `DiscountAmountCannotBeNegative`.
 * Deprecated `UnitTaxAmountMustBeGreaterThanZero` error in favor of `UnitTaxAmountCannotBeNegative`.
 * Add `find_all` static method to `TransactionLineItem` class
-* Add support for `profile_id` in Transaction#create options for VenmoAccounts
 
 # 2.82.0
 * Add support for tagged evidence in DisputeGateway#add_text_evidence (Beta release)
