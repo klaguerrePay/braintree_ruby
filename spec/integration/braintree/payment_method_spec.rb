@@ -696,41 +696,6 @@ describe Braintree::PaymentMethod do
       end
     end
 
-    context "SEPA" do
-      it "returns the SEPA bank account behind the nonce" do
-        config = Braintree::Configuration.instantiate
-        customer = Braintree::Customer.create.customer
-        raw_client_token = Braintree::ClientToken.generate(:customer_id => customer.id, :sepa_mandate_type => Braintree::EuropeBankAccount::MandateType::Business)
-        client_token = decode_client_token(raw_client_token)
-        authorization_fingerprint = client_token["authorizationFingerprint"]
-        http = ClientApiHttp.new(
-          config,
-          :authorization_fingerprint => authorization_fingerprint
-        )
-
-        nonce = http.create_europe_bank_account_nonce(
-          :accountHolderName => "Bob Holder",
-          :iban => "DE89370400440532013000",
-          :bic => "DEUTDEFF",
-          :locale => "en-US",
-          :billingAddress =>  {
-            :region => "Hesse",
-            :country_name => "Germany"
-          }
-        )
-        nonce.should_not == nil
-        result = Braintree::PaymentMethod.create(
-          :payment_method_nonce => nonce,
-          :customer_id => customer.id
-        )
-
-        result.should be_success
-        result.payment_method.token.should_not == nil
-        result.payment_method.image_url.should_not be_nil
-        result.payment_method.customer_id.should == customer.id
-      end
-    end
-
     context "Unknown payment methods" do
       it "creates an unknown payment method from a nonce" do
         customer = Braintree::Customer.create.customer
