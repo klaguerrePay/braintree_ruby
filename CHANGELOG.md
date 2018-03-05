@@ -1,5 +1,4 @@
-# unreleased
-
+# 2.84.0
 * Add support for `address.create!` to gateway instance
 * Add support for `address.update!` to gateway instance
 * Add support for `credit_card.create!` to gateway instance
