@@ -5,7 +5,7 @@ describe Braintree::UsBankAccount do
   describe "self.find" do
     it "returns a UsBankAccount" do
       customer = Braintree::Customer.create!
-      nonce = generate_valid_us_bank_account_nonce
+      nonce = generate_non_plaid_us_bank_account_nonce
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
@@ -37,7 +37,7 @@ describe Braintree::UsBankAccount do
   context "self.sale" do
     it "creates a transaction using a us bank account and returns a result object" do
       customer = Braintree::Customer.create!
-      nonce = generate_valid_us_bank_account_nonce
+      nonce = generate_non_plaid_us_bank_account_nonce
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
@@ -71,7 +71,7 @@ describe Braintree::UsBankAccount do
   context "self.sale!" do
     it "creates a transaction using a us bank account and returns a result object" do
       customer = Braintree::Customer.create!
-      nonce = generate_valid_us_bank_account_nonce
+      nonce = generate_non_plaid_us_bank_account_nonce
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
