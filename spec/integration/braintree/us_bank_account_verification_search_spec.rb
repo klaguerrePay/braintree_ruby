@@ -14,7 +14,7 @@ describe Braintree::UsBankAccountVerification, "search" do
 
   it "can search on text fields" do
     customer = Braintree::Customer.create(
-      :email => "someone@something.com",
+      :email => "john.doe@example.com",
     ).customer
     payment_method = Braintree::PaymentMethod.create(
       :payment_method_nonce => nonce,
@@ -27,12 +27,12 @@ describe Braintree::UsBankAccountVerification, "search" do
 
     search_criteria = {
       :id => verification.id,
-      :account_holder_name => "Dan Schulman",
+      :account_holder_name => "John Doe",
       :routing_number => "021000021",
       :payment_method_token => payment_method.token,
       :account_type => "checking",
       :customer_id => customer.id,
-      :customer_email => "someone@something.com",
+      :customer_email => "john.doe@example.com",
     }
 
     search_criteria.each do |criterion, value|
@@ -154,7 +154,7 @@ describe Braintree::UsBankAccountVerification, "search" do
   end
 
   context "ends with fields" do
-    xit "does ends_with search on account_number" do
+    it "does ends_with search on account_number" do
       customer = Braintree::Customer.create.customer
 
       payment_method = Braintree::PaymentMethod.create(
@@ -167,6 +167,7 @@ describe Braintree::UsBankAccountVerification, "search" do
       verification = payment_method.verifications.first
 
       collection = Braintree::UsBankAccountVerification.search do |search|
+        search.id.is verification.id
         search.account_number.ends_with "1234"
       end
 

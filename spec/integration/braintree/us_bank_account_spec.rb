@@ -21,7 +21,7 @@ describe Braintree::UsBankAccount do
       us_bank_account.routing_number.should == "021000021"
       us_bank_account.last_4.should == "1234"
       us_bank_account.account_type.should == "checking"
-      us_bank_account.account_holder_name.should == "Dan Schulman"
+      us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/
       us_bank_account.ach_mandate.text.should == "cl mandate text"
       us_bank_account.ach_mandate.accepted_at.should be_a Time
@@ -61,7 +61,7 @@ describe Braintree::UsBankAccount do
       us_bank_account.routing_number.should == "021000021"
       us_bank_account.last_4.should == "1234"
       us_bank_account.account_type.should == "checking"
-      us_bank_account.account_holder_name.should == "Dan Schulman"
+      us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/
       us_bank_account.ach_mandate.text.should == "cl mandate text"
       us_bank_account.ach_mandate.accepted_at.should be_a Time
@@ -94,7 +94,7 @@ describe Braintree::UsBankAccount do
       us_bank_account.routing_number.should == "021000021"
       us_bank_account.last_4.should == "1234"
       us_bank_account.account_type.should == "checking"
-      us_bank_account.account_holder_name.should == "Dan Schulman"
+      us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/
       us_bank_account.ach_mandate.text.should == "cl mandate text"
       us_bank_account.ach_mandate.accepted_at.should be_a Time
