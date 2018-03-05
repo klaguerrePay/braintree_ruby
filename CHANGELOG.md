@@ -27,6 +27,7 @@
 * Add support for `transaction.void!` to gateway instance
 * Add support for `profile_id` in Transaction#create options for VenmoAccounts
 * Add support for `association_filter_id` in Customer#find
+* Update country names to have parity with documentation
 
 # 2.83.0
 * Add support for `tax_amount` field on transaction `line_items`
