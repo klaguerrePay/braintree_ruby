@@ -27,6 +27,7 @@
 * Add support for `transaction.void!` to gateway instance
 * Add support for `profile_id` in Transaction#create options for VenmoAccounts
 * Add support for `association_filter_id` in Customer#find
+* Add support for `customer_id`, `disbursement_date` and `history_event_effective_date` in Dispute#search
 * Update country names to have parity with documentation
 
 # 2.83.0
