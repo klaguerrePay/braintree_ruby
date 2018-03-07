@@ -1281,7 +1281,7 @@ describe Braintree::Transaction do
           }
         )
         result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == true
+        result.transaction.credit_card_details.venmo_sdk?.should == false
       end
     end
 
@@ -5809,7 +5809,7 @@ describe Braintree::Transaction do
           :venmo_sdk_payment_method_code => Braintree::Test::VenmoSDK.generate_test_payment_method_code(Braintree::Test::CreditCardNumbers::Visa)
         )
         result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == true
+        result.transaction.credit_card_details.venmo_sdk?.should == false
       end
 
       it "errors when an invalid payment method code is passed" do
@@ -5836,7 +5836,7 @@ describe Braintree::Transaction do
           }
         )
         result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == true
+        result.transaction.credit_card_details.venmo_sdk?.should == false
       end
 
       it "venmo_sdk boolean is false when an invalid session is passed" do
