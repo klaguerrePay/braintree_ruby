@@ -1,3 +1,6 @@
+# Unreleased
+* Add support for `oauth_access_revocation` on `WebhookNotification`s
+
 # 2.84.0
 * Add support for `address.create!` to gateway instance
 * Add support for `address.update!` to gateway instance
