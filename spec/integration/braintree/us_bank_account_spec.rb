@@ -9,7 +9,10 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => "us_bank_merchant_account",
+        }
       )
       result.should be_success
 
@@ -38,7 +41,10 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => "us_bank_merchant_account",
+        }
       )
       result.should be_success
 
@@ -65,7 +71,10 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => "us_bank_merchant_account",
+        }
       )
       result.should be_success
 

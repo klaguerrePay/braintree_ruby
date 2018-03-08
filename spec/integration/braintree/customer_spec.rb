@@ -973,7 +973,12 @@ describe Braintree::Customer do
 
     it "returns associated us bank accounts" do
       result = Braintree::Customer.create(
-        :payment_method_nonce => generate_valid_us_bank_account_nonce
+        :payment_method_nonce => generate_valid_us_bank_account_nonce,
+        :credit_card => {
+          :options => {
+            :verification_merchant_account_id => "us_bank_merchant_account",
+          }
+        }
       )
       result.should be_success
 
