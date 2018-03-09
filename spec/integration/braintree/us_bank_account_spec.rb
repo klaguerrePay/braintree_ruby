@@ -9,7 +9,10 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+        }
       )
       result.should be_success
 
@@ -38,11 +41,18 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+        }
       )
       result.should be_success
 
-      result = Braintree::UsBankAccount.sale(result.payment_method.token, :merchant_account_id => "us_bank_merchant_account", :amount => "100.00")
+      result = Braintree::UsBankAccount.sale(
+        result.payment_method.token,
+        :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+        :amount => "100.00"
+      )
 
       result.success?.should == true
       result.transaction.amount.should == BigDecimal.new("100.00")
@@ -65,11 +75,18 @@ describe Braintree::UsBankAccount do
 
       result = Braintree::PaymentMethod.create(
         :payment_method_nonce => nonce,
-        :customer_id => customer.id
+        :customer_id => customer.id,
+        :options => {
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+        }
       )
       result.should be_success
 
-      transaction = Braintree::UsBankAccount.sale!(result.payment_method.token, :merchant_account_id => "us_bank_merchant_account", :amount => "100.00")
+      transaction = Braintree::UsBankAccount.sale!(
+        result.payment_method.token,
+        :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+        :amount => "100.00"
+      )
 
       transaction.amount.should == BigDecimal.new("100.00")
       transaction.type.should == "sale"
@@ -85,7 +102,11 @@ describe Braintree::UsBankAccount do
 
     it "does not creates a transaction using a us bank account and returns raises an exception" do
       expect do
-        Braintree::UsBankAccount.sale!(generate_invalid_us_bank_account_nonce, :merchant_account_id => "us_bank_merchant_account", :amount => "100.00")
+        Braintree::UsBankAccount.sale!(
+          generate_invalid_us_bank_account_nonce,
+          :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
+          :amount => "100.00"
+        )
       end.to raise_error(Braintree::ValidationsFailed)
     end
   end
