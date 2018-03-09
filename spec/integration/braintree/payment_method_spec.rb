@@ -200,6 +200,18 @@ describe Braintree::PaymentMethod do
       venmo_account.customer_id.should == customer.id
     end
 
+    it "doesn't not create a payment method from europe bank acount nonce" do
+      customer = Braintree::Customer.create.customer
+      token = SecureRandom.hex(16)
+      expect do
+        Braintree::PaymentMethod.create(
+          :payment_method_nonce => Braintree::Test::Nonce::Europe,
+          :customer_id => customer.id,
+          :token => token
+        )
+      end.to raise_error(Braintree::ServerError)
+    end
+
     it "allows passing the make_default option alongside the nonce" do
       customer = Braintree::Customer.create!
       result = Braintree::CreditCard.create(
