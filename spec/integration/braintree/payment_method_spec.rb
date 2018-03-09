@@ -490,7 +490,7 @@ describe Braintree::PaymentMethod do
           :payment_method_nonce => generate_valid_us_bank_account_nonce,
           :customer_id => customer.id,
           :options => {
-            :verification_merchant_account_id => UsBankMerchantAccountId,
+            :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
           }
         )
 
@@ -515,7 +515,7 @@ describe Braintree::PaymentMethod do
           :payment_method_nonce => generate_invalid_us_bank_account_nonce,
           :customer_id => customer.id,
           :options => {
-            :verification_merchant_account_id => UsBankMerchantAccountId,
+            :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
           }
         )
 
