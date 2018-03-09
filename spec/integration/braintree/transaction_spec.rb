@@ -2124,7 +2124,7 @@ describe Braintree::Transaction do
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => "us_bank_merchant_account",
+          :merchant_account_id => UsBankMerchantAccountId,
           :payment_method_nonce => valid_nonce,
           :options => {
             :submit_for_settlement => true,
@@ -2149,7 +2149,7 @@ describe Braintree::Transaction do
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => "us_bank_merchant_account",
+          :merchant_account_id => UsBankMerchantAccountId,
           :payment_method_nonce => valid_nonce,
           :options => {
             :submit_for_settlement => true,
@@ -2172,7 +2172,7 @@ describe Braintree::Transaction do
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => "us_bank_merchant_account",
+          :merchant_account_id => UsBankMerchantAccountId,
           :payment_method_token=> result.transaction.us_bank_account_details.token,
           :options => {
             :submit_for_settlement => true,
@@ -2196,7 +2196,7 @@ describe Braintree::Transaction do
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => "us_bank_merchant_account",
+          :merchant_account_id => UsBankMerchantAccountId,
           :payment_method_nonce => invalid_nonce,
           :options => {
             :submit_for_settlement => true,

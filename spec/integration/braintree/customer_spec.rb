@@ -976,7 +976,7 @@ describe Braintree::Customer do
         :payment_method_nonce => generate_valid_us_bank_account_nonce,
         :credit_card => {
           :options => {
-            :verification_merchant_account_id => "us_bank_merchant_account",
+            :verification_merchant_account_id => UsBankMerchantAccountId,
           }
         }
       )
