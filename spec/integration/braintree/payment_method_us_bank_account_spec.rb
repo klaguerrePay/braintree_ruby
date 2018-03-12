@@ -19,7 +19,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "another_us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
             }
           )
 
@@ -56,7 +56,7 @@ describe Braintree::PaymentMethod do
               :customer_id => customer.id,
               :options => {
                 :us_bank_account_verification_method => method,
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               }
             )
 
@@ -100,7 +100,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "another_us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
             }
           )
 
@@ -133,7 +133,7 @@ describe Braintree::PaymentMethod do
               :customer_id => customer.id,
               :options => {
                 :us_bank_account_verification_method => method,
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               }
             )
 
@@ -189,7 +189,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
             }
           )
 
@@ -225,7 +225,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
             }
           )
 
@@ -280,7 +280,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => generate_non_plaid_us_bank_account_nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "another_us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
             },
           ).payment_method
         end
@@ -293,7 +293,7 @@ describe Braintree::PaymentMethod do
             result = Braintree::PaymentMethod.update(
               payment_method.token,
               :options => {
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
                 :us_bank_account_verification_method => method,
               },
             )
@@ -326,7 +326,7 @@ describe Braintree::PaymentMethod do
           result = Braintree::PaymentMethod.update(
             payment_method.token,
             :options => {
-              :verification_merchant_account_id => "another_us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :us_bank_account_verification_method => "blahblah",
             },
           )
@@ -351,7 +351,7 @@ describe Braintree::PaymentMethod do
             :payment_method_nonce => generate_non_plaid_us_bank_account_nonce,
             :customer_id => customer.id,
             :options => {
-              :verification_merchant_account_id => "us_bank_merchant_account",
+              :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
             }
           ).payment_method
         end
@@ -364,7 +364,7 @@ describe Braintree::PaymentMethod do
             result = Braintree::PaymentMethod.update(
               payment_method.token,
               :options => {
-                :verification_merchant_account_id => "us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
                 :us_bank_account_verification_method => method,
               },
             )

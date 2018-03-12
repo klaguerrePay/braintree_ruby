@@ -19,7 +19,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
           :us_bank_account_verification_method => Braintree::UsBankAccountVerification::VerificationMethod::NetworkCheck,
         }
       )
@@ -45,7 +45,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
           :us_bank_account_verification_method => Braintree::UsBankAccountVerification::VerificationMethod::NetworkCheck,
         }
       ).payment_method

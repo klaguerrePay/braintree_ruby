@@ -20,7 +20,7 @@ describe Braintree::UsBankAccountVerification, "search" do
       :payment_method_nonce => nonce,
       :customer_id => customer.id,
       :options => {
-        :verification_merchant_account_id => "us_bank_merchant_account",
+        :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
       }
     ).payment_method
     verification = payment_method.verifications.first
@@ -69,7 +69,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => generate_non_plaid_us_bank_account_nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
         }
       ).payment_method
       verification1 = payment_method1.verifications.first
@@ -78,7 +78,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => generate_non_plaid_us_bank_account_nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
         }
       ).payment_method
       verification2 = payment_method2.verifications.first
@@ -99,7 +99,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => generate_non_plaid_us_bank_account_nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
         }
       ).payment_method
       verification = payment_method.verifications.first
@@ -161,7 +161,7 @@ describe Braintree::UsBankAccountVerification, "search" do
         :payment_method_nonce => nonce,
         :customer_id => customer.id,
         :options => {
-          :verification_merchant_account_id => "us_bank_merchant_account",
+          :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
         }
       ).payment_method
       verification = payment_method.verifications.first

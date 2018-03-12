@@ -18,7 +18,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_nonce => plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -46,7 +46,7 @@ describe Braintree::Transaction do
               :payment_method_nonce => plaid_nonce,
               :customer_id => Braintree::Customer.create.customer.id,
               :options => {
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               }
             ).payment_method
 
@@ -60,7 +60,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_token => payment_method.token,
               :options => {
                 :submit_for_settlement => true,
@@ -88,7 +88,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_nonce => plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -101,7 +101,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_token => result.transaction.us_bank_account_details.token,
               :options => {
                 :submit_for_settlement => true,
@@ -136,7 +136,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_nonce => non_plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -150,7 +150,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_nonce => invalid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -168,7 +168,7 @@ describe Braintree::Transaction do
               :customer_id => Braintree::Customer.create.customer.id,
               :options => {
                 :us_bank_account_verification_method => "independent_check",
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               }
             )
             payment_method = result.payment_method
@@ -183,7 +183,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_token => payment_method.token,
               :options => {
                 :submit_for_settlement => true,
@@ -198,7 +198,7 @@ describe Braintree::Transaction do
               :payment_method_nonce => non_plaid_nonce,
               :customer_id => Braintree::Customer.create.customer.id,
               :options => {
-                :verification_merchant_account_id => "another_us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               }
             ).payment_method
 
@@ -208,7 +208,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "another_us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
               :payment_method_token => payment_method.token,
               :options => {
                 :submit_for_settlement => true,
@@ -237,7 +237,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_nonce => plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -265,7 +265,7 @@ describe Braintree::Transaction do
               :payment_method_nonce => plaid_nonce,
               :customer_id => Braintree::Customer.create.customer.id,
               :options => {
-                :verification_merchant_account_id => "us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               }
             )
 
@@ -281,7 +281,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_token => payment_method.token,
               :options => {
                 :submit_for_settlement => true,
@@ -309,7 +309,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_nonce => plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -322,7 +322,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_token => result.transaction.us_bank_account_details.token,
               :options => {
                 :submit_for_settlement => true,
@@ -357,7 +357,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_nonce => non_plaid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -384,7 +384,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_nonce => invalid_nonce,
               :options => {
                 :submit_for_settlement => true,
@@ -401,7 +401,7 @@ describe Braintree::Transaction do
               :payment_method_nonce => non_plaid_nonce,
               :customer_id => Braintree::Customer.create.customer.id,
               :options => {
-                :verification_merchant_account_id => "us_bank_merchant_account",
+                :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               }
             )
             payment_method = result.payment_method
@@ -416,7 +416,7 @@ describe Braintree::Transaction do
             result = Braintree::Transaction.create(
               :type => "sale",
               :amount => Braintree::Test::TransactionAmounts::Authorize,
-              :merchant_account_id => "us_bank_merchant_account",
+              :merchant_account_id => SpecHelper::UsBankMerchantAccountId,
               :payment_method_token => payment_method.token,
               :options => {
                 :submit_for_settlement => true,
