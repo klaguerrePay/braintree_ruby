@@ -19,7 +19,7 @@ describe Braintree::UsBankAccount do
       us_bank_account = Braintree::UsBankAccount.find(result.payment_method.token)
       us_bank_account.should be_a(Braintree::UsBankAccount)
       us_bank_account.routing_number.should == "021000021"
-      us_bank_account.last_4.should == "1234"
+      us_bank_account.last_4.should == "0000"
       us_bank_account.account_type.should == "checking"
       us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/
@@ -59,7 +59,7 @@ describe Braintree::UsBankAccount do
       result.transaction.type.should == "sale"
       us_bank_account = result.transaction.us_bank_account_details
       us_bank_account.routing_number.should == "021000021"
-      us_bank_account.last_4.should == "1234"
+      us_bank_account.last_4.should == "0000"
       us_bank_account.account_type.should == "checking"
       us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/
@@ -92,7 +92,7 @@ describe Braintree::UsBankAccount do
       transaction.type.should == "sale"
       us_bank_account = transaction.us_bank_account_details
       us_bank_account.routing_number.should == "021000021"
-      us_bank_account.last_4.should == "1234"
+      us_bank_account.last_4.should == "0000"
       us_bank_account.account_type.should == "checking"
       us_bank_account.account_holder_name.should == "John Doe"
       us_bank_account.bank_name.should =~ /CHASE/

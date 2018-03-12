@@ -168,7 +168,7 @@ describe Braintree::UsBankAccountVerification, "search" do
 
       collection = Braintree::UsBankAccountVerification.search do |search|
         search.id.is verification.id
-        search.account_number.ends_with "1234"
+        search.account_number.ends_with "0000"
       end
 
       collection.maximum_size.should == 1

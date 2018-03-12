@@ -71,7 +71,7 @@ def generate_non_plaid_us_bank_account_nonce
     },
     :account_type => "checking",
     :routing_number => "021000021",
-    :account_number => "567891234",
+    :account_number => "1000000000",
     :first_name => "John",
     :last_name => "Doe",
     :ownership_type => "personal",

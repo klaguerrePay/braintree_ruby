@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
 
 describe Braintree::Transaction do
   describe "self.create us bank account" do
-    context "whitelisted merchant" do
+    context "compliant merchant" do
       before do
         Braintree::Configuration.merchant_id = "integration2_merchant_id"
         Braintree::Configuration.public_key = "integration2_public_key"
@@ -30,11 +30,11 @@ describe Braintree::Transaction do
             result.transaction.payment_instrument_type.should == Braintree::PaymentInstrumentType::UsBankAccount
             result.transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             result.transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            result.transaction.us_bank_account_details.routing_number.should == "021000021"
-            result.transaction.us_bank_account_details.last_4.should == "1234"
+            result.transaction.us_bank_account_details.routing_number.should == "011000015"
+            result.transaction.us_bank_account_details.last_4.should == "0000"
             result.transaction.us_bank_account_details.account_type.should == "checking"
             result.transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            result.transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            result.transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             result.transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             result.transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -75,11 +75,11 @@ describe Braintree::Transaction do
             transaction.type.should == "sale"
             transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            transaction.us_bank_account_details.routing_number.should == "021000021"
-            transaction.us_bank_account_details.last_4.should == "1234"
+            transaction.us_bank_account_details.routing_number.should == "011000015"
+            transaction.us_bank_account_details.last_4.should == "0000"
             transaction.us_bank_account_details.account_type.should == "checking"
             transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -116,11 +116,11 @@ describe Braintree::Transaction do
             transaction.type.should == "sale"
             transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            transaction.us_bank_account_details.routing_number.should == "021000021"
-            transaction.us_bank_account_details.last_4.should == "1234"
+            transaction.us_bank_account_details.routing_number.should == "011000015"
+            transaction.us_bank_account_details.last_4.should == "0000"
             transaction.us_bank_account_details.account_type.should == "checking"
             transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -249,11 +249,11 @@ describe Braintree::Transaction do
             result.transaction.payment_instrument_type.should == Braintree::PaymentInstrumentType::UsBankAccount
             result.transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             result.transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            result.transaction.us_bank_account_details.routing_number.should == "021000021"
-            result.transaction.us_bank_account_details.last_4.should == "1234"
+            result.transaction.us_bank_account_details.routing_number.should == "011000015"
+            result.transaction.us_bank_account_details.last_4.should == "0000"
             result.transaction.us_bank_account_details.account_type.should == "checking"
             result.transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            result.transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            result.transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             result.transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             result.transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -296,11 +296,11 @@ describe Braintree::Transaction do
             transaction.type.should == "sale"
             transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            transaction.us_bank_account_details.routing_number.should == "021000021"
-            transaction.us_bank_account_details.last_4.should == "1234"
+            transaction.us_bank_account_details.routing_number.should == "011000015"
+            transaction.us_bank_account_details.last_4.should == "0000"
             transaction.us_bank_account_details.account_type.should == "checking"
             transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -337,11 +337,11 @@ describe Braintree::Transaction do
             transaction.type.should == "sale"
             transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             transaction.status.should == Braintree::Transaction::Status::SettlementPending
-            transaction.us_bank_account_details.routing_number.should == "021000021"
-            transaction.us_bank_account_details.last_4.should == "1234"
+            transaction.us_bank_account_details.routing_number.should == "011000015"
+            transaction.us_bank_account_details.last_4.should == "0000"
             transaction.us_bank_account_details.account_type.should == "checking"
             transaction.us_bank_account_details.account_holder_name.should == "PayPal, Inc."
-            transaction.us_bank_account_details.bank_name.should =~ /CHASE/
+            transaction.us_bank_account_details.bank_name.should == "FEDERAL RESERVE BANK"
             transaction.us_bank_account_details.ach_mandate.text.should == "cl mandate text"
             transaction.us_bank_account_details.ach_mandate.accepted_at.should be_a Time
           end
@@ -372,7 +372,7 @@ describe Braintree::Transaction do
             transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
             transaction.status.should == Braintree::Transaction::Status::SettlementPending
             transaction.us_bank_account_details.routing_number.should == "021000021"
-            transaction.us_bank_account_details.last_4.should == "1234"
+            transaction.us_bank_account_details.last_4.should == "0000"
             transaction.us_bank_account_details.account_type.should == "checking"
             transaction.us_bank_account_details.account_holder_name.should == "John Doe"
             transaction.us_bank_account_details.bank_name.should =~ /CHASE/

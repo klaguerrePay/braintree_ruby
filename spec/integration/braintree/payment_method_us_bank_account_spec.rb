@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
 
 describe Braintree::PaymentMethod do
   describe "self.create" do
-    context "whitelisted merchant" do
+    context "compliant merchant" do
       before do
         Braintree::Configuration.merchant_id = "integration2_merchant_id"
         Braintree::Configuration.public_key = "integration2_public_key"
@@ -26,11 +26,11 @@ describe Braintree::PaymentMethod do
           result.should be_success
           us_bank_account = result.payment_method
           us_bank_account.should be_a(Braintree::UsBankAccount)
-          us_bank_account.routing_number.should == "021000021"
-          us_bank_account.last_4.should == "1234"
+          us_bank_account.routing_number.should == "011000015"
+          us_bank_account.last_4.should == "0000"
           us_bank_account.account_type.should == "checking"
           us_bank_account.account_holder_name.should == "PayPal, Inc."
-          us_bank_account.bank_name.should =~ /CHASE/
+          us_bank_account.bank_name.should == "FEDERAL RESERVE BANK"
           us_bank_account.default.should == true
           us_bank_account.ach_mandate.text.should == "cl mandate text"
           us_bank_account.ach_mandate.accepted_at.should be_a Time
@@ -63,11 +63,11 @@ describe Braintree::PaymentMethod do
             result.should be_success
             us_bank_account = result.payment_method
             us_bank_account.should be_a(Braintree::UsBankAccount)
-            us_bank_account.routing_number.should == "021000021"
-            us_bank_account.last_4.should == "1234"
+            us_bank_account.routing_number.should == "011000015"
+            us_bank_account.last_4.should == "0000"
             us_bank_account.account_type.should == "checking"
             us_bank_account.account_holder_name.should == "PayPal, Inc."
-            us_bank_account.bank_name.should =~ /CHASE/
+            us_bank_account.bank_name.should == "FEDERAL RESERVE BANK"
             us_bank_account.default.should == true
             us_bank_account.ach_mandate.text.should == "cl mandate text"
             us_bank_account.ach_mandate.accepted_at.should be_a Time
@@ -108,7 +108,7 @@ describe Braintree::PaymentMethod do
           us_bank_account = result.payment_method
           us_bank_account.should be_a(Braintree::UsBankAccount)
           us_bank_account.routing_number.should == "021000021"
-          us_bank_account.last_4.should == "1234"
+          us_bank_account.last_4.should == "0000"
           us_bank_account.account_type.should == "checking"
           us_bank_account.account_holder_name.should == "John Doe"
           us_bank_account.bank_name.should =~ /CHASE/
@@ -141,7 +141,7 @@ describe Braintree::PaymentMethod do
             us_bank_account = result.payment_method
             us_bank_account.should be_a(Braintree::UsBankAccount)
             us_bank_account.routing_number.should == "021000021"
-            us_bank_account.last_4.should == "1234"
+            us_bank_account.last_4.should == "0000"
             us_bank_account.account_type.should == "checking"
             us_bank_account.account_holder_name.should == "John Doe"
             us_bank_account.bank_name.should =~ /CHASE/
@@ -196,11 +196,11 @@ describe Braintree::PaymentMethod do
           result.should be_success
           us_bank_account = result.payment_method
           us_bank_account.should be_a(Braintree::UsBankAccount)
-          us_bank_account.routing_number.should == "021000021"
-          us_bank_account.last_4.should == "1234"
+          us_bank_account.routing_number.should == "011000015"
+          us_bank_account.last_4.should == "0000"
           us_bank_account.account_type.should == "checking"
           us_bank_account.account_holder_name.should == "PayPal, Inc."
-          us_bank_account.bank_name.should =~ /CHASE/
+          us_bank_account.bank_name.should == "FEDERAL RESERVE BANK"
           us_bank_account.default.should == true
           us_bank_account.ach_mandate.text.should == "cl mandate text"
           us_bank_account.ach_mandate.accepted_at.should be_a Time
@@ -233,7 +233,7 @@ describe Braintree::PaymentMethod do
           us_bank_account = result.payment_method
           us_bank_account.should be_a(Braintree::UsBankAccount)
           us_bank_account.routing_number.should == "021000021"
-          us_bank_account.last_4.should == "1234"
+          us_bank_account.last_4.should == "0000"
           us_bank_account.account_type.should == "checking"
           us_bank_account.account_holder_name.should == "John Doe"
           us_bank_account.bank_name.should =~ /CHASE/
@@ -266,7 +266,7 @@ describe Braintree::PaymentMethod do
   end
 
   context "self.update" do
-    context "whitelisted merchant" do
+    context "compliant merchant" do
       before do
         Braintree::Configuration.merchant_id = "integration2_merchant_id"
         Braintree::Configuration.public_key = "integration2_public_key"
@@ -303,7 +303,7 @@ describe Braintree::PaymentMethod do
             us_bank_account = result.payment_method
             us_bank_account.should be_a(Braintree::UsBankAccount)
             us_bank_account.routing_number.should == "021000021"
-            us_bank_account.last_4.should == "1234"
+            us_bank_account.last_4.should == "0000"
             us_bank_account.account_type.should == "checking"
             us_bank_account.account_holder_name.should == "John Doe"
             us_bank_account.bank_name.should =~ /CHASE/
@@ -374,7 +374,7 @@ describe Braintree::PaymentMethod do
             us_bank_account = result.payment_method
             us_bank_account.should be_a(Braintree::UsBankAccount)
             us_bank_account.routing_number.should == "021000021"
-            us_bank_account.last_4.should == "1234"
+            us_bank_account.last_4.should == "0000"
             us_bank_account.account_type.should == "checking"
             us_bank_account.account_holder_name.should == "John Doe"
             us_bank_account.bank_name.should =~ /CHASE/
