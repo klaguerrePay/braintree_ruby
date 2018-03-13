@@ -546,10 +546,12 @@ describe Braintree::PaymentMethod do
         result.should be_success
         result.payment_method.should be_a(Braintree::PayPalAccount)
         result.payment_method.image_url.should_not be_nil
+        result.payment_method.payer_id.should_not be_nil
         token = result.payment_method.token
 
         found_paypal_account = Braintree::PayPalAccount.find(token)
         found_paypal_account.should_not be_nil
+        found_paypal_account.payer_id.should_not be_nil
       end
 
       it "creates a billing agreement payment method from a refresh token" do
@@ -562,11 +564,13 @@ describe Braintree::PaymentMethod do
         result.should be_success
         result.payment_method.should be_a(Braintree::PayPalAccount)
         result.payment_method.billing_agreement_id.should eq("B_FAKE_ID")
+        result.payment_method.payer_id.should_not be_nil
         token = result.payment_method.token
 
         found_paypal_account = Braintree::PayPalAccount.find(token)
         found_paypal_account.should_not be_nil
         found_paypal_account.billing_agreement_id.should eq("B_FAKE_ID")
+        found_paypal_account.payer_id.should_not be_nil
       end
 
       it "creates a billing agreement payment method from a refresh token without upgrading" do
