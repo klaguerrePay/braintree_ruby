@@ -456,7 +456,7 @@ describe Braintree::Customer do
           }
         )
         result.success?.should == true
-        result.customer.credit_cards.first.venmo_sdk?.should == true
+        result.customer.credit_cards.first.venmo_sdk?.should == false
       end
     end
 
