@@ -40,6 +40,7 @@ unless defined?(SPEC_HELPER_LOADED)
     FakeAmexDirectMerchantAccountId = "fake_amex_direct_usd"
     FakeVenmoAccountMerchantAccountId = "fake_first_data_venmo_account"
     UsBankMerchantAccountId = "us_bank_merchant_account"
+    AnotherUsBankMerchantAccountId = "another_us_bank_merchant_account"
     IdealMerchantAccountId = "ideal_merchant_account"
 
     TrialPlan = {
