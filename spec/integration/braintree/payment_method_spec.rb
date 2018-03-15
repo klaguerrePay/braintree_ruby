@@ -200,7 +200,7 @@ describe Braintree::PaymentMethod do
       venmo_account.customer_id.should == customer.id
     end
 
-    it "doesn't not create a payment method from europe bank acount nonce" do
+    it "raise server error when we attempt to create europe bank account payment method" do
       customer = Braintree::Customer.create.customer
       token = SecureRandom.hex(16)
       expect do

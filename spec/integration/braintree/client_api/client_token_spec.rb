@@ -188,7 +188,7 @@ describe Braintree::ClientToken do
     end
 
     context "SEPA" do
-      it "raise error for passing in sepa related params" do
+      it "raises error for passing in sepa related params" do
         with_altpay_merchant do
           result = Braintree::Customer.create
           customer_id = result.customer.id
