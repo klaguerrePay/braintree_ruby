@@ -1,4 +1,6 @@
 # Unreleased
+
+# 2.87.0
 * Add Dispute error ValidEvidenceRequiredToFinalize
 
 # 2.86.0
