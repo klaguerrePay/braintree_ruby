@@ -1385,6 +1385,8 @@ describe Braintree::Transaction do
         apple_pay_details.expiration_month.to_i.should > 0
         apple_pay_details.expiration_year.to_i.should > 0
         apple_pay_details.cardholder_name.should_not be_nil
+        apple_pay_details.image_url.should_not be_nil
+        apple_pay_details.token.should be_nil
       end
 
       it "can create a transaction with a fake android pay proxy card nonce" do
@@ -1406,6 +1408,8 @@ describe Braintree::Transaction do
         android_pay_details.expiration_month.to_i.should > 0
         android_pay_details.expiration_year.to_i.should > 0
         android_pay_details.google_transaction_id.should == "google_transaction_id"
+        android_pay_details.image_url.should_not be_nil
+        android_pay_details.token.should be_nil
       end
 
       it "can create a transaction with a fake android pay network token nonce" do
