@@ -2,6 +2,7 @@
 
 # 2.87.0
 * Add Dispute error ValidEvidenceRequiredToFinalize
+* Add `image_url` and `token` attributes to `AndroidPayDetails` and `ApplePayDetails`
 
 # 2.86.0
 * Remove `sepa_mandate_type` and `sepa_mandate_acceptance_location` params from `ClientTokenGateway`
