@@ -1,5 +1,6 @@
 # Unreleased
 * Warn when instantiating a `Braintree::Gateway` with mixed environments
+* Allow payee ID to be passed in options params for transaction create
 
 # 2.88.0
 * Add support for Micro Transfer ACH verifications

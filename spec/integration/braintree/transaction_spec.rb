@@ -1586,6 +1586,81 @@ describe Braintree::Transaction do
         result.transaction.should_not be_nil
       end
 
+      it "can create a transaction with a payee id" do
+        customer = Braintree::Customer.create!
+        nonce = nonce_for_new_payment_method(
+          :paypal_account => {
+            :consent_code => "PAYPAL_CONSENT_CODE",
+          }
+        )
+        nonce.should_not be_nil
+
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :payment_method_nonce => nonce,
+          :paypal_account => {
+            :payee_id => "fake-payee-id"
+          }
+        )
+
+        result.success?.should == true
+        result.transaction.paypal_details.should_not be_nil
+        result.transaction.paypal_details.debug_id.should_not be_nil
+        result.transaction.paypal_details.payee_id.should == "fake-payee-id"
+      end
+
+      it "can create a transaction with a payee id in the options params" do
+        customer = Braintree::Customer.create!
+        nonce = nonce_for_new_payment_method(
+          :paypal_account => {
+            :consent_code => "PAYPAL_CONSENT_CODE",
+          }
+        )
+        nonce.should_not be_nil
+
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :payment_method_nonce => nonce,
+          :paypal_account => {},
+          :options => {
+            :payee_id => "fake-payee-id"
+          }
+        )
+
+        result.success?.should == true
+        result.transaction.paypal_details.should_not be_nil
+        result.transaction.paypal_details.debug_id.should_not be_nil
+        result.transaction.paypal_details.payee_id.should == "fake-payee-id"
+      end
+
+      it "can create a transaction with a payee id in options.paypal" do
+        customer = Braintree::Customer.create!
+        nonce = nonce_for_new_payment_method(
+          :paypal_account => {
+            :consent_code => "PAYPAL_CONSENT_CODE",
+          }
+        )
+        nonce.should_not be_nil
+
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :payment_method_nonce => nonce,
+          :options => {
+            :paypal => {
+              :payee_id => "fake-payee-id"
+            }
+          }
+        )
+
+        result.success?.should == true
+        result.transaction.paypal_details.should_not be_nil
+        result.transaction.paypal_details.debug_id.should_not be_nil
+        result.transaction.paypal_details.payee_id.should == "fake-payee-id"
+      end
+
       it "can create a transaction with a payee email" do
         customer = Braintree::Customer.create!
         nonce = nonce_for_new_payment_method(
