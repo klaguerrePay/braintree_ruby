@@ -1046,6 +1046,20 @@ describe Braintree::Transaction do
     end
 
     context "transaction_source" do
+      it "marks a transactions as recurring_first" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :transaction_source => "recurring_first"
+        )
+        result.success?.should == true
+        result.transaction.recurring.should == true
+      end
+
       it "marks a transactions as recurring" do
         result = Braintree::Transaction.create(
           :type => "sale",
@@ -1060,6 +1074,20 @@ describe Braintree::Transaction do
         result.transaction.recurring.should == true
       end
 
+      it "marks a transactions as merchant" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :transaction_source => "merchant"
+        )
+        result.success?.should == true
+        result.transaction.recurring.should == false
+      end
+
       it "marks a transactions as moto" do
         result = Braintree::Transaction.create(
           :type => "sale",
@@ -1072,6 +1100,20 @@ describe Braintree::Transaction do
         )
         result.success?.should == true
         result.transaction.recurring.should == false
+      end
+
+      it "handles validation when transaction source invalid" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :transaction_source => "invalid_value"
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).on(:transaction_source)[0].code.should == Braintree::ErrorCodes::Transaction::TransactionSourceIsInvalid
       end
     end
 
