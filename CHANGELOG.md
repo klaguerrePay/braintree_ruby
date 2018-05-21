@@ -1,4 +1,4 @@
-# Unreleased
+# 2.89.0
 * Warn when instantiating a `Braintree::Gateway` with mixed environments
 * Allow payee ID to be passed in options params for transaction create
 * Add `merchant_id` to `ConnectedMerchantStatusTransitioned` and `ConnectedMerchantPayPalStatusChanged` Auth webhooks
