@@ -1,3 +1,6 @@
+# Unreleased
+* Add `processor_response_code` and `processor_response_text` to authorization adjustments subfield in transaction response.
+
 # 2.89.0
 * Warn when instantiating a `Braintree::Gateway` with mixed environments
 * Allow payee ID to be passed in options params for transaction create

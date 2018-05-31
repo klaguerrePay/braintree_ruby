@@ -5714,6 +5714,8 @@ describe Braintree::Transaction do
       authorization_adjustment.amount.should == "-20.00"
       authorization_adjustment.success.should == true
       authorization_adjustment.timestamp.should be_a Time
+      authorization_adjustment.processor_response_code.should == "1000"
+      authorization_adjustment.processor_response_text.should == "Approved"
     end
   end
 
