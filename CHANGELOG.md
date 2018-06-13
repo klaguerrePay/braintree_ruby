@@ -1,5 +1,6 @@
 # Unreleased
 * Add `processor_response_code` and `processor_response_text` to authorization adjustments subfield in transaction response.
+* Stop restricting `transaction_source` values for Disputes search, allow searching by OAuth Application client_id
 
 # 2.89.0
 * Warn when instantiating a `Braintree::Gateway` with mixed environments
