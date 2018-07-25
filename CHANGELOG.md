@@ -1,4 +1,4 @@
-# Unreleased
+# 2.90.0
 * Add `processor_response_code` and `processor_response_text` to authorization adjustments subfield in transaction response.
 * Stop restricting `transaction_source` values for Disputes search, allow searching by OAuth Application client_id
 * Add support for Samsung Pay
