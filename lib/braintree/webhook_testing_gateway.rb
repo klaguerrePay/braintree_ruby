@@ -64,6 +64,8 @@ module Braintree
         _disbursement_sample_xml(id)
       when Braintree::WebhookNotification::Kind::SubscriptionChargedSuccessfully
         _subscription_charged_successfully(id)
+      when Braintree::WebhookNotification::Kind::SubscriptionChargedUnsuccessfully
+        _subscription_charged_unsuccessfully(id)
       when Braintree::WebhookNotification::Kind::AccountUpdaterDailyReport
         _account_updater_daily_report_sample_xml(id)
       when Braintree::WebhookNotification::Kind::ConnectedMerchantStatusTransitioned
@@ -95,7 +97,28 @@ module Braintree
           <id>#{id}</id>
           <transactions type="array">
             <transaction>
+              <id>#{id}</id>
               <status>submitted_for_settlement</status>
+              <amount>49.99</amount>
+            </transaction>
+          </transactions>
+          <add_ons type="array">
+          </add_ons>
+          <discounts type="array">
+          </discounts>
+        </subscription>
+      XML
+    end
+
+    def _subscription_charged_unsuccessfully(id)
+
+      <<-XML
+        <subscription>
+          <id>#{id}</id>
+          <transactions type="array">
+            <transaction>
+              <id>#{id}</id>
+              <status>failed</status>
               <amount>49.99</amount>
             </transaction>
           </transactions>

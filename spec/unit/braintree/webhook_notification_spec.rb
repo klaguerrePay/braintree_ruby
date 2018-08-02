@@ -392,6 +392,21 @@ describe Braintree::WebhookNotification do
         notification.subscription.transactions.first.status.should == Braintree::Transaction::Status::SubmittedForSettlement
         notification.subscription.transactions.first.amount.should == BigDecimal("49.99")
       end
+
+      it "builds a sample notification for a subscription charged unsuccessfully webhook" do
+        sample_notification = Braintree::WebhookTesting.sample_notification(
+          Braintree::WebhookNotification::Kind::SubscriptionChargedUnsuccessfully,
+          "my_id"
+        )
+
+        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+
+        notification.kind.should == Braintree::WebhookNotification::Kind::SubscriptionChargedUnsuccessfully
+        notification.subscription.id.should == "my_id"
+        notification.subscription.transactions.size.should == 1
+        notification.subscription.transactions.first.status.should == Braintree::Transaction::Status::Failed
+        notification.subscription.transactions.first.amount.should == BigDecimal("49.99")
+      end
     end
 
     it "includes a valid signature" do
