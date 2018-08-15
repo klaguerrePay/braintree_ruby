@@ -44,6 +44,7 @@ module Braintree
     end
     attr_reader *READABLE_ATTRIBUTES
     attr_reader *NON_REQUIRED_READABLE_ATTRIBUTES
+    attr_writer *WRITABLE_ATTRIBUTES
 
     def self.expectant_reader(*attributes) # :nodoc:
       attributes.each do |attribute|

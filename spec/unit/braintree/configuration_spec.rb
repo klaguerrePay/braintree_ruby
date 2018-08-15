@@ -167,6 +167,19 @@ describe Braintree::Configuration do
       config = Braintree::Configuration.new :logger => nil
       config.logger.should_not == nil
     end
+
+    it "can set logger on gateway instance" do
+      gateway = Braintree::Configuration.gateway
+      old_logger = Braintree::Configuration.logger
+
+      new_logger = Logger.new("/dev/null")
+
+      gateway.config.logger = new_logger
+
+      expect(gateway.config.logger).to eq(new_logger)
+
+      gateway.config.logger = old_logger
+    end
   end
 
   describe "self.environment" do
