@@ -113,6 +113,8 @@ module Braintree
         instance_variable_set "@#{attr}", options[attr]
       end
 
+      @environment = @environment.to_sym if @environment
+
       _check_for_mixed_credentials(options)
 
       parser = Braintree::CredentialsParser.new

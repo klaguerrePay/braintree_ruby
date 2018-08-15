@@ -183,6 +183,14 @@ describe Braintree::Configuration do
         Braintree::Configuration.environment
       end.to raise_error(Braintree::ConfigurationError, "Braintree::Configuration.environment needs to be set")
     end
+
+    it "converts environment to symbol" do
+      config = Braintree::Configuration.new({
+        :environment => "sandbox"
+      })
+
+      expect(config.environment).to eq(:sandbox)
+    end
   end
 
   describe "self.gateway" do
