@@ -2,6 +2,7 @@
 * Add subscription charged unsuccessfully sample webhook to webhook testing gateway
 * Fix issue where environment was not automatically converted from a string to a symbol (#148, #164)
 * Fix issue where logger could not be set on gateway instance
+* Fix dispute results in transactions not showing the correct status sometimes
 
 # 2.90.0
 * Add `processor_response_code` and `processor_response_text` to authorization adjustments subfield in transaction response.

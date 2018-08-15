@@ -1,6 +1,6 @@
 module Braintree
   class Configuration
-    API_VERSION = "4" # :nodoc:
+    API_VERSION = "5" # :nodoc:
     DEFAULT_ENDPOINT = "api" # :nodoc:
 
     READABLE_ATTRIBUTES = [
