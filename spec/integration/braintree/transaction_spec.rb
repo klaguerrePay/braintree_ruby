@@ -4808,8 +4808,8 @@ describe Braintree::Transaction do
     it "returns an error with an invalid payment instrument type" do
       authorized_transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :merchant_account_id => SpecHelper::DefaultMerchantAccountId,
-        :payment_method_nonce => Braintree::Test::Nonce::AndroidPayDiscover
+        :merchant_account_id => SpecHelper::FakeVenmoAccountMerchantAccountId,
+        :payment_method_nonce => Braintree::Test::Nonce::VenmoAccount
       )
 
       result = Braintree::Transaction.submit_for_partial_settlement(authorized_transaction.id, 100)
