@@ -248,6 +248,31 @@ describe Braintree::Transaction do
       end
     end
 
+    context "elo" do
+      it "returns a successful result if successful" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::AdyenMerchantAccountId,
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Elo,
+            :cvv => "737",
+            :expiration_date => "10/2020"
+          }
+        )
+        result.success?.should == true
+        result.transaction.id.should =~ /^\w{6,}$/
+        result.transaction.type.should == "sale"
+        result.transaction.amount.should == BigDecimal.new(Braintree::Test::TransactionAmounts::Authorize)
+        result.transaction.processor_authorization_code.should_not be_nil
+        result.transaction.voice_referral_number.should be_nil
+        result.transaction.credit_card_details.bin.should == Braintree::Test::CreditCardNumbers::Elo[0, 6]
+        result.transaction.credit_card_details.last_4.should == Braintree::Test::CreditCardNumbers::Elo[-4..-1]
+        result.transaction.credit_card_details.expiration_date.should == "10/2020"
+        result.transaction.credit_card_details.customer_location.should == "US"
+      end
+    end
+
     it "returns a successful result if successful" do
       result = Braintree::Transaction.create(
         :type => "sale",
