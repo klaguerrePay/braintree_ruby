@@ -21,6 +21,7 @@ module Braintree
       CarteBlanches = %w[30569309025904] # :nodoc:
       DinersClubs = %w[38520000023237] # :nodoc:
 
+      Discover = "6011111111111117"
       Discovers = %w[6011111111111117 6011000990139424]
       JCBs = %w[3530111333300000 3566002020360505] # :nodoc:
 
