@@ -2,6 +2,7 @@ module Braintree
   class Configuration
     API_VERSION = "5" # :nodoc:
     DEFAULT_ENDPOINT = "api" # :nodoc:
+    GRAPHQL_API_VERSION = "2018-09-10" # :nodoc:
 
     READABLE_ATTRIBUTES = [
       :merchant_id,
@@ -161,12 +162,20 @@ module Braintree
       API_VERSION
     end
 
+    def graphql_api_version # :nodoc:
+      GRAPHQL_API_VERSION
+    end
+
     def base_merchant_path # :nodoc:
       "/merchants/#{merchant_id}"
     end
 
     def base_url
       "#{protocol}://#{server}:#{port}"
+    end
+
+    def graphql_base_url
+      "#{protocol}://#{graphql_server}:#{graphql_port}/graphql"
     end
 
     def base_merchant_url # :nodoc:
@@ -185,6 +194,10 @@ module Braintree
       Http.new(self)
     end
 
+    def graphql_client
+      GraphQLClient.new(self)
+    end
+
     def logger
       @logger ||= self.class._default_logger
     end
@@ -193,6 +206,15 @@ module Braintree
       case @environment
       when :development, :integration
         ENV['GATEWAY_PORT'] || 3000
+      when :production, :qa, :sandbox
+        443
+      end
+    end
+
+    def graphql_port # :nodoc:
+      case @environment
+      when :development, :integration
+        ENV['GRAPHQL_PORT'] || 8080
       when :production, :qa, :sandbox
         443
       end
@@ -220,6 +242,19 @@ module Braintree
         "gateway.qa.braintreepayments.com"
       when :sandbox
         "api.sandbox.braintreegateway.com"
+      end
+    end
+
+    def graphql_server # :nodoc:
+      case @environment
+      when :development, :integration
+        ENV['GRAPHQL_HOST'] || "graphql.bt.local"
+      when :production
+        "payments.braintree-api.com"
+      when :qa
+        "payments-qa.dev.braintree-api.com"
+      when :sandbox
+        "payments.sandbox.braintree-api.com"
       end
     end
 

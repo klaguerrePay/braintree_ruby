@@ -356,6 +356,22 @@ describe Braintree::Configuration do
     end
   end
 
+  describe "graphql_server" do
+    it "is localhost or GRAPHQL_HOST environment variable for development" do
+      Braintree::Configuration.environment = :development
+      old_gateway_url = ENV['GRAPHQL_HOST']
+      begin
+        ENV['GRAPHQL_HOST'] = nil
+        Braintree::Configuration.instantiate.graphql_server.should == "graphql.bt.local"
+
+        ENV['GRAPHQL_HOST'] = 'gateway'
+        Braintree::Configuration.instantiate.graphql_server.should == 'gateway'
+      ensure
+        ENV['GRAPHQL_HOST'] = old_gateway_url
+      end
+    end
+  end
+
   describe "server" do
     it "is localhost or GATEWAY_HOST environment variable for development" do
       Braintree::Configuration.environment = :development
