@@ -1,3 +1,6 @@
+# unreleased
+* Add `processor_response_type` to `Transaction`, `AuthorizationAdjustment`, and `CreditCardVerification`.
+
 # 2.91.0
 * Add local payment webhook support
 * Add subscription charged unsuccessfully sample webhook to webhook testing gateway
