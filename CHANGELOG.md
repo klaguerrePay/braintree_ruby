@@ -1,5 +1,6 @@
 # unreleased
 * Allow PayPal payment ID and payer ID to be passed during transaction create
+* Add `travel_flight` support to industry-specific data
 
 # 2.92.0
 * Add `processor_response_type` to `Transaction`, `AuthorizationAdjustment`, and `CreditCardVerification`.

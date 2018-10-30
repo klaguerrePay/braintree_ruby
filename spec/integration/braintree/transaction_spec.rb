@@ -246,6 +246,105 @@ describe Braintree::Transaction do
           result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should == [Braintree::ErrorCodes::Transaction::Industry::TravelCruise::TravelPackageIsInvalid]
         end
       end
+
+      context "for travel flight" do
+        it "accepts valid industry data" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => 1_00,
+            :payment_method_nonce => Braintree::Test::Nonce::PayPalOneTimePayment,
+            :options => {
+              :submit_for_settlement => true
+            },
+            :industry => {
+              :industry_type => Braintree::Transaction::IndustryType::TravelAndFlight,
+              :data => {
+                :passenger_first_name => "John",
+                :passenger_last_name => "Doe",
+                :passenger_middle_initial => "M",
+                :passenger_title => "Mr.",
+                :issued_date => Date.new(2018, 1, 1),
+                :travel_agency_name => "Expedia",
+                :travel_agency_code => "12345678",
+                :ticket_number => "ticket-number",
+                :issuing_carrier_code => "AA",
+                :customer_code => "customer-code",
+                :fare_amount => 70_00,
+                :fee_amount => 10_00,
+                :tax_amount => 20_00,
+                :restricted_ticket => false,
+                :legs => [
+                  {
+                    :conjunction_ticket => "CJ0001",
+                    :exchange_ticket => "ET0001",
+                    :coupon_number => "1",
+                    :service_class => "Y",
+                    :carrier_code => "AA",
+                    :fare_basis_code => "W",
+                    :flight_number => "AA100",
+                    :departure_date => Date.new(2018, 1, 2),
+                    :departure_airport_code => "MDW",
+                    :departure_time => "08:00",
+                    :arrival_airport_code => "ATX",
+                    :arrival_time => "10:00",
+                    :stopover_permitted => false,
+                    :fare_amount => 35_00,
+                    :fee_amount => 5_00,
+                    :tax_amount => 10_00,
+                    :endorsement_or_restrictions => "NOT REFUNDABLE"
+                  },
+                  {
+                    :conjunction_ticket => "CJ0002",
+                    :exchange_ticket => "ET0002",
+                    :coupon_number => "1",
+                    :service_class => "Y",
+                    :carrier_code => "AA",
+                    :fare_basis_code => "W",
+                    :flight_number => "AA200",
+                    :departure_date => Date.new(2018, 1, 3),
+                    :departure_airport_code => "ATX",
+                    :departure_time => "12:00",
+                    :arrival_airport_code => "MDW",
+                    :arrival_time => "14:00",
+                    :stopover_permitted => false,
+                    :fare_amount => 35_00,
+                    :fee_amount => 5_00,
+                    :tax_amount => 10_00,
+                    :endorsement_or_restrictions => "NOT REFUNDABLE"
+                  }
+                ]
+              }
+            }
+          )
+          result.success?.should be(true)
+        end
+
+        it "returns errors if validations on industry data fails" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => 1_00,
+            :payment_method_nonce => Braintree::Test::Nonce::PayPalOneTimePayment,
+            :options => {
+              :submit_for_settlement => true
+            },
+            :industry => {
+              :industry_type => Braintree::Transaction::IndustryType::TravelAndFlight,
+              :data => {
+                :fare_amount => -1_23,
+                :restricted_ticket => false,
+                :legs => [
+                  {
+                    :fare_amount => -1_23
+                  }
+                ]
+              }
+            }
+          )
+          result.success?.should be(false)
+          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should == [Braintree::ErrorCodes::Transaction::Industry::TravelFlight::FareAmountCannotBeNegative]
+          result.errors.for(:transaction).for(:industry).for(:legs).for(:index_0).map { |e| e.code }.sort.should == [Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareAmountCannotBeNegative]
+        end
+      end
     end
 
     context "elo" do
