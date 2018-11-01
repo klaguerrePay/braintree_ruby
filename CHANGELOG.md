@@ -1,4 +1,4 @@
-# unreleased
+# 2.92.0
 * Add `processor_response_type` to `Transaction`, `AuthorizationAdjustment`, and `CreditCardVerification`.
 * Add `authorization_expires_at` to `Transaction`
 
