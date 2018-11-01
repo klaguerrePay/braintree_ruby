@@ -1,5 +1,6 @@
 # unreleased
 * Add `processor_response_type` to `Transaction`, `AuthorizationAdjustment`, and `CreditCardVerification`.
+* Add `authorization_expires_at` to `Transaction`
 
 # 2.91.0
 * Add local payment webhook support

@@ -4034,6 +4034,7 @@ describe Braintree::Transaction do
       transaction.order_id.should == "123"
       transaction.channel.should == "MyShoppingCartProvider"
       transaction.processor_response_code.should == "1000"
+      transaction.authorization_expires_at.between?(Time.now, Time.now + (60 * 60 * 24 * 60)).should == true
       transaction.created_at.between?(Time.now - 60, Time.now).should == true
       transaction.updated_at.between?(Time.now - 60, Time.now).should == true
       transaction.credit_card_details.bin.should == "510510"
@@ -5423,6 +5424,7 @@ describe Braintree::Transaction do
       transaction.order_id.should == "123"
       transaction.channel.should == "MyShoppingCartProvider"
       transaction.processor_response_code.should == "1000"
+      transaction.authorization_expires_at.between?(Time.now, Time.now + (60 * 60 * 24 * 60)).should == true
       transaction.created_at.between?(Time.now - 60, Time.now).should == true
       transaction.updated_at.between?(Time.now - 60, Time.now).should == true
       transaction.credit_card_details.bin.should == "510510"

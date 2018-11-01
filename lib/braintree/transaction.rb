@@ -83,6 +83,7 @@ module Braintree
     attr_reader :android_pay_details
     attr_reader :apple_pay_details
     attr_reader :authorization_adjustments
+    attr_reader :authorization_expires_at
     attr_reader :authorized_transaction_id
     attr_reader :avs_error_response_code
     attr_reader :avs_postal_code_response_code
