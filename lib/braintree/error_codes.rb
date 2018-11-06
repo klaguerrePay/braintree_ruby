@@ -345,6 +345,7 @@ module Braintree
       MerchantAccountDoesNotMatchIdealPaymentMerchantAccount = "915143"
       MerchantAccountDoesNotSupportMOTO = "91558"
       MerchantAccountDoesNotSupportRefunds = "91547"
+      MerchantAccountIdDoesNotMatchSubscription = "915180"
       MerchantAccountIdIsInvalid = "91513"
       MerchantAccountIsSuspended = "91514"
       OrderIdIsTooLong = "91501"
