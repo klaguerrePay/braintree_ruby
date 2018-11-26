@@ -137,6 +137,7 @@ describe Braintree::Transaction do
           result.transaction.risk_data.should respond_to(:id)
           result.transaction.risk_data.should respond_to(:decision)
           result.transaction.risk_data.should respond_to(:device_data_captured)
+          result.transaction.risk_data.should respond_to(:fraud_service_provider)
         end
       end
     end
