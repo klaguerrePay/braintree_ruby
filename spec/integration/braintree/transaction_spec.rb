@@ -1632,6 +1632,24 @@ describe Braintree::Transaction do
         result.transaction.should_not be_nil
       end
 
+      it "can create a transaction with local payment webhook content" do
+        result = Braintree::Transaction.sale(
+          :amount => "100",
+          :options => {
+            :submit_for_settlement => true
+          },
+          :paypal_account => {
+            :payer_id => "PAYER-1234",
+            :payment_id => "PAY-5678",
+          }
+        )
+
+        result.success?.should == true
+        result.transaction.status.should == Braintree::Transaction::Status::Settling
+        result.transaction.paypal_details.payer_id.should == "PAYER-1234"
+        result.transaction.paypal_details.payment_id.should == "PAY-5678"
+      end
+
       it "can create a transaction with a payee id" do
         customer = Braintree::Customer.create!
         nonce = nonce_for_new_payment_method(
