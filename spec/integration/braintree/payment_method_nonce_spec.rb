@@ -100,6 +100,15 @@ describe Braintree::PaymentMethodNonce do
       nonce.three_d_secure_info.should be_nil
     end
 
+    it "returns the bin" do
+      result = Braintree::PaymentMethodNonce.find("fake-valid-visa-nonce")
+
+      nonce = result.payment_method_nonce
+      result.should be_success
+      nonce.details.should_not be_nil
+      nonce.details[:bin].should == "401288"
+    end
+
     it "returns bin_data with commercial set to Yes" do
       result = Braintree::PaymentMethodNonce.find("fake-valid-commercial-nonce")
 

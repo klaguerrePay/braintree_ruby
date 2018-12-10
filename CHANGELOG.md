@@ -1,3 +1,6 @@
+# Unreleased
+* Add `bin` field to `payment_method_nonce_details`
+
 # 2.93.0
 * Allow PayPal payment ID and payer ID to be passed during transaction create
 * Add `travel_flight` support to industry-specific data
