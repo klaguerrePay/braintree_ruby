@@ -2398,15 +2398,6 @@ describe Braintree::Transaction do
           refund_transaction.refunded_transaction_id.should == transaction.id
         end
 
-        it "returns an error if already refunded" do
-          transaction = create_paypal_transaction_for_refund
-          result = Braintree::Transaction.refund(transaction.id)
-          result.success?.should == true
-          result = Braintree::Transaction.refund(transaction.id)
-          result.success?.should == false
-          result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::HasAlreadyBeenRefunded
-        end
-
         it "returns an error result if unsettled" do
           transaction = Braintree::Transaction.sale!(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
