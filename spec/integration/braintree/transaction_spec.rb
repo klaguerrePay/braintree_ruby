@@ -6260,8 +6260,8 @@ describe Braintree::Transaction do
           :venmo_sdk_payment_method_code => Braintree::Test::VenmoSDK::InvalidPaymentMethodCode
         )
         result.success?.should == false
-        result.message.should == "Invalid VenmoSDK payment method code"
-        result.errors.first.code.should == "91727"
+        result.message.should include("Invalid VenmoSDK payment method code")
+        result.errors.map(&:code).should include("91727")
       end
     end
 
