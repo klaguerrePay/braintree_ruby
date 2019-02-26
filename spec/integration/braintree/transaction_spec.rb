@@ -3946,6 +3946,122 @@ describe Braintree::Transaction do
       end
 
     end
+
+    context "account_type" do
+      it "creates a Hiper transaction with account type credit" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Hiper,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "credit",
+              }
+            }
+          )
+          result.success?.should == true
+          result.transaction.credit_card_details.account_type.should == "credit"
+       end
+
+       it "creates a Hipercard transaction with account_type credit" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Hipercard,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "credit",
+              }
+            }
+          )
+          result.success?.should == true
+          result.transaction.credit_card_details.account_type.should == "credit"
+       end
+
+       it "creates a Hiper transaction with account_type debit" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Hiper,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "debit",
+              },
+              :submit_for_settlement => true,
+            }
+          )
+          result.success?.should == true
+          result.transaction.credit_card_details.account_type.should == "debit"
+       end
+
+       it "does not allow auths with account_type debit" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Hiper,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "debit",
+              },
+            }
+          )
+          result.success?.should == false
+          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeDebitDoesNotSupportAuths
+       end
+
+       it "does not allow invalid account_type" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Hiper,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "ach",
+              },
+            }
+          )
+          result.success?.should == false
+          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeIsInvalid
+       end
+
+       it "does not allow account_type not supported by merchant" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Visa,
+              :expiration_date => "05/2009"
+            },
+            :amount => "10.00",
+            :options => {
+              :credit_card => {
+                :account_type => "credit",
+              },
+            }
+          )
+          result.success?.should == false
+          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeNotSupported
+       end
+    end
   end
 
   describe "self.create!" do
