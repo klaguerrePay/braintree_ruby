@@ -578,6 +578,54 @@ describe Braintree::PaymentMethod do
         result.should_not be_success
         result.errors.for(:credit_card).for(:options).on(:verification_account_type)[0].code.should == Braintree::ErrorCodes::CreditCard::VerificationAccountTypeNotSupported
       end
+
+      it "updates the credit card with account_type credit" do
+        customer = Braintree::Customer.create!
+        credit_card = Braintree::CreditCard.create!(
+          :cardholder_name => "Original Holder",
+          :customer_id => customer.id,
+          :cvv => "123",
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2012"
+        )
+        update_result = Braintree::PaymentMethod.update(credit_card.token,
+          :cardholder_name => "New Holder",
+          :cvv => "456",
+          :number => Braintree::Test::CreditCardNumbers::Hiper,
+          :expiration_date => "06/2013",
+          :options => {
+            :verify_card => true,
+            :verification_merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :verification_account_type => "credit",
+          },
+        )
+        update_result.success?.should == true
+        update_result.payment_method.verification.credit_card[:account_type].should == "credit"
+      end
+
+      it "updates the credit card with account_type debit" do
+        customer = Braintree::Customer.create!
+        credit_card = Braintree::CreditCard.create!(
+          :cardholder_name => "Original Holder",
+          :customer_id => customer.id,
+          :cvv => "123",
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2012"
+        )
+        update_result = Braintree::PaymentMethod.update(credit_card.token,
+          :cardholder_name => "New Holder",
+          :cvv => "456",
+          :number => Braintree::Test::CreditCardNumbers::Hiper,
+          :expiration_date => "06/2013",
+          :options => {
+            :verify_card => true,
+            :verification_merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+            :verification_account_type => "debit",
+          },
+        )
+        update_result.success?.should == true
+        update_result.payment_method.verification.credit_card[:account_type].should == "debit"
+      end
     end
 
     context "paypal" do
