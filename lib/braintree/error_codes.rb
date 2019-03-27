@@ -100,7 +100,7 @@ module Braintree
       TokenIsTooLong = "91720"
       VenmoSDKPaymentMethodCodeCardTypeIsNotAccepted = "91726"
       VerificationNotSupportedOnThisMerchantAccount = "91730"
-      VerificationAccountTypeIsInvald = "91757"
+      VerificationAccountTypeIsInvalid = "91757"
       VerificationAccountTypeNotSupported = "91758"
 
       module Options

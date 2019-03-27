@@ -554,7 +554,7 @@ describe Braintree::PaymentMethod do
         )
 
         result.should_not be_success
-        result.errors.for(:credit_card).for(:options).on(:verification_account_type)[0].code.should == Braintree::ErrorCodes::CreditCard::VerificationAccountTypeIsInvald
+        result.errors.for(:credit_card).for(:options).on(:verification_account_type)[0].code.should == Braintree::ErrorCodes::CreditCard::VerificationAccountTypeIsInvalid
       end
 
       it "errors when account_type not supported by merchant" do
