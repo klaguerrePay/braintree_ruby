@@ -2098,7 +2098,7 @@ describe Braintree::Transaction do
 
       it "returns an error for transaction with three_d_secure_pass_thru when processor settings do not support 3DS for card type" do
         result = Braintree::Transaction.create(
-          :merchant_account_id => "adyen_ma",
+          :merchant_account_id => "heartland_ma",
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
           :credit_card => {
