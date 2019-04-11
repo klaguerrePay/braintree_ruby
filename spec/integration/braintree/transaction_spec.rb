@@ -766,6 +766,16 @@ describe Braintree::Transaction do
         result.success?.should == false
         result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::Fraud
       end
+
+      it "exposes the token issuance gateway rejection reason" do
+        result = Braintree::Transaction.sale(
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::FakeVenmoAccountMerchantAccountId,
+          :payment_method_nonce => Braintree::Test::Nonce::VenmoAccountTokenIssuanceError,
+        )
+        result.success?.should == false
+        result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::TokenIssuance
+      end
     end
 
     it "accepts credit card expiration month and expiration year" do
