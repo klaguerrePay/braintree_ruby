@@ -1,3 +1,26 @@
+# Unreleased
+* Add `prepaid` field to android_pay_card
+* Add `healthcare` field to android_pay_card
+* Add `debit` field to android_pay_card
+* Add `durbin_regulated` field to android_pay_card
+* Add `commercial` field to android_pay_card
+* Add `payroll` field to android_pay_card
+* Add `issuing_bank` field to android_pay_card
+* Add `country_of_issuance` field to android_pay_card
+* Add `product_id` field to android_pay_card
+* Add `global_id` field to android_pay_card
+* Add `prepaid` field to apple_pay_card
+* Add `healthcare` field to apple_pay_card
+* Add `debit` field to apple_pay_card
+* Add `durbin_regulated` field to apple_pay_card
+* Add `commercial` field to apple_pay_card
+* Add `payroll` field to apple_pay_card
+* Add `issuing_bank` field to apple_pay_card
+* Add `country_of_issuance` field to apple_pay_card
+* Add `product_id` field to apple_pay_card
+* Add `bin` field to apple_pay_card
+* Add `global_id` field to apple_pay_card
+
 # 2.95.0
 * Deprecate `GrantedPaymentInstrumentUpdate` and add `GrantorUpdatedGrantedPaymentMethod` and `RecipientUpdatedGrantedPaymentMethod`
 * Add account_type support for transaction sale, verification, and payment_method create/update

@@ -1575,6 +1575,13 @@ describe Braintree::Transaction do
         apple_pay_details.cardholder_name.should_not be_nil
         apple_pay_details.image_url.should_not be_nil
         apple_pay_details.token.should be_nil
+        apple_pay_details.prepaid.should_not be_nil
+        apple_pay_details.healthcare.should_not be_nil
+        apple_pay_details.debit.should_not be_nil
+        apple_pay_details.durbin_regulated.should_not be_nil
+        apple_pay_details.commercial.should_not be_nil
+        apple_pay_details.payroll.should_not be_nil
+        apple_pay_details.product_id.should_not be_nil
       end
 
       it "can create a vaulted transaction with a fake apple pay nonce" do
@@ -1620,6 +1627,13 @@ describe Braintree::Transaction do
         android_pay_details.google_transaction_id.should == "google_transaction_id"
         android_pay_details.image_url.should_not be_nil
         android_pay_details.token.should be_nil
+        android_pay_details.prepaid.should_not be_nil
+        android_pay_details.healthcare.should_not be_nil
+        android_pay_details.debit.should_not be_nil
+        android_pay_details.durbin_regulated.should_not be_nil
+        android_pay_details.commercial.should_not be_nil
+        android_pay_details.payroll.should_not be_nil
+        android_pay_details.product_id.should_not be_nil
       end
 
       it "can create a vaulted transaction with a fake android pay proxy card nonce" do
