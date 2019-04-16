@@ -5877,6 +5877,8 @@ describe Braintree::Transaction do
         transaction.paypal_details.refund_id.should_not be_nil
         transaction.paypal_details.transaction_fee_amount.should_not be_nil
         transaction.paypal_details.transaction_fee_currency_iso_code.should_not be_nil
+        transaction.paypal_details.refund_from_transaction_fee_amount.should_not be_nil
+        transaction.paypal_details.refund_from_transaction_fee_currency_iso_code.should_not be_nil
       end
     end
   end
