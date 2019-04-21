@@ -108,6 +108,8 @@ module Braintree
     attr_reader :facilitator_details
     attr_reader :gateway_rejection_reason
     attr_reader :id
+    # NEXT_MAJOR_VERSION Remove this class as legacy Ideal has been removed/disabled in the Braintree Gateway
+    # DEPRECATED If you're looking to accept iDEAL as a payment method contact accounts@braintreepayments.com for a solution.
     attr_reader :ideal_payment_details
     attr_reader :masterpass_card_details
     attr_reader :merchant_account_id

@@ -2453,53 +2453,6 @@ describe Braintree::Transaction do
       end
     end
 
-    context "ideal payment nonce" do
-      it "returns a successful result for tansacting on an ideal payment nonce" do
-        valid_ideal_payment_id = generate_valid_ideal_payment_nonce
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :order_id => SpecHelper::DefaultOrderId,
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => SpecHelper::IdealMerchantAccountId,
-          :payment_method_nonce => valid_ideal_payment_id,
-          :options => {
-            :submit_for_settlement => true,
-          }
-        )
-        result.success?.should == true
-        result.transaction.id.should =~ /^\w{6,}$/
-        result.transaction.type.should == "sale"
-        result.transaction.payment_instrument_type.should == Braintree::PaymentInstrumentType::IdealPayment
-        result.transaction.amount.should == BigDecimal(Braintree::Test::TransactionAmounts::Authorize)
-        result.transaction.status.should == Braintree::Transaction::Status::Settled
-        result.transaction.ideal_payment_details.ideal_payment_id.should =~ /^idealpayment_\w{6,}$/
-        result.transaction.ideal_payment_details.ideal_transaction_id.should =~ /^\d{16,}$/
-        result.transaction.ideal_payment_details.image_url.should start_with("https://")
-        result.transaction.ideal_payment_details.masked_iban.should_not be_empty
-        result.transaction.ideal_payment_details.bic.should_not be_empty
-      end
-
-      it "returns a failure if ideal payment is not complete" do
-        expired_payment_amount = "3.00"
-
-        incomplete_payment_id = generate_valid_ideal_payment_nonce(expired_payment_amount)
-
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :order_id => SpecHelper::DefaultOrderId,
-          :amount => expired_payment_amount,
-          :merchant_account_id => SpecHelper::IdealMerchantAccountId,
-          :payment_method_nonce => incomplete_payment_id,
-          :options => {
-            :submit_for_settlement => true,
-          }
-        )
-
-        result.success?.should == false
-        result.errors.for(:transaction).on(:payment_method_nonce)[0].code.should == Braintree::ErrorCodes::Transaction::IdealPaymentNotComplete
-      end
-    end
-
     context "line items" do
       it "allows creation with empty line items and returns none" do
         result = Braintree::Transaction.create(

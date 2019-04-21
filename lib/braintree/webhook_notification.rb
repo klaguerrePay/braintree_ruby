@@ -33,6 +33,8 @@ module Braintree
 
       AccountUpdaterDailyReport = "account_updater_daily_report"
 
+      # NEXT_MAJOR_VERSION Remove this class as legacy Ideal has been removed/disabled in the Braintree Gateway
+      # DEPRECATED If you're looking to accept iDEAL as a payment method contact accounts@braintreepayments.com for a solution.
       IdealPaymentComplete = "ideal_payment_complete"
       IdealPaymentFailed = "ideal_payment_failed"
 

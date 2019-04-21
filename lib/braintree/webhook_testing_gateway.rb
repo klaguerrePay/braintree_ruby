@@ -72,8 +72,12 @@ module Braintree
         _auth_status_transitioned_sample_xml(id)
       when Braintree::WebhookNotification::Kind::ConnectedMerchantPayPalStatusChanged
         _auth_paypal_status_changed_sample_xml(id)
+        # NEXT_MAJOR_VERSION Remove this class as legacy Ideal has been removed/disabled in the Braintree Gateway
+        # DEPRECATED If you're looking to accept iDEAL as a payment method contact accounts@braintreepayments.com for a solution.
       when Braintree::WebhookNotification::Kind::IdealPaymentComplete
         _ideal_payment_complete_sample_xml(id)
+        # NEXT_MAJOR_VERSION Remove this class as legacy Ideal has been removed/disabled in the Braintree Gateway
+        # DEPRECATED If you're looking to accept iDEAL as a payment method contact accounts@braintreepayments.com for a solution.
       when Braintree::WebhookNotification::Kind::IdealPaymentFailed
         _ideal_payment_failed_sample_xml(id)
       # NEXT_MAJOR_VERSION remove GrantedPaymentInstrumentUpdate
