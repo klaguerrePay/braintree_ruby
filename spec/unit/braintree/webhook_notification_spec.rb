@@ -566,6 +566,23 @@ describe Braintree::WebhookNotification do
     end
   end
 
+  context "payment_method_revoked_by_customer" do
+    it "builds a sample notification for a payment_method_revoked_by_customer webhook" do
+      sample_notification = Braintree::WebhookTesting.sample_notification(
+        Braintree::WebhookNotification::Kind::PaymentMethodRevokedByCustomer,
+        "my_payment_method_token"
+      )
+
+      notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+      notification.kind.should == Braintree::WebhookNotification::Kind::PaymentMethodRevokedByCustomer
+
+      metadata = notification.revoked_payment_method_metadata
+      metadata.token.should == "my_payment_method_token"
+      metadata.revoked_payment_method.class.should == Braintree::PayPalAccount
+      metadata.revoked_payment_method.revoked_at.should_not be_nil
+    end
+  end
+
   context "local_payment_completed" do
     it "builds a sample notification for a local_payment webhook" do
       sample_notification = Braintree::WebhookTesting.sample_notification(

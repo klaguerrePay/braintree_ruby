@@ -22,6 +22,8 @@
 * Add `global_id` field to apple_pay_card
 * Add `refund_from_transaction_fee_amount` field to paypal_details
 * Add `refund_from_transaction_fee_currency_iso_code` field to paypal_details
+* Add `revoked_at` field to paypal_account
+* Add support for `PaymentMethodRevokedByCustomer` webhook
 
 # 2.95.0
 * Deprecate `GrantedPaymentInstrumentUpdate` and add `GrantorUpdatedGrantedPaymentMethod` and `RecipientUpdatedGrantedPaymentMethod`

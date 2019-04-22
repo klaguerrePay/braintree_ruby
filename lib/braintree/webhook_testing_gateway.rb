@@ -87,6 +87,8 @@ module Braintree
         _granted_payment_instrument_update_sample_xml(id)
       when Braintree::WebhookNotification::Kind::RecipientUpdatedGrantedPaymentMethod
         _granted_payment_instrument_update_sample_xml(id)
+      when Braintree::WebhookNotification::Kind::PaymentMethodRevokedByCustomer
+        _payment_method_revoked_by_customer_sample_xml(id)
       when Braintree::WebhookNotification::Kind::LocalPaymentCompleted
         _local_payment_completed_sample_xml(id)
       else
@@ -670,6 +672,28 @@ module Braintree
             <item>expiration-year</item>
           </updated-fields>
         </granted-payment-instrument-update>
+      XML
+    end
+
+    def _payment_method_revoked_by_customer_sample_xml(id)
+      <<-XML
+        <paypal-account>
+          <billing-agreement-id>a-billing-agreement-id</billing-agreement-id>
+          <created-at type="datetime">2019-01-01T12:00:00Z</created-at>
+          <customer-id>a-customer-id</customer-id>
+          <default type="boolean">true</default>
+          <email>name@email.com</email>
+          <global-id>cGF5bWVudG1ldGhvZF9jaDZieXNz</global-id>
+          <image-url>https://assets.braintreegateway.com/payment_method_logo/paypal.png?environment=test</image-url>
+          <subscriptions type="array"/>
+          <token>#{id}</token>
+          <updated-at type="datetime">2019-01-02T12:00:00Z</updated-at>
+          <is-channel-initiated nil="true"/>
+          <payer-id>a-payer-id</payer-id>
+          <payer-info nil="true"/>
+          <limited-use-order-id nil="true"/>
+          <revoked-at type="datetime">2019-01-02T12:00:00Z</revoked-at>
+        </paypal-account>
       XML
     end
 
