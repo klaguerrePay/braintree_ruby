@@ -26,6 +26,7 @@
 * Add support for `PaymentMethodRevokedByCustomer` webhook
 * Add `payment_method_nonce` field to `LocalPaymentCompleted` webhook
 * Add `transaction` field to `LocalPaymentCompleted` webhook
+* Add `local_payment_detail` field to transactions
 
 # 2.95.0
 * Deprecate `GrantedPaymentInstrumentUpdate` and add `GrantorUpdatedGrantedPaymentMethod` and `RecipientUpdatedGrantedPaymentMethod`

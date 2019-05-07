@@ -2253,6 +2253,21 @@ describe Braintree::Transaction do
         end
       end
 
+      context "local payments" do
+        it "can create a local payment transaction with a nonce" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :payment_method_nonce => Braintree::Test::Nonce::LocalPayment
+          )
+
+          result.should be_success
+          result.transaction.local_payment_details.should_not be_nil
+          result.transaction.local_payment_details.funding_source.should_not be_nil
+          result.transaction.local_payment_details.payment_id.should_not be_nil
+        end
+      end
+
       context "onetime" do
         it "can create a paypal transaction with a nonce" do
           result = Braintree::Transaction.create(
