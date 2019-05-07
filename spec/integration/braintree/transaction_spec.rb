@@ -201,7 +201,7 @@ describe Braintree::Transaction do
           result.success?.should be(false)
           invalid_folio = Braintree::ErrorCodes::Transaction::Industry::Lodging::FolioNumberIsInvalid
           check_out_date_must_follow_check_in_date = Braintree::ErrorCodes::Transaction::Industry::Lodging::CheckOutDateMustFollowCheckInDate
-          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should == [invalid_folio, check_out_date_must_follow_check_in_date]
+          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should include *[invalid_folio, check_out_date_must_follow_check_in_date]
         end
       end
 

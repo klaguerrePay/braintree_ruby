@@ -594,8 +594,13 @@ describe Braintree::WebhookNotification do
       notification.kind.should == Braintree::WebhookNotification::Kind::LocalPaymentCompleted
 
       local_payment_completed = notification.local_payment_completed
-      local_payment_completed.payment_id.should == 'PAY-XYZ123'
-      local_payment_completed.payer_id.should == 'ABCPAYER'
+      local_payment_completed.payment_id.should == "PAY-XYZ123"
+      local_payment_completed.payer_id.should == "ABCPAYER"
+      local_payment_completed.payment_method_nonce.should == "ee257d98-de40-47e8-96b3-a6954ea7a9a4"
+      local_payment_completed.transaction.id.should == "my_id"
+      local_payment_completed.transaction.status.should == Braintree::Transaction::Status::Authorized
+      local_payment_completed.transaction.amount.should == 49.99
+      local_payment_completed.transaction.order_id.should == "order4567"
     end
   end
 

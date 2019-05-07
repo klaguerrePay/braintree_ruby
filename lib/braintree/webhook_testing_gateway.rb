@@ -702,6 +702,13 @@ module Braintree
         <local-payment>
           <payment-id>PAY-XYZ123</payment-id>
           <payer-id>ABCPAYER</payer-id>
+          <payment-method-nonce>ee257d98-de40-47e8-96b3-a6954ea7a9a4</payment-method-nonce>
+          <transaction>
+            <id>#{id}</id>
+            <status>authorized</status>
+            <amount>49.99</amount>
+            <order-id>order4567</order-id>
+          </transaction>
         </local-payment>
       XML
     end
