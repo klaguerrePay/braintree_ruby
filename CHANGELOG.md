@@ -27,6 +27,7 @@
 * Add `payment_method_nonce` field to `LocalPaymentCompleted` webhook
 * Add `transaction` field to `LocalPaymentCompleted` webhook
 * Add `local_payment_detail` field to transactions
+* Add `TokenIssuance` gateway rejection reason enum
 
 # 2.95.0
 * Deprecate `GrantedPaymentInstrumentUpdate` and add `GrantorUpdatedGrantedPaymentMethod` and `RecipientUpdatedGrantedPaymentMethod`
