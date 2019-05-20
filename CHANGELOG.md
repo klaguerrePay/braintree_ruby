@@ -1,4 +1,4 @@
-# Unreleased
+# 2.96.0
 * Add `prepaid` field to android_pay_card
 * Add `healthcare` field to android_pay_card
 * Add `debit` field to android_pay_card
