@@ -6,6 +6,7 @@
 * Add `transaction_fee_currency_iso_code` to local_payment_details
 * Add `refund_from_transaction_fee_amount` to local_payment_details
 * Add `refund_from_transaction_fee_currency_iso_code` to local_payment_details
+* Add `xid`, `cavv`, `eciFlag`, `dsTransactionId`, and `threeDSecureVersion` to `ThreeDSecureInfo`
 
 # 2.96.0
 * Add `prepaid` field to android_pay_card
