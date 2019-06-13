@@ -1148,9 +1148,9 @@ describe Braintree::Transaction do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          },
+              :number => Braintree::Test::CreditCardNumbers::Visa,
+              :expiration_date => "05/2009"
+            },
             :tax_amount => 'abcd'
           )
           result.success?.should == false
@@ -1161,9 +1161,9 @@ describe Braintree::Transaction do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          },
+              :number => Braintree::Test::CreditCardNumbers::Visa,
+              :expiration_date => "05/2009"
+            },
             :purchase_order_number => 'a' * 18
           )
           result.success?.should == false
@@ -1174,9 +1174,9 @@ describe Braintree::Transaction do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          },
+              :number => Braintree::Test::CreditCardNumbers::Visa,
+              :expiration_date => "05/2009"
+            },
             :purchase_order_number => "\303\237\303\245\342\210\202"
           )
           result.success?.should == false
@@ -2113,6 +2113,11 @@ describe Braintree::Transaction do
             :eci_flag => "02",
             :cavv => "some_cavv",
             :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
           }
         )
 
@@ -2133,6 +2138,11 @@ describe Braintree::Transaction do
             :eci_flag => "02",
             :cavv => "some_cavv",
             :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
           }
         )
         result.success?.should == false
@@ -2169,6 +2179,11 @@ describe Braintree::Transaction do
             :eci_flag => "05",
             :cavv => "",
             :xid => "",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
           }
         )
         result.success?.should == false
@@ -2187,13 +2202,111 @@ describe Braintree::Transaction do
             :eci_flag => "bad_eci_flag",
             :cavv => "some_cavv",
             :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
           }
         )
         result.success?.should == false
         result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:eci_flag)[0].code.should == Braintree::ErrorCodes::Transaction::ThreeDSecureEciFlagIsInvalid
       end
 
+      it "returns an error for transaction when the three_d_secure_pass_thru three_d_secure_version is invalid" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :three_d_secure_pass_thru => {
+            :eci_flag => "02",
+            :cavv => "some_cavv",
+            :xid => "some_xid",
+            :three_d_secure_version => "invalid",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:three_d_secure_version)[0].code.should == Braintree::ErrorCodes::Transaction::ThreeDSecureThreeDSecureVersionIsInvalid
+      end
 
+      it "returns an error for transaction when the three_d_secure_pass_thru authentication_response is invalid" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper:: AdyenMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :three_d_secure_pass_thru => {
+            :eci_flag => "02",
+            :cavv => "some_cavv",
+            :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "asdf",
+            :directory_response => "Y",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:authentication_response)[0].code.should == Braintree::ErrorCodes::Transaction::ThreeDSecureAuthenticationResponseIsInvalid
+      end
+
+      it "returns an error for transaction when the three_d_secure_pass_thru directory_response is invalid" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper:: AdyenMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :three_d_secure_pass_thru => {
+            :eci_flag => "02",
+            :cavv => "some_cavv",
+            :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "abc",
+            :cavv_algorithm => "2",
+            :ds_transaction_id => "some_ds_id",
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:directory_response)[0].code.should == Braintree::ErrorCodes::Transaction::ThreeDSecureDirectoryResponseIsInvalid
+      end
+
+      it "returns an error for transaction when the three_d_secure_pass_thru cavv_algorithm is invalid" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper:: AdyenMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :three_d_secure_pass_thru => {
+            :eci_flag => "02",
+            :cavv => "some_cavv",
+            :xid => "some_xid",
+            :three_d_secure_version => "1.0.2",
+            :authentication_response => "Y",
+            :directory_response => "Y",
+            :cavv_algorithm => "bad_alg",
+            :ds_transaction_id => "some_ds_id",
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:cavv_algorithm)[0].code.should == Braintree::ErrorCodes::Transaction::ThreeDSecureCavvAlgorithmIsInvalid
+      end
     end
 
     context "paypal" do
@@ -3944,118 +4057,118 @@ describe Braintree::Transaction do
 
     context "account_type" do
       it "creates a Hiper transaction with account type credit" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Hiper,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Hiper,
-              :expiration_date => "05/2009"
-            },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "credit",
-              }
+              :account_type => "credit",
             }
-          )
-          result.success?.should == true
-          result.transaction.credit_card_details.account_type.should == "credit"
-       end
+          }
+        )
+        result.success?.should == true
+        result.transaction.credit_card_details.account_type.should == "credit"
+      end
 
-       it "creates a Hipercard transaction with account_type credit" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+      it "creates a Hipercard transaction with account_type credit" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Hipercard,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Hipercard,
-              :expiration_date => "05/2009"
-            },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "credit",
-              }
+              :account_type => "credit",
             }
-          )
-          result.success?.should == true
-          result.transaction.credit_card_details.account_type.should == "credit"
-       end
+          }
+        )
+        result.success?.should == true
+        result.transaction.credit_card_details.account_type.should == "credit"
+      end
 
-       it "creates a Hiper transaction with account_type debit" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+      it "creates a Hiper transaction with account_type debit" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Hiper,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Hiper,
-              :expiration_date => "05/2009"
+              :account_type => "debit",
             },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "debit",
-              },
-              :submit_for_settlement => true,
-            }
-          )
-          result.success?.should == true
-          result.transaction.credit_card_details.account_type.should == "debit"
-       end
+            :submit_for_settlement => true,
+          }
+        )
+        result.success?.should == true
+        result.transaction.credit_card_details.account_type.should == "debit"
+      end
 
-       it "does not allow auths with account_type debit" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+      it "does not allow auths with account_type debit" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Hiper,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Hiper,
-              :expiration_date => "05/2009"
+              :account_type => "debit",
             },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "debit",
-              },
-            }
-          )
-          result.success?.should == false
-          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeDebitDoesNotSupportAuths
-       end
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeDebitDoesNotSupportAuths
+      end
 
-       it "does not allow invalid account_type" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+      it "does not allow invalid account_type" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Hiper,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Hiper,
-              :expiration_date => "05/2009"
+              :account_type => "ach",
             },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "ach",
-              },
-            }
-          )
-          result.success?.should == false
-          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeIsInvalid
-       end
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeIsInvalid
+      end
 
-       it "does not allow account_type not supported by merchant" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
+      it "does not allow account_type not supported by merchant" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          },
+          :amount => "10.00",
+          :options => {
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Visa,
-              :expiration_date => "05/2009"
+              :account_type => "credit",
             },
-            :amount => "10.00",
-            :options => {
-              :credit_card => {
-                :account_type => "credit",
-              },
-            }
-          )
-          result.success?.should == false
-          result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeNotSupported
-       end
+          }
+        )
+        result.success?.should == false
+        result.errors.for(:transaction).for(:options).for(:credit_card).on(:account_type)[0].code.should == Braintree::ErrorCodes::Transaction::Options::CreditCard::AccountTypeNotSupported
+      end
     end
   end
 
@@ -4846,11 +4959,11 @@ describe Braintree::Transaction do
       )
 
       options = {
-          :descriptor => {
-            :name => '123*123456789012345678',
-            :phone => '3334445555',
-            :url => "ebay.com"
-          }
+        :descriptor => {
+          :name => '123*123456789012345678',
+          :phone => '3334445555',
+          :url => "ebay.com"
+        }
       }
 
       result = Braintree::Transaction.submit_for_settlement(transaction.id, nil, options)

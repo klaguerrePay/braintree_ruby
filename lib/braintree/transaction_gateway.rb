@@ -205,6 +205,11 @@ module Braintree
             :eci_flag,
             :cavv,
             :xid,
+            :three_d_secure_version,
+            :authentication_response,
+            :directory_response,
+            :cavv_algorithm,
+            :ds_transaction_id,
           ]
         },
         {:options => [
