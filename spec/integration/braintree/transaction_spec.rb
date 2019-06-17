@@ -2275,6 +2275,9 @@ describe Braintree::Transaction do
           result.transaction.local_payment_details.should_not be_nil
           result.transaction.local_payment_details.funding_source.should_not be_nil
           result.transaction.local_payment_details.payment_id.should_not be_nil
+          result.transaction.local_payment_details.capture_id.should_not be_nil
+          result.transaction.local_payment_details.transaction_fee_amount.should_not be_nil
+          result.transaction.local_payment_details.transaction_fee_currency_iso_code.should_not be_nil
         end
       end
 
