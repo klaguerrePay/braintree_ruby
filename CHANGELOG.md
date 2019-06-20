@@ -15,6 +15,7 @@
 * Add `fire_safe` field to transactions
 * Add `property_phone` field to transactions
 * Add `additional_charges` field to transactions
+* Add `payer_info` to payment_method_nonce details
 
 # 2.96.0
 * Add `prepaid` field to android_pay_card
