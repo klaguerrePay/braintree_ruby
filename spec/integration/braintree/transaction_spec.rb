@@ -162,7 +162,7 @@ describe Braintree::Transaction do
         it "accepts valid industry data" do
           result = Braintree::Transaction.create(
             :type => "sale",
-            :amount => 1_00,
+            :amount => 1000_00,
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Prepaid,
               :expiration_date => "05/2009"
@@ -172,8 +172,23 @@ describe Braintree::Transaction do
               :data => {
                 :folio_number => "ABCDEFG",
                 :check_in_date => "2014-06-01",
-                :check_out_date => "2014-06-30",
-                :room_rate => "239.00",
+                :check_out_date => "2014-06-05",
+                :room_rate => 170_00,
+                :room_tax => 30_00,
+                :no_show => false,
+                :advanced_deposit => false,
+                :fire_safe => true,
+                :property_phone => "1112223345",
+                :additional_charges => [
+                  {
+                    :kind => Braintree::Transaction::AdditionalCharge::Telephone,
+                    :amount => 50_00,
+                  },
+                  {
+                    :kind => Braintree::Transaction::AdditionalCharge::Other,
+                    :amount => 150_00,
+                  },
+                ],
               }
             }
           )
@@ -183,7 +198,7 @@ describe Braintree::Transaction do
         it "returns errors if validations on industry lodging data fails" do
           result = Braintree::Transaction.create(
             :type => "sale",
-            :amount => 1_00,
+            :amount => 500_00,
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Prepaid,
               :expiration_date => "05/2009"
@@ -195,13 +210,22 @@ describe Braintree::Transaction do
                 :check_in_date => "2014-06-30",
                 :check_out_date => "2014-06-01",
                 :room_rate => "asdfasdf",
+                :additional_charges => [
+                  {
+                    :kind => "unknown",
+                    :amount => 20_00,
+                  },
+                ],
               }
             }
           )
           result.success?.should be(false)
           invalid_folio = Braintree::ErrorCodes::Transaction::Industry::Lodging::FolioNumberIsInvalid
           check_out_date_must_follow_check_in_date = Braintree::ErrorCodes::Transaction::Industry::Lodging::CheckOutDateMustFollowCheckInDate
-          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should include *[invalid_folio, check_out_date_must_follow_check_in_date]
+          room_rate_format_is_invalid = Braintree::ErrorCodes::Transaction::Industry::Lodging::RoomRateFormatIsInvalid
+          invalid_additional_charge_kind = Braintree::ErrorCodes::Transaction::Industry::AdditionalCharge::KindIsInvalid
+          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should include *[invalid_folio, check_out_date_must_follow_check_in_date, room_rate_format_is_invalid]
+          result.errors.for(:transaction).for(:industry).for(:additional_charges).for(:index_0).on(:kind).map { |e| e.code }.sort.should include *[invalid_additional_charge_kind]
         end
       end
 

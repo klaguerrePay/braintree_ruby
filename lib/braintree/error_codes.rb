@@ -443,6 +443,16 @@ module Braintree
           CheckOutDateIsInvalid = "93405"
           CheckOutDateMustFollowCheckInDate = "93406"
           UnknownDataField = "93407"
+          RoomRateMustBeGreaterThanZero = "93433"
+          RoomRateFormatIsInvalid = "93434"
+          RoomRateIsTooLarge = "93435"
+          RoomTaxMustBeGreaterThanZero = "93436"
+          RoomTaxFormatIsInvalid = "93437"
+          RoomTaxIsTooLarge = "93438"
+          NoShowIndicatorIsInvalid = "93439"
+          AdvancedDepositIndicatorIsInvalid = "93440"
+          FireSafetyIndicatorIsInvalid = "93441"
+          PropertyPhoneIsInvalid = "93442"
         end
 
         module TravelCruise
@@ -499,6 +509,15 @@ module Braintree
             TaxAmountIsTooLarge = "96319"
             TicketNumberIsTooLong = "96320"
           end
+        end
+
+        module AdditionalCharge
+          KindIsInvalid = "96601"
+          KindMustBeUnique = "96602"
+          AmountMustBeGreaterThanZero = "96603"
+          AmountFormatIsInvalid = "96604"
+          AmountIsTooLarge = "96605"
+          AmountIsRequired = "96606"
         end
       end
 
