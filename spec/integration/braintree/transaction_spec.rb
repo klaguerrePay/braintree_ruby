@@ -5970,16 +5970,6 @@ describe Braintree::Transaction do
         transaction.three_d_secure_info.should be_liability_shifted
         transaction.three_d_secure_info.should be_liability_shift_possible
         transaction.three_d_secure_info.status.should == "authenticate_successful"
-        transaction.three_d_secure_info.cavv.should == "somebase64value"
-        transaction.three_d_secure_info.xid.should == "xidvalue"
-        transaction.three_d_secure_info.eci_flag.should == "07"
-        transaction.three_d_secure_info.three_d_secure_version.should == "1.0.2"
-        transaction.three_d_secure_info.ds_transaction_id.should == "dstxnid"
-      end
-
-      it "returns the new three_d_secure fields" do
-        transaction = Braintree::Transaction.find("threedsecuredtransaction")
-
       end
 
       it "is nil if the transaction wasn't 3d secured" do

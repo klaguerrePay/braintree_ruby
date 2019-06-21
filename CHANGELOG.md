@@ -6,7 +6,6 @@
 * Add `transaction_fee_currency_iso_code` to local_payment_details
 * Add `refund_from_transaction_fee_amount` to local_payment_details
 * Add `refund_from_transaction_fee_currency_iso_code` to local_payment_details
-* Add `xid`, `cavv`, `eciFlag`, `dsTransactionId`, and `threeDSecureVersion` to `ThreeDSecureInfo`
 * Add `three_d_secure_version`, `authentication_response`, `directory_response`, `cavv_algorithm` and `ds_transaction_id` to 3DS pass thru fields
 * Add verification_account_type support for credit_card create/update and customer create/update
 * Add `room_tax` field to transactions
