@@ -1,4 +1,5 @@
-## unreleased
+# Unreleased
+* Add `network_response_code` and `network_response_text` to transactions and verifications
 * Add `PayPalHereDetails`
 
 # 2.97.0

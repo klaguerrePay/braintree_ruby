@@ -24,6 +24,8 @@ module Braintree
     attr_reader :gateway_rejection_reason
     attr_reader :id
     attr_reader :merchant_account_id
+    attr_reader :network_response_code
+    attr_reader :network_response_text
     attr_reader :processor_response_code
     attr_reader :processor_response_text
     attr_reader :processor_response_type
@@ -49,6 +51,8 @@ module Braintree
         :avs_error_response_code,
         :avs_postal_code_response_code,
         :avs_street_address_response_code,
+        :network_response_code,
+        :network_response_text,
         :merchant_account_id,
         :gateway_rejection_reason,
         :id,
