@@ -6735,4 +6735,39 @@ describe Braintree::Transaction do
       result.transaction.facilitator_details.oauth_application_name.should == "PseudoShop"
     end
   end
+
+  context "paypal here" do
+    it "gets the details of an auth/capture transaction" do
+      result = Braintree::Transaction.find('paypal_here_auth_capture_id')
+      result.payment_instrument_type.should eq(Braintree::PaymentInstrumentType::PayPalHere)
+      result.paypal_here_details.should_not be_nil
+
+      details = result.paypal_here_details
+      details.authorization_id.should_not be_nil
+      details.capture_id.should_not be_nil
+      details.invoice_id.should_not be_nil
+      details.last_4.should_not be_nil
+      details.payment_type.should_not be_nil
+      details.transaction_fee_amount.should_not be_nil
+      details.transaction_fee_currency_iso_code.should_not be_nil
+      details.transaction_initiation_date.should_not be_nil
+      details.transaction_updated_date.should_not be_nil
+    end
+
+    it "gets the details of a sale transaction" do
+      result = Braintree::Transaction.find('paypal_here_sale_id')
+      result.paypal_here_details.should_not be_nil
+
+      details = result.paypal_here_details
+      details.payment_id.should_not be_nil
+    end
+
+    it "gets the details of a refunded sale transaction" do
+      result = Braintree::Transaction.find('paypal_here_refund_id')
+      result.paypal_here_details.should_not be_nil
+
+      details = result.paypal_here_details
+      details.refund_id.should_not be_nil
+    end
+  end
 end

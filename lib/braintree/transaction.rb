@@ -131,6 +131,7 @@ module Braintree
     attr_reader :partial_settlement_transaction_ids
     attr_reader :payment_instrument_type
     attr_reader :paypal_details
+    attr_reader :paypal_here_details
     attr_reader :plan_id
     attr_reader :processor_authorization_code           # Authorization code from the processor.
     attr_reader :processor_response_code                # Response code from the processor.
@@ -299,6 +300,7 @@ module Braintree
       @descriptor = Descriptor.new(@descriptor)
       @local_payment_details = LocalPaymentDetails.new(@local_payment)
       @paypal_details = PayPalDetails.new(@paypal)
+      @paypal_here_details = PayPalHereDetails.new(@paypal_here)
       @apple_pay_details = ApplePayDetails.new(@apple_pay)
       @android_pay_details = AndroidPayDetails.new(@android_pay_card)
       @amex_express_checkout_details = AmexExpressCheckoutDetails.new(@amex_express_checkout_card)

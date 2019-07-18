@@ -1,3 +1,6 @@
+## unreleased
+* Add `PayPalHereDetails`
+
 # 2.97.0
 * Add `capture_id` to local_payment_details
 * Add `refund_id` to local_payment_details
