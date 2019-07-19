@@ -30,6 +30,7 @@ module Braintree
     attr_reader :processor_response_text
     attr_reader :processor_response_type
     attr_reader :risk_data
+    attr_reader :three_d_secure_info
     attr_reader :status
 
     def initialize(attributes) # :nodoc:
@@ -38,6 +39,7 @@ module Braintree
       @amount = Util.to_big_decimal(amount)
 
       @risk_data = RiskData.new(attributes[:risk_data]) if attributes[:risk_data]
+      @three_d_secure_info = ThreeDSecureInfo.new(attributes[:three_d_secure_info]) if attributes[:three_d_secure_info]
     end
 
     def inspect # :nodoc:
