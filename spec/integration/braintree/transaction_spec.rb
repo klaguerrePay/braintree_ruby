@@ -421,6 +421,31 @@ describe Braintree::Transaction do
       result.transaction.credit_card_details.customer_location.should == "US"
     end
 
+    it "returns a successful network response code if successful" do
+      result = Braintree::Transaction.create(
+        :type => "sale",
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        }
+      )
+      expect(result.success?).to eq(true)
+      expect(result.transaction.type).to eq("sale")
+      expect(result.transaction.amount).to eq(BigDecimal(Braintree::Test::TransactionAmounts::Authorize))
+      expect(result.transaction.processor_authorization_code).not_to be_nil
+      expect(result.transaction.processor_response_code).to eq("1000")
+      expect(result.transaction.processor_response_text).to eq("Approved")
+      expect(result.transaction.processor_response_type).to eq(Braintree::ProcessorResponseTypes::Approved)
+      expect(result.transaction.network_response_code).to eq("XX")
+      expect(result.transaction.network_response_text).to eq("sample network response text")
+      expect(result.transaction.voice_referral_number).to be_nil
+      expect(result.transaction.credit_card_details.bin).to eq(Braintree::Test::CreditCardNumbers::Visa[0, 6])
+      expect(result.transaction.credit_card_details.last_4).to eq(Braintree::Test::CreditCardNumbers::Visa[-4..-1])
+      expect(result.transaction.credit_card_details.expiration_date).to eq("05/2009")
+      expect(result.transaction.credit_card_details.customer_location).to eq("US")
+    end
+
     it "returns a successful result using an access token" do
       oauth_gateway = Braintree::Gateway.new(
         :client_id => "client_id$#{Braintree::Configuration.environment}$integration_client_id",

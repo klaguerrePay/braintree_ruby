@@ -126,6 +126,8 @@ module Braintree
     attr_reader :local_payment_details
     attr_reader :masterpass_card_details
     attr_reader :merchant_account_id
+    attr_reader :network_response_code                  # Response code from the card network
+    attr_reader :network_response_text                  # Response text from the card network
     attr_reader :network_transaction_id
     attr_reader :order_id
     attr_reader :partial_settlement_transaction_ids
