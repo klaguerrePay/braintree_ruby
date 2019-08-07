@@ -1,4 +1,4 @@
-# Unreleased
+# 2.98.0
 * Add `network_response_code` and `network_response_text` to transactions and verifications
 * Add `PayPalHereDetails`
 * Add `three_d_secure_info` to credit_card_verification
