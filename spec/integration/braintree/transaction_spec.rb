@@ -954,6 +954,25 @@ describe Braintree::Transaction do
       result.errors.for(:transaction).on(:amount)[0].code.should == Braintree::ErrorCodes::Transaction::AmountCannotBeNegative
     end
 
+    it "returns an error if amount is not supported by processor" do
+      result = Braintree::Transaction.create(
+        :type => "sale",
+        :merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Hiper,
+          :expiration_date => "05/2009"
+        },
+        :amount => "0.20",
+        :options => {
+          :credit_card => {
+            :account_type => "credit",
+          }
+        }
+      )
+      result.success?.should == false
+      result.errors.for(:transaction).on(:amount)[0].code.should == Braintree::ErrorCodes::Transaction::AmountNotSupportedByProcessor
+    end
+
     it "returns an error if amount is invalid format" do
       params = {
         :transaction => {

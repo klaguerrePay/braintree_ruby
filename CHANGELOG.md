@@ -4,6 +4,7 @@
 * Add `three_d_secure_info` to credit_card_verification
 * Add `xid`, `cavv`, `eciFlag`, `dsTransactionId`, and `threeDSecureVersion` to `ThreeDSecureInfo`
 * Add `graphql_client` to `Braintree::Gateway` class
+* Add `AmountNotSupportedByProcessor` to validation error
 
 # 2.97.0
 * Add `capture_id` to local_payment_details
