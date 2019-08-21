@@ -8,8 +8,7 @@ describe Braintree::Dispute do
       :amount_disputed => "500.00",
       :amount_won => "0.00",
       :created_at => Time.utc(2009, 3, 9, 10, 50, 39),
-      :forwarded_comments => "Forwarded comments",
-      :processor_comments => "processor forwarded comments",
+      :processor_comments => "forwarded comments",
       :date_opened => "2009-03-09",
       :date_won => "2009-04-15",
       :original_dispute_id => "original_dispute_id",
@@ -393,17 +392,15 @@ describe Braintree::Dispute do
     end
   end
 
-  describe "attributes" do
+  describe "comments" do
     let(:dispute) { Braintree::Dispute._new(attributes) }
-    [
-      :forwarded_comments,
-      :processor_comments,
-    ].each do |attr|
-      describe "##{attr}" do
-        it "returns the value" do
-          expect(dispute.public_send(attr)).to eq(attributes[attr])
-        end
-      end
+
+    it "#forwarded_comments returns `processor_comments`" do
+      expect(dispute.forwarded_comments).to eq(dispute.processor_comments)
+    end
+
+    it "#processor_comments" do
+      expect(dispute.processor_comments).to eq(attributes[:processor_comments])
     end
   end
 

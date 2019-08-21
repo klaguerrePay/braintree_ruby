@@ -12,7 +12,6 @@ module Braintree
     attr_reader :date_opened
     attr_reader :date_won
     attr_reader :evidence
-    attr_reader :forwarded_comments
     attr_reader :processor_comments
     attr_reader :id
     attr_reader :kind
@@ -29,6 +28,8 @@ module Braintree
     attr_reader :transaction
     attr_reader :transaction_details
     attr_reader :updated_at
+
+    alias_method :forwarded_comments, :processor_comments
 
     module Status
       Accepted = "accepted"
