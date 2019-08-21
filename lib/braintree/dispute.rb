@@ -13,6 +13,7 @@ module Braintree
     attr_reader :date_won
     attr_reader :evidence
     attr_reader :forwarded_comments
+    attr_reader :processor_comments
     attr_reader :id
     attr_reader :kind
     attr_reader :merchant_account_id
