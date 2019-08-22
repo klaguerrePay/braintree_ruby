@@ -29,8 +29,6 @@ module Braintree
     attr_reader :transaction_details
     attr_reader :updated_at
 
-    alias_method :forwarded_comments, :processor_comments
-
     module Status
       Accepted = "accepted"
       Disputed = "disputed"
@@ -121,6 +119,11 @@ module Braintree
       @status_history = status_history.map do |event|
         Braintree::Dispute::HistoryEvent.new(event)
       end unless status_history.nil?
+    end
+
+    def forwarded_comments
+      warn "[DEPRECATED] #forwarded_comments is deprecated. Please use #processor_comments"
+      processor_comments
     end
   end
 end

@@ -1,5 +1,6 @@
 # unreleased
 * Add `processor_comments` to `Dispute`
+* Depricate `forwarded_comments` on `Disputes`
 
 # 2.98.0
 * Add `network_response_code` and `network_response_text` to transactions and verifications
