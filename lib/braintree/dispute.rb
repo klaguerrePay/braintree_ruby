@@ -122,6 +122,7 @@ module Braintree
     end
 
     def forwarded_comments
+      # NEXT_MAJOR_VERSION delete this method since it never returned anything anyway.
       warn "[DEPRECATED] #forwarded_comments is deprecated. Please use #processor_comments"
       processor_comments
     end
