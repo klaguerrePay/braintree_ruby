@@ -1,4 +1,4 @@
-# unreleased
+# 2.99.0
 * Add `processor_comments` to `Dispute`
 * Deprecate `forwarded_comments` on `Disputes`
 
