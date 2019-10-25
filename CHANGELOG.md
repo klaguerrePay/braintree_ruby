@@ -2,6 +2,8 @@
 * Add `is_network_tokenized?` to android_pay_card and android_pay_details
 * Add handling for `gzip` encoding to `graphql_client`
 * Add Graphql ID to `CreditCardVerification`, `Customer`, `Dispute`, and `Transaction`
+* Add `three_d_secure_authentication_id` to `ThreeDSecureInfo`
+* Add `three_d_secure_authentication_id` support to transaction
 
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
