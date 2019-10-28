@@ -1,10 +1,10 @@
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
+* Add `bin` to `apple_pay_details` and `android_pay_details`
 
 # 2.99.0
 * Add `processor_comments` to `Dispute`
 * Deprecate `forwarded_comments` on `Disputes`
-* Add `bin` to `apple_pay_details` and `android_pay_details`
 
 # 2.98.0
 * Add `network_response_code` and `network_response_text` to transactions and verifications
