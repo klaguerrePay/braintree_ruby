@@ -1,4 +1,4 @@
-# Unreleased
+# 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
 
 # 2.99.0
