@@ -2085,6 +2085,7 @@ describe Braintree::Transaction do
 
         result = Braintree::Transaction.create(
           :type => "sale",
+          :merchant_account_id => SpecHelper::ThreeDSecureMerchantAccountId,
           :amount => Braintree::Test::TransactionAmounts::Authorize,
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
