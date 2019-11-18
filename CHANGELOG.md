@@ -1,3 +1,6 @@
+# unreleased
+* Add `is_network_tokenized?` to android_pay_card and android_pay_details
+
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
 * Add `bin` to `apple_pay_details` and `android_pay_details`
