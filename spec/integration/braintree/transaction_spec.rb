@@ -1706,6 +1706,7 @@ describe Braintree::Transaction do
         android_pay_details.expiration_year.to_i.should > 0
         android_pay_details.google_transaction_id.should == "google_transaction_id"
         android_pay_details.image_url.should_not be_nil
+        android_pay_details.is_network_tokenized?.should == false
         android_pay_details.token.should be_nil
         android_pay_details.prepaid.should_not be_nil
         android_pay_details.healthcare.should_not be_nil
@@ -1737,6 +1738,7 @@ describe Braintree::Transaction do
         android_pay_details.expiration_year.to_i.should > 0
         android_pay_details.google_transaction_id.should == "google_transaction_id"
         android_pay_details.image_url.should_not be_nil
+        android_pay_details.is_network_tokenized?.should == false
         android_pay_details.token.should_not be_nil
       end
 
@@ -1759,6 +1761,7 @@ describe Braintree::Transaction do
         android_pay_details.expiration_month.to_i.should > 0
         android_pay_details.expiration_year.to_i.should > 0
         android_pay_details.google_transaction_id.should == "google_transaction_id"
+        android_pay_details.is_network_tokenized?.should == true
       end
 
       it "can create a transaction with a fake amex express checkout card nonce" do
