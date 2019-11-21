@@ -1,5 +1,6 @@
 # unreleased
 * Add `is_network_tokenized?` to android_pay_card and android_pay_details
+* Add handling for `gzip` encoding to `graphql_client`
 
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
