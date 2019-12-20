@@ -5888,6 +5888,7 @@ describe Braintree::Transaction do
       created_transaction = result.transaction
       found_transaction = Braintree::Transaction.find(created_transaction.id)
       found_transaction.should == created_transaction
+      found_transaction.graphql_id.should_not be_nil
     end
 
     it "finds the vaulted transaction with the given id" do

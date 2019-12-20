@@ -889,6 +889,7 @@ describe Braintree::Customer do
 
       customer = Braintree::Customer.find(result.customer.id)
       customer.id.should == result.customer.id
+      customer.graphql_id.should_not be_nil
       customer.first_name.should == "Joe"
       customer.last_name.should == "Cool"
     end
