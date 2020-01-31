@@ -5062,6 +5062,30 @@ describe Braintree::Transaction do
           result.success?.should == true
           result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
         end
+
+        it "succeeds when level 2 data is provided" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            }
+          )
+          result.success?.should == true
+
+          result = Braintree::Transaction.submit_for_settlement(result.transaction.id, nil, :tax_amount => "2.00", :tax_exempt => false, :purchase_order_number => "0Rd3r#")
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
       end
     end
   end

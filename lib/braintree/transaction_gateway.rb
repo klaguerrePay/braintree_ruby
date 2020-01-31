@@ -263,6 +263,9 @@ module Braintree
       [
         :order_id,
         {:descriptor => [:name, :phone, :url]},
+        :purchase_order_number,
+        :tax_amount,
+        :tax_exempt,
       ]
     end
 

@@ -4,6 +4,7 @@
 * Add Graphql ID to `CreditCardVerification`, `Customer`, `Dispute`, and `Transaction`
 * Add `three_d_secure_authentication_id` to `ThreeDSecureInfo`
 * Add `three_d_secure_authentication_id` support to transaction
+* Add level 2 processing options `purchase_order_number`, `tax_amount`, and `tax_exempt` to Transaction submit_for_settlement
 
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors
