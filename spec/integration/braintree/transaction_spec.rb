@@ -2770,6 +2770,36 @@ describe Braintree::Transaction do
           result.success?.should == false
           result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::CannotRefundUnlessSettled
         end
+
+        it "handles soft declined refund authorizations" do
+          transaction = Braintree::Transaction.sale!(
+            :amount => "9000.00",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :options => {
+              :submit_for_settlement => true
+            }
+          )
+          config = Braintree::Configuration.instantiate
+          response = config.http.put("#{config.base_merchant_path}/transactions/#{transaction.id}/settle")
+          result = Braintree::Transaction.refund(transaction.id, :amount => "2046.00")
+          result.success?.should == false
+          result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::RefundAuthSoftDeclined
+        end
+
+        it "handles hard declined refund authorizations" do
+          transaction = Braintree::Transaction.sale!(
+            :amount => "9000.00",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :options => {
+              :submit_for_settlement => true
+            }
+          )
+          config = Braintree::Configuration.instantiate
+          response = config.http.put("#{config.base_merchant_path}/transactions/#{transaction.id}/settle")
+          result = Braintree::Transaction.refund(transaction.id, :amount => "2009.00")
+          result.success?.should == false
+          result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::RefundAuthHardDeclined
+        end
       end
 
       context "handling errors" do

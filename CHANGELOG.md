@@ -1,4 +1,5 @@
 # unreleased
+* Add `RefundAuthHardDeclined` and `RefundAuthSoftDeclined` to validation errors
 * Add `is_network_tokenized?` to android_pay_card and android_pay_details
 * Add handling for `gzip` encoding to `graphql_client`
 * Add Graphql ID to `CreditCardVerification`, `Customer`, `Dispute`, and `Transaction`
