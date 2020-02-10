@@ -266,6 +266,10 @@ module Braintree
         :purchase_order_number,
         :tax_amount,
         :tax_exempt,
+        :discount_amount,
+        :shipping_amount,
+        :ships_from_postal_code,
+        :line_items => [:commodity_code, :description, :discount_amount, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :url, :tax_amount],
       ]
     end
 

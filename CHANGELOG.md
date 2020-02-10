@@ -6,6 +6,7 @@
 * Add `three_d_secure_authentication_id` to `ThreeDSecureInfo`
 * Add `three_d_secure_authentication_id` support to transaction
 * Add level 2 processing options `purchase_order_number`, `tax_amount`, and `tax_exempt` to Transaction submit_for_settlement
+* Add level 3 processing options `shipping_amount`, `discount_amount`, `ships_from_postal_code`, and `line_items` to Transaction submit_for_settlement
 
 # 2.100.0
 * Add `ProcessorDoesNotSupportMotoForCardType` to validation errors

@@ -5092,30 +5092,6 @@ describe Braintree::Transaction do
           result.success?.should == true
           result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
         end
-
-        it "succeeds when level 2 data is provided" do
-          result = Braintree::Transaction.sale(
-            :amount => Braintree::Test::TransactionAmounts::Authorize,
-            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
-            :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
-              :expiration_date => "05/2009"
-            },
-            :options => {
-              :amex_rewards => {
-                :request_id => "ABC123",
-                :points => "1000",
-                :currency_amount => "10.00",
-                :currency_iso_code => "USD"
-              }
-            }
-          )
-          result.success?.should == true
-
-          result = Braintree::Transaction.submit_for_settlement(result.transaction.id, nil, :tax_amount => "2.00", :tax_exempt => false, :purchase_order_number => "0Rd3r#")
-          result.success?.should == true
-          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
-        end
       end
     end
   end
@@ -5279,6 +5255,71 @@ describe Braintree::Transaction do
         result.success?.should == false
         result.errors.for(:transaction).on(:amount)[0].code.should == Braintree::ErrorCodes::Transaction::SettlementAmountIsLessThanServiceFeeAmount
       end
+    end
+
+    it "succeeds when level 2 data is provided" do
+      result = Braintree::Transaction.sale(
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
+          :expiration_date => "05/2009"
+        },
+        :options => {
+          :amex_rewards => {
+            :request_id => "ABC123",
+            :points => "1000",
+            :currency_amount => "10.00",
+            :currency_iso_code => "USD"
+          }
+        }
+      )
+      result.success?.should == true
+
+      result = Braintree::Transaction.submit_for_settlement(result.transaction.id, nil, :tax_amount => "2.00", :tax_exempt => false, :purchase_order_number => "0Rd3r#")
+      result.success?.should == true
+      result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+    end
+
+    it "succeeds when level 3 data is provided" do
+      result = Braintree::Transaction.sale(
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
+          :expiration_date => "05/2009"
+        },
+        :options => {
+          :amex_rewards => {
+            :request_id => "ABC123",
+            :points => "1000",
+            :currency_amount => "10.00",
+            :currency_iso_code => "USD"
+          }
+        }
+      )
+      result.success?.should == true
+
+      result = Braintree::Transaction.submit_for_settlement(
+        result.transaction.id,
+        nil,
+        :discount_amount => "2.00",
+        :shipping_amount => "1.23",
+        :ships_from_postal_code => "90210",
+        :line_items => [
+          {
+            :quantity => 1,
+            :unit_amount => 1,
+            :name => "New line item",
+            :kind => "debit",
+            :total_amount => "18.00",
+            :discount_amount => "12.00",
+            :tax_amount => "0",
+          },
+        ]
+      )
+      result.success?.should == true
+      result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
     end
   end
 
