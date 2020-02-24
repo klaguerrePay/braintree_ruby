@@ -91,13 +91,6 @@ mutation TokenizeUsBankAccount($input: TokenizeUsBankAccountInput!) {
 end
 
 def generate_valid_plaid_us_bank_account_nonce
-  raw_client_token = Braintree::ClientToken.generate
-  client_token = decode_client_token(raw_client_token)
-
-  url = client_token["graphQL"]["url"]
-  date = client_token["graphQL"]["date"]
-  token = client_token["authorizationFingerprint"]
-
   definition = <<-GRAPHQL
 mutation TokenizeUsBankLogin($input: TokenizeUsBankLoginInput!) {
   tokenizeUsBankLogin(input: $input) {
@@ -113,7 +106,6 @@ mutation TokenizeUsBankLogin($input: TokenizeUsBankLoginInput!) {
         achMandate: "cl mandate text",
         publicToken: "good",
         accountId: "plaid_account_id",
-        accountType: "CHECKING",
         businessOwner: {
           businessName: "PayPal, Inc."
         },
@@ -126,23 +118,9 @@ mutation TokenizeUsBankLogin($input: TokenizeUsBankLoginInput!) {
       }
     }
   }
-  payload = {
-    query: definition,
-    variables: variables
-  }
-  uri = URI::parse(url)
-  connection = Net::HTTP.new(uri.host, uri.port)
-  connection.use_ssl = false
-  response = connection.start do |http|
-    request = Net::HTTP::Post.new(uri.path)
-    request["Content-Type"] = "application/json"
-    request["Braintree-Version"] = date
-    request["Authorization"] = "Bearer #{token}"
-    request.body = payload.to_json
-    http.request(request)
-  end
+  response = Braintree::GraphQLClient.new(Braintree::Configuration.instantiate).query(definition, variables)
 
-  JSON.parse(response.body)[:data][:tokenizeUsBankLogin][:paymentMethod][:id]
+  response[:data][:tokenizeUsBankLogin][:paymentMethod][:id]
 end
 
 def sample(arr)
