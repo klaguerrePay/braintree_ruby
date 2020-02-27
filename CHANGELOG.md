@@ -1,3 +1,7 @@
+# unreleased
+* Add ThreeDSecure test payment method nonces
+* Add test `AuthenticationId`s Unreleased
+
 # 2.101.0
 * Add `RefundAuthHardDeclined` and `RefundAuthSoftDeclined` to validation errors
 * Add `is_network_tokenized?` to android_pay_card and android_pay_details
