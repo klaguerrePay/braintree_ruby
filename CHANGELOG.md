@@ -1,6 +1,6 @@
 # unreleased
 * Add ThreeDSecure test payment method nonces
-* Add test `AuthenticationId`s Unreleased
+* Add test `AuthenticationId`s
 
 # 2.101.0
 * Add `RefundAuthHardDeclined` and `RefundAuthSoftDeclined` to validation errors
