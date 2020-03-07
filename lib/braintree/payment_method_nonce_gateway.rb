@@ -8,8 +8,13 @@ module Braintree
       @config.assert_has_access_token_or_keys
     end
 
-    def create(payment_method_token)
-      response = @config.http.post("#{@config.base_merchant_path}/payment_methods/#{payment_method_token}/nonces")
+    def create(payment_method_token, args = { payment_method_nonce: {} })
+      schema = [
+        payment_method_nonce: %i[merchant_account_id authentication_insight amount]
+      ]
+      Util.verify_keys(schema, args)
+
+      response = @config.http.post("#{@config.base_merchant_path}/payment_methods/#{payment_method_token}/nonces", args)
       payment_method_nonce = PaymentMethodNonce._new(@gateway, response.fetch(:payment_method_nonce))
       SuccessfulResult.new(:payment_method_nonce => payment_method_nonce)
     end
