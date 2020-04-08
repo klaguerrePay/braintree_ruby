@@ -1,4 +1,5 @@
 # unreleased
+* Add `recurring_customer_consent`and `recurring_max_amount` options to `authentication_insight`to payment method nonce create
 * Add ThreeDSecure test payment method nonces
 * Add test `AuthenticationId`s
 * Add `DisputeAccepted`, `DisputeDisputed`, and `DisputeExpired` webhook constants

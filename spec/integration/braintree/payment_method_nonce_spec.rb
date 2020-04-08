@@ -283,23 +283,29 @@ describe Braintree::PaymentMethodNonce do
 
         it "can get sca_required" do
           expect(
-            request_authentication_insights(indian_merchant_token, indian_payment_token, 2001)[:sca_indicator]
+            request_authentication_insights(indian_merchant_token, indian_payment_token, {amount: 2001})[:sca_indicator]
           ).to eq "sca_required"
         end
 
         it "can get sca_optional" do
           expect(
-            request_authentication_insights(indian_merchant_token, indian_payment_token, 2000)[:sca_indicator]
+            request_authentication_insights(indian_merchant_token, indian_payment_token, {amount: 2000, recurring_customer_consent: true, recurring_max_amount: 2000})[:sca_indicator]
+
           ).to eq "sca_optional"
         end
       end
 
-      def request_authentication_insights(merchant_token, payment_method_token, amount=nil)
+      def request_authentication_insights(merchant_token, payment_method_token, options = {})
+        authentication_insight_options = {
+          amount: options[:amount],
+          recurring_customer_consent: options[:recurring_customer_consent],
+          recurring_max_amount: options[:recurring_max_amount],
+        }
         nonce_request = {
           merchant_account_id: merchant_token,
           authentication_insight: true,
+          authentication_insight_options: authentication_insight_options,
         }
-        nonce_request[:amount] = amount unless amount.nil?
 
         result = Braintree::PaymentMethodNonce.create(
           payment_method_token,

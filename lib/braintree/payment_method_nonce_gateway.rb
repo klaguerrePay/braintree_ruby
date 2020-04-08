@@ -9,14 +9,20 @@ module Braintree
     end
 
     def create(payment_method_token, args = { payment_method_nonce: {} })
-      schema = [
-        payment_method_nonce: %i[merchant_account_id authentication_insight amount]
-      ]
-      Util.verify_keys(schema, args)
+      Util.verify_keys(PaymentMethodNonceGateway._create_signature, args)
 
       response = @config.http.post("#{@config.base_merchant_path}/payment_methods/#{payment_method_token}/nonces", args)
       payment_method_nonce = PaymentMethodNonce._new(@gateway, response.fetch(:payment_method_nonce))
       SuccessfulResult.new(:payment_method_nonce => payment_method_nonce)
+    end
+
+    def self._create_signature
+      [ {
+        :payment_method_nonce=> [
+          :merchant_account_id, :authentication_insight,
+          {:authentication_insight_options => [:amount, :recurring_customer_consent, :recurring_max_amount]}
+        ]
+      }]
     end
 
     def create!(*args)
