@@ -6,6 +6,7 @@
 * Add `DisputeAccepted`, `DisputeDisputed`, and `DisputeExpired` webhook constants
 * Add `Authentication Insight` to payment method nonce create
 * Add `FileIsEmpty` error to `DocumentUpload`
+* Add `retrieval_reference_number` to `Transaction`
 
 # 2.101.0
 * Add `RefundAuthHardDeclined` and `RefundAuthSoftDeclined` to validation errors
