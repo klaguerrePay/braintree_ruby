@@ -805,16 +805,18 @@ describe Braintree::Transaction do
       end
 
       it "exposes the fraud gateway rejection reason" do
-        result = Braintree::Transaction.sale(
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Fraud,
-            :expiration_date => "05/2017",
-            :cvv => "333"
-          }
-        )
-        result.success?.should == false
-        result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::Fraud
+        with_advanced_fraud_integration_merchant do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Fraud,
+              :expiration_date => "05/2017",
+              :cvv => "333"
+            }
+          )
+          result.success?.should == false
+          result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::Fraud
+        end
       end
 
       it "exposes the token issuance gateway rejection reason" do
