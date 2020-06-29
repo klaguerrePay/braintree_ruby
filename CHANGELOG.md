@@ -1,3 +1,6 @@
+# Unreleased
+* Add `network_transaction_id` to `CreditCardVerification`
+
 # 2.102.0
 * Add `threeDSecurePassThru` parameters to `Customer.create`, `PaymentMethod.create`, `CreditCard.create`, `Customer.update`, `PaymentMethod.update`, and `CreditCard.update`
 * Add `recurring_customer_consent`and `recurring_max_amount` options to `authentication_insight`to payment method nonce create
