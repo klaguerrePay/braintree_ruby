@@ -44,10 +44,9 @@ describe Braintree::CreditCardVerification do
 
   it "accepts network_transaction_id" do
     verification = Braintree::CreditCardVerification._new(
-      :gateway,
       :network_transaction_id => "123456789012345"
     )
-    expect(transaction.network_transaction_id).to eq "123456789012345"
+    expect(verification.network_transaction_id).to eq "123456789012345"
   end
 
   describe "self.create" do
