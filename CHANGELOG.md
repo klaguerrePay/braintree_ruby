@@ -1,5 +1,19 @@
 # Unreleased
 * Add `network_transaction_id` to `CreditCardVerification`
+* Add `product_sku` to `Transaction`
+* Add `phone_number` and `shipping_method` to `AddressDetails`
+* Add `customer_device_id`, `customer_location_zip`, and `customer_tenure` to `RiskData`
+* Add validation errors:
+   * `Transaction::ProductSkuIsInvalid`
+   * `Transaction::ShippingMethodIsInvalid`
+   * `Transaction::ShippingPhoneNumberIsInvalid`
+   * `Transaction::BillingPhoneNumberIsInvalid`
+   * `RiskData::CustomerBrowserIsTooLong`
+   * `RiskData::CustomerDeviceIdIsTooLong`
+   * `RiskData::CustomerLocationZipInvalidCharacters`
+   * `RiskData::CustomerLocationZipIsInvalid`
+   * `RiskData::CustomerLocationZipIsTooLong`
+   * `RiskData::CustomerTenureIsTooLong`
 
 # 2.102.0
 * Add `threeDSecurePassThru` parameters to `Customer.create`, `PaymentMethod.create`, `CreditCard.create`, `Customer.update`, `PaymentMethod.update`, and `CreditCard.update`

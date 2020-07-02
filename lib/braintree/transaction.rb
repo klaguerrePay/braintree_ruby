@@ -142,6 +142,7 @@ module Braintree
     attr_reader :processor_response_type                # Response type from the processor.
     attr_reader :processor_settlement_response_code     # Settlement response code from the processor.
     attr_reader :processor_settlement_response_text     # Settlement response text from the processor.
+    attr_reader :product_sku
     attr_reader :purchase_order_number
     attr_reader :recurring
     attr_reader :refund_ids

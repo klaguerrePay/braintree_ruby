@@ -37,6 +37,7 @@ describe Braintree::CreditCard do
           :first_name,
           :last_name,
           :locality,
+          :phone_number,
           :postal_code,
           :region,
           :street_address
@@ -84,6 +85,7 @@ describe Braintree::CreditCard do
           :first_name,
           :last_name,
           :locality,
+          :phone_number,
           :postal_code,
           :region,
           :street_address,
