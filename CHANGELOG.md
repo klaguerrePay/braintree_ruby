@@ -14,6 +14,8 @@
    * `RiskData::CustomerLocationZipIsInvalid`
    * `RiskData::CustomerLocationZipIsTooLong`
    * `RiskData::CustomerTenureIsTooLong`
+* Add `processed_with_network_token` to `Transaction`
+* Add `is_network_tokenized` to `CreditCard`
 
 # 2.102.0
 * Add `threeDSecurePassThru` parameters to `Customer.create`, `PaymentMethod.create`, `CreditCard.create`, `Customer.update`, `PaymentMethod.update`, and `CreditCard.update`

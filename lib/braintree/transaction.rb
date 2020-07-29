@@ -440,6 +440,10 @@ module Braintree
       return_object_or_raise(:transaction) { void }
     end
 
+    def processed_with_network_token?
+      @processed_with_network_token
+    end
+
     class << self
       protected :new
       def _new(*args) # :nodoc:
@@ -448,7 +452,7 @@ module Braintree
     end
 
     def self._attributes # :nodoc:
-      [:amount, :created_at, :credit_card_details, :customer_details, :id, :status, :subscription_details, :type, :updated_at]
+      [:amount, :created_at, :credit_card_details, :customer_details, :id, :status, :subscription_details, :type, :updated_at, :processed_with_network_token?]
     end
   end
 end

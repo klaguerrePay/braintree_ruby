@@ -7135,4 +7135,37 @@ describe Braintree::Transaction do
       details.refund_id.should_not be_nil
     end
   end
+
+  describe "card on file network tokenization" do
+    it "creates a transaction with a vaulted, tokenized credit card" do
+      result = Braintree::Transaction.sale(
+        :amount => "112.44",
+        :payment_method_token => "network_tokenized_credit_card",
+      )
+      result.success?.should == true
+      transaction = result.transaction
+
+      transaction.amount.should == BigDecimal("112.44")
+      transaction.processed_with_network_token?.should == true
+    end
+
+    it "creates a transaction with a vaulted, non-tokenized credit card" do
+      customer = Braintree::Customer.create!
+      result = Braintree::PaymentMethod.create(
+        :payment_method_nonce => Braintree::Test::Nonce::TransactableVisa,
+        :customer_id => customer.id
+      )
+      payment_method_token = result.payment_method.token
+
+      result = Braintree::Transaction.sale(
+        :amount => "112.44",
+        :payment_method_token => payment_method_token,
+      )
+      result.success?.should == true
+      transaction = result.transaction
+
+      transaction.amount.should == BigDecimal("112.44")
+      transaction.processed_with_network_token?.should == false
+    end
+  end
 end
