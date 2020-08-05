@@ -16,6 +16,7 @@
    * `RiskData::CustomerTenureIsTooLong`
 * Add `processed_with_network_token` to `Transaction`
 * Add `is_network_tokenized` to `CreditCard`
+* Add `created_at` accessor to `dispute.transaction` on dispute webhooks (closes #200)
 
 # 2.102.0
 * Add `threeDSecurePassThru` parameters to `Customer.create`, `PaymentMethod.create`, `CreditCard.create`, `Customer.update`, `PaymentMethod.update`, and `CreditCard.update`
