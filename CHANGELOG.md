@@ -1,4 +1,5 @@
 # Unreleased
+* Add `RiskThreshold` to gateway rejection reasons
 * Add `network_transaction_id` to `CreditCardVerification`
 * Add `product_sku` to `Transaction`
 * Add `phone_number` and `shipping_method` to `AddressDetails`
