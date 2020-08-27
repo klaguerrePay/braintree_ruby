@@ -4,7 +4,7 @@ module Braintree
     include Braintree::Util::IdEquality
 
     attr_reader :addresses
-    attr_reader :amex_express_checkout_cards
+    attr_reader :amex_express_checkout_cards # Deprecated
     attr_reader :android_pay_cards
     attr_reader :apple_pay_cards
     attr_reader :coinbase_accounts
@@ -18,7 +18,7 @@ module Braintree
     attr_reader :graphql_id
     attr_reader :id
     attr_reader :last_name
-    attr_reader :masterpass_cards
+    attr_reader :masterpass_cards # Deprecated
     attr_reader :paypal_accounts
     attr_reader :phone
     attr_reader :samsung_pay_cards

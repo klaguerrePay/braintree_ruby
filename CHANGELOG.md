@@ -1,3 +1,6 @@
+# unreleased
+* Deprecate Masterpass and American Express Checkout payment methods.
+
 # 2.103.0
 * Add `RiskThreshold` to gateway rejection reasons
 * Add `network_transaction_id` to `CreditCardVerification`
