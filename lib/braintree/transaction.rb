@@ -96,6 +96,7 @@ module Braintree
     # DEPRECATED The American Express Checkout payment method is deprecated.
     attr_reader :amex_express_checkout_details
     attr_reader :amount
+    # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
     attr_reader :android_pay_details
     attr_reader :apple_pay_details
     attr_reader :authorization_adjustments
@@ -312,6 +313,7 @@ module Braintree
       @paypal_details = PayPalDetails.new(@paypal)
       @paypal_here_details = PayPalHereDetails.new(@paypal_here)
       @apple_pay_details = ApplePayDetails.new(@apple_pay)
+      # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
       @android_pay_details = AndroidPayDetails.new(@android_pay_card)
       @amex_express_checkout_details = AmexExpressCheckoutDetails.new(@amex_express_checkout_card)
       @venmo_account_details = VenmoAccountDetails.new(@venmo_account)
