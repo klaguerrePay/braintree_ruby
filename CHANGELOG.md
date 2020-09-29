@@ -4,6 +4,26 @@
 
 * Deprecate Masterpass and American Express Checkout payment methods.
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
+* Breaking changes:
+  * Remove `EuropeBankAccount` class
+  * Remove error codes:
+    * EuropeBankAccount.IBANIsRequired
+    * EuropeBankAccount.BICIsRequired
+    * EuropeBankAccount.AccountHolderNameIsRequired
+    * SEPAMandate.AccountHolderNameIsRequired
+    * SEPAMandate.BICIsRequired
+    * SEPAMandate.IBANIsRequired
+    * SEPAMandate.TypeIsRequired
+    * SEPAMandate.IBANInvalidCharacter
+    * SEPAMandate.BICInvalidCharacter
+    * SEPAMandate.BICLengthIsInvalid
+    * SEPAMandate.BICUnsupportedCountry
+    * SEPAMandate.IBANUnsupportedCountry
+    * SEPAMandate.IBANInvalidFormat
+    * SEPAMandate.LocaleIsUnsupported
+    * SEPAMandate.BillingAddressIsInvalid
+    * SEPAMandate.TypeIsInvalid
+
 
 ## 2.103.0
 

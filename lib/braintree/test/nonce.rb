@@ -62,7 +62,6 @@ module Braintree
       ProcessorFailureJCB = "fake-processor-failure-jcb-nonce"
       LuhnInvalid = "fake-luhn-invalid-nonce"
       PayPalFuturePaymentRefreshToken = "fake-paypal-future-refresh-token-nonce"
-      SEPA = "fake-sepa-bank-account-nonce"
       GatewayRejectedFraud = "fake-gateway-rejected-fraud-nonce"
       GatewayRejectedRiskThresholds = "fake-gateway-rejected-risk-thresholds-nonce"
       # NEXT_MAJOR_VERSION Remove Masterpass test nonces

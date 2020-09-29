@@ -203,28 +203,6 @@ module Braintree
       TokenIsInUse = "92906"
     end
 
-    module EuropeBankAccount
-      IBANIsRequired = "93001"
-      BICIsRequired = "93002"
-      AccountHolderNameIsRequired = "93003"
-    end
-
-    module SEPAMandate
-      AccountHolderNameIsRequired = "83301"
-      BICIsRequired = "83302"
-      IBANIsRequired = "83303"
-      TypeIsRequired = "93304"
-      IBANInvalidCharacter = "83305"
-      BICInvalidCharacter = "83306"
-      BICLengthIsInvalid = "83307"
-      BICUnsupportedCountry = "83308"
-      IBANUnsupportedCountry = "83309"
-      IBANInvalidFormat = "83310"
-      LocaleIsUnsupported = "93311"
-      BillingAddressIsInvalid = "93312"
-      TypeIsInvalid = "93313"
-    end
-
     module Subscription
       BillingDayOfMonthCannotBeUpdated = "91918"
       BillingDayOfMonthIsInvalid = "91914"

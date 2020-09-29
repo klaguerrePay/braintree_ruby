@@ -88,10 +88,6 @@ module Braintree
       MerchantAccountGateway.new(self)
     end
 
-    def europe_bank_account
-      EuropeBankAccountGateway.new(self)
-    end
-
     def settlement_batch_summary
       SettlementBatchSummaryGateway.new(self)
     end
