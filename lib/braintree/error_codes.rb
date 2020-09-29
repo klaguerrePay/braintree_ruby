@@ -273,7 +273,6 @@ module Braintree
     module Transaction
       AmountCannotBeNegative = "81501"
       AmountDoesNotMatch3DSecureAmount = "91585"
-      AmountDoesNotMatchIdealPaymentAmount = "915144"
       AmountFormatIsInvalid = "81503" # Keep for backwards compatibility
       AmountIsInvalid = "81503" # Keep for backwards compatibility
       AmountIsRequired = "81502"
@@ -315,18 +314,13 @@ module Braintree
       FailedAuthAdjustmentHardDecline = "95602"
       FinalAuthSubmitForSettlementForDifferentAmount = "95601"
       HasAlreadyBeenRefunded = "91512"
-      IdealPaymentNotComplete = "815141"
-      IdealPaymentsCannotBeVaulted = "915150"
       LineItemsExpected = "915158"
       MerchantAccountDoesNotMatch3DSecureMerchantAccount = "91584"
-      MerchantAccountDoesNotMatchIdealPaymentMerchantAccount = "915143"
       MerchantAccountDoesNotSupportMOTO = "91558"
       MerchantAccountDoesNotSupportRefunds = "91547"
       MerchantAccountIdDoesNotMatchSubscription = "915180"
       MerchantAccountIdIsInvalid = "91513"
       MerchantAccountIsSuspended = "91514"
-      OrderIdDoesNotMatchIdealPaymentOrderId = "91503"
-      OrderIdIsRequiredWithIdealPayment = "91502"
       OrderIdIsTooLong = "91501"
       PaymentInstrumentNotSupportedByMerchantAccount = "91577"
       PaymentInstrumentTypeIsNotAccepted = "915101"

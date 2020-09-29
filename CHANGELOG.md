@@ -6,6 +6,7 @@
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
 * Breaking changes:
   * Remove `EuropeBankAccount` class
+  * Remove `IdealPayment` and `IdealPaymentDetails` classes
   * Remove error codes:
     * EuropeBankAccount.IBANIsRequired
     * EuropeBankAccount.BICIsRequired
@@ -23,7 +24,12 @@
     * SEPAMandate.LocaleIsUnsupported
     * SEPAMandate.BillingAddressIsInvalid
     * SEPAMandate.TypeIsInvalid
-
+    * Transaction.AmountDoesNotMatchIdealPaymentAmount
+    * Transaction.IdealPaymentNotComplete
+    * Transaction.IdealPaymentsCannotBeVaulted
+    * Transaction.MerchantAccountDoesNotMatchIdealPaymentMerchantAccount
+    * Transaction.OrderIdDoesNotMatchIdealPaymentOrderId
+    * Transaction.OrderIdIsRequiredWithIdealPayment
 
 ## 2.103.0
 

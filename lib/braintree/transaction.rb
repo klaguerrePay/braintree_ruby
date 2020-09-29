@@ -125,9 +125,6 @@ module Braintree
     attr_reader :gateway_rejection_reason
     attr_reader :graphql_id
     attr_reader :id
-    # NEXT_MAJOR_VERSION Remove this class as legacy Ideal has been removed/disabled in the Braintree Gateway
-    # DEPRECATED If you're looking to accept iDEAL as a payment method contact accounts@braintreepayments.com for a solution.
-    attr_reader :ideal_payment_details
     attr_reader :local_payment_details
     # NEXT_MAJOR_VERSION Remove this class.
     # DEPRECATED The Masterpass Card payment method is deprecated.
@@ -328,7 +325,6 @@ module Braintree
       @facilitator_details = FacilitatorDetails.new(attributes[:facilitator_details]) if attributes[:facilitator_details]
       @three_d_secure_info = ThreeDSecureInfo.new(attributes[:three_d_secure_info]) if attributes[:three_d_secure_info]
       @us_bank_account_details = UsBankAccountDetails.new(attributes[:us_bank_account]) if attributes[:us_bank_account]
-      @ideal_payment_details = IdealPaymentDetails.new(attributes[:ideal_payment]) if attributes[:ideal_payment]
       @visa_checkout_card_details = VisaCheckoutCardDetails.new(attributes[:visa_checkout_card])
       @masterpass_card_details = MasterpassCardDetails.new(attributes[:masterpass_card])
       @samsung_pay_card_details = SamsungPayCardDetails.new(attributes[:samsung_pay_card])
