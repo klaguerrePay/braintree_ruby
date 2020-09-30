@@ -92,9 +92,6 @@ module Braintree
 
     attr_reader :add_ons
     attr_reader :additional_processor_response          # The raw response from the processor.
-    # NEXT_MAJOR_VERSION Remove this class.
-    # DEPRECATED The American Express Checkout payment method is deprecated.
-    attr_reader :amex_express_checkout_details
     attr_reader :amount
     # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
     attr_reader :android_pay_details
@@ -125,9 +122,6 @@ module Braintree
     attr_reader :graphql_id
     attr_reader :id
     attr_reader :local_payment_details
-    # NEXT_MAJOR_VERSION Remove this class.
-    # DEPRECATED The Masterpass Card payment method is deprecated.
-    attr_reader :masterpass_card_details
     attr_reader :merchant_account_id
     attr_reader :network_response_code                  # Response code from the card network
     attr_reader :network_response_text                  # Response text from the card network
@@ -299,7 +293,6 @@ module Braintree
       @apple_pay_details = ApplePayDetails.new(@apple_pay)
       # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
       @android_pay_details = AndroidPayDetails.new(@android_pay_card)
-      @amex_express_checkout_details = AmexExpressCheckoutDetails.new(@amex_express_checkout_card)
       @venmo_account_details = VenmoAccountDetails.new(@venmo_account)
       disputes.map! { |attrs| Dispute._new(attrs) } if disputes
       @custom_fields = attributes[:custom_fields].is_a?(Hash) ? attributes[:custom_fields] : {}
@@ -312,7 +305,6 @@ module Braintree
       @three_d_secure_info = ThreeDSecureInfo.new(attributes[:three_d_secure_info]) if attributes[:three_d_secure_info]
       @us_bank_account_details = UsBankAccountDetails.new(attributes[:us_bank_account]) if attributes[:us_bank_account]
       @visa_checkout_card_details = VisaCheckoutCardDetails.new(attributes[:visa_checkout_card])
-      @masterpass_card_details = MasterpassCardDetails.new(attributes[:masterpass_card])
       @samsung_pay_card_details = SamsungPayCardDetails.new(attributes[:samsung_pay_card])
       authorization_adjustments.map! { |attrs| AuthorizationAdjustment._new(attrs) } if authorization_adjustments
     end

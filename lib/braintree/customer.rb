@@ -4,7 +4,6 @@ module Braintree
     include Braintree::Util::IdEquality
 
     attr_reader :addresses
-    attr_reader :amex_express_checkout_cards # Deprecated
     # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
     attr_reader :android_pay_cards
     attr_reader :apple_pay_cards
@@ -18,7 +17,6 @@ module Braintree
     attr_reader :graphql_id
     attr_reader :id
     attr_reader :last_name
-    attr_reader :masterpass_cards # Deprecated
     attr_reader :paypal_accounts
     attr_reader :phone
     attr_reader :samsung_pay_cards
@@ -89,11 +87,9 @@ module Braintree
       @apple_pay_cards = (@apple_pay_cards || []).map { |pm| ApplePayCard._new gateway, pm }
       # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
       @android_pay_cards = (@android_pay_cards || []).map { |pm| AndroidPayCard._new gateway, pm }
-      @amex_express_checkout_cards = (@amex_express_checkout_cards || []).map { |pm| AmexExpressCheckoutCard._new gateway, pm }
       @venmo_accounts = (@venmo_accounts || []).map { |pm| VenmoAccount._new gateway, pm }
       @us_bank_accounts = (@us_bank_accounts || []).map { |pm| UsBankAccount._new gateway, pm }
       @visa_checkout_cards = (@visa_checkout_cards|| []).map { |pm| VisaCheckoutCard._new gateway, pm }
-      @masterpass_cards = (@masterpass_cards|| []).map { |pm| MasterpassCard._new gateway, pm }
       @samsung_pay_cards = (@samsung_pay_cards|| []).map { |pm| SamsungPayCard._new gateway, pm }
       @addresses = (@addresses || []).map { |addr| Address._new gateway, addr }
       @custom_fields = attributes[:custom_fields].is_a?(Hash) ? attributes[:custom_fields] : {}
@@ -130,7 +126,6 @@ module Braintree
         @paypal_accounts +
         @apple_pay_cards +
         @android_pay_cards +
-        @amex_express_checkout_cards +
         @venmo_accounts +
         @us_bank_accounts +
         @visa_checkout_cards +

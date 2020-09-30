@@ -13,14 +13,10 @@ module Braintree
       elsif attributes[:android_pay_card]
         # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
         AndroidPayCard._new(gateway, attributes[:android_pay_card])
-      elsif attributes[:amex_express_checkout_card]
-        AmexExpressCheckoutCard._new(gateway, attributes[:amex_express_checkout_card])
       elsif attributes[:venmo_account]
         VenmoAccount._new(gateway, attributes[:venmo_account])
       elsif attributes[:visa_checkout_card]
         VisaCheckoutCard._new(gateway, attributes[:visa_checkout_card])
-      elsif attributes[:masterpass_card]
-        MasterpassCard._new(gateway, attributes[:masterpass_card])
       elsif attributes[:samsung_pay_card]
         SamsungPayCard._new(gateway, attributes[:samsung_pay_card])
       else

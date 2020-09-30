@@ -17,8 +17,6 @@ module Braintree
       AndroidPayVisa = "fake-android-pay-visa-nonce"
       AndroidPayMasterCard = "fake-android-pay-mastercard-nonce"
       AndroidPayAmEx = "fake-android-pay-amex-nonce"
-      # NEXT_MAJOR_VERSION Remove AmexExpressCheckout test nonces
-      AmexExpressCheckout = "fake-amex-express-checkout-nonce"
       VenmoAccount = "fake-venmo-account-nonce"
       VenmoAccountTokenIssuanceError = "fake-token-issuance-error-venmo-account-nonce"
       ThreeDSecureVisaFullAuthentication = "fake-three-d-secure-visa-full-authentication-nonce"
@@ -63,11 +61,6 @@ module Braintree
       PayPalFuturePaymentRefreshToken = "fake-paypal-future-refresh-token-nonce"
       GatewayRejectedFraud = "fake-gateway-rejected-fraud-nonce"
       GatewayRejectedRiskThresholds = "fake-gateway-rejected-risk-thresholds-nonce"
-      # NEXT_MAJOR_VERSION Remove Masterpass test nonces
-      MasterpassAmEx = "fake-masterpass-amex-nonce"
-      MasterpassDiscover = "fake-masterpass-discover-nonce"
-      MasterpassMasterCard = "fake-masterpass-mastercard-nonce"
-      MasterpassVisa = "fake-masterpass-visa-nonce"
       VisaCheckoutAmEx = "fake-visa-checkout-amex-nonce"
       VisaCheckoutDiscover = "fake-visa-checkout-discover-nonce"
       VisaCheckoutMasterCard = "fake-visa-checkout-mastercard-nonce"
