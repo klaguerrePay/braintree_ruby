@@ -105,21 +105,6 @@ describe Braintree::CreditCard do
     end
   end
 
-  describe "self.create_from_transparent_redirect" do
-    it "raises an exception if the query string is forged" do
-      expect do
-        Braintree::CreditCard.create_from_transparent_redirect("http_status=200&forged=query_string")
-      end.to raise_error(Braintree::ForgedQueryString)
-    end
-  end
-
-  describe "self.create_credit_card_url" do
-    it "returns the url" do
-      config = Braintree::Configuration.instantiate
-      Braintree::CreditCard.create_credit_card_url.should == "http#{config.ssl? ? 's' : ''}://#{config.server}:#{config.port}/merchants/integration_merchant_id/payment_methods/all/create_via_transparent_redirect_request"
-    end
-  end
-
   describe "==" do
     it "returns true if given a credit card with the same token" do
       first = Braintree::CreditCard._new(:gateway, :token => 123)

@@ -90,10 +90,6 @@ module Braintree
       SubscriptionGateway.new(self)
     end
 
-    def transparent_redirect
-      TransparentRedirectGateway.new(self)
-    end
-
     def transaction
       TransactionGateway.new(self)
     end

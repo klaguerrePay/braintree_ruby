@@ -259,14 +259,6 @@ describe Braintree::Customer do
     end
   end
 
-  describe "self.create_from_transparent_redirect" do
-    it "raises an exception if the query string is forged" do
-      expect do
-        Braintree::Customer.create_from_transparent_redirect("http_status=200&forged=query_string")
-      end.to raise_error(Braintree::ForgedQueryString)
-    end
-  end
-
   describe "==" do
     it "returns true when given a customer with the same id" do
       first = Braintree::Customer._new(:gateway, :id => 123)

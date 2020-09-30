@@ -20,17 +20,6 @@ module Braintree
       return_object_or_raise(:credit_card) { create(*args) }
     end
 
-    # Deprecated
-    def create_credit_card_url
-      "#{@config.base_merchant_url}/payment_methods/all/create_via_transparent_redirect_request"
-    end
-
-    # Deprecated
-    def create_from_transparent_redirect(query_string)
-      params = @gateway.transparent_redirect.parse_and_validate_query_string query_string
-      _do_create("/payment_methods/all/confirm_transparent_redirect_request", :id => params[:id])
-    end
-
     def credit(token, transaction_attributes)
       @gateway.transaction.credit(transaction_attributes.merge(:payment_method_token => token))
     end
@@ -83,19 +72,6 @@ module Braintree
 
     def update!(*args)
       return_object_or_raise(:credit_card) { update(*args) }
-    end
-
-    # Deprecated
-    def update_from_transparent_redirect(query_string)
-      warn "[DEPRECATED] CreditCard.update_via_transparent_redirect_request is deprecated. Please use TransparentRedirect.confirm"
-      params = @gateway.transparent_redirect.parse_and_validate_query_string query_string
-      _do_update(:post, "/payment_methods/all/confirm_transparent_redirect_request", :id => params[:id])
-    end
-
-    # Deprecated
-    def update_credit_card_url
-      warn "[DEPRECATED] CreditCard.update_credit_card_url is deprecated. Please use TransparentRedirect.url"
-      "#{@config.base_merchant_url}/payment_methods/all/update_via_transparent_redirect_request"
     end
 
     def self._create_signature # :nodoc:

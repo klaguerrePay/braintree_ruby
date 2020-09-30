@@ -70,18 +70,6 @@ module Braintree
       Configuration.gateway.credit_card.create!(*args)
     end
 
-    # Deprecated. Use Braintree::TransparentRedirect.url
-    def self.create_credit_card_url
-      warn "[DEPRECATED] CreditCard.create_credit_card_url is deprecated. Please use TransparentRedirect.url"
-      Configuration.gateway.credit_card.create_credit_card_url
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.confirm
-    def self.create_from_transparent_redirect(query_string)
-      warn "[DEPRECATED] CreditCard.create_from_transparent_redirect is deprecated. Please use TransparentRedirect.confirm"
-      Configuration.gateway.credit_card.create_from_transparent_redirect(query_string)
-    end
-
     def self.credit(token, transaction_attributes)
       Transaction.credit(transaction_attributes.merge(:payment_method_token => token))
     end
@@ -129,18 +117,6 @@ module Braintree
 
     def self.update!(*args)
       Configuration.gateway.credit_card.update!(*args)
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.confirm
-    def self.update_from_transparent_redirect(query_string)
-      warn "[DEPRECATED] CreditCard.update_via_transparent_redirect_request is deprecated. Please use TransparentRedirect.confirm"
-      Configuration.gateway.credit_card.update_from_transparent_redirect(query_string)
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.url
-    def self.update_credit_card_url
-      warn "[DEPRECATED] CreditCard.update_credit_card_url is deprecated. Please use TransparentRedirect.url"
-      Configuration.gateway.credit_card.update_credit_card_url
     end
 
     def initialize(gateway, attributes) # :nodoc:

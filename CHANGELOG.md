@@ -7,6 +7,7 @@
 * Breaking changes:
   * Remove `EuropeBankAccount` class
   * Remove `IdealPayment` and `IdealPaymentDetails` classes
+  * Remove support for Transparent Redirect
   * Remove error codes:
     * EuropeBankAccount.IBANIsRequired
     * EuropeBankAccount.BICIsRequired

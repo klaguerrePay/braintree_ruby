@@ -196,18 +196,6 @@ module Braintree
       Configuration.gateway.transaction.clone_transaction!(*args)
     end
 
-    # Deprecated. Use Braintree::TransparentRedirect.confirm
-    def self.create_from_transparent_redirect(*args)
-      warn "[DEPRECATED] Transaction.create_from_transparent_redirect is deprecated. Please use TransparentRedirect.confirm"
-      Configuration.gateway.transaction.create_from_transparent_redirect(*args)
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.url
-    def self.create_transaction_url
-      warn "[DEPRECATED] Transaction.create_transaction_url is deprecated. Please use TransparentRedirect.url"
-      Configuration.gateway.transaction.create_transaction_url
-    end
-
     def self.credit(*args)
       Configuration.gateway.transaction.credit(*args)
     end

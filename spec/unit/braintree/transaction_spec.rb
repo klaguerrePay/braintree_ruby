@@ -17,14 +17,6 @@ describe Braintree::Transaction do
     end
   end
 
-  describe "self.create_from_transparent_redirect" do
-    it "raises an exception if the query string is forged" do
-      expect do
-        Braintree::Transaction.create_from_transparent_redirect("http_status=200&forged=query_string")
-      end.to raise_error(Braintree::ForgedQueryString)
-    end
-  end
-
   describe "self.find" do
     it "raises error if passed empty string" do
       expect do
@@ -42,13 +34,6 @@ describe Braintree::Transaction do
       expect do
         Braintree::Transaction.find(nil)
       end.to raise_error(ArgumentError)
-    end
-  end
-
-  describe "self.create_transaction_url" do
-    it "returns the url" do
-      config = Braintree::Configuration.instantiate
-      Braintree::Transaction.create_transaction_url.should == "http#{config.ssl? ? 's' : ''}://#{config.server}:#{config.port}/merchants/integration_merchant_id/transactions/all/create_via_transparent_redirect_request"
     end
   end
 

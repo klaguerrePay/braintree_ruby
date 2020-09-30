@@ -41,18 +41,6 @@ module Braintree
       Configuration.gateway.customer.create!(*args)
     end
 
-    # Deprecated. Use Braintree::TransparentRedirect.url
-    def self.create_customer_url
-      warn "[DEPRECATED] Customer.create_customer_url is deprecated. Please use TransparentRedirect.url"
-      Configuration.gateway.customer.create_customer_url
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.confirm
-    def self.create_from_transparent_redirect(*args)
-      warn "[DEPRECATED] Customer.create_from_transparent_redirect is deprecated. Please use TransparentRedirect.confirm"
-      Configuration.gateway.customer.create_from_transparent_redirect(*args)
-    end
-
     def self.credit(customer_id, transaction_attributes)
       Transaction.credit(transaction_attributes.merge(:customer_id => customer_id))
     end
@@ -92,18 +80,6 @@ module Braintree
 
     def self.update!(*args)
       Configuration.gateway.customer.update!(*args)
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.url
-    def self.update_customer_url
-      warn "[DEPRECATED] Customer.update_customer_url is deprecated. Please use TransparentRedirect.url"
-      Configuration.gateway.customer.update_customer_url
-    end
-
-    # Deprecated. Use Braintree::TransparentRedirect.confirm
-    def self.update_from_transparent_redirect(*args)
-      warn "[DEPRECATED] Customer.update_from_transparent_redirect is deprecated. Please use TransparentRedirect.confirm"
-      Configuration.gateway.customer.update_from_transparent_redirect(*args)
     end
 
     def initialize(gateway, attributes) # :nodoc:

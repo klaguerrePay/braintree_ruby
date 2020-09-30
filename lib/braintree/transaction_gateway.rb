@@ -52,17 +52,6 @@ module Braintree
       return_object_or_raise(:transaction) { clone_transaction(*args) }
     end
 
-    # Deprecated
-    def create_from_transparent_redirect(query_string)
-      params = @gateway.transparent_redirect.parse_and_validate_query_string query_string
-      _do_create("/transactions/all/confirm_transparent_redirect_request", :id => params[:id])
-    end
-
-    def create_transaction_url
-      warn "[DEPRECATED] Transaction.create_transaction_url is deprecated. Please use TransparentRedirect.url"
-      "#{@config.base_merchant_url}/transactions/all/create_via_transparent_redirect_request"
-    end
-
     def credit(attributes)
       create(attributes.merge(:type => 'credit'))
     end
