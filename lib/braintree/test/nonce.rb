@@ -12,7 +12,6 @@ module Braintree
       ApplePayAmEx = "fake-apple-pay-amex-nonce"
       AbstractTransactable = "fake-abstract-transactable-nonce"
       Europe = "fake-europe-bank-account-nonce"
-      Coinbase = "fake-coinbase-nonce"
       # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
       AndroidPayDiscover = "fake-android-pay-discover-nonce"
       AndroidPayVisa = "fake-android-pay-visa-nonce"

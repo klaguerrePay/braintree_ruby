@@ -2,7 +2,6 @@ module Braintree
   module PaymentInstrumentType
     PayPalAccount = 'paypal_account'
     CreditCard = 'credit_card'
-    CoinbaseAccount = 'coinbase_account'
     ApplePayCard = 'apple_pay_card'
     # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
     AndroidPayCard = 'android_pay_card'

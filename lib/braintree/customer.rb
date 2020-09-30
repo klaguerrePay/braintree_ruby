@@ -8,7 +8,6 @@ module Braintree
     # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
     attr_reader :android_pay_cards
     attr_reader :apple_pay_cards
-    attr_reader :coinbase_accounts
     attr_reader :company
     attr_reader :created_at
     attr_reader :credit_cards
@@ -87,7 +86,6 @@ module Braintree
       set_instance_variables_from_hash(attributes)
       @credit_cards = (@credit_cards || []).map { |pm| CreditCard._new gateway, pm }
       @paypal_accounts = (@paypal_accounts || []).map { |pm| PayPalAccount._new gateway, pm }
-      @coinbase_accounts = (@coinbase_accounts || []).map { |pm| CoinbaseAccount._new gateway, pm }
       @apple_pay_cards = (@apple_pay_cards || []).map { |pm| ApplePayCard._new gateway, pm }
       # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
       @android_pay_cards = (@android_pay_cards || []).map { |pm| AndroidPayCard._new gateway, pm }
@@ -131,7 +129,6 @@ module Braintree
       @credit_cards +
         @paypal_accounts +
         @apple_pay_cards +
-        @coinbase_accounts +
         @android_pay_cards +
         @amex_express_checkout_cards +
         @venmo_accounts +

@@ -6,8 +6,6 @@ module Braintree
         CreditCard._new(gateway, attributes[:credit_card])
       elsif attributes[:paypal_account]
         PayPalAccount._new(gateway, attributes[:paypal_account])
-      elsif attributes[:coinbase_account]
-        CoinbaseAccount._new(gateway, attributes[:coinbase_account])
       elsif attributes[:us_bank_account]
         UsBankAccount._new(gateway, attributes[:us_bank_account])
       elsif attributes[:apple_pay_card]

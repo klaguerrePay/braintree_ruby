@@ -5,9 +5,7 @@
 * Deprecate Masterpass and American Express Checkout payment methods.
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
 * Breaking changes:
-  * Remove `EuropeBankAccount` class
-  * Remove `IdealPayment` and `IdealPaymentDetails` classes
-  * Remove support for Transparent Redirect
+  * Remove support for Transparent Redirect, Coinbase and iDEAL
   * Remove error codes:
     * EuropeBankAccount.IBANIsRequired
     * EuropeBankAccount.BICIsRequired

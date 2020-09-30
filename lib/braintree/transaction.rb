@@ -107,7 +107,6 @@ module Braintree
     attr_reader :avs_street_address_response_code
     attr_reader :billing_details
     attr_reader :channel
-    attr_reader :coinbase_details
     attr_reader :created_at
     attr_reader :credit_card_details
     attr_reader :currency_iso_code
@@ -302,7 +301,6 @@ module Braintree
       @android_pay_details = AndroidPayDetails.new(@android_pay_card)
       @amex_express_checkout_details = AmexExpressCheckoutDetails.new(@amex_express_checkout_card)
       @venmo_account_details = VenmoAccountDetails.new(@venmo_account)
-      @coinbase_details = CoinbaseDetails.new(@coinbase_account)
       disputes.map! { |attrs| Dispute._new(attrs) } if disputes
       @custom_fields = attributes[:custom_fields].is_a?(Hash) ? attributes[:custom_fields] : {}
       add_ons.map! { |attrs| AddOn._new(attrs) } if add_ons

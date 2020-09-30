@@ -1522,22 +1522,6 @@ describe Braintree::PaymentMethod do
       end
     end
 
-    context "coinbase accounts" do
-      it "cannot create a payment method token with Coinbase" do
-        customer = Braintree::Customer.create!
-
-        nonce = Braintree::Test::Nonce::Coinbase
-        result = Braintree::PaymentMethod.create(
-          :payment_method_nonce => nonce,
-          :customer_id => customer.id
-        )
-
-        result.should_not be_success
-
-        result.errors.for(:coinbase_account).first.code.should == Braintree::ErrorCodes::PaymentMethod::PaymentMethodNoLongerSupported
-      end
-    end
-
     context "paypal accounts" do
       it "updates a paypal account's token" do
         customer = Braintree::Customer.create!
