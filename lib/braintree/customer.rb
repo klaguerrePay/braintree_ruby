@@ -4,8 +4,6 @@ module Braintree
     include Braintree::Util::IdEquality
 
     attr_reader :addresses
-    # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-    attr_reader :android_pay_cards
     attr_reader :apple_pay_cards
     attr_reader :company
     attr_reader :created_at
@@ -14,6 +12,7 @@ module Braintree
     attr_reader :email
     attr_reader :fax
     attr_reader :first_name
+    attr_reader :google_pay_cards
     attr_reader :graphql_id
     attr_reader :id
     attr_reader :last_name
@@ -85,8 +84,7 @@ module Braintree
       @credit_cards = (@credit_cards || []).map { |pm| CreditCard._new gateway, pm }
       @paypal_accounts = (@paypal_accounts || []).map { |pm| PayPalAccount._new gateway, pm }
       @apple_pay_cards = (@apple_pay_cards || []).map { |pm| ApplePayCard._new gateway, pm }
-      # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-      @android_pay_cards = (@android_pay_cards || []).map { |pm| AndroidPayCard._new gateway, pm }
+      @google_pay_cards = (@google_pay_cards || []).map { |pm| GooglePayCard._new gateway, pm }
       @venmo_accounts = (@venmo_accounts || []).map { |pm| VenmoAccount._new gateway, pm }
       @us_bank_accounts = (@us_bank_accounts || []).map { |pm| UsBankAccount._new gateway, pm }
       @visa_checkout_cards = (@visa_checkout_cards|| []).map { |pm| VisaCheckoutCard._new gateway, pm }
@@ -125,7 +123,7 @@ module Braintree
       @credit_cards +
         @paypal_accounts +
         @apple_pay_cards +
-        @android_pay_cards +
+        @google_pay_cards +
         @venmo_accounts +
         @us_bank_accounts +
         @visa_checkout_cards +

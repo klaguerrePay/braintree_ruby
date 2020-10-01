@@ -171,6 +171,22 @@ describe Braintree::Util do
     end
   end
 
+  describe "self.replace_key" do
+    it "replaces the target key with the replacement key" do
+      Braintree::Util.replace_key(
+        {:a => {:b => "some value"}},
+        :b,
+        :c).should == {:a => {:c => "some value"}}
+    end
+
+    it "returns hash with all of the original keys if the target key does not exist" do
+      Braintree::Util.replace_key(
+        {:some_key => "some value"},
+        :not_found,
+        :new_key).should == {:some_key => "some value"}
+    end
+  end
+
   describe "self._flatten_hash_keys" do
     it "flattens hash keys" do
       Braintree::Util._flatten_hash_keys(:nested => {

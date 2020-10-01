@@ -245,8 +245,7 @@ module Braintree
           ]},
         ]},
         {:apple_pay_card => [:number, :cardholder_name, :cryptogram, :expiration_month, :expiration_year, :eci_indicator]},
-        # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-        {:android_pay_card => [:number, :cryptogram, :google_transaction_id, :expiration_month, :expiration_year, :source_card_type, :source_card_last_four, :eci_indicator]}
+        {:google_pay_card => [:number, :cryptogram, :google_transaction_id, :expiration_month, :expiration_year, :source_card_type, :source_card_last_four, :eci_indicator]}
       ]
     end
 
@@ -280,6 +279,9 @@ module Braintree
     end
 
     def _do_create(path, params=nil) # :nodoc:
+      if !params.nil?
+        params = Util.replace_key(params, :google_pay_card, :android_pay_card)
+      end
       response = @config.http.post("#{@config.base_merchant_path}#{path}", params)
       _handle_transaction_response(response)
     end

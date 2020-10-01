@@ -29,6 +29,7 @@
     * Transaction.MerchantAccountDoesNotMatchIdealPaymentMerchantAccount
     * Transaction.OrderIdDoesNotMatchIdealPaymentOrderId
     * Transaction.OrderIdIsRequiredWithIdealPayment
+  * Rename all Android Pay classes and methods to Google Pay 
 
 ## 2.103.0
 

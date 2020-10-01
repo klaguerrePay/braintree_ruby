@@ -942,36 +942,36 @@ describe Braintree::Customer do
       apple_pay_card.payment_instrument_name.should == "AmEx 41002"
     end
 
-    it "returns associated android pay proxy cards" do
+    it "returns associated google pay proxy cards" do
       result = Braintree::Customer.create(
-        :payment_method_nonce => Braintree::Test::Nonce::AndroidPayDiscover
+        :payment_method_nonce => Braintree::Test::Nonce::GooglePayDiscover
       )
       result.success?.should == true
 
       found_customer = Braintree::Customer.find(result.customer.id)
-      found_customer.android_pay_cards.size.should == 1
+      found_customer.google_pay_cards.size.should == 1
       found_customer.payment_methods.size.should == 1
-      android_pay_card = found_customer.android_pay_cards.first
-      android_pay_card.should be_a Braintree::AndroidPayCard
-      android_pay_card.token.should_not be_nil
-      android_pay_card.expiration_year.should_not be_nil
-      android_pay_card.is_network_tokenized?.should == false
+      google_pay_card = found_customer.google_pay_cards.first
+      google_pay_card.should be_a Braintree::GooglePayCard
+      google_pay_card.token.should_not be_nil
+      google_pay_card.expiration_year.should_not be_nil
+      google_pay_card.is_network_tokenized?.should == false
     end
 
-    it "returns associated android pay network tokens" do
+    it "returns associated google pay network tokens" do
       result = Braintree::Customer.create(
-        :payment_method_nonce => Braintree::Test::Nonce::AndroidPayMasterCard
+        :payment_method_nonce => Braintree::Test::Nonce::GooglePayMasterCard
       )
       result.success?.should == true
 
       found_customer = Braintree::Customer.find(result.customer.id)
-      found_customer.android_pay_cards.size.should == 1
+      found_customer.google_pay_cards.size.should == 1
       found_customer.payment_methods.size.should == 1
-      android_pay_card = found_customer.android_pay_cards.first
-      android_pay_card.should be_a Braintree::AndroidPayCard
-      android_pay_card.token.should_not be_nil
-      android_pay_card.expiration_year.should_not be_nil
-      android_pay_card.is_network_tokenized?.should == true
+      google_pay_card = found_customer.google_pay_cards.first
+      google_pay_card.should be_a Braintree::GooglePayCard
+      google_pay_card.token.should_not be_nil
+      google_pay_card.expiration_year.should_not be_nil
+      google_pay_card.is_network_tokenized?.should == true
     end
 
     it "returns associated venmo accounts" do

@@ -1804,83 +1804,83 @@ describe Braintree::Transaction do
         apple_pay_details.token.should_not be_nil
       end
 
-      it "can create a transaction with a fake android pay proxy card nonce" do
+      it "can create a transaction with a fake google pay proxy card nonce" do
         customer = Braintree::Customer.create!
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::AndroidPayDiscover
+          :payment_method_nonce => Braintree::Test::Nonce::GooglePayDiscover
         )
         result.success?.should == true
         result.transaction.should_not be_nil
-        android_pay_details = result.transaction.android_pay_details
-        android_pay_details.should_not be_nil
-        android_pay_details.bin.should_not be_nil
-        android_pay_details.card_type.should == Braintree::CreditCard::CardType::Discover
-        android_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::Discover
-        android_pay_details.last_4.should == "1117"
-        android_pay_details.virtual_card_last_4.should == "1117"
-        android_pay_details.source_description.should == "Discover 1111"
-        android_pay_details.expiration_month.to_i.should > 0
-        android_pay_details.expiration_year.to_i.should > 0
-        android_pay_details.google_transaction_id.should == "google_transaction_id"
-        android_pay_details.image_url.should_not be_nil
-        android_pay_details.is_network_tokenized?.should == false
-        android_pay_details.token.should be_nil
-        android_pay_details.prepaid.should_not be_nil
-        android_pay_details.healthcare.should_not be_nil
-        android_pay_details.debit.should_not be_nil
-        android_pay_details.durbin_regulated.should_not be_nil
-        android_pay_details.commercial.should_not be_nil
-        android_pay_details.payroll.should_not be_nil
-        android_pay_details.product_id.should_not be_nil
+        google_pay_details = result.transaction.google_pay_details
+        google_pay_details.should_not be_nil
+        google_pay_details.bin.should_not be_nil
+        google_pay_details.card_type.should == Braintree::CreditCard::CardType::Discover
+        google_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::Discover
+        google_pay_details.last_4.should == "1117"
+        google_pay_details.virtual_card_last_4.should == "1117"
+        google_pay_details.source_description.should == "Discover 1111"
+        google_pay_details.expiration_month.to_i.should > 0
+        google_pay_details.expiration_year.to_i.should > 0
+        google_pay_details.google_transaction_id.should == "google_transaction_id"
+        google_pay_details.image_url.should_not be_nil
+        google_pay_details.is_network_tokenized?.should == false
+        google_pay_details.token.should be_nil
+        google_pay_details.prepaid.should_not be_nil
+        google_pay_details.healthcare.should_not be_nil
+        google_pay_details.debit.should_not be_nil
+        google_pay_details.durbin_regulated.should_not be_nil
+        google_pay_details.commercial.should_not be_nil
+        google_pay_details.payroll.should_not be_nil
+        google_pay_details.product_id.should_not be_nil
       end
 
-      it "can create a vaulted transaction with a fake android pay proxy card nonce" do
+      it "can create a vaulted transaction with a fake google pay proxy card nonce" do
         customer = Braintree::Customer.create!
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::AndroidPayDiscover,
+          :payment_method_nonce => Braintree::Test::Nonce::GooglePayDiscover,
           :options => { :store_in_vault_on_success => true }
         )
         result.success?.should == true
         result.transaction.should_not be_nil
-        android_pay_details = result.transaction.android_pay_details
-        android_pay_details.should_not be_nil
-        android_pay_details.card_type.should == Braintree::CreditCard::CardType::Discover
-        android_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::Discover
-        android_pay_details.last_4.should == "1117"
-        android_pay_details.virtual_card_last_4.should == "1117"
-        android_pay_details.source_description.should == "Discover 1111"
-        android_pay_details.expiration_month.to_i.should > 0
-        android_pay_details.expiration_year.to_i.should > 0
-        android_pay_details.google_transaction_id.should == "google_transaction_id"
-        android_pay_details.image_url.should_not be_nil
-        android_pay_details.is_network_tokenized?.should == false
-        android_pay_details.token.should_not be_nil
+        google_pay_details = result.transaction.google_pay_details
+        google_pay_details.should_not be_nil
+        google_pay_details.card_type.should == Braintree::CreditCard::CardType::Discover
+        google_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::Discover
+        google_pay_details.last_4.should == "1117"
+        google_pay_details.virtual_card_last_4.should == "1117"
+        google_pay_details.source_description.should == "Discover 1111"
+        google_pay_details.expiration_month.to_i.should > 0
+        google_pay_details.expiration_year.to_i.should > 0
+        google_pay_details.google_transaction_id.should == "google_transaction_id"
+        google_pay_details.image_url.should_not be_nil
+        google_pay_details.is_network_tokenized?.should == false
+        google_pay_details.token.should_not be_nil
       end
 
-      it "can create a transaction with a fake android pay network token nonce" do
+      it "can create a transaction with a fake google pay network token nonce" do
         customer = Braintree::Customer.create!
         result = Braintree::Transaction.create(
           :type => "sale",
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::AndroidPayMasterCard
+          :payment_method_nonce => Braintree::Test::Nonce::GooglePayMasterCard
         )
         result.success?.should == true
         result.transaction.should_not be_nil
-        android_pay_details = result.transaction.android_pay_details
-        android_pay_details.should_not be_nil
-        android_pay_details.card_type.should == Braintree::CreditCard::CardType::MasterCard
-        android_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::MasterCard
-        android_pay_details.last_4.should == "4444"
-        android_pay_details.virtual_card_last_4.should == "4444"
-        android_pay_details.source_description.should == "MasterCard 4444"
-        android_pay_details.expiration_month.to_i.should > 0
-        android_pay_details.expiration_year.to_i.should > 0
-        android_pay_details.google_transaction_id.should == "google_transaction_id"
-        android_pay_details.is_network_tokenized?.should == true
+        google_pay_details = result.transaction.google_pay_details
+        google_pay_details.should_not be_nil
+        google_pay_details.card_type.should == Braintree::CreditCard::CardType::MasterCard
+        google_pay_details.virtual_card_type.should == Braintree::CreditCard::CardType::MasterCard
+        google_pay_details.last_4.should == "4444"
+        google_pay_details.virtual_card_last_4.should == "4444"
+        google_pay_details.source_description.should == "MasterCard 4444"
+        google_pay_details.expiration_month.to_i.should > 0
+        google_pay_details.expiration_year.to_i.should > 0
+        google_pay_details.google_transaction_id.should == "google_transaction_id"
+        google_pay_details.is_network_tokenized?.should == true
       end
 
       it "can create a transaction with a fake venmo account nonce" do
@@ -4997,11 +4997,11 @@ describe Braintree::Transaction do
       result.transaction.status.should == Braintree::Transaction::Status::Authorized
     end
 
-    context "Android Pay params" do
+    context "Google Pay params" do
       it "works with full params" do
         params = {
           :amount => "3.12",
-          :android_pay_card => {
+          :google_pay_card => {
             :number => "4012888888881881",
             :cryptogram => "AAAAAAAA/COBt84dnIEcwAA3gAAGhgEDoLABAAhAgAABAAAALnNCLw==",
             :google_transaction_id => "25469d622c1dd37cb1a403c6d438e850",
@@ -5020,7 +5020,7 @@ describe Braintree::Transaction do
       it "works with only number, cryptogram, expiration and transaction ID (network tokenized card)" do
         params = {
           :amount => "3.12",
-          :android_pay_card => {
+          :google_pay_card => {
             :number => "4012888888881881",
             :cryptogram => "AAAAAAAA/COBt84dnIEcwAA3gAAGhgEDoLABAAhAgAABAAAALnNCLw==",
             :google_transaction_id => "25469d622c1dd37cb1a403c6d438e850",
@@ -5036,7 +5036,7 @@ describe Braintree::Transaction do
       it "works with only number, expiration and transaction ID (non-tokenized card)" do
         params = {
           :amount => "3.12",
-          :android_pay_card => {
+          :google_pay_card => {
             :number => "4012888888881881",
             :google_transaction_id => "25469d622c1dd37cb1a403c6d438e850",
             :expiration_month => "10",

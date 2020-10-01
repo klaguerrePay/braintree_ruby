@@ -11,8 +11,7 @@ module Braintree
       elsif attributes[:apple_pay_card]
         ApplePayCard._new(gateway, attributes[:apple_pay_card])
       elsif attributes[:android_pay_card]
-        # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-        AndroidPayCard._new(gateway, attributes[:android_pay_card])
+        GooglePayCard._new(gateway, attributes[:android_pay_card])
       elsif attributes[:venmo_account]
         VenmoAccount._new(gateway, attributes[:venmo_account])
       elsif attributes[:visa_checkout_card]

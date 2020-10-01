@@ -93,8 +93,7 @@ module Braintree
     attr_reader :add_ons
     attr_reader :additional_processor_response          # The raw response from the processor.
     attr_reader :amount
-    # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-    attr_reader :android_pay_details
+    attr_reader :google_pay_details
     attr_reader :apple_pay_details
     attr_reader :authorization_adjustments
     attr_reader :authorization_expires_at
@@ -291,8 +290,7 @@ module Braintree
       @paypal_details = PayPalDetails.new(@paypal)
       @paypal_here_details = PayPalHereDetails.new(@paypal_here)
       @apple_pay_details = ApplePayDetails.new(@apple_pay)
-      # NEXT_MAJOR_VERSION rename Android Pay to Google Pay
-      @android_pay_details = AndroidPayDetails.new(@android_pay_card)
+      @google_pay_details = GooglePayDetails.new(@google_pay_card)
       @venmo_account_details = VenmoAccountDetails.new(@venmo_account)
       disputes.map! { |attrs| Dispute._new(attrs) } if disputes
       @custom_fields = attributes[:custom_fields].is_a?(Hash) ? attributes[:custom_fields] : {}
