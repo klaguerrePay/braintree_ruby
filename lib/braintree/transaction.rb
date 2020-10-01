@@ -324,18 +324,6 @@ module Braintree
       @gateway.transaction_line_item.find_all(id)
     end
 
-    # Deprecated. Use Braintree::Transaction.refund
-    def refund(amount = nil)
-      warn "[DEPRECATED] refund as an instance method is deprecated. Please use Transaction.refund"
-      result = @gateway.transaction.refund(id, amount)
-
-      if result.success?
-        SuccessfulResult.new(:new_transaction => result.transaction)
-      else
-        result
-      end
-    end
-
     # Returns true if the transaction has been refunded. False otherwise.
     def refunded?
       !@refund_id.nil?
@@ -344,27 +332,6 @@ module Braintree
     # Returns true if the transaction has been disbursed. False otherwise.
     def disbursed?
       @disbursement_details.valid?
-    end
-
-    def refund_id
-      warn "[DEPRECATED] Transaction.refund_id is deprecated. Please use Transaction.refund_ids"
-      @refund_id
-    end
-
-    # Deprecated. Use Braintree::Transaction.submit_for_settlement
-    def submit_for_settlement(amount = nil)
-      warn "[DEPRECATED] submit_for_settlement as an instance method is deprecated. Please use Transaction.submit_for_settlement"
-      result = @gateway.transaction.submit_for_settlement(id, amount)
-      if result.success?
-        copy_instance_variables_from_object result.transaction
-      end
-      result
-    end
-
-    # Deprecated. Use Braintree::Transaction.submit_for_settlement!
-    def submit_for_settlement!(amount = nil)
-      warn "[DEPRECATED] submit_for_settlement! as an instance method is deprecated. Please use Transaction.submit_for_settlement!"
-      return_object_or_raise(:transaction) { submit_for_settlement(amount) }
     end
 
     # If this transaction was stored in the vault, or created from vault records,
@@ -401,22 +368,6 @@ module Braintree
     def vault_shipping_address
       return nil if shipping_details.id.nil?
       @gateway.address.find(customer_details.id, shipping_details.id)
-    end
-
-    # Deprecated. Use Braintree::Transaction.void
-    def void
-      warn "[DEPRECATED] void as an instance method is deprecated. Please use Transaction.void"
-      result = @gateway.transaction.void(id)
-      if result.success?
-        copy_instance_variables_from_object result.transaction
-      end
-      result
-    end
-
-    # Deprecated. Use Braintree::Transaction.void!
-    def void!
-      warn "[DEPRECATED] void! as an instance method is deprecated. Please use Transaction.void!"
-      return_object_or_raise(:transaction) { void }
     end
 
     def processed_with_network_token?

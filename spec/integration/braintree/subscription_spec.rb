@@ -35,7 +35,6 @@ describe Braintree::Subscription do
       result.subscription.updated_at.between?(Time.now - 60, Time.now).should == true
 
       result.subscription.failure_count.should == 0
-      result.subscription.next_bill_amount.should == "12.34"
       result.subscription.next_billing_period_amount.should == "12.34"
       result.subscription.payment_method_token.should == @credit_card.token
 
@@ -691,7 +690,6 @@ describe Braintree::Subscription do
 
       subscription.failure_count.should == 0
       subscription.current_billing_cycle.should == 1
-      subscription.next_bill_amount.should == "12.34"
       subscription.next_billing_period_amount.should == "12.34"
       subscription.payment_method_token.should == @credit_card.token
     end

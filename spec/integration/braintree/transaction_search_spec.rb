@@ -468,7 +468,7 @@ describe Braintree::Transaction, "search" do
         )
         SpecHelper.settle_transaction transaction.id
 
-        refund_transaction = transaction.refund.new_transaction
+        refund_transaction = Braintree::Transaction.refund(transaction.id).transaction
 
         collection = Braintree::Transaction.search do |search|
           search.credit_card_cardholder_name.is cardholder_name

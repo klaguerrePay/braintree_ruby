@@ -29,6 +29,27 @@
     * Transaction.MerchantAccountDoesNotMatchIdealPaymentMerchantAccount
     * Transaction.OrderIdDoesNotMatchIdealPaymentOrderId
     * Transaction.OrderIdIsRequiredWithIdealPayment
+    * TransactionLineItem.DiscountAmountMustBeGreaterThanZero
+    * TransactionLineItem.UnitTaxAmountMustBeGreaterThanZero
+  * Remove deprecated methods:
+    * Address#delete
+    * Address#update and Address#update!
+    * CreditCard.grant
+    * CreditCard#credit and CreditCard#credit!
+    * CreditCard#delete
+    * CreditCard#sale and CreditCard#sale!
+    * CreditCard#update and CreditCard#update!
+    * CreditCardGateway#grant
+    * Customer#default_credit_card
+    * Customer#sale and Customer#sale!
+    * Customer#update and Customer#update!
+    * Dispute#forwarded_comments
+    * Subscription#next_bill_amount
+    * Transaction#refund
+    * Transaction#refund_id
+    * Transaction#submit_for_settlement and Transaction#submit_for_settlement!
+    * Transaction#void and Transaction#void!
+  * Remove unused WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
   * Rename all Android Pay classes and methods to Google Pay 
 
 ## 2.103.0

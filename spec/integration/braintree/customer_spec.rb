@@ -698,64 +698,8 @@ describe Braintree::Customer do
           :expiration_date => "05/2010"
         }
       )
-      transaction = customer.sale!(:amount => "100.00")
+      transaction = Braintree::Customer.sale!(customer.id, :amount => "100.00")
       collection = Braintree::Customer.transactions(customer.id)
-      collection.first.should == transaction
-    end
-  end
-
-
-  describe "sale" do
-    it "creates a sale transaction using the customer, returning a result object" do
-      customer = Braintree::Customer.create!(
-        :credit_card => {
-          :number => Braintree::Test::CreditCardNumbers::Visa,
-          :expiration_date => "05/2010"
-        }
-      )
-      result = customer.sale(
-        :amount => "100.00"
-      )
-      result.success?.should == true
-      result.transaction.amount.should == BigDecimal("100.00")
-      result.transaction.type.should == "sale"
-      result.transaction.customer_details.id.should == customer.id
-      result.transaction.credit_card_details.token.should == customer.credit_cards[0].token
-      result.transaction.credit_card_details.bin.should == Braintree::Test::CreditCardNumbers::Visa[0, 6]
-      result.transaction.credit_card_details.last_4.should == Braintree::Test::CreditCardNumbers::Visa[-4..-1]
-      result.transaction.credit_card_details.expiration_date.should == "05/2010"
-    end
-  end
-
-  describe "sale!" do
-    it "returns the created sale tranaction if valid" do
-      customer = Braintree::Customer.create!(
-        :credit_card => {
-          :number => Braintree::Test::CreditCardNumbers::Visa,
-          :expiration_date => "05/2010"
-        }
-      )
-      transaction = customer.sale!(:amount => "100.00")
-      transaction.amount.should == BigDecimal("100.00")
-      transaction.type.should == "sale"
-      transaction.customer_details.id.should == customer.id
-      transaction.credit_card_details.token.should == customer.credit_cards[0].token
-      transaction.credit_card_details.bin.should == Braintree::Test::CreditCardNumbers::Visa[0, 6]
-      transaction.credit_card_details.last_4.should == Braintree::Test::CreditCardNumbers::Visa[-4..-1]
-      transaction.credit_card_details.expiration_date.should == "05/2010"
-    end
-  end
-
-  describe "transactions" do
-    it "finds transactions for the customer" do
-      customer = Braintree::Customer.create!(
-        :credit_card => {
-          :number => Braintree::Test::CreditCardNumbers::Visa,
-          :expiration_date => "05/2010"
-        }
-      )
-      transaction = customer.sale!(:amount => "100.00")
-      collection = customer.transactions
       collection.first.should == transaction
     end
   end
@@ -1469,61 +1413,7 @@ describe Braintree::Customer do
     end
   end
 
-  describe "update" do
-    it "updates the customer" do
-      customer = Braintree::Customer.create!(
-        :first_name => "Joe",
-        :last_name => "Cool"
-      )
-      update_result = customer.update(
-        :first_name => "Mr. Joe",
-        :last_name => "Super Cool"
-      )
-      update_result.success?.should == true
-      update_result.customer.should == customer
-      updated_customer = update_result.customer
-      updated_customer.first_name.should == "Mr. Joe"
-      updated_customer.last_name.should == "Super Cool"
-    end
-
-    it "returns an error response if invalid" do
-      customer = Braintree::Customer.create!(
-        :email => "valid@email.com"
-      )
-      result = customer.update(
-        :email => "@invalid.com"
-      )
-      result.success?.should == false
-      result.errors.for(:customer).on(:email)[0].message.should == "Email is an invalid format."
-    end
-  end
-
-  describe "update!" do
-    it "returns the customer and updates the customer if successful" do
-      customer = Braintree::Customer.create!(
-        :first_name => "Joe",
-        :last_name => "Cool"
-      )
-      customer.update!(
-        :first_name => "Mr. Joe",
-        :last_name => "Super Cool"
-      ).should == customer
-      customer.first_name.should == "Mr. Joe"
-      customer.last_name.should == "Super Cool"
-      customer.updated_at.between?(Time.now - 60, Time.now).should == true
-    end
-
-    it "raises an error if unsuccessful" do
-      customer = Braintree::Customer.create!(
-        :email => "valid@email.com"
-      )
-      expect do
-        customer.update!(:email => "@invalid.com")
-      end.to raise_error(Braintree::ValidationsFailed)
-    end
-  end
-
-  describe "default_credit_card" do
+  describe "default_payment_method" do
     it "should return the default credit card for a given customer" do
       customer = Braintree::Customer.create!(
         :credit_card => {
@@ -1535,7 +1425,7 @@ describe Braintree::Customer do
         }
       )
 
-      default_credit_card = Braintree::CreditCard.create!(
+      default_payment_method = Braintree::CreditCard.create!(
         :customer_id => customer.id,
         :number => Braintree::Test::CreditCardNumbers::MasterCard,
         :expiration_date => "11/2015",
@@ -1546,7 +1436,7 @@ describe Braintree::Customer do
 
       customer = Braintree::Customer.find(customer.id)
 
-      customer.default_credit_card.should == default_credit_card
+      customer.default_payment_method.should == default_payment_method
     end
   end
 

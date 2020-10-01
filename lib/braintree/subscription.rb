@@ -103,11 +103,6 @@ module Braintree
       @status_history = attributes[:status_history] ? attributes[:status_history].map { |s| StatusDetails.new(s) } : []
     end
 
-    def next_bill_amount
-      warn "[DEPRECATED] Subscription.next_bill_amount is deprecated. Please use Subscription.next_billing_period_amount"
-      @next_bill_amount
-    end
-
     def never_expires?
       @never_expires
     end

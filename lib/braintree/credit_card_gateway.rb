@@ -60,11 +60,6 @@ module Braintree
       raise NotFoundError, "nonce #{nonce.inspect} locked, consumed, or not found"
     end
 
-    # Deprecated in favor of PaymentMethodGateway.grant
-    def grant(token, allow_vaulting)
-      @gateway.payment_method.grant(token, allow_vaulting)
-    end
-
     def update(token, attributes)
       Util.verify_keys(CreditCardGateway._update_signature, attributes)
       _do_update(:put, "/payment_methods/credit_card/#{token}", :credit_card => attributes)

@@ -238,7 +238,7 @@ describe Braintree::CreditCard do
   describe "self.update" do
     it "raises an exception if attributes contain an invalid key" do
       expect do
-        Braintree::CreditCard._new(Braintree::Configuration.gateway, {}).update(:invalid_key => 'val')
+        Braintree::CreditCard.update(:gateway, :invalid_key => 'val')
       end.to raise_error(ArgumentError, "invalid keys: invalid_key")
     end
   end

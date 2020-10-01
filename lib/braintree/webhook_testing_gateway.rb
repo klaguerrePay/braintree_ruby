@@ -78,9 +78,6 @@ module Braintree
         _auth_status_transitioned_sample_xml(id)
       when Braintree::WebhookNotification::Kind::ConnectedMerchantPayPalStatusChanged
         _auth_paypal_status_changed_sample_xml(id)
-      # NEXT_MAJOR_VERSION remove GrantedPaymentInstrumentUpdate
-      when Braintree::WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
-        _granted_payment_instrument_update_sample_xml(id)
       when Braintree::WebhookNotification::Kind::GrantorUpdatedGrantedPaymentMethod
         _granted_payment_instrument_update_sample_xml(id)
       when Braintree::WebhookNotification::Kind::RecipientUpdatedGrantedPaymentMethod

@@ -98,11 +98,6 @@ module Braintree
       Configuration.gateway.credit_card.from_nonce(*args)
     end
 
-    # Deprecated. Use Braintree::PaymentMethod.grant
-    def self.grant(*args)
-      Configuration.gateway.credit_card.grant(*args)
-    end
-
     def self.sale(token, transaction_attributes)
       Configuration.gateway.transaction.sale(transaction_attributes.merge(:payment_method_token => token))
     end
@@ -132,24 +127,6 @@ module Braintree
       CreditCardVerification._new(verification) if verification
     end
 
-    # Deprecated. Use Braintree::CreditCard.credit
-    def credit(transaction_attributes)
-      warn "[DEPRECATED] credit as an instance method is deprecated. Please use CreditCard.credit"
-      @gateway.transaction.credit(transaction_attributes.merge(:payment_method_token => token))
-    end
-
-    # Deprecated. Use Braintree::CreditCard.credit!
-    def credit!(transaction_attributes)
-      warn "[DEPRECATED] credit! as an instance method is deprecated. Please use CreditCard.credit!"
-      return_object_or_raise(:transaction) { credit(transaction_attributes) }
-    end
-
-    # Deprecated. Use Braintree::CreditCard.delete
-    def delete
-      warn "[DEPRECATED] delete as an instance method is deprecated. Please use CreditCard.delete"
-      @gateway.credit_card.delete(token)
-    end
-
     # Returns true if this credit card is the customer's default payment method.
     def default?
       @default
@@ -176,34 +153,6 @@ module Braintree
 
     def masked_number
       "#{bin}******#{last_4}"
-    end
-
-    # Deprecated. Use Braintree::CreditCard.sale
-    def sale(transaction_attributes)
-      warn "[DEPRECATED] sale as an instance method is deprecated. Please use CreditCard.sale"
-      @gateway.transaction.sale(transaction_attributes.merge(:payment_method_token => token))
-    end
-
-    # Deprecated. Use Braintree::CreditCard.sale!
-    def sale!(transaction_attributes)
-      warn "[DEPRECATED] sale! as an instance method is deprecated. Please use CreditCard.sale!"
-      return_object_or_raise(:transaction) { sale(transaction_attributes) }
-    end
-
-    # Deprecated. Use Braintree::CreditCard.update
-    def update(attributes)
-      warn "[DEPRECATED] update as an instance method is deprecated. Please use CreditCard.update"
-      result = @gateway.credit_card.update(token, attributes)
-      if result.success?
-        copy_instance_variables_from_object result.credit_card
-      end
-      result
-    end
-
-    # Deprecated. Use Braintree::CreditCard.update!
-    def update!(attributes)
-      warn "[DEPRECATED] update! as an instance method is deprecated. Please use CreditCard.update!"
-      return_object_or_raise(:credit_card) { update(attributes) }
     end
 
     def nonce

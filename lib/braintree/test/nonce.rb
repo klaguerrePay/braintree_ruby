@@ -68,15 +68,6 @@ module Braintree
       SamsungPayDiscover = "tokensam_fake_discover"
       SamsungPayMasterCard = "tokensam_fake_mastercard"
       SamsungPayVisa = "tokensam_fake_visa"
-
-      def self.const_missing(const_name)
-        if const_name == :AndroidPay
-          warn "[DEPRECATED] Braintree::Test::Nonce::AndroidPay is deprecated. Use a card-specific nonce, e.g. Braintree::Test::Nonce::AndroidPayMasterCard"
-          "fake-android-pay-nonce"
-        else
-          super
-        end
-      end
     end
   end
 end
