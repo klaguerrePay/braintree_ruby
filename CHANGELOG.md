@@ -6,6 +6,10 @@
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
 * Breaking changes:
   * Remove support for Transparent Redirect, Coinbase, iDEAL, Amex Express Checkout and Masterpass
+  * Rename `DownForMaintenanceError` to `ServiceUnavailableError`
+  * Update `Transaction.search` to raise an `UnexpectedError` if the search yields unexpected results
+  * Add `GatewayTimeoutError` and `RequestTimeoutError`
+  * Remove `ForgedQueryString` error
   * Remove error codes:
     * EuropeBankAccount.IBANIsRequired
     * EuropeBankAccount.BICIsRequired

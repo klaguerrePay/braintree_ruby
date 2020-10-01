@@ -113,7 +113,7 @@ module Braintree
       if response.has_key?(:search_results)
         ResourceCollection.new(response) { |ids| _fetch_transactions(search, ids) }
       else
-        raise DownForMaintenanceError
+        raise UnexpectedError, "expected :search_results"
       end
     end
 

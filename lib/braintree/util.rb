@@ -53,6 +53,8 @@ module Braintree
         raise AuthorizationError, message
       when 404
         raise NotFoundError
+      when 408
+        raise RequestTimeoutError
       when 426
         raise UpgradeRequiredError, "Please upgrade your client library."
       when 429
@@ -60,7 +62,9 @@ module Braintree
       when 500
         raise ServerError
       when 503
-        raise DownForMaintenanceError
+        raise ServiceUnavailableError
+      when 504
+        raise GatewayTimeoutError
       else
         raise UnexpectedError, "Unexpected HTTP_RESPONSE #{status_code.to_i}"
       end
@@ -87,7 +91,7 @@ module Braintree
           when "INTERNAL"
             raise ServerError
           when "SERVICE_AVAILABILITY"
-            raise DownForMaintenanceError
+            raise ServiceUnavailableError
           else
             raise UnexpectedError, "Unexpected Response: #{error[:message]}"
           end

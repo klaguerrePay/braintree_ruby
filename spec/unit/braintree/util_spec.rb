@@ -275,7 +275,7 @@ describe Braintree::Util do
       "UNSUPPORTED_CLIENT" => Braintree::UpgradeRequiredError,
       "RESOURCE_LIMIT" => Braintree::TooManyRequestsError,
       "INTERNAL" => Braintree::ServerError,
-      "SERVICE_AVAILABILITY" => Braintree::DownForMaintenanceError,
+      "SERVICE_AVAILABILITY" => Braintree::ServiceUnavailableError,
     }
 
     errors.each do |graphQLError, exception|
@@ -337,6 +337,18 @@ describe Braintree::Util do
       end.to raise_error(Braintree::AuthorizationError)
     end
 
+    it "raises a NotFoundError if resource is not found" do
+      expect do
+        Braintree::Util.raise_exception_for_status_code(404)
+      end.to raise_error(Braintree::NotFoundError)
+    end
+
+    it "raises a RequestTimeoutError if the request times out" do
+      expect do
+        Braintree::Util.raise_exception_for_status_code(408)
+      end.to raise_error(Braintree::RequestTimeoutError)
+    end
+
     it "raises an UpgradeRequired if the client library is EOL'd" do
       expect do
         Braintree::Util.raise_exception_for_status_code(426)
@@ -355,10 +367,16 @@ describe Braintree::Util do
       end.to raise_error(Braintree::ServerError)
     end
 
-    it "raises a DownForMaintenanceError if the server is down for maintenance" do
+    it "raises a ServiceUnavailableError if the server is unavailable" do
       expect do
         Braintree::Util.raise_exception_for_status_code(503)
-      end.to raise_error(Braintree::DownForMaintenanceError)
+      end.to raise_error(Braintree::ServiceUnavailableError)
+    end
+
+    it "raises a GatewayTimeoutError if the gateway times out" do
+      expect do
+        Braintree::Util.raise_exception_for_status_code(504)
+      end.to raise_error(Braintree::GatewayTimeoutError)
     end
 
     it "raises an UnexpectedError if some other code is returned" do

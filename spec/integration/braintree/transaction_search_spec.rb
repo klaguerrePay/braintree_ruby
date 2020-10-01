@@ -1316,12 +1316,12 @@ describe Braintree::Transaction, "search" do
     end
 
     context "when the search times out" do
-      it "raises a Down for Maintenance Error" do
+      it "raises a UnexpectedError" do
         expect {
           collection = Braintree::Transaction.search do |search|
             search.amount.is -10
           end
-        }.to raise_error(Braintree::DownForMaintenanceError)
+        }.to raise_error(Braintree::UnexpectedError)
       end
     end
   end
