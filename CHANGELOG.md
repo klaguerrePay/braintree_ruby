@@ -4,6 +4,7 @@
 
 * Deprecate Masterpass and American Express Checkout payment methods.
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
+* Add `implicitly_vaulted_payment_method_token` and `implicitly_vaulted_payment_method_global_id` to `paypal_details`
 
 ## 2.103.0
 
