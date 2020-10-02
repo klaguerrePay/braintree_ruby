@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 2.104.0
 
 * Deprecate Masterpass and American Express Checkout payment methods.
 * Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
