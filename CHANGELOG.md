@@ -2,8 +2,6 @@
 
 ## unreleased
 
-* Deprecate Masterpass and American Express Checkout payment methods.
-* Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
 * Breaking changes:
   * Remove support for Transparent Redirect, Coinbase, iDEAL, Amex Express Checkout and Masterpass
   * Rename `DownForMaintenanceError` to `ServiceUnavailableError`
@@ -55,6 +53,12 @@
     * Transaction#void and Transaction#void!
   * Remove unused WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
   * Rename all Android Pay classes and methods to Google Pay 
+
+## 2.104.0
+
+* Deprecate Masterpass and American Express Checkout payment methods.
+* Add `installment_count` accessor to `dispute.transaction` on dispute webhooks
+* Add `implicitly_vaulted_payment_method_token` and `implicitly_vaulted_payment_method_global_id` to `paypal_details`
 
 ## 2.103.0
 
