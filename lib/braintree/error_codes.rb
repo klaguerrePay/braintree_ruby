@@ -313,6 +313,8 @@ module Braintree
       FailedAuthAdjustmentAllowRetry = "95603"
       FailedAuthAdjustmentHardDecline = "95602"
       FinalAuthSubmitForSettlementForDifferentAmount = "95601"
+      RefundAuthHardDeclined = "915200"
+      RefundAuthSoftDeclined = "915201"
       HasAlreadyBeenRefunded = "91512"
       LineItemsExpected = "915158"
       MerchantAccountDoesNotMatch3DSecureMerchantAccount = "91584"

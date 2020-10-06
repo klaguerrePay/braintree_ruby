@@ -2854,7 +2854,13 @@ describe Braintree::Transaction do
           response = config.http.put("#{config.base_merchant_path}/transactions/#{transaction.id}/settle")
           result = Braintree::Transaction.refund(transaction.id, :amount => "2046.00")
           result.success?.should == false
-          result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::RefundAuthSoftDeclined
+          result.transaction.id.should =~ /^\w{6,}$/
+          result.transaction.type.should == "credit"
+          result.transaction.status.should == Braintree::Transaction::Status::ProcessorDeclined
+          result.transaction.processor_response_code.should == "2046"
+          result.transaction.processor_response_text.should == "Declined"
+          result.transaction.processor_response_type.should == Braintree::ProcessorResponseTypes::SoftDeclined
+          result.transaction.additional_processor_response.should == "2046 : Declined"
         end
 
         it "handles hard declined refund authorizations" do
@@ -2869,7 +2875,13 @@ describe Braintree::Transaction do
           response = config.http.put("#{config.base_merchant_path}/transactions/#{transaction.id}/settle")
           result = Braintree::Transaction.refund(transaction.id, :amount => "2009.00")
           result.success?.should == false
-          result.errors.for(:transaction).on(:base)[0].code.should == Braintree::ErrorCodes::Transaction::RefundAuthHardDeclined
+          result.transaction.id.should =~ /^\w{6,}$/
+          result.transaction.type.should == "credit"
+          result.transaction.status.should == Braintree::Transaction::Status::ProcessorDeclined
+          result.transaction.processor_response_code.should == "2009"
+          result.transaction.processor_response_text.should == "No Such Issuer"
+          result.transaction.processor_response_type.should == Braintree::ProcessorResponseTypes::HardDeclined
+          result.transaction.additional_processor_response.should == "2009 : No Such Issuer"
         end
       end
 
