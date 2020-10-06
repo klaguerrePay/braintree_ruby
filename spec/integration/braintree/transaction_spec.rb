@@ -509,7 +509,7 @@ describe Braintree::Transaction do
       result.transaction.credit_card_details.customer_location.should == "US"
     end
 
-    it "accepts additional security parameters: device_session_id and fraud_merchant_id" do
+    it "accepts additional security parameters: device_data" do
       result = Braintree::Transaction.create(
         :type => "sale",
         :amount => Braintree::Test::TransactionAmounts::Authorize,
@@ -517,8 +517,7 @@ describe Braintree::Transaction do
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/2009"
         },
-        :device_session_id => "abc123",
-        :fraud_merchant_id => "7"
+        :device_data => "device_data",
       )
 
       result.success?.should == true
@@ -1369,22 +1368,6 @@ describe Braintree::Transaction do
           result.success?.should == false
           result.errors.for(:transaction).on(:purchase_order_number)[0].code.should == Braintree::ErrorCodes::Transaction::PurchaseOrderNumberIsInvalid
         end
-      end
-    end
-
-    context "recurring" do
-      it "marks a transaction as recurring" do
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "12/12",
-          },
-          :recurring => true
-        )
-        result.success?.should == true
-        result.transaction.recurring.should == true
       end
     end
 

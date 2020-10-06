@@ -85,14 +85,13 @@ describe Braintree::Customer do
       result.customer.last_name.should == "Brown"
     end
 
-    it "supports creation with a device session ID and (optional) fraud_merchant_id" do
+    it "supports creation with device_data" do
       result = Braintree::Customer.create(
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::MasterCard,
           :expiration_date => "05/2010",
           :cvv => "100",
-          :device_session_id => "abc123",
-          :fraud_merchant_id => "7"
+          :device_data => "device_data",
         }
       )
 

@@ -52,7 +52,11 @@
     * Transaction#submit_for_settlement and Transaction#submit_for_settlement!
     * Transaction#void and Transaction#void!
   * Remove unused WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
-  * Rename all Android Pay classes and methods to Google Pay 
+  * Rename all Android Pay classes and methods to Google Pay
+  * Remove deprecated parameters:
+    - `device_session_id` from CreditCard#create, Transaction#sale, PaymentMethod#create, and Customer#create
+    - `fraud_merchant_id` from CreditCard#create, Transaction#sale, PaymentMethod#create, and Customer#create
+    - `recurring` from Transaction#sale
 
 ## 2.104.0
 

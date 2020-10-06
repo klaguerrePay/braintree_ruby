@@ -173,13 +173,13 @@ module Braintree
 
     def self._create_signature # :nodoc:
       [
-        :amount, :customer_id, :merchant_account_id, :order_id, :channel, :payment_method_token,
-        :purchase_order_number, :recurring, :transaction_source, :shipping_address_id, :type, :tax_amount, :tax_exempt,
-        :venmo_sdk_payment_method_code, :device_session_id, :service_fee_amount, :device_data, :fraud_merchant_id,
-        :shipping_amount, :discount_amount, :ships_from_postal_code,
-        :billing_address_id, :payment_method_nonce, :three_d_secure_token, :three_d_secure_authentication_id,
-        :shared_payment_method_token, :shared_billing_address_id, :shared_customer_id, :shared_shipping_address_id, :shared_payment_method_nonce,
-        :product_sku,
+        :amount, :billing_address_id, :channel, :customer_id, :device_data, :discount_amount,
+        :merchant_account_id, :order_id, :payment_method_nonce, :payment_method_token,
+        :product_sku, :purchase_order_number, :service_fee_amount, :shared_billing_address_id,
+        :shared_customer_id, :shared_payment_method_nonce, :shared_payment_method_token,
+        :shared_shipping_address_id, :shipping_address_id, :shipping_amount,
+        :ships_from_postal_code, :tax_amount, :tax_exempt, :three_d_secure_authentication_id,
+        :three_d_secure_token, :transaction_source, :type, :venmo_sdk_payment_method_code,
         {:line_items => [:quantity, :name, :description, :kind, :unit_amount, :unit_tax_amount, :total_amount, :discount_amount, :tax_amount, :unit_of_measure, :product_code, :commodity_code, :url]},
         {:risk_data => [:customer_browser, :customer_device_id, :customer_ip, :customer_location_zip, :customer_tenure]},
         {:credit_card => [:token, :cardholder_name, :cvv, :expiration_date, :expiration_month, :expiration_year, :number]},
