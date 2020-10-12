@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 2.104.1
 
 * Update `LocalPaymentCompleted` webhook to handle no transaction being created for unbranded local payment methods
 
