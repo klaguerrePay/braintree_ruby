@@ -2,6 +2,7 @@
 
 ## unreleased
 
+* Memory improvements related to XML parsing (addresses #159)
 * Breaking changes:
   * Remove support for Transparent Redirect, Coinbase, iDEAL, Amex Express Checkout and Masterpass
   * Rename `DownForMaintenanceError` to `ServiceUnavailableError`

@@ -188,15 +188,10 @@ unless defined?(SPEC_HELPER_LOADED)
       end
 
       def matches?(xml_string)
-        @libxml_parse = Braintree::Xml::Parser.hash_from_xml(xml_string, Braintree::Xml::Libxml)
-        @rexml_parse = Braintree::Xml::Parser.hash_from_xml(xml_string, Braintree::Xml::Rexml)
+        @libxml_parse = Braintree::Xml::Parser.hash_from_xml(xml_string)
         if @libxml_parse != @expected_hash
           @results = @libxml_parse
           @failed_parser = "libxml"
-          false
-        elsif @rexml_parse != @expected_hash
-          @results = @rexml_parse
-          @failed_parser = "rexml"
           false
         else
           true
