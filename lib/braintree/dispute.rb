@@ -118,7 +118,7 @@ module Braintree
       @transaction = Transaction.new(transaction)
 
       @status_history = status_history.map do |event|
-        Braintree::Dispute::HistoryEvent.new(event)
+        Braintree::Dispute::StatusHistory.new(event)
       end unless status_history.nil?
     end
   end

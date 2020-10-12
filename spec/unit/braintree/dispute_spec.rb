@@ -320,7 +320,7 @@ describe Braintree::Dispute do
       dispute.transaction.payment_instrument_subtype.should == "Visa"
     end
 
-    it "converts status_history hash into an array of Dispute::HistoryEvent objects" do
+    it "converts status_history hash into an array of Dispute::StatusHistory objects" do
       dispute = Braintree::Dispute._new(attributes)
 
       dispute.status_history.length.should == 1

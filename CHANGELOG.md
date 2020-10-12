@@ -53,6 +53,18 @@
     * Transaction#void and Transaction#void!
   * Remove unused WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
   * Rename all Android Pay classes and methods to Google Pay 
+  * Rename Dispute::HistoryEvent to Dispute::StatusHistory
+  * Update the following methods to return `Date`s instead of `Strings` (fixes #161):
+    * DisbursementDetails#disbursement_date
+    * StatusHistory#disbursement_date
+    * StatusHistory#effective_date
+    * Subscription#billing_period_end_date
+    * Subscription#billing_period_start_date
+    * Subscription#first_billing_date
+    * Subscription#next_billing_date
+    * Subscription#paid_through_date
+    * SubscriptionDetails#billing_period_end_date
+    * SubscriptionDetails#billing_period_start_date
   * Bump API version to support declined refund objects
   * Remove deprecated parameters:
     - `device_session_id` from CreditCard#create, Transaction#sale, PaymentMethod#create, and Customer#create

@@ -6052,7 +6052,8 @@ describe Braintree::Transaction do
         found_transaction.disbursed?.should == true
         disbursement = found_transaction.disbursement_details
 
-        disbursement.disbursement_date.should == "2013-04-10"
+        expect(disbursement.disbursement_date).to be_a Date
+        expect(disbursement.disbursement_date).to eq Date.parse("2013-04-10")
         disbursement.settlement_amount.should == "100.00"
         disbursement.settlement_currency_iso_code.should == "USD"
         disbursement.settlement_currency_exchange_rate.should == "1"

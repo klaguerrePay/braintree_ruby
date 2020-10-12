@@ -91,7 +91,7 @@ describe Braintree::Transaction do
         }
       )
       disbursement = transaction.disbursement_details
-      disbursement.disbursement_date.should == "2013-04-03"
+      disbursement.disbursement_date.should == Date.parse("2013-04-03")
       disbursement.settlement_amount.should == "120.00"
       disbursement.settlement_currency_iso_code.should == "USD"
       disbursement.settlement_currency_exchange_rate.should == "1"

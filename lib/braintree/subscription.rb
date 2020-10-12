@@ -101,6 +101,11 @@ module Braintree
       add_ons.map! { |attrs| AddOn._new(attrs) }
       discounts.map! { |attrs| Discount._new(attrs) }
       @status_history = attributes[:status_history] ? attributes[:status_history].map { |s| StatusDetails.new(s) } : []
+      @first_billing_date = Date.parse(first_billing_date) unless first_billing_date.nil?
+      @next_billing_date = Date.parse(next_billing_date) unless next_billing_date.nil?
+      @billing_period_start_date = Date.parse(billing_period_start_date) unless billing_period_start_date.nil?
+      @billing_period_end_date = Date.parse(billing_period_end_date) unless billing_period_end_date.nil?
+      @paid_through_date = Date.parse(paid_through_date) unless paid_through_date.nil?
     end
 
     def never_expires?
