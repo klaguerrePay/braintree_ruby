@@ -109,7 +109,7 @@ describe Braintree::CreditCard do
         :options => {:verify_card => true}
       )
       result.success?.should == false
-      result.credit_card_verification.status.should == Braintree::Transaction::Status::ProcessorDeclined
+      result.credit_card_verification.status.should == Braintree::CreditCardVerification::Status::ProcessorDeclined
       result.credit_card_verification.processor_response_code.should == "2000"
       result.credit_card_verification.processor_response_text.should == "Do Not Honor"
       result.credit_card_verification.cvv_response_code.should == "I"
@@ -127,7 +127,7 @@ describe Braintree::CreditCard do
         :options => {:verify_card => true, :verification_amount => "100.00"}
       )
       result.success?.should == false
-      result.credit_card_verification.status.should == Braintree::Transaction::Status::ProcessorDeclined
+      result.credit_card_verification.status.should == Braintree::CreditCardVerification::Status::ProcessorDeclined
       result.credit_card_verification.processor_response_code.should == "2000"
       result.credit_card_verification.processor_response_text.should == "Do Not Honor"
       result.credit_card_verification.cvv_response_code.should == "I"
@@ -174,7 +174,7 @@ describe Braintree::CreditCard do
           :options => {:verify_card => true}
         )
         result.success?.should == false
-        result.credit_card_verification.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::CVV
+        result.credit_card_verification.gateway_rejection_reason.should == Braintree::CreditCardVerification::GatewayRejectionReason::CVV
       ensure
         Braintree::Configuration.merchant_id = old_merchant
         Braintree::Configuration.public_key = old_public_key
@@ -191,7 +191,7 @@ describe Braintree::CreditCard do
         :options => {:verify_card => true, :verification_amount => "1.01"}
       )
       result.success?.should == false
-      result.credit_card_verification.status.should == Braintree::Transaction::Status::ProcessorDeclined
+      result.credit_card_verification.status.should == Braintree::CreditCardVerification::Status::ProcessorDeclined
       result.credit_card_verification.processor_response_code.should == "2000"
       result.credit_card_verification.processor_response_text.should == "Do Not Honor"
       result.credit_card_verification.cvv_response_code.should == "I"
@@ -963,7 +963,7 @@ describe Braintree::CreditCard do
         :options => {:verify_card => true}
       )
       update_result.success?.should == false
-      update_result.credit_card_verification.status.should == Braintree::Transaction::Status::ProcessorDeclined
+      update_result.credit_card_verification.status.should == Braintree::CreditCardVerification::Status::ProcessorDeclined
       update_result.credit_card_verification.gateway_rejection_reason.should be_nil
     end
 
