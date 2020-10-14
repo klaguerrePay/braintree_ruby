@@ -72,6 +72,9 @@
     - `device_session_id` from CreditCard#create, Transaction#sale, PaymentMethod#create, and Customer#create
     - `fraud_merchant_id` from CreditCard#create, Transaction#sale, PaymentMethod#create, and Customer#create
     - `recurring` from Transaction#sale
+  * Update builder dependency to >= 3.2.4
+  * Update libxml-ruby dependency to >= 3.2.0
+  * Update gemspec to require ruby >= 2.5.0
 
 ## 2.104.1
 

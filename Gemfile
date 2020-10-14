@@ -1,12 +1,10 @@
 source "https://rubygems.org"
 
-gem 'builder', '2.1.2'
-gem 'libxml-ruby', '2.8.0'
-gem 'rake_commit', '1.0.1'
-gem 'rake', '10.3.2'
-gem 'rspec', '3.1.0'
-gem 'rspec_junit_formatter'
+gem 'builder', '3.2.4'
+gem 'libxml-ruby', '3.2.0'
 
 group :development do
-  gem 'pry', '0.12.2'
+  gem 'pry', '0.13.1'
+  gem 'rake', '13.0.1'
+  gem 'rspec', '3.9.0'
 end

@@ -4,7 +4,6 @@ unless defined?(SPEC_HELPER_LOADED)
   require "rubygems"
   require "bundler/setup"
   require "rspec"
-  require "libxml"
   require "pry"
 
   braintree_lib = "#{project_root}/lib"
@@ -26,10 +25,6 @@ unless defined?(SPEC_HELPER_LOADED)
       return if message =~ /^\[DEPRECATED\]/
       original_warn(message)
     end
-  end
-
-  def now_in_eastern
-    (Time.now.utc - 5*60*60).strftime("%Y-%m-%d")
   end
 
   module SpecHelper

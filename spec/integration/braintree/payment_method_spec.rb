@@ -1696,7 +1696,7 @@ describe Braintree::PaymentMethod do
       it "raises an error if the token isn't found" do
         expect do
           @granting_gateway.payment_method.grant("not_a_real_token", false)
-        end.to raise_error
+        end.to raise_error(Braintree::NotFoundError)
       end
 
       it "returns a valid nonce with no options set" do
@@ -1711,7 +1711,7 @@ describe Braintree::PaymentMethod do
       it "raises an error if the token isn't found" do
         expect do
           @granting_gateway.payment_method.revoke("not_a_real_token")
-        end.to raise_error
+        end.to raise_error(Braintree::NotFoundError)
       end
 
       it "renders a granted nonce useless" do
