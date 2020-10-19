@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 3.0.0
 
 * Add `CreditCardVerification::GatewayRejectionReason`
 * Memory improvements related to XML parsing (addresses #159)
