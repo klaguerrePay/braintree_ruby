@@ -1,5 +1,8 @@
 # Changelog
 
+## unreleased
+* Add `billing_agreement_id` to `PayPalDetails`
+
 ## 3.0.1
 
 * Add `CreditCardVerification::GatewayRejectionReason`
