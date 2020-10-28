@@ -1,8 +1,8 @@
 # Changelog
 
 ## unreleased
-
 * Add `acquirer_reference_number` to `Transaction`
+* Add `billing_agreement_id` to `PayPalDetails`
 
 ## 3.0.1
 

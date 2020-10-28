@@ -2664,6 +2664,22 @@ describe Braintree::Transaction do
         end
       end
 
+      context "billing agreement" do
+        it "can create a paypal billing agreement" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :payment_method_nonce => Braintree::Test::Nonce::PayPalBillingAgreement,
+            :options => {:store_in_vault => true}
+          )
+
+          result.should be_success
+          result.transaction.paypal_details.should_not be_nil
+          result.transaction.paypal_details.debug_id.should_not be_nil
+          result.transaction.paypal_details.billing_agreement_id.should_not be_nil
+        end
+      end
+
       context "local payments" do
         it "can create a local payment transaction with a nonce" do
           result = Braintree::Transaction.create(
