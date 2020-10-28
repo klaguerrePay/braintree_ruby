@@ -1,5 +1,9 @@
 # Changelog
 
+## unreleased
+
+* Add `acquirer_reference_number` to `Transaction`
+
 ## 3.0.1
 
 * Add `CreditCardVerification::GatewayRejectionReason`
