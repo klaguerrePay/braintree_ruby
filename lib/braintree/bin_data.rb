@@ -17,10 +17,17 @@ module Braintree
     end
 
     def inspect
-      formatted_attrs = self.class._attributes.map do |attr|
+      formatted_attributes = self.class._attributes.map do |attr|
         "#{attr}: #{send(attr).inspect}"
       end
-      "#<BinData #{formatted_attrs.join(", ")}>"
+      "#<#{self.class} #{formatted_attributes.join(", ")}>"
+    end
+
+    def self._attributes # :nodoc:
+      [
+        :commercial, :country_of_issuance, :debit, :durbin_regulated, :healthcare,
+        :issuing_bank, :payroll, :prepaid, :product_id
+      ]
     end
   end
 end
