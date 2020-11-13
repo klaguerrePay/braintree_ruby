@@ -530,7 +530,7 @@
 * Adds authorized_transaction_id, partial_settlement_transaction_ids and facilitator_details attr_readers to Transaction
 * Adds support for Transaction#sale with raw Apple Pay parameters
 * Adds Merchant.provision_raw_apple_pay
-* Relaxes constraints on TrasnactionSearch#source
+* Relaxes constraints on TransactionSearch#source
 * Adds Check WebhookNotifications
 * Adds Transaction.submit_for_partial_settlement
 
