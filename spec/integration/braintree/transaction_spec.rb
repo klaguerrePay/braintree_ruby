@@ -159,7 +159,6 @@ describe Braintree::Transaction do
             }
           )
           result.success?.should == false
-          result.errors.for(:transaction).for(:risk_data).on(:customer_browser).map { |e| e.code }.should include Braintree::ErrorCodes::RiskData::CustomerBrowserIsTooLong
           result.errors.for(:transaction).for(:risk_data).on(:customer_device_id).map { |e| e.code }.should include Braintree::ErrorCodes::RiskData::CustomerDeviceIdIsTooLong
           result.errors.for(:transaction).for(:risk_data).on(:customer_location_zip).map { |e| e.code }.should include Braintree::ErrorCodes::RiskData::CustomerLocationZipInvalidCharacters
           result.errors.for(:transaction).for(:risk_data).on(:customer_tenure).map { |e| e.code }.should include Braintree::ErrorCodes::RiskData::CustomerTenureIsTooLong
