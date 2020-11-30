@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+* Add Installment support to Transaction sale
+  * Add `installment_count` to `Transaction`
+  * Add new `Installment` and `Installment::Adjustment` classes to `Transaction`
+
 ## 3.1.0
 * Add `acquirer_reference_number` to `Transaction`
 * Add `billing_agreement_id` to `PayPalDetails`

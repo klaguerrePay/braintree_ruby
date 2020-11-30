@@ -6788,4 +6788,91 @@ describe Braintree::Transaction do
       transaction.processed_with_network_token?.should == false
     end
   end
+
+  describe "installments" do
+    it "creates a transaction with an installment count" do
+      result = Braintree::Transaction.create(
+        :type => "sale",
+        :merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        },
+        :amount => "100.01",
+        :installments => {
+          :count => 12,
+        },
+      )
+
+      expect(result.success?).to eq(true)
+      expect(result.transaction.installment_count).to eq(12)
+    end
+
+    it "creates a transaction with a installments during capture" do
+      result = Braintree::Transaction.create(
+        :type => "sale",
+        :merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        },
+        :amount => "100.01",
+        :installments => {
+          :count => 12,
+        },
+        :options => {
+          :submit_for_settlement => true,
+        },
+      )
+
+      expect(result.success?).to eq(true)
+      transaction = result.transaction
+      expect(transaction.installment_count).to eq(12)
+
+      installments = transaction.installments
+      expect(installments.map(&:id)).to match_array((1..12).map { |i| "#{transaction.id}_INST_#{i}" })
+      expect(installments.map(&:amount)).to match_array([BigDecimal("8.33")] * 11 + [BigDecimal("8.38")])
+    end
+
+    it "can refund a transaction with installments" do
+      sale_result = Braintree::Transaction.create(
+        :type => "sale",
+        :merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        },
+        :amount => "100.01",
+        :installments => {
+          :count => 12,
+        },
+        :options => {
+          :submit_for_settlement => true,
+        },
+      )
+
+      expect(sale_result.success?).to eq(true)
+      sale_transaction = sale_result.transaction
+
+      refund_result = Braintree::Transaction.refund(sale_transaction.id, "49.99")
+
+      expect(refund_result.success?).to eq(true)
+      refund_transaction = refund_result.transaction
+      installments = refund_transaction.refunded_installments
+
+      (1..11).each do |i|
+        installment = installments.find { |installment| installment.id == "#{sale_transaction.id}_INST_#{i}" }
+
+        expect(installment.amount).to eq(BigDecimal("8.33"))
+        expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("4.16")])
+        expect(installment.adjustments.map(&:kind)).to match_array([Braintree::Transaction::Installment::Adjustment::Kind::Refund])
+      end
+
+      installment = installments.find { |installment| installment.id == "#{sale_transaction.id}_INST_12" }
+
+      expect(installment.amount).to eq(BigDecimal("8.38"))
+      expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("4.23")])
+      expect(installment.adjustments.map(&:kind)).to match_array([Braintree::Transaction::Installment::Adjustment::Kind::Refund])
+    end
+  end
 end
