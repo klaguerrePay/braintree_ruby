@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+* Add SCA exemption to Transaction sale
 * Add Installment support to Transaction sale
   * Add `installment_count` to `Transaction`
   * Add new `Installment` and `Installment::Adjustment` classes to `Transaction`

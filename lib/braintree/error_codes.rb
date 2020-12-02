@@ -354,6 +354,7 @@ module Braintree
       RefundAmountIsTooLarge = "91521"
       RefundAuthHardDeclined = "915200"
       RefundAuthSoftDeclined = "915201"
+      ScaExemptionInvalid = "915213"
       ServiceFeeAmountCannotBeNegative = "91554"
       ServiceFeeAmountFormatIsInvalid = "91555"
       ServiceFeeAmountIsTooLarge = "91556"

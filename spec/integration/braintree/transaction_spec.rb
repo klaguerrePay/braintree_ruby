@@ -181,6 +181,42 @@ describe Braintree::Transaction do
       end
     end
 
+    describe "sca_exemption" do
+      context "with a valid request" do
+        it "succeeds" do
+          requested_exemption = "low_value"
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::VisaCountryOfIssuanceIE,
+              :expiration_date => "05/2009"
+            },
+            :sca_exemption => requested_exemption,
+          )
+          expect(result).to be_success
+          expect(result.transaction.sca_exemption_requested).to eq(requested_exemption)
+        end
+      end
+
+      context "with an invalid request" do
+        it "returns an error" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::Visa,
+              :expiration_date => "05/2009"
+            },
+            :sca_exemption => "invalid_sca_exemption_value",
+          )
+          sca_exemption_invalid = Braintree::ErrorCodes::Transaction::ScaExemptionInvalid
+          expect(result).not_to be_success
+          expect(result.errors.for(:transaction).map(&:code)).to eq([sca_exemption_invalid])
+        end
+      end
+    end
+
     describe "industry data" do
       context "for lodging" do
         it "accepts valid industry data" do
