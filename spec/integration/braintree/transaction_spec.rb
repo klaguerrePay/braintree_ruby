@@ -6900,14 +6900,14 @@ describe Braintree::Transaction do
         installment = installments.find { |installment| installment.id == "#{sale_transaction.id}_INST_#{i}" }
 
         expect(installment.amount).to eq(BigDecimal("8.33"))
-        expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("4.16")])
+        expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("-4.16")])
         expect(installment.adjustments.map(&:kind)).to match_array([Braintree::Transaction::Installment::Adjustment::Kind::Refund])
       end
 
       installment = installments.find { |installment| installment.id == "#{sale_transaction.id}_INST_12" }
 
       expect(installment.amount).to eq(BigDecimal("8.38"))
-      expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("4.23")])
+      expect(installment.adjustments.map(&:amount)).to match_array([BigDecimal("-4.23")])
       expect(installment.adjustments.map(&:kind)).to match_array([Braintree::Transaction::Installment::Adjustment::Kind::Refund])
     end
   end
