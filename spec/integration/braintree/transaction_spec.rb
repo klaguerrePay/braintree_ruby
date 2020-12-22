@@ -4390,25 +4390,7 @@ describe Braintree::Transaction do
           result.success?.should == true
           result.transaction.network_transaction_id.should be_nil
         end
-
-        it "rejects previous_network_transaction_id" do
-          result = Braintree::Transaction.create(
-            :type => "sale",
-            :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::AmExes[0],
-              :expiration_date => "05/2009"
-            },
-            :external_vault => {
-              :status => Braintree::Transaction::ExternalVault::Status::Vaulted,
-              :previous_network_transaction_id => "123456789012345",
-            },
-            :amount => "10.00",
-          )
-          result.success?.should == false
-          result.errors.for(:transaction).for(:external_vault).on(:previous_network_transaction_id)[0].code.should == Braintree::ErrorCodes::Transaction::ExternalVault::CardTypeIsInvalid
-        end
       end
-
     end
 
     context "account_type" do

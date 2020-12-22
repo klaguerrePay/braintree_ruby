@@ -508,6 +508,7 @@ module Braintree
       end
 
       module ExternalVault
+        # NEXT_MAJOR_VERSION remove this validation error as it is no longer returned by the gateway
         CardTypeIsInvalid = "915178"
         PreviousNetworkTransactionIdIsInvalid = "915179"
         StatusIsInvalid = "915175"
