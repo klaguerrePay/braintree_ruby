@@ -4305,7 +4305,7 @@ describe Braintree::Transaction do
         result.errors.for(:transaction).for(:external_vault).on(:status)[0].code.should == Braintree::ErrorCodes::Transaction::ExternalVault::StatusIsInvalid
       end
 
-      context "Visa/Mastercard/Discover" do
+      context "Visa/Mastercard/Discover/AmEx" do
         it "accepts status" do
           result = Braintree::Transaction.create(
             :type => "sale",
@@ -4357,12 +4357,12 @@ describe Braintree::Transaction do
         end
       end
 
-      context "Non-(Visa/Mastercard/Discover) card types" do
+      context "Non-(Visa/Mastercard/Discover/AmEx) card types" do
         it "accepts status" do
           result = Braintree::Transaction.create(
             :type => "sale",
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::AmExes[0],
+              :number => Braintree::Test::CreditCardNumbers::JCBs[0],
               :expiration_date => "05/2009"
             },
             :external_vault => {
@@ -4378,7 +4378,7 @@ describe Braintree::Transaction do
           result = Braintree::Transaction.create(
             :type => "sale",
             :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::AmExes[0],
+              :number => Braintree::Test::CreditCardNumbers::JCBs[0],
               :expiration_date => "05/2009"
             },
             :external_vault => {
