@@ -5,6 +5,7 @@
 * Add Installment support to Transaction sale
   * Add `installment_count` to `Transaction`
   * Add new `Installment` and `Installment::Adjustment` classes to `Transaction`
+* Allows `ResourceCollection#first` to receive one argument and return that argument number of items(Thanks @regismesquita)
 
 ## 3.1.0
 * Add `acquirer_reference_number` to `Transaction`
