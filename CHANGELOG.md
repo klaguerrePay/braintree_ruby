@@ -5,6 +5,11 @@
 * Add Installment support to Transaction sale
   * Add `installment_count` to `Transaction`
   * Add new `Installment` and `Installment::Adjustment` classes to `Transaction`
+* Add `verification_currency_iso_code` parameter to `Customer.create`, `PaymentMethod.create`, `CreditCard.create`, `Customer.update`, `PaymentMethod.update`, and `CreditCard.update`
+* Add `currency_iso_code` parameter to `Transaction.sale`
+* Add validation errors
+   * `CreditCard::CurrencyCodeNotSupportedByMerchantAccount`
+   * `Transaction::CurrencyCodeNotSupportedByMerchantAccount`
 * Allows `ResourceCollection#first` to receive one argument and return that argument number of items(Thanks @regismesquita)
 
 ## 3.1.0

@@ -4976,6 +4976,73 @@ describe Braintree::Transaction do
       result.errors.for(:transaction).on(:amount)[0].code.should == Braintree::ErrorCodes::Transaction::AmountIsRequired
     end
 
+    it "validates currency_iso_code and creates transaction" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :currency_iso_code => "USD",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == true
+      result.transaction.currency_iso_code == "USD"
+    end
+
+    it "validates currency_iso_code and returns error" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :currency_iso_code => "CAD",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == false
+      result.errors.for(:transaction).on(:currency_iso_code)[0].code.should == Braintree::ErrorCodes::Transaction::CurrencyCodeNotSupportedByMerchantAccount
+    end
+
+    it "validates currency_iso_code and creates transaction with specified merchant account" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::NonDefaultMerchantAccountId,
+          :currency_iso_code => "USD",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == true
+      result.transaction.currency_iso_code == "USD"
+      result.transaction.merchant_account_id == SpecHelper::NonDefaultMerchantAccountId
+    end
+
+    it "validates currency_iso_code and returns error with specified merchant account" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::NonDefaultMerchantAccountId,
+          :currency_iso_code => "CAD",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == false
+      result.errors.for(:transaction).on(:currency_iso_code)[0].code.should == Braintree::ErrorCodes::Transaction::CurrencyCodeNotSupportedByMerchantAccount
+    end
+
     it "skips advanced fraud checking if transaction[options][skip_advanced_fraud_checking] is set to true" do
       with_advanced_fraud_integration_merchant do
         result = Braintree::Transaction.sale(
