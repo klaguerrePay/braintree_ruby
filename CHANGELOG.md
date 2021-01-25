@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.2.0
 * Add SCA exemption to Transaction sale
 * Add Installment support to Transaction sale
   * Add `installment_count` to `Transaction`
