@@ -123,8 +123,8 @@ describe Braintree::Transaction do
 
   describe "self.create" do
     describe "risk data" do
-      it "returns decision, device_data_captured and id" do
-        with_advanced_fraud_integration_merchant do
+      it "returns decision, device_data_captured, id, transaction_risk_score, and decision_reasons" do
+        with_fraud_protection_enterprise_merchant do
           result = Braintree::Transaction.create(
             :type => "sale",
             :amount => 1_00,
@@ -134,15 +134,17 @@ describe Braintree::Transaction do
             }
           )
           result.transaction.risk_data.should be_a(Braintree::RiskData)
-          result.transaction.risk_data.should respond_to(:id)
-          result.transaction.risk_data.should respond_to(:decision)
-          result.transaction.risk_data.should respond_to(:device_data_captured)
-          result.transaction.risk_data.should respond_to(:fraud_service_provider)
+          result.transaction.risk_data.id.should_not be_nil
+          result.transaction.risk_data.decision.should_not be_nil
+          result.transaction.risk_data.decision_reasons.should_not be_nil
+          result.transaction.risk_data.device_data_captured.should_not be_nil
+          result.transaction.risk_data.fraud_service_provider.should_not be_nil
+          result.transaction.risk_data.transaction_risk_score.should_not be_nil
         end
       end
 
       it "handles validation errors for invalid risk data attributes" do
-        with_advanced_fraud_integration_merchant do
+        with_advanced_fraud_kount_integration_merchant do
           result = Braintree::Transaction.create(
             :type => "sale",
             :amount => Braintree::Test::TransactionAmounts::Authorize,
@@ -930,7 +932,7 @@ describe Braintree::Transaction do
       end
 
       it "exposes the fraud gateway rejection reason" do
-        with_advanced_fraud_integration_merchant do
+        with_advanced_fraud_kount_integration_merchant do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :credit_card => {
@@ -945,7 +947,7 @@ describe Braintree::Transaction do
       end
 
       it "exposes the risk_threshold gateway rejection reason (via test cc num)" do
-        with_advanced_fraud_integration_merchant do
+        with_advanced_fraud_kount_integration_merchant do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :credit_card => {
@@ -960,7 +962,7 @@ describe Braintree::Transaction do
       end
 
       it "exposes the risk_threshold gateway rejection reason (via test test nonce)" do
-        with_advanced_fraud_integration_merchant do
+        with_advanced_fraud_kount_integration_merchant do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
             :payment_method_nonce => Braintree::Test::Nonce::GatewayRejectedRiskThresholds,
@@ -5044,7 +5046,7 @@ describe Braintree::Transaction do
     end
 
     it "skips advanced fraud checking if transaction[options][skip_advanced_fraud_checking] is set to true" do
-      with_advanced_fraud_integration_merchant do
+      with_advanced_fraud_kount_integration_merchant do
         result = Braintree::Transaction.sale(
           :amount => Braintree::Test::TransactionAmounts::Authorize,
           :credit_card => {
