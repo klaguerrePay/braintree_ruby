@@ -6238,15 +6238,21 @@ describe Braintree::Transaction do
       it "returns all the three_d_secure_info" do
         transaction = Braintree::Transaction.find("threedsecuredtransaction")
 
-        transaction.three_d_secure_info.enrolled.should == "Y"
-        transaction.three_d_secure_info.should be_liability_shifted
-        transaction.three_d_secure_info.should be_liability_shift_possible
-        transaction.three_d_secure_info.status.should == "authenticate_successful"
+        expect(transaction.three_d_secure_info.authentication).to have_key(:trans_status)
+        expect(transaction.three_d_secure_info.authentication).to have_key(:trans_status_reason)
+        expect(transaction.three_d_secure_info.lookup).to have_key(:trans_status)
+        expect(transaction.three_d_secure_info.lookup).to have_key(:trans_status_reason)
         transaction.three_d_secure_info.cavv.should == "somebase64value"
-        transaction.three_d_secure_info.xid.should == "xidvalue"
-        transaction.three_d_secure_info.eci_flag.should == "07"
-        transaction.three_d_secure_info.three_d_secure_version.should == "1.0.2"
         transaction.three_d_secure_info.ds_transaction_id.should == "dstxnid"
+        transaction.three_d_secure_info.eci_flag.should == "07"
+        transaction.three_d_secure_info.enrolled.should == "Y"
+        transaction.three_d_secure_info.pares_status.should == "Y"
+        transaction.three_d_secure_info.should be_liability_shift_possible
+        transaction.three_d_secure_info.should be_liability_shifted
+        transaction.three_d_secure_info.status.should == "authenticate_successful"
+        transaction.three_d_secure_info.three_d_secure_authentication_id.should == "dyj5jtnwy6p2fb37yj"
+        transaction.three_d_secure_info.three_d_secure_version.should == "1.0.2"
+        transaction.three_d_secure_info.xid.should == "xidvalue"
       end
 
       it "is nil if the transaction wasn't 3d secured" do

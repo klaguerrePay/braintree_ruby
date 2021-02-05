@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Add 'acs_transaction_id', 'pares_status', 'three_d_secure_transaction_id', 'lookup', and 'authentication' to 'ThreeDSecureInfo'
+
 ## 3.2.0
 * Add SCA exemption to Transaction sale
 * Add Installment support to Transaction sale
