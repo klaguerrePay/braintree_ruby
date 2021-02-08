@@ -6250,7 +6250,7 @@ describe Braintree::Transaction do
         transaction.three_d_secure_info.should be_liability_shift_possible
         transaction.three_d_secure_info.should be_liability_shifted
         transaction.three_d_secure_info.status.should == "authenticate_successful"
-        transaction.three_d_secure_info.three_d_secure_authentication_id.should == "dyj5jtnwy6p2fb37yj"
+        expect(transaction.three_d_secure_info.three_d_secure_authentication_id).to be
         transaction.three_d_secure_info.three_d_secure_version.should == "1.0.2"
         transaction.three_d_secure_info.xid.should == "xidvalue"
       end
