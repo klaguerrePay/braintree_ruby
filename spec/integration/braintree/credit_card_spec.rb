@@ -153,7 +153,7 @@ describe Braintree::CreditCard do
         verification.risk_data.decision_reasons.should_not be_nil
         verification.risk_data.device_data_captured.should_not be_nil
         verification.risk_data.fraud_service_provider.should_not be_nil
-        expect(verification.risk_data.transaction_risk_score).to be
+        expect(verification.risk_data).to respond_to(:transaction_risk_score)
       end
     end
 
