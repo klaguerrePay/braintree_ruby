@@ -338,7 +338,6 @@ describe Braintree::MerchantAccount do
       id = result.merchant_account.id
       merchant_account = Braintree::MerchantAccount.find(id)
 
-      merchant_account.status.should == Braintree::MerchantAccount::Status::Active
       merchant_account.individual_details.first_name.should == VALID_APPLICATION_PARAMS[:individual][:first_name]
       merchant_account.individual_details.last_name.should == VALID_APPLICATION_PARAMS[:individual][:last_name]
     end
