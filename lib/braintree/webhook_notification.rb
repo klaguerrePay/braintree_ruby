@@ -46,6 +46,7 @@ module Braintree
       PaymentMethodRevokedByCustomer = "payment_method_revoked_by_customer"
 
       LocalPaymentCompleted = "local_payment_completed"
+      LocalPaymentReversed = "local_payment_reversed"
     end
 
     attr_reader :account_updater_daily_report
@@ -57,6 +58,7 @@ module Braintree
     attr_reader :revoked_payment_method_metadata
     attr_reader :kind
     attr_reader :local_payment_completed
+    attr_reader :local_payment_reversed
     attr_reader :oauth_access_revocation
     attr_reader :partner_merchant
     attr_reader :source_merchant_id
@@ -89,6 +91,7 @@ module Braintree
       @granted_payment_instrument_update = GrantedPaymentInstrumentUpdate._new(@subject[:granted_payment_instrument_update]) if @subject.has_key?(:granted_payment_instrument_update)
       @revoked_payment_method_metadata = RevokedPaymentMethodMetadata._new(gateway, @subject) if [Kind::GrantedPaymentInstrumentRevoked, Kind::PaymentMethodRevokedByCustomer].include?(@kind)
       @local_payment_completed = LocalPaymentCompleted._new(@subject[:local_payment]) if @subject.has_key?(:local_payment)
+      @local_payment_reversed = LocalPaymentReversed._new(@subject[:local_payment]) if @subject.has_key?(:local_payment)
     end
 
     def merchant_account
