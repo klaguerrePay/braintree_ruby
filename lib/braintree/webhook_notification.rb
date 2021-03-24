@@ -90,8 +90,8 @@ module Braintree
       @connected_merchant_paypal_status_changed = ConnectedMerchantPayPalStatusChanged._new(@subject[:connected_merchant_paypal_status_changed]) if @subject.has_key?(:connected_merchant_paypal_status_changed)
       @granted_payment_instrument_update = GrantedPaymentInstrumentUpdate._new(@subject[:granted_payment_instrument_update]) if @subject.has_key?(:granted_payment_instrument_update)
       @revoked_payment_method_metadata = RevokedPaymentMethodMetadata._new(gateway, @subject) if [Kind::GrantedPaymentInstrumentRevoked, Kind::PaymentMethodRevokedByCustomer].include?(@kind)
-      @local_payment_completed = LocalPaymentCompleted._new(@subject[:local_payment]) if @subject.has_key?(:local_payment)
-      @local_payment_reversed = LocalPaymentReversed._new(@subject[:local_payment]) if @subject.has_key?(:local_payment)
+      @local_payment_completed = LocalPaymentCompleted._new(@subject[:local_payment]) if @subject.has_key?(:local_payment) && Kind::LocalPaymentCompleted == @kind
+      @local_payment_reversed = LocalPaymentReversed._new(@subject[:local_payment]) if @subject.has_key?(:local_payment) && Kind::LocalPaymentReversed == @kind
     end
 
     def merchant_account
