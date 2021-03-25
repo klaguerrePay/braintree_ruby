@@ -917,9 +917,9 @@ module Braintree
 
     def _local_payment_reversed_sample_xml(id)
       <<-XML
-        <local-payment>
+        <local-payment-reversed>
           <payment-id>PAY-XYZ123</payment-id>
-        </local-payment>
+        </local-payment-reversed>
       XML
     end
   end
