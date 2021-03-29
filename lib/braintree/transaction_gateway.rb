@@ -276,7 +276,8 @@ module Braintree
     def self._refund_signature
       [
         :amount,
-        :order_id
+        :merchant_account_id,
+        :order_id,
       ]
     end
 

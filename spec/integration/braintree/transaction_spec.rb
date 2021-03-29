@@ -2871,6 +2871,19 @@ describe Braintree::Transaction do
           result.transaction.amount.should == transaction.amount/2
         end
 
+        it "allows merchant_account_id to be passed for the refund" do
+          transaction = create_transaction_to_refund
+
+          result = Braintree::Transaction.refund(
+            transaction.id,
+            :merchant_account_id => SpecHelper::NonDefaultMerchantAccountId
+          )
+
+          result.success?.should == true
+          result.transaction.type.should == "credit"
+          result.transaction.merchant_account_id.should == SpecHelper::NonDefaultMerchantAccountId
+        end
+
         it "does not allow arbitrary options to be passed" do
           transaction = create_paypal_transaction_for_refund
 
