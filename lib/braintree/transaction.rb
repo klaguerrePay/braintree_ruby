@@ -169,6 +169,14 @@ module Braintree
     attr_reader :visa_checkout_card_details
     attr_reader :voice_referral_number
 
+    def self.adjust_authorization(*args)
+      Configuration.gateway.transaction.adjust_authorization(*args)
+    end
+
+    def self.adjust_authorization!(*args)
+      Configuration.gateway.transaction.adjust_authorization!(*args)
+    end
+
     def self.create(*args)
       Configuration.gateway.transaction.create(*args)
     end

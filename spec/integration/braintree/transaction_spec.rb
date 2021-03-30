@@ -6981,4 +6981,143 @@ describe Braintree::Transaction do
       expect(installment.adjustments.map(&:kind)).to match_array([Braintree::Transaction::Installment::Adjustment::Kind::Refund])
     end
   end
+
+  describe "Adjust Authorization" do
+    let(:first_data_master_transaction_params) do
+      {
+        :merchant_account_id => SpecHelper::FakeFirstDataMerchantAccountId,
+        :amount => "75.50",
+        :credit_card => {
+          :number => "5105105105105100",
+          :expiration_date => "05/2012"
+        }
+      }
+    end
+    let(:first_data_visa_transaction_params) do
+      {
+        :merchant_account_id => SpecHelper::FakeFirstDataMerchantAccountId,
+        :amount => "75.50",
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "06/2009"
+        }
+      }
+    end
+    context "successful authorization" do
+      it "returns success response" do
+        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params)
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "85.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(true)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("85.50"))
+      end
+    end
+
+    context "unsuccessful authorization" do
+      it "returns failure, when processor does not support multi auth adjustment" do
+        initial_transaction = Braintree::Transaction.sale(
+          :merchant_account_id => SpecHelper::DefaultMerchantAccountId,
+          :amount => "75.50",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "06/2009"
+          }
+        )
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "85.50",
+        )
+
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::ProcessorDoesNotSupportAuthAdjustment)
+      end
+
+      it "returns failure response, when adjusted amount submitted is zero" do
+        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params)
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "0.0",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:authorization_adjustment).on(:amount).first.code).to eq(Braintree::ErrorCodes::Transaction::AdjustmentAmountMustBeGreaterThanZero)
+      end
+
+      it "returns failure response, when adjusted amount submitted same as authorized amount" do
+        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params)
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "75.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:authorization_adjustment).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::NoNetAmountToPerformAuthAdjustment)
+      end
+
+      it "returns failure, when transaction status is not authorized" do
+        additional_params = {:options => {:submit_for_settlement => true }}
+        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "85.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::TransactionMustBeInStateAuthorized)
+      end
+
+      it "returns failure, when transaction authorization type final or undefined" do
+        additional_params = {:transaction_source => "recurring_first"}
+        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "85.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::TransactionIsNotEligibleForAdjustment)
+      end
+
+      it "returns failure, when processor does not support incremental auth" do
+        initial_transaction = Braintree::Transaction.sale(first_data_visa_transaction_params)
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "85.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::ProcessorDoesNotSupportIncrementalAuth)
+      end
+
+      it "returns failure, when processor does not support auth reversal" do
+        initial_transaction = Braintree::Transaction.sale(first_data_visa_transaction_params)
+        expect(initial_transaction.success?).to eq(true)
+
+        adjustment_transaction = Braintree::Transaction.adjust_authorization(
+          initial_transaction.transaction.id, "65.50",
+        )
+
+        expect(adjustment_transaction.success?).to eq(false)
+        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
+        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::ProcessorDoesNotSupportPartialAuthReversal)
+      end
+    end
+  end
 end

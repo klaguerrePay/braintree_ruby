@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+* Add `Transaction.adjust_authorization` method to support for multiple authorizations for a single transaction
 * Add `merchant_account_id` parameter to `Transaction#refund`
 
 ## 3.3.0
@@ -78,7 +79,7 @@
     * Transaction#submit_for_settlement and Transaction#submit_for_settlement!
     * Transaction#void and Transaction#void!
   * Remove unused WebhookNotification::Kind::GrantedPaymentInstrumentUpdate
-  * Rename all Android Pay classes and methods to Google Pay 
+  * Rename all Android Pay classes and methods to Google Pay
   * Rename Dispute::HistoryEvent to Dispute::StatusHistory
   * Update the following methods to return `Date`s instead of `Strings` (fixes #161):
     * DisbursementDetails#disbursement_date

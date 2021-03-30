@@ -139,6 +139,18 @@ module Braintree
       return_object_or_raise(:transaction) { submit_for_settlement(*args) }
     end
 
+    def adjust_authorization(transaction_id, amount)
+      raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
+      Util.verify_keys(TransactionGateway._adjust_authorization_signature, {})
+      transaction_params = {:amount => amount}
+      response = @config.http.put("#{@config.base_merchant_path}/transactions/#{transaction_id}/adjust_authorization", :transaction => transaction_params)
+      _handle_transaction_response(response)
+    end
+
+    def adjust_authorization!(*args)
+      return_object_or_raise(:transaction) { adjust_authorization(*args) }
+    end
+
     def update_details(transaction_id, options = {})
       raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
       Util.verify_keys(TransactionGateway._update_details_signature, options)
@@ -262,6 +274,12 @@ module Braintree
         :shipping_amount,
         :ships_from_postal_code,
         :line_items => [:commodity_code, :description, :discount_amount, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :url, :tax_amount],
+      ]
+    end
+
+    def self._adjust_authorization_signature
+      [
+        :amount
       ]
     end
 

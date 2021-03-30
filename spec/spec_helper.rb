@@ -40,6 +40,7 @@ unless defined?(SPEC_HELPER_LOADED)
     AdyenMerchantAccountId = "adyen_ma"
     HiperBRLMerchantAccountId = "hiper_brl"
     CardProcessorBRLMerchantAccountId = "card_processor_brl"
+    FakeFirstDataMerchantAccountId = "fake_first_data_merchant_account"
 
     TrialPlan = {
       :description => "Plan for integration tests -- with trial",
