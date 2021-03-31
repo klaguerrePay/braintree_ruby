@@ -37,7 +37,7 @@ module Braintree
       :shipping_locality,
       :shipping_postal_code,
       :shipping_region,
-      :shipping_street_address
+      :shipping_street_address,
     )
 
     equality_fields :credit_card_expiration_date

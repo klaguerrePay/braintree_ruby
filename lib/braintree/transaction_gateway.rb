@@ -53,7 +53,7 @@ module Braintree
     end
 
     def credit(attributes)
-      create(attributes.merge(:type => 'credit'))
+      create(attributes.merge(:type => "credit"))
     end
 
     def credit!(*args)
@@ -72,7 +72,7 @@ module Braintree
       options = if amount_or_options.is_a?(Hash)
                   amount_or_options
                 else
-                  { :amount => amount_or_options }
+                  {:amount => amount_or_options}
                 end
 
       Util.verify_keys(TransactionGateway._refund_signature, options)
@@ -97,7 +97,7 @@ module Braintree
     end
 
     def sale(attributes)
-      create(attributes.merge(:type => 'sale'))
+      create(attributes.merge(:type => "sale"))
     end
 
     def sale!(*args)

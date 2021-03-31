@@ -1,4 +1,4 @@
-require 'base64'
+require "base64"
 require "bigdecimal"
 require "cgi"
 require "date"

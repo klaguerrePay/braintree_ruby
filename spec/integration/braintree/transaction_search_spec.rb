@@ -60,7 +60,7 @@ describe Braintree::Transaction, "search" do
           :postal_code => "54321",
           :region => "MA",
           :street_address => "456 Road"
-        }
+        },
       )
 
       SpecHelper.settle_transaction transaction.id
@@ -133,20 +133,20 @@ describe Braintree::Transaction, "search" do
     it "searches on users" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment
+        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
       )
 
       collection = Braintree::Transaction.search do |search|
         search.user.is "integration_user_public_id"
       end
 
-      collection.any?{ |t| t.id == transaction.id }.should == true
+      collection.any? { |t| t.id == transaction.id }.should == true
     end
 
     it "searches on paypal transactions" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment
+        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
       )
 
       paypal_details = transaction.paypal_details
@@ -168,7 +168,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
-        }
+        },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -199,7 +199,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
-        }
+        },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -230,7 +230,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
-        }
+        },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -261,7 +261,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
-        }
+        },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -301,7 +301,7 @@ describe Braintree::Transaction, "search" do
             :number => Braintree::Test::CreditCardNumbers::Elo,
             :cvv => "737",
             :expiration_date => "10/2020"
-          }
+          },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -318,7 +318,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -333,7 +333,7 @@ describe Braintree::Transaction, "search" do
       it "searches by payment instrument type PayPal" do
         transaction = Braintree::Transaction.sale!(
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment
+          :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -348,7 +348,7 @@ describe Braintree::Transaction, "search" do
       it "searches by payment instrument type LocalPaymentDetail" do
         transaction = Braintree::Transaction.sale!(
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::LocalPayment
+          :payment_method_nonce => Braintree::Test::Nonce::LocalPayment,
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -363,7 +363,7 @@ describe Braintree::Transaction, "search" do
       it "searches by payment instrument type ApplePay" do
         transaction = Braintree::Transaction.sale!(
           :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :payment_method_nonce => Braintree::Test::Nonce::ApplePayVisa
+          :payment_method_nonce => Braintree::Test::Nonce::ApplePayVisa,
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -381,7 +381,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -421,7 +421,7 @@ describe Braintree::Transaction, "search" do
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
         )
 
         collection = Braintree::Transaction.search do |search|
@@ -454,7 +454,7 @@ describe Braintree::Transaction, "search" do
           :cardholder_name => cardholder_name,
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
-        }
+        },
         )
 
         transaction = Braintree::Transaction.sale!(
@@ -464,7 +464,7 @@ describe Braintree::Transaction, "search" do
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "05/12"
         },
-        :options => { :submit_for_settlement => true }
+        :options => {:submit_for_settlement => true},
         )
         SpecHelper.settle_transaction transaction.id
 
@@ -516,7 +516,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
           )
 
           collection = Braintree::Transaction.search do |search|
@@ -557,7 +557,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
           )
 
           collection = Braintree::Transaction.search do |search|
@@ -576,7 +576,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           )
 
           created_at = transaction.created_at
@@ -586,7 +586,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.created_at.between(
               created_at - 60,
-              created_at + 60
+              created_at + 60,
             )
           end
 
@@ -613,7 +613,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.created_at.between(
               created_at - 300,
-              created_at - 100
+              created_at - 100,
             )
           end
 
@@ -634,7 +634,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/12"
-          }
+          },
           )
 
           now = Time.now
@@ -643,7 +643,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.created_at.between(
               now - 60,
-              now + 60
+              now + 60,
             )
           end
 
@@ -670,7 +670,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.created_at.between(
               now - 300,
-              now - 100
+              now - 100,
             )
           end
 
@@ -683,14 +683,14 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           )
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.created_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -708,7 +708,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction_id
             search.disbursement_date.between(
               disbursement_time - 60,
-              disbursement_time + 60
+              disbursement_time + 60,
             )
           end
 
@@ -735,7 +735,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction_id
             search.disbursement_date.between(
               disbursement_time - 300,
-              disbursement_time - 100
+              disbursement_time - 100,
             )
           end
 
@@ -758,7 +758,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction_id
             search.disbursement_date.between(
               now - 60,
-              now + 60
+              now + 60,
             )
           end
 
@@ -785,7 +785,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction_id
             search.disbursement_date.between(
               now - 300,
-              now - 100
+              now - 100,
             )
           end
 
@@ -800,7 +800,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction_id
             search.disbursement_date.between(
               disbursement_date - 1,
-              disbursement_date + 1
+              disbursement_date + 1,
             )
           end
 
@@ -816,7 +816,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Disputes::Chargeback,
               :expiration_date => "03/18"
-            }
+            },
           )
 
           @disputed_date = @disputed_transaction.disputes.first.received_date
@@ -841,7 +841,7 @@ describe Braintree::Transaction, "search" do
             search.id.is @disputed_transaction.id
             search.dispute_date.between(
               @disputed_time - 60,
-              @disputed_time + 60
+              @disputed_time + 60,
             )
           end
 
@@ -880,7 +880,7 @@ describe Braintree::Transaction, "search" do
             search.id.is @disputed_transaction.id
             search.dispute_date.between(
               now - 60,
-              now + 60
+              now + 60,
             )
           end
 
@@ -908,7 +908,7 @@ describe Braintree::Transaction, "search" do
             search.id.is @disputed_transaction.id
             search.dispute_date.between(
               @disputed_date - 1,
-              @disputed_date + 1
+              @disputed_date + 1,
             )
           end
 
@@ -924,14 +924,14 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           )
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.authorized_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -941,7 +941,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.authorized_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -955,14 +955,14 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           ).transaction
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.failed_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -972,7 +972,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.failed_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -984,7 +984,7 @@ describe Braintree::Transaction, "search" do
           collection = Braintree::Transaction.search do |search|
             search.authorization_expired_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -993,7 +993,7 @@ describe Braintree::Transaction, "search" do
           collection = Braintree::Transaction.search do |search|
             search.authorization_expired_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1017,14 +1017,14 @@ describe Braintree::Transaction, "search" do
                 :number => Braintree::Test::CreditCardNumbers::Visa,
                 :expiration_date => "05/12",
                 :cvv => "200"
-              }
+              },
             ).transaction
 
             collection = Braintree::Transaction.search do |search|
               search.id.is transaction.id
               search.gateway_rejected_at.between(
                 Date.today - 2,
-                Date.today - 1
+                Date.today - 1,
               )
             end
 
@@ -1034,7 +1034,7 @@ describe Braintree::Transaction, "search" do
               search.id.is transaction.id
               search.gateway_rejected_at.between(
                 Date.today - 1,
-                Date.today + 1
+                Date.today + 1,
               )
             end
 
@@ -1053,14 +1053,14 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           ).transaction
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.processor_declined_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -1070,7 +1070,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.processor_declined_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1087,7 +1087,7 @@ describe Braintree::Transaction, "search" do
             },
             :options => {
               :submit_for_settlement => true
-            }
+            },
           ).transaction
 
           SpecHelper.settle_transaction transaction.id
@@ -1096,7 +1096,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.settled_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -1106,7 +1106,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.settled_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1123,14 +1123,14 @@ describe Braintree::Transaction, "search" do
             },
             :options => {
               :submit_for_settlement => true
-            }
+            },
           ).transaction
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.submitted_for_settlement_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -1140,7 +1140,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.submitted_for_settlement_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1154,7 +1154,7 @@ describe Braintree::Transaction, "search" do
             :credit_card => {
               :number => Braintree::Test::CreditCardNumbers::Visa,
               :expiration_date => "05/12"
-            }
+            },
           )
           transaction = Braintree::Transaction.void(transaction.id).transaction
 
@@ -1162,7 +1162,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.voided_at.between(
               Date.today - 2,
-              Date.today - 1
+              Date.today - 1,
             )
           end
 
@@ -1172,7 +1172,7 @@ describe Braintree::Transaction, "search" do
             search.id.is transaction.id
             search.voided_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1190,18 +1190,18 @@ describe Braintree::Transaction, "search" do
             },
             :options => {
               :submit_for_settlement => true
-            }
+            },
           )
 
           collection = Braintree::Transaction.search do |search|
             search.id.is transaction.id
             search.authorized_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
             search.submitted_for_settlement_at.between(
               Date.today - 1,
-              Date.today + 1
+              Date.today + 1,
             )
           end
 
@@ -1213,7 +1213,7 @@ describe Braintree::Transaction, "search" do
       collection = Braintree::Transaction.search
       collection.maximum_size.should > 100
 
-      transaction_ids = collection.map {|t| t.id }.uniq.compact
+      transaction_ids = collection.map { |t| t.id }.uniq.compact
       transaction_ids.size.should == collection.maximum_size
     end
 
@@ -1225,7 +1225,7 @@ describe Braintree::Transaction, "search" do
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/2012",
             :cardholder_name => "Tom Smith"
-          }
+          },
         )
       end
 
@@ -1319,7 +1319,7 @@ describe Braintree::Transaction, "search" do
       it "raises a UnexpectedError" do
         expect {
           collection = Braintree::Transaction.search do |search|
-            search.amount.is -10
+            search.amount.is(-10)
           end
         }.to raise_error(Braintree::UnexpectedError)
       end
@@ -1336,7 +1336,7 @@ describe Braintree::Transaction, "search" do
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/2012",
             :cardholder_name => "#{cardholder_name} #{index}"
-          }
+          },
         )
       end
 
@@ -1353,7 +1353,7 @@ describe Braintree::Transaction, "search" do
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/2012",
             :cardholder_name => new_cardholder_name,
-          }
+          },
         )
 
       transactions = collection.to_a
