@@ -7009,7 +7009,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50",
+          initial_transaction.transaction.id, "85.50"
         )
 
         expect(adjustment_transaction.success?).to eq(true)
@@ -7025,12 +7025,12 @@ describe Braintree::Transaction do
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "06/2009"
-          }
+          },
         )
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50",
+          initial_transaction.transaction.id, "85.50"
         )
 
 
@@ -7044,7 +7044,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "0.0",
+          initial_transaction.transaction.id, "0.0"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
@@ -7057,7 +7057,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "75.50",
+          initial_transaction.transaction.id, "75.50"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
@@ -7066,12 +7066,12 @@ describe Braintree::Transaction do
       end
 
       it "returns failure, when transaction status is not authorized" do
-        additional_params = {:options => {:submit_for_settlement => true }}
+        additional_params = {:options => {:submit_for_settlement => true}}
         initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50",
+          initial_transaction.transaction.id, "85.50"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
@@ -7085,7 +7085,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50",
+          initial_transaction.transaction.id, "85.50"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
@@ -7098,7 +7098,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50",
+          initial_transaction.transaction.id, "85.50"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
@@ -7111,7 +7111,7 @@ describe Braintree::Transaction do
         expect(initial_transaction.success?).to eq(true)
 
         adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "65.50",
+          initial_transaction.transaction.id, "65.50"
         )
 
         expect(adjustment_transaction.success?).to eq(false)
