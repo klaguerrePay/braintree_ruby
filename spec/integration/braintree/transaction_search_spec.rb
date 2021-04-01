@@ -161,6 +161,19 @@ describe Braintree::Transaction, "search" do
       collection.first.id.should == transaction.id
     end
 
+    it "searches on store_id" do
+      transaction_id = "contact_visa_transaction"
+      store_id = "store-id"
+
+      collection = Braintree::Transaction.search do |search|
+        search.id.is transaction_id
+        search.store_ids.in store_id
+      end
+
+      collection.maximum_size.should == 1
+      collection.first.id.should == transaction_id
+    end
+
     context "multiple value fields" do
       it "searches on created_using" do
         transaction = Braintree::Transaction.sale!(
@@ -494,6 +507,19 @@ describe Braintree::Transaction, "search" do
 
         collection.maximum_size.should == 1
         collection.first.id.should == credit_transaction.id
+      end
+
+      it "searches on store_ids" do
+        transaction_id = "contact_visa_transaction"
+        store_ids = ["store-id"]
+
+        collection = Braintree::Transaction.search do |search|
+          search.id.is transaction_id
+          search.store_ids.in store_ids
+        end
+
+        collection.maximum_size.should == 1
+        collection.first.id.should == transaction_id
       end
     end
 
