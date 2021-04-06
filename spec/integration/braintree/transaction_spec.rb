@@ -5409,6 +5409,7 @@ describe Braintree::Transaction do
     it "returns an error result if settlement is too large" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "06/2009"
@@ -5537,6 +5538,7 @@ describe Braintree::Transaction do
     it "raises a ValidationsFailed if unsuccessful" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "06/2009"
