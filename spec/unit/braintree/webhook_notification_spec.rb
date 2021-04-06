@@ -652,6 +652,22 @@ describe Braintree::WebhookNotification do
     end
   end
 
+
+  context "local_payment_reversed" do
+    it "builds a sample notification for a local_payment webhook" do
+      sample_notification = Braintree::WebhookTesting.sample_notification(
+        Braintree::WebhookNotification::Kind::LocalPaymentReversed,
+        "my_id",
+      )
+
+      notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+      notification.kind.should == Braintree::WebhookNotification::Kind::LocalPaymentReversed
+
+      local_payment_reversed = notification.local_payment_reversed
+      local_payment_reversed.payment_id.should == "PAY-XYZ123"
+    end
+  end
+
   describe "parse" do
     it "raises InvalidSignature error when the signature is nil" do
       expect do
