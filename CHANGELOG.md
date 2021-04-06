@@ -5,6 +5,7 @@
 * Add `Transaction.adjust_authorization` method to support for multiple authorizations for a single transaction
 * Add `merchant_account_id` parameter to `Transaction#refund`
 * Add `store_id` and `store_ids` parameters to `Transaction#search`
+* Add support for `ActiveSupport::TimeWithZone` when generating XML (thanks @Tonkpils!)
 
 ## 3.3.0
 * Add `decision_reasons` and `transaction_risk_score` fields to `RiskData`
