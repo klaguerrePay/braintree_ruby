@@ -657,7 +657,7 @@ describe Braintree::WebhookNotification do
     it "builds a sample notification for a local_payment webhook" do
       sample_notification = Braintree::WebhookTesting.sample_notification(
         Braintree::WebhookNotification::Kind::LocalPaymentReversed,
-        "my_id"
+        "my_id",
       )
 
       notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
