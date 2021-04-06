@@ -138,7 +138,7 @@ describe Braintree::Transaction do
           result.transaction.risk_data.decision.should_not be_nil
           result.transaction.risk_data.decision_reasons.should_not be_nil
           expect(result.transaction.risk_data).to respond_to(:device_data_captured)
-          result.transaction.risk_data.fraud_service_provider.should_not be_nil
+          expect(result.transaction.risk_data).to respond_to(:fraud_service_provider)
           expect(result.transaction.risk_data).to respond_to(:transaction_risk_score)
         end
       end
