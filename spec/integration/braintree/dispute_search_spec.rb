@@ -78,18 +78,6 @@ describe Braintree::Dispute, "search" do
       dispute = collection.disputes.first
     end
 
-    # it "correctly returns disputes by cbp flag" do
-    #   collection = Braintree::Dispute.search do |search|
-    #   binding.pry
-    #     search.chargeback_protection_level.in [
-    #       Braintree::Dispute::ChargebackProtectionLevel::EFFORTLESS,
-    #     ]
-    #   end
-    #
-    #   expect(collection.disputes.count).to be >= 2
-    #   dispute = collection.disputes.first
-    # end
-
     it "correctly returns disputes by effective_date range" do
       effective_date = transaction.disputes.first.status_history.first.effective_date
 
