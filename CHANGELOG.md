@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.4.0
 * Add `local_payment_reversed` webhook notification 
 * Add `Transaction.adjust_authorization` method to support for multiple authorizations for a single transaction
 * Add `merchant_account_id` parameter to `Transaction#refund`
