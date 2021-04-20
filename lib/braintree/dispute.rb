@@ -68,9 +68,9 @@ module Braintree
     end
 
     module ChargebackProtectionLevel
-      EFFORTLESS = "effortless"
-      STANDARD = "standard"
-      NOT_PROTECTED = "not_protected"
+      Effortless = "effortless"
+      Standard = "standard"
+      NotProtected = "not_protected"
 
       All = constants.map { |c| const_get(c) }
     end
