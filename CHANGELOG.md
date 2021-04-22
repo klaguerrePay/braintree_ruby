@@ -1,5 +1,8 @@
 # Changelog
 
+## unreleased
+* Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
+
 ## 3.4.0
 * Add `local_payment_reversed` webhook notification 
 * Add `Transaction.adjust_authorization` method to support for multiple authorizations for a single transaction
