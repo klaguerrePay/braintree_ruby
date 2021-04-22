@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0(unreleased)
+* Breaking Changes
+    * Remove `CardTypeIsInvalid` validation error code
+    * Remove `paypal_vault_without_upgrade` parameter from `PaymentMethod#create`
+
 ## 3.4.0
 * Add `local_payment_reversed` webhook notification 
 * Add `Transaction.adjust_authorization` method to support for multiple authorizations for a single transaction
