@@ -5,6 +5,9 @@
   * Remove `ExternalVault::CardTypeIsInvalid` error code
   * Remove `RiskData::CustomerBrowserIsTooLong` error code
   * Remove `paypal_vault_without_upgrade` parameter from `PaymentMethod#create`
+  * Add `PaymentMethodNonceDetails` and `PaymentMethodNonceDetailsPayerInfo`
+    * `PaymentMethodNonce#details` is now an instance of `PaymentMethodNonceDetails` rather than a hash
+    * `PaymentMethodNonceDetails#payer_info` is now an instance of `PaymentMethodNonceDetailsPayerInfo` rather than a hash
 * Add `phone_number` to `Address`
 
 ## 3.4.0
