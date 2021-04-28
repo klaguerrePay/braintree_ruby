@@ -784,8 +784,6 @@ module Braintree
     end
 
     module RiskData
-      # NEXT_MAJOR_VERSION Remove CustomerBrowserIsTooLong (this validation is no longer applied)
-      CustomerBrowserIsTooLong = "94701"
       CustomerDeviceIdIsTooLong = "94702"
       CustomerLocationZipInvalidCharacters = "94703"
       CustomerLocationZipIsInvalid = "94704"

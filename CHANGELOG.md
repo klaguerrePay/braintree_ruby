@@ -1,9 +1,10 @@
 # Changelog
 
-## 4.0.0(unreleased)
+## 4.0.0 (unreleased)
 * Breaking Changes
-    * Remove `CardTypeIsInvalid` validation error code
-    * Remove `paypal_vault_without_upgrade` parameter from `PaymentMethod#create`
+  * Remove `ExternalVault::CardTypeIsInvalid` error code
+  * Remove `RiskData::CustomerBrowserIsTooLong` error code
+  * Remove `paypal_vault_without_upgrade` parameter from `PaymentMethod#create`
 
 ## 3.4.0
 * Add `local_payment_reversed` webhook notification 
