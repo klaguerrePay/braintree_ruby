@@ -17,6 +17,7 @@ module Braintree
     attr_reader :kind
     attr_reader :merchant_account_id
     attr_reader :original_dispute_id
+    attr_reader :paypal_messages
     attr_reader :processor_comments
     attr_reader :reason
     attr_reader :reason_code
@@ -113,6 +114,10 @@ module Braintree
       @evidence = evidence.map do |record|
         Braintree::Dispute::Evidence.new(record)
       end unless evidence.nil?
+
+      @paypal_messages = paypal_messages.map do |record|
+        Braintree::Dispute::PayPalMessage.new(record)
+      end unless paypal_messages.nil?
 
       @transaction_details = TransactionDetails.new(transaction)
       @transaction = Transaction.new(transaction)
