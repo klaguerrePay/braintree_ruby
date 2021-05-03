@@ -9,6 +9,7 @@
     * `PaymentMethodNonce#details` is now an instance of `PaymentMethodNonceDetails` rather than a hash
     * `PaymentMethodNonceDetails#payer_info` is now an instance of `PaymentMethodNonceDetailsPayerInfo` rather than a hash
 * Add `phone_number` to `Address`
+* Add `paypal_messages` to `Dispute`
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
 
 ## 3.4.0
