@@ -11,6 +11,7 @@
 * Add `phone_number` to `Address`
 * Add `paypal_messages` to `Dispute`
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
+* Make libxml-ruby an optional dependency instead of required (addresses JRuby incompatibility issues raised in #203 and #205)
 
 ## 3.4.0
 * Add `local_payment_reversed` webhook notification 

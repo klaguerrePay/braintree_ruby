@@ -17,10 +17,15 @@ Or add to your Gemfile:
 gem 'braintree'
 ```
 
+Optionally, you may also include LibXML for more performant XML parsing. If LibXML is not present, REXML will be used instead.
+
+```ruby
+gem 'libxml-ruby'
+```
+
 ## Dependencies
 
 * builder
-* libxml-ruby
 
 The Braintree Ruby SDK is tested against Ruby versions 2.5.8 and 2.7.2.
 
