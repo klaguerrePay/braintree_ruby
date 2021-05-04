@@ -41,7 +41,6 @@ unless defined?(SPEC_HELPER_LOADED)
     HiperBRLMerchantAccountId = "hiper_brl"
     CardProcessorBRLMerchantAccountId = "card_processor_brl"
     FakeFirstDataMerchantAccountId = "fake_first_data_merchant_account"
-    PinlessDebitMerchantAccountId = "sandbox_credit_card"
 
     TrialPlan = {
       :description => "Plan for integration tests -- with trial",

@@ -5263,21 +5263,6 @@ describe Braintree::Transaction do
           result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
         end
 
-        it "returns debit_network for a pinlessdebit transaction" do
-
-          result = Braintree::Transaction.sale(
-            :amount => Braintree::Test::TransactionAmounts::Authorize,
-            :merchant_account_id => SpecHelper::PinlessDebitMerchantAccountId,
-            :currency_iso_code => "USD",
-            :credit_card => {
-              :number => Braintree::Test::CreditCardNumbers::Visa,
-              :expiration_date => "05/2009"
-            },
-          )
-          result.success?.should == true
-          result.transaction.debit_network.should =~ /\w+/
-        end
-
         it "succeeds even if the card's balance is insufficient" do
           result = Braintree::Transaction.sale(
             :amount => Braintree::Test::TransactionAmounts::Authorize,
