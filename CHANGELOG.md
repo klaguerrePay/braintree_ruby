@@ -2,6 +2,7 @@
 
 ## unreleased
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
+* Add webhook sample for `GrantedPaymentMethodRevoked`
 
 ## 3.4.0
 * Add `local_payment_reversed` webhook notification 
