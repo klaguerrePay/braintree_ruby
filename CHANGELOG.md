@@ -2,6 +2,7 @@
 
 ## 4.0.0 (unreleased)
 * Breaking Changes
+  * Update gemspec to require ruby >= 2.6.0
   * Remove `ExternalVault::CardTypeIsInvalid` error code
   * Remove `RiskData::CustomerBrowserIsTooLong` error code
   * Remove `paypal_vault_without_upgrade` parameter from `PaymentMethod#create`
