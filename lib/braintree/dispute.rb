@@ -7,6 +7,7 @@ module Braintree
     attr_reader :amount_disputed
     attr_reader :amount_won
     attr_reader :case_number
+    attr_reader :chargeback_protection_level
     attr_reader :created_at
     attr_reader :currency_iso_code
     attr_reader :date_opened
@@ -62,6 +63,14 @@ module Braintree
       Chargeback = "chargeback"
       PreArbitration = "pre_arbitration"
       Retrieval = "retrieval"
+
+      All = constants.map { |c| const_get(c) }
+    end
+
+    module ChargebackProtectionLevel
+      Effortless = "effortless"
+      Standard = "standard"
+      NotProtected = "not_protected"
 
       All = constants.map { |c| const_get(c) }
     end
