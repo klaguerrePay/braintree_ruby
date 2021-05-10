@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.0.0 (unreleased)
+## 4.0.0
 * Breaking Changes
   * Update gemspec to require ruby >= 2.6.0
   * Remove `ExternalVault::CardTypeIsInvalid` error code
