@@ -618,12 +618,11 @@ describe Braintree::WebhookNotification do
           "my_id",
         )
 
-        webhook_xml_response = Base64.decode64(sample_notification[:bt_payload])
-        attributes = Braintree::Xml.hash_from_xml(webhook_xml_response)
-        notification = Braintree::WebhookNotification._new(gateway, attributes[:notification])
+        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+        expect(notification.kind).to eq Braintree::WebhookNotification::Kind::GrantedPaymentMethodRevoked
+
         metadata = notification.revoked_payment_method_metadata
 
-        expect(notification.kind).to eq Braintree::WebhookNotification::Kind::GrantedPaymentMethodRevoked
         expect(metadata.customer_id).to eq "venmo_customer_id"
         expect(metadata.token).to eq "my_id"
         expect(metadata.revoked_payment_method.class).to eq Braintree::VenmoAccount
