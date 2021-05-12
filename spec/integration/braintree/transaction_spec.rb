@@ -4386,7 +4386,7 @@ describe Braintree::Transaction do
             :amount => "10.00",
           )
           result.success?.should == true
-          result.transaction.network_transaction_id.should be_nil
+          result.transaction.network_transaction_id.should_not be_nil
         end
 
         it "accepts blank previous_network_transaction_id" do
@@ -4403,7 +4403,7 @@ describe Braintree::Transaction do
             :amount => "10.00",
           )
           result.success?.should == true
-          result.transaction.network_transaction_id.should be_nil
+          result.transaction.network_transaction_id.should_not be_nil
         end
       end
     end
