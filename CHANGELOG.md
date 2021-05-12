@@ -12,6 +12,7 @@
 * Add `phone_number` to `Address`
 * Add `paypal_messages` to `Dispute`
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
+* Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `chargeback_protection_level` into dispute search 
 * Make libxml-ruby an optional dependency instead of required (addresses JRuby incompatibility issues raised in #203 and #205)
 
