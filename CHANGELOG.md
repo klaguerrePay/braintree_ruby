@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+* Add `skip_advanced_fraud_checking` to:
+  * `Customer#create` and `Customer#update`
+  * `PaymentMethod#create` and `PaymentMethod#update`
+  * `CreditCard#create` and `CreditCard#update`
+
 ## 4.0.0
 * Breaking Changes
   * Update gemspec to require ruby >= 2.6.0
