@@ -5,6 +5,9 @@
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
   * `CreditCard#create` and `CreditCard#update`
+* Fix incorrect error code constants (fixes #213)
+  * `PaymentMethodNonceConsumed` is now `93106`
+  * `CannotForwardPaymentMethodType` is now `93107`
 
 ## 4.0.0
 * Breaking Changes
