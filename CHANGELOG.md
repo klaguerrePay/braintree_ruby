@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+* Add `payment_reader_card_details` parameter to `Transaction.sale`
 * Add `skip_advanced_fraud_checking` to:
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`

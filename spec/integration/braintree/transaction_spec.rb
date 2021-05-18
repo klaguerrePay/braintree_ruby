@@ -6984,6 +6984,42 @@ describe Braintree::Transaction do
     end
   end
 
+  describe "Manual Key Entry" do
+    context "with correct encrypted payment reader card details" do
+      it "returns a success response" do
+        result = Braintree::Transaction.sale(
+          :amount => "10.00",
+          :credit_card => {
+            :payment_reader_card_details => {
+              :encrypted_card_data => "8F34DFB312DC79C24FD5320622F3E11682D79E6B0C0FD881",
+              :key_serial_number => "FFFFFF02000572A00005",
+            },
+          },
+        )
+
+        expect(result).to be_success
+      end
+    end
+
+    context "with invalid encrypted payment reader card details" do
+      it "returns a failure response" do
+        result = Braintree::Transaction.sale(
+          :amount => "10.00",
+          :credit_card => {
+            :payment_reader_card_details => {
+              :encrypted_card_data => "invalid",
+              :key_serial_number => "invalid",
+            },
+          },
+        )
+
+        expect(result).not_to be_success
+        expect(result.errors.for(:transaction).first.code)
+          .to eq(Braintree::ErrorCodes::Transaction::PaymentInstrumentNotSupportedByMerchantAccount)
+      end
+    end
+  end
+
   describe "Adjust Authorization" do
     let(:first_data_master_transaction_params) do
       {
