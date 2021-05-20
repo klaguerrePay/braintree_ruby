@@ -6,6 +6,7 @@
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
   * `CreditCard#create` and `CreditCard#update`
+* Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden 
 
 ## 4.0.0
 * Breaking Changes
