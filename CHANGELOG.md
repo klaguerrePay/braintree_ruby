@@ -6,6 +6,7 @@
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
   * `CreditCard#create` and `CreditCard#update`
+* Include `rexml` in Gemspec (fixes #214)
 
 ## 4.0.0
 * Breaking Changes
