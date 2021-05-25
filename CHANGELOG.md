@@ -2,6 +2,7 @@
 
 ## Unreleased
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
+* Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `skip_advanced_fraud_checking` to:
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
@@ -23,7 +24,6 @@
 * Add `phone_number` to `Address`
 * Add `paypal_messages` to `Dispute`
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
-* Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `chargeback_protection_level` into dispute search 
 * Make libxml-ruby an optional dependency instead of required (addresses JRuby incompatibility issues raised in #203 and #205)
 
