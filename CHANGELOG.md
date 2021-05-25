@@ -6,6 +6,7 @@
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
   * `CreditCard#create` and `CreditCard#update`
+* Include `rexml` in Gemspec (fixes #214)
 * Fix incorrect error code constants (fixes #213)
   * `PaymentMethodNonceConsumed` is now `93107`
   * `CannotForwardPaymentMethodType` is now `93106`
