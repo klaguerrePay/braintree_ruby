@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
 * Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `skip_advanced_fraud_checking` to:
