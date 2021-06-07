@@ -117,6 +117,7 @@ module Braintree
     attr_reader :escrow_status
     attr_reader :facilitated_details
     attr_reader :facilitator_details
+    attr_reader :fx_id
     attr_reader :gateway_rejection_reason
     attr_reader :google_pay_details
     attr_reader :graphql_id
