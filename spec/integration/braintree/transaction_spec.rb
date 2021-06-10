@@ -999,7 +999,7 @@ describe Braintree::Transaction do
       result.transaction.credit_card_details.expiration_date.should == "05/2011"
     end
 
-    it "accepts transaction foreign exchange id for a transaction" do
+    it "accepts transaction exchange rate quote id for a transaction" do
       result = Braintree::Transaction.create(
         :type => "sale",
         :amount => Braintree::Test::TransactionAmounts::Authorize,
