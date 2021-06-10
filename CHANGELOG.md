@@ -1,8 +1,5 @@
 # Changelog
 
-## 4.2.0
-* Add `exchange_rate_quote_id` parameter to Transaction Requests from Gateway
-
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
 * Add webhook sample for `GrantedPaymentMethodRevoked`
@@ -14,6 +11,8 @@
 * Fix incorrect error code constants (fixes #213)
   * `PaymentMethodNonceConsumed` is now `93107`
   * `CannotForwardPaymentMethodType` is now `93106`
+* Add `exchange_rate_quote_id` parameter to Transaction Requests from Gateway
+
 
 ## 4.0.0
 * Breaking Changes
