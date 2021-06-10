@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.0
+* Add `exchange_rate_quote_id` parameter to Transaction Requests from Gateway
+
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
 * Add webhook sample for `GrantedPaymentMethodRevoked`

@@ -238,6 +238,14 @@ describe Braintree::Transaction do
       transaction.network_transaction_id.should == "123456789012345"
     end
 
+    it "accepts exchange_rate_quote_id" do
+      transaction = Braintree::Transaction._new(
+        :gateway,
+        :exchange_rate_quote_id => "123456789012345",
+      )
+      transaction.exchange_rate_quote_id.should == "123456789012345"
+    end
+
     it "accepts network_response code and network_response_text" do
       transaction = Braintree::Transaction._new(
         :gateway,
