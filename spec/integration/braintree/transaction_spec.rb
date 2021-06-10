@@ -702,6 +702,22 @@ describe Braintree::Transaction do
       result.errors.for(:transaction).for(:billing).on(:base).map { |e| e.code }.should include(Braintree::ErrorCodes::Address::InconsistentCountry)
     end
 
+    it "validates exchange_rate_quote_id and creates transaction" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :exchange_rate_quote_id => "123456789012345",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == true
+      result.transaction.exchange_rate_quote_id == "123456789012345"
+    end
+
     it "returns an error if given an incorrect alpha2 code" do
       result = Braintree::Transaction.sale(
         :amount => "100",
