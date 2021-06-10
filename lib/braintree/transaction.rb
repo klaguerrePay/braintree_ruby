@@ -117,7 +117,7 @@ module Braintree
     attr_reader :escrow_status
     attr_reader :facilitated_details
     attr_reader :facilitator_details
-    attr_reader :foreign_exchange_id
+    attr_reader :exchange_rate_quote_id
     attr_reader :gateway_rejection_reason
     attr_reader :google_pay_details
     attr_reader :graphql_id
@@ -319,7 +319,7 @@ module Braintree
       @visa_checkout_card_details = VisaCheckoutCardDetails.new(attributes[:visa_checkout_card])
       @samsung_pay_card_details = SamsungPayCardDetails.new(attributes[:samsung_pay_card])
       @sca_exemption_requested = attributes[:sca_exemption_requested]
-      @foreign_exchange_id = attributes[:foreign_exchange_id]
+      @exchange_rate_quote_id = attributes[:exchange_rate_quote_id]
       authorization_adjustments.map! { |attrs| AuthorizationAdjustment._new(attrs) } if authorization_adjustments
 
       installments.map! { |attrs| Installment.new(attrs) } if installments
