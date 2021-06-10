@@ -1003,7 +1003,7 @@ describe Braintree::Transaction do
       result = Braintree::Transaction.create(
         :type => "sale",
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        exchange_rate_quote_id => 123456789,
+        :exchange_rate_quote_id => 123456789,
       )
       result.success?.should == true
       result.transaction.exchange_rate_quote_id.should == 123456789
