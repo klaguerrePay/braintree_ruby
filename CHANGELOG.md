@@ -4,7 +4,6 @@
 * Add `exchange_rate_quote_id` parameter to `Transaction#create`
 * Add `exchange_rate_quote_id` attribute to `Transaction`
 
-
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
 * Add webhook sample for `GrantedPaymentMethodRevoked`
