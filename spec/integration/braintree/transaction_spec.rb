@@ -25,6 +25,7 @@ describe Braintree::Transaction do
           :country_code_alpha3 => "BTN",
           :country_code_numeric => "064"
         },
+        :exchange_rate_quote_id => "123456789012345",
       )
       result.success?.should == true
 
@@ -5056,6 +5057,23 @@ describe Braintree::Transaction do
       result = Braintree::Transaction.sale(params[:transaction])
       result.success?.should == false
       result.errors.for(:transaction).on(:currency_iso_code)[0].code.should == Braintree::ErrorCodes::Transaction::CurrencyCodeNotSupportedByMerchantAccount
+    end
+
+
+    it "validates exchange_rate_quote_id and creates transaction" do
+      params = {
+        :transaction => {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :exchange_rate_quote_id => "123456789012345",
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009"
+          }
+        }
+      }
+      result = Braintree::Transaction.sale(params[:transaction])
+      result.success?.should == true
+      result.transaction.exchange_rate_quote_id == "123456789012345"
     end
 
     it "skips advanced fraud checking if transaction[options][skip_advanced_fraud_checking] is set to true" do
