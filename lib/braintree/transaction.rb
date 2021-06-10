@@ -319,7 +319,6 @@ module Braintree
       @visa_checkout_card_details = VisaCheckoutCardDetails.new(attributes[:visa_checkout_card])
       @samsung_pay_card_details = SamsungPayCardDetails.new(attributes[:samsung_pay_card])
       @sca_exemption_requested = attributes[:sca_exemption_requested]
-      @exchange_rate_quote_id = attributes[:exchange_rate_quote_id]
       authorization_adjustments.map! { |attrs| AuthorizationAdjustment._new(attrs) } if authorization_adjustments
 
       installments.map! { |attrs| Installment.new(attrs) } if installments

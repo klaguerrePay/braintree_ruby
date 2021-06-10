@@ -1,7 +1,7 @@
 # Changelog
 
-## Unreleased
-* Add `exchange_rate_quote_id` parameter to Transaction Requests from Gateway
+## unreleased
+* Add `exchange_rate_quote_id` parameter to `Transaction#create`
 
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
