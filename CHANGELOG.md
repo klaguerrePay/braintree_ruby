@@ -3,6 +3,7 @@
 ## unreleased
 * Add `exchange_rate_quote_id` parameter to `Transaction#create`
 * Add `exchange_rate_quote_id` attribute to `Transaction`
+* Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
 
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
