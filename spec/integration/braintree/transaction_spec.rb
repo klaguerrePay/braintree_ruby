@@ -5073,7 +5073,7 @@ describe Braintree::Transaction do
       }
       result = Braintree::Transaction.sale(params[:transaction])
       result.success?.should == true
-      result.transaction.exchange_rate_quote_id == "123456789012345"
+      result.transaction.exchange_rate_quote_id.should == "123456789012345"
     end
 
     it "skips advanced fraud checking if transaction[options][skip_advanced_fraud_checking] is set to true" do
