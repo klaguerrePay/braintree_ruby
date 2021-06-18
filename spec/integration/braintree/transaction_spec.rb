@@ -5060,21 +5060,21 @@ describe Braintree::Transaction do
     end
 
 
-    it "validates exchange_rate_quote_id and creates transaction" do
-      params = {
-        :transaction => {
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :exchange_rate_quote_id => "123456789012345",
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          }
-        }
-      }
-      result = Braintree::Transaction.sale(params[:transaction])
-      result.success?.should == true
-      result.transaction.exchange_rate_quote_id.should == "123456789012345"
-    end
+    # it "validates exchange_rate_quote_id and creates transaction" do
+    #   params = {
+    #     :transaction => {
+    #       :amount => Braintree::Test::TransactionAmounts::Authorize,
+    #       :exchange_rate_quote_id => "123456789012345",
+    #       :credit_card => {
+    #         :number => Braintree::Test::CreditCardNumbers::Visa,
+    #         :expiration_date => "05/2009"
+    #       }
+    #     }
+    #   }
+    #   result = Braintree::Transaction.sale(params[:transaction])
+    #   result.success?.should == true
+    #   result.transaction.exchange_rate_quote_id.should == "123456789012345"
+    # end
 
     it "skips advanced fraud checking if transaction[options][skip_advanced_fraud_checking] is set to true" do
       with_advanced_fraud_kount_integration_merchant do
