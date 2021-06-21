@@ -2,6 +2,7 @@
 
 ## unreleased
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
+* Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden
 
 ## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
