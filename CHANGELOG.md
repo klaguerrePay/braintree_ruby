@@ -1,12 +1,20 @@
 # Changelog
 
-## Unreleased
+## unreleased
+* Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
+* Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden
+
+## 4.1.0
 * Add `payment_reader_card_details` parameter to `Transaction.sale`
+* Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `skip_advanced_fraud_checking` to:
   * `Customer#create` and `Customer#update`
   * `PaymentMethod#create` and `PaymentMethod#update`
   * `CreditCard#create` and `CreditCard#update`
-* Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden 
+* Include `rexml` in Gemspec (fixes #214)
+* Fix incorrect error code constants (fixes #213)
+  * `PaymentMethodNonceConsumed` is now `93107`
+  * `CannotForwardPaymentMethodType` is now `93106`
 
 ## 4.0.0
 * Breaking Changes
@@ -20,7 +28,6 @@
 * Add `phone_number` to `Address`
 * Add `paypal_messages` to `Dispute`
 * Add `tax_identifiers` parameter to `Customer.create` and `Customer.update`
-* Add webhook sample for `GrantedPaymentMethodRevoked`
 * Add `chargeback_protection_level` into dispute search 
 * Make libxml-ruby an optional dependency instead of required (addresses JRuby incompatibility issues raised in #203 and #205)
 
