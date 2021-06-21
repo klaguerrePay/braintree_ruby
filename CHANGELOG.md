@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 4.2.0
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
 * Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden
 
