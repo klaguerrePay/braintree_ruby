@@ -1,8 +1,6 @@
 # Changelog
 
 ## unreleased
-* Add `exchange_rate_quote_id` parameter to `Transaction#create`
-* Add `exchange_rate_quote_id` attribute to `Transaction`
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
 * Add error code `TaxAmountIsRequiredForAibSwedish` for attribute `tax_amount` in `transaction` key for AIB:Domestic Transactions in Sweden
 

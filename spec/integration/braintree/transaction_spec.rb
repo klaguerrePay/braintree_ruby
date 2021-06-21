@@ -25,7 +25,6 @@ describe Braintree::Transaction do
           :country_code_alpha3 => "BTN",
           :country_code_numeric => "064"
         },
-        :exchange_rate_quote_id => "123456789012345",
       )
       result.success?.should == true
 
@@ -5058,30 +5057,7 @@ describe Braintree::Transaction do
       result.success?.should == false
       result.errors.for(:transaction).on(:currency_iso_code)[0].code.should == Braintree::ErrorCodes::Transaction::CurrencyCodeNotSupportedByMerchantAccount
     end
-    it "succeeds even if the card is ineligible" do
-      result = Braintree::Transaction.sale(
-        :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :credit_card => {
-          :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::IneligibleCard,
-          :expiration_date => "05/2009"
-        },
-        :exchange_rate_quote_id => "123456789012345",
-        :options => {
-          :submit_for_settlement => true,
-          :amex_rewards => {
-            :request_id => "ABC123",
-            :points => "1000",
-            :currency_amount => "10.00",
-            :currency_iso_code => "USD"
-          }
-        },
-      )
-      result.success?.should == true
-      result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
-      result.transaction.exchange_rate_quote_id.should == "123456789012345"
-      
-      
-      
+
     it "validates tax_amount for Aib domestic sweden transaction and returns error" do
       params = {
           :transaction => {
