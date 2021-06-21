@@ -5062,11 +5062,11 @@ describe Braintree::Transaction do
     it "succeeds even if the card is ineligible" do
       result = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :exchange_rate_quote_id => "123456789012345",
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::IneligibleCard,
           :expiration_date => "05/2009"
         },
+        :exchange_rate_quote_id => "123456789012345",
         :options => {
           :submit_for_settlement => true,
           :amex_rewards => {
