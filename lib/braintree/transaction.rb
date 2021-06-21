@@ -115,6 +115,7 @@ module Braintree
     attr_reader :discounts
     attr_reader :disputes
     attr_reader :escrow_status
+    attr_reader :exchange_rate_quote_id
     attr_reader :facilitated_details
     attr_reader :facilitator_details
     attr_reader :gateway_rejection_reason
