@@ -1,5 +1,7 @@
 # Unreleased
 * Add a log message to the `ArgumentError` at `TransactionGateway.find`
+* Add `exchange_rate_quote_id` to `Transaction.create`
+* Add error code `ExchangeRateQuoteIdTooLong` to `Transaction`
 
 # Changelog
 
