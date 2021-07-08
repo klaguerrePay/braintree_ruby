@@ -12,6 +12,9 @@
   * `product_id`
   * `country_of_issuance`
   * `issuing_bank`
+* Add the following fields to `PayPalDetails`:
+  * `tax_id`
+  * `tax_id_type`
 
 # Changelog
 
