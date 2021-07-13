@@ -2,6 +2,19 @@
 * Add a log message to the `ArgumentError` at `TransactionGateway.find`
 * Add `exchange_rate_quote_id` to `Transaction.create`
 * Add error code `ExchangeRateQuoteIdTooLong` to `Transaction`
+* Add the following fields to `ApplePayCard` and `GooglePayCard`:
+  * `commercial`
+  * `debit`
+  * `durbin_regulated`
+  * `healthcare`
+  * `payroll`
+  * `prepaid`
+  * `product_id`
+  * `country_of_issuance`
+  * `issuing_bank`
+* Add the following fields to `PayPalDetails`:
+  * `tax_id`
+  * `tax_id_type`
 
 # Changelog
 
