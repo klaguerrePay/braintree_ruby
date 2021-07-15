@@ -1,4 +1,6 @@
-# Unreleased
+# Changelog
+
+## Unreleased
 * Add a log message to the `ArgumentError` at `TransactionGateway.find`
 * Add `exchange_rate_quote_id` to `Transaction.create`
 * Add error code `ExchangeRateQuoteIdTooLong` to `Transaction`
@@ -15,8 +17,6 @@
 * Add the following fields to `PayPalDetails`:
   * `tax_id`
   * `tax_id_type`
-
-# Changelog
 
 ## 4.2.0
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
