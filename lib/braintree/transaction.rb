@@ -406,6 +406,10 @@ module Braintree
       @processed_with_network_token
     end
 
+    def processed_with_airline_data?
+      @processed_with_airline_data
+    end
+
     class << self
       protected :new
       def _new(*args) # :nodoc:
@@ -414,7 +418,7 @@ module Braintree
     end
 
     def self._attributes # :nodoc:
-      [:amount, :created_at, :credit_card_details, :customer_details, :id, :status, :subscription_details, :type, :updated_at, :processed_with_network_token?]
+      [:amount, :created_at, :credit_card_details, :customer_details, :id, :status, :subscription_details, :type, :updated_at, :processed_with_network_token?, :processed_with_airline_data?]
     end
   end
 end
