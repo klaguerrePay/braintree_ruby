@@ -17,6 +17,7 @@
 * Add the following fields to `PayPalDetails`:
   * `tax_id`
   * `tax_id_type`
+* Add `LocalPaymentExpired` and `LocalPaymentFunded` webhook notification support
 
 ## 4.2.0
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
