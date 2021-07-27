@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+* Sanitize encrypted_card_data logs
+
 ## 4.3.0
 * Add a log message to the `ArgumentError` at `TransactionGateway.find`
 * Add `exchange_rate_quote_id` to `Transaction.create`
