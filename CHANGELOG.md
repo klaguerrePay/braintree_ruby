@@ -2,6 +2,7 @@
 
 ## Unreleased
 * Sanitize encrypted_card_data logs
+* Add `LocalPaymentExpired` and `LocalPaymentFunded` webhook notification support
 
 ## 4.3.0
 * Add a log message to the `ArgumentError` at `TransactionGateway.find`
@@ -20,7 +21,6 @@
 * Add the following fields to `PayPalDetails`:
   * `tax_id`
   * `tax_id_type`
-* Add `LocalPaymentExpired` and `LocalPaymentFunded` webhook notification support
 
 ## 4.2.0
 * Add `default?` to `PaymentMethodNonce` (thanks @klouvas)
