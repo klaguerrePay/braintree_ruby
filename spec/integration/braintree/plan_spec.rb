@@ -84,11 +84,11 @@ describe Braintree::Plan do
         :name => "my new plan name",
         :number_of_billing_cycles => 1,
         :price => "9.99",
-        :trial_period => false
+        :trial_period => false,
       )
       expect(result.success?).to be_truthy
 
-      expect(Braintree::Plan.find(result.plan.id).eq result.plan
+      expect(Braintree::Plan.find(result.plan.id)).eq result.plan
     end
 
     it "raises Braintree::NotFoundError if it cannot find" do
@@ -108,15 +108,15 @@ describe Braintree::Plan do
         :name => "my new plan name",
         :number_of_billing_cycles => 1,
         :price => "9.99",
-        :trial_period => false
+        :trial_period => false,
       ).plan
     end
 
     it "returns the updated plan if valid" do
       new_id = rand(36**9).to_s(36)
       plan = Braintree::Plan.update!(@plan.id,
-                                     :name: "updated name",
-                                     :price => 99.88
+                                     :name => "updated name",
+                                     :price => 99.88,
                                     )
 
       expect(plan.name).to eq "updated name"
@@ -125,9 +125,7 @@ describe Braintree::Plan do
 
     it "raises a ValidationsFailed if invalid" do
       expect do
-        Braintree::Plan.update!(@plan.id,
-                                :plan_id => "not_a_plan_id"
-                               )
+        Braintree::Plan.update!(@plan.id, :plan_id => "not_a_plan_id")
       end.to raise_error(Braintree::ValidationsFailed)
     end
   end
