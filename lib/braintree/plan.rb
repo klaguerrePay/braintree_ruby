@@ -46,11 +46,11 @@ module Braintree
         Configuration.gateway.plan.find(*args)
       end
 
-      def self.update(*args)
+      def update(*args)
         Configuration.gateway.plan.update(*args)
       end
 
-      def self.update!(*args)
+      def update!(*args)
         Configuration.gateway.plan.update!(*args)
       end
     end

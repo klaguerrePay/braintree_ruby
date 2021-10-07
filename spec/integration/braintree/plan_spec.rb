@@ -76,7 +76,7 @@ describe Braintree::Plan do
 
   describe "self.find" do
     it "finds a plan" do
-      result = Braintree::Plan.create(
+      plan = Braintree::Plan.create(
         :billing_day_of_month => 12,
         :billing_frequency => 1,
         :currency_iso_code => "USD",
@@ -85,10 +85,10 @@ describe Braintree::Plan do
         :number_of_billing_cycles => 1,
         :price => "9.99",
         :trial_period => false,
-      )
-      expect(result.success?).to be_truthy
+      ).plan
 
-      expect(Braintree::Plan.find(result.plan.id)).eq result.plan
+      found_plan = Braintree::Plan.find(plan.id)
+      expect(found_plan.name).to eq plan.name
     end
 
     it "raises Braintree::NotFoundError if it cannot find" do
@@ -125,7 +125,7 @@ describe Braintree::Plan do
 
     it "raises a ValidationsFailed if invalid" do
       expect do
-        Braintree::Plan.update!(@plan.id, :plan_id => "not_a_plan_id")
+        Braintree::Plan.update!(@plan.id, :number_of_billing_cycles => "number of billing cycles")
       end.to raise_error(Braintree::ValidationsFailed)
     end
   end
