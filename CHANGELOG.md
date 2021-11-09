@@ -1,7 +1,5 @@
 # Changelog
 
-# unreleased
-* Adding test recurring subscription endpoint for sandbox
 ## 4.4.0
 * Sanitize encrypted_card_data logs
 * Add `LocalPaymentExpired` and `LocalPaymentFunded` webhook notification support

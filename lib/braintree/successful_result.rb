@@ -23,7 +23,6 @@ module Braintree
     attr_reader :transaction
     attr_reader :us_bank_account_verification
     attr_reader :credit_card_verification
-    attr_reader :success
 
     def initialize(attributes = {}) # :nodoc:
       @attrs = attributes.keys
