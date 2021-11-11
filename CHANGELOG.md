@@ -2,6 +2,7 @@
 
 ## unreleased
 * Add plan create/update/find API endpoint
+* Add support for `TransactionReview` webhook notification
 
 ## 4.4.0
 * Sanitize encrypted_card_data logs
