@@ -331,7 +331,7 @@ describe Braintree::WebhookNotification do
         expect(notification.transaction_review.decision).to eq("decision")
         expect(notification.transaction_review.reviewer_email).to eq("hey@girl.com")
         expect(notification.transaction_review.reviewer_note).to eq("i reviewed this")
-        expect(notification.transaction_review.reviewer_time).to_not be_nil
+        expect(notification.transaction_review.reviewed_time).to_not be_nil
       end
     end
 

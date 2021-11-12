@@ -258,7 +258,7 @@ module Braintree
           <decision>decision</decision>
           <reviewer-email>hey@girl.com</reviewer-email>
           <reviewer-note>i reviewed this</reviewer-note>
-          <reviewer-time type="datetime">2017-06-16T20:44:41Z</reviewer-time>
+          <reviewed-time type="datetime">2017-06-16T20:44:41Z</reviewed-time>
         </transaction-review>
       XML
     end
