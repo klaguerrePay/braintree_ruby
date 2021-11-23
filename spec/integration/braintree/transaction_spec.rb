@@ -481,52 +481,34 @@ describe Braintree::Transaction do
                   :fare_amount => 70_00,
                   :fee_amount => 10_00,
                   :tax_amount => 20_00,
+                  :ticket_issuer_address => "Tkt-issuer-adr",
+                  :arrival_date => Date.new(2020, 1, 1),
                   :restricted_ticket => false,
                   :legs => [
-                  {
-                  :conjunction_ticket => "CJ0001",
-                  :exchange_ticket => "ET0001",
-                  :coupon_number => "1",
-                  :service_class => "Y",
-                  :carrier_code => "AA",
-                  :fare_basis_code => "W",
-                  :flight_number => "AA100",
-                  :departure_date => Date.new(2018, 1, 2),
-                  :departure_airport_code => "MDW",
-                  :departure_time => "08:00",
-                  :arrival_airport_code => "ATX",
-                  :arrival_time => "10:00",
-                  :stopover_permitted => false,
-                  :fare_amount => 35_00,
-                  :fee_amount => 5_00,
-                  :tax_amount => 10_00,
-                  :endorsement_or_restrictions => "NOT REFUNDABLE"
-                  },
-                  {
-                    :conjunction_ticket => "CJ0002",
-                    :exchange_ticket => "ET0002",
-                    :coupon_number => "1",
-                    :service_class => "Y",
-                    :carrier_code => "AA",
-                    :fare_basis_code => "W",
-                    :flight_number => "AA200",
-                    :departure_date => Date.new(2018, 1, 3),
-                    :departure_airport_code => "ATX",
-                    :departure_time => "12:00",
-                    :arrival_airport_code => "MDW",
-                    :arrival_time => "14:00",
-                    :stopover_permitted => false,
-                    :fare_amount => 35_00,
-                    :fee_amount => 5_00,
-                    :tax_amount => 10_00,
-                    :endorsement_or_restrictions => "NOT REFUNDABLE"
-                  }
+                    {
+                      :conjunction_ticket => "CJ0001",
+                      :exchange_ticket => "ET0001",
+                      :coupon_number => "1",
+                      :service_class => "Y",
+                      :carrier_code => "AA",
+                      :fare_basis_code => "W",
+                      :flight_number => "AA100",
+                      :departure_date => Date.new(2018, 1, 2),
+                      :departure_airport_code => "MDW",
+                      :departure_time => "08:00",
+                      :arrival_airport_code => "ABC",
+                      :arrival_time => "10:00",
+                      :stopover_permitted => false,
+                      :fare_amount => 35_00,
+                      :fee_amount => 5_00,
+                      :tax_amount => 10_00,
+                      :endorsement_or_restrictions => "NOT REFUNDABLE"
+                    }
                   ]
                 }
               },
             )
             result.success?.should be(true)
-            result.transaction.processed_with_airline_data.should be(true)
           end
 
 
@@ -546,7 +528,7 @@ describe Braintree::Transaction do
                   :passenger_last_name => "Doe",
                   :passenger_middle_initial => "M",
                   :passenger_title => "Mr.",
-                  :issued_date => Date.new(2018, 1, 1),
+                  :issued_date => Date.new(2020, 1, 1),
                   :travel_agency_name => "Expedia",
                   :travel_agency_code => "12345678",
                   :ticket_number => "ticket-number",
@@ -555,6 +537,8 @@ describe Braintree::Transaction do
                   :fare_amount => 70_00,
                   :fee_amount => 10_00,
                   :tax_amount => 20_00,
+                  :ticket_issuer_address => "Tkt-issuer-adr",
+                  :arrival_date => Date.new(2020, 1, 1),
                   :restricted_ticket => false,
                   :legs => [
                     {
@@ -568,27 +552,8 @@ describe Braintree::Transaction do
                       :departure_date => Date.new(2018, 1, 2),
                       :departure_airport_code => "MDW",
                       :departure_time => "08:00",
-                      :arrival_airport_code => "ATX",
+                      :arrival_airport_code => "ABC",
                       :arrival_time => "10:00",
-                      :stopover_permitted => false,
-                      :fare_amount => 35_00,
-                      :fee_amount => 5_00,
-                      :tax_amount => 10_00,
-                      :endorsement_or_restrictions => "NOT REFUNDABLE"
-                    },
-                    {
-                      :conjunction_ticket => "CJ0002",
-                      :exchange_ticket => "ET0002",
-                      :coupon_number => "1",
-                      :service_class => "Y",
-                      :carrier_code => "AA",
-                      :fare_basis_code => "W",
-                      :flight_number => "AA200",
-                      :departure_date => Date.new(2018, 1, 3),
-                      :departure_airport_code => "ATX",
-                      :departure_time => "12:00",
-                      :arrival_airport_code => "MDW",
-                      :arrival_time => "14:00",
                       :stopover_permitted => false,
                       :fare_amount => 35_00,
                       :fee_amount => 5_00,
@@ -601,13 +566,11 @@ describe Braintree::Transaction do
             )
             result.success?.should be(true)
             result.transaction.status.should == Braintree::Transaction::Status::Authorized
-            result.transaction.processed_with_airline_data.should be(true)
 
             result = Braintree::Transaction.submit_for_settlement(result.transaction.id)
 
             result.success?.should == true
             result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
-            result.transaction.processed_with_airline_data.should be(true)
           end
 
           it "2 step should be processed with AID in step2" do
@@ -641,6 +604,8 @@ describe Braintree::Transaction do
                 :fare_amount => 70_00,
                 :fee_amount => 10_00,
                 :tax_amount => 20_00,
+                :ticket_issuer_address => "Tkt-issuer-adr",
+                :arrival_date => Date.new(2020, 1, 1),
                 :restricted_ticket => false,
                 :legs => [
                   {
@@ -654,27 +619,8 @@ describe Braintree::Transaction do
                     :departure_date => Date.new(2018, 1, 2),
                     :departure_airport_code => "MDW",
                     :departure_time => "08:00",
-                    :arrival_airport_code => "ATX",
+                    :arrival_airport_code => "ABC",
                     :arrival_time => "10:00",
-                    :stopover_permitted => false,
-                    :fare_amount => 35_00,
-                    :fee_amount => 5_00,
-                    :tax_amount => 10_00,
-                    :endorsement_or_restrictions => "NOT REFUNDABLE"
-                  },
-                  {
-                    :conjunction_ticket => "CJ0002",
-                    :exchange_ticket => "ET0002",
-                    :coupon_number => "1",
-                    :service_class => "Y",
-                    :carrier_code => "AA",
-                    :fare_basis_code => "W",
-                    :flight_number => "AA200",
-                    :departure_date => Date.new(2018, 1, 3),
-                    :departure_airport_code => "ATX",
-                    :departure_time => "12:00",
-                    :arrival_airport_code => "MDW",
-                    :arrival_time => "14:00",
                     :stopover_permitted => false,
                     :fare_amount => 35_00,
                     :fee_amount => 5_00,
@@ -690,7 +636,6 @@ describe Braintree::Transaction do
 
             result.success?.should == true
             result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
-            result.transaction.processed_with_airline_data.should be(true)
           end
 
           it "should not be processed with AID if validations on industry data fails for card : #{card_number}" do
@@ -720,8 +665,14 @@ describe Braintree::Transaction do
                 }
               },
             )
-            result.success?.should be(true)
-            result.transaction.processed_with_airline_data.should be(false)
+
+          result.success?.should be(false)
+          binding.pry
+          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should == [
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::FareAmountCannotBeNegative,
+
+          ]
+          result.errors.for(:transaction).for(:industry).for(:legs).for(:index_0).map { |e| e.code }.sort.should == [Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareAmountCannotBeNegative]
           end
         end
       end
