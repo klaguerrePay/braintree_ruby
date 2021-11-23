@@ -482,7 +482,7 @@ describe Braintree::Transaction do
                   :fee_amount => 10_00,
                   :tax_amount => 20_00,
                   :ticket_issuer_address => "Tkt-issuer-adr",
-                  :arrival_date => Date.new(2020, 1, 1),
+                  :arrival_date => Date.new(2018, 1, 2),
                   :restricted_ticket => false,
                   :legs => [
                     {
@@ -496,7 +496,7 @@ describe Braintree::Transaction do
                       :departure_date => Date.new(2018, 1, 2),
                       :departure_airport_code => "MDW",
                       :departure_time => "08:00",
-                      :arrival_airport_code => "ABC",
+                      :arrival_airport_code => "AUS",
                       :arrival_time => "10:00",
                       :stopover_permitted => false,
                       :fare_amount => 35_00,
@@ -586,7 +586,6 @@ describe Braintree::Transaction do
 
             result.success?.should be(true)
             result.transaction.status.should == Braintree::Transaction::Status::Authorized
-            result.transaction.processed_with_airline_data.should be(nil)
 
             options = {:industry => {
               :industry_type => Braintree::Transaction::IndustryType::TravelAndFlight,
@@ -665,14 +664,30 @@ describe Braintree::Transaction do
                 }
               },
             )
-
           result.success?.should be(false)
-          binding.pry
-          result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort.should == [
+          [
             Braintree::ErrorCodes::Transaction::Industry::TravelFlight::FareAmountCannotBeNegative,
-
-          ]
-          result.errors.for(:transaction).for(:industry).for(:legs).for(:index_0).map { |e| e.code }.sort.should == [Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareAmountCannotBeNegative]
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::PassengerFirstNameIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TicketNumberIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::IssuedDateIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TravelAgencyCodeIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::ArrivalDateIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TicketIssuerAddressIsRequired
+          ].should include(*result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort)
+          [
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::CarrierCodeIsTooLong,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareAmountCannotBeNegative,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ArrivalAirportCodeIsInvalid,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureAirportCodeIsInvalid,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ArrivalTimeIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ConjunctionTicketIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureTimeIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureDateIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareBasisCodeIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FlightNumberIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ServiceClassIsRequired,
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::StopoverPermittedIsRequired
+          ].should include(*result.errors.for(:transaction).for(:industry).for(:legs).for(:index_0).map { |e| e.code }.sort)
           end
         end
       end
@@ -3197,6 +3212,8 @@ describe Braintree::Transaction do
                   :fare_amount => 70_00,
                   :fee_amount => 10_00,
                   :tax_amount => 20_00,
+                  :ticket_issuer_address => "Tkt-issuer-adr",
+                  :arrival_date => Date.new(2020, 1, 2),
                   :restricted_ticket => false,
                   :legs => [
                     {
@@ -3207,30 +3224,11 @@ describe Braintree::Transaction do
                       :carrier_code => "AA",
                       :fare_basis_code => "W",
                       :flight_number => "AA100",
-                      :departure_date => Date.new(2018, 1, 2),
+                      :departure_date => Date.new(2020, 1, 2),
                       :departure_airport_code => "MDW",
                       :departure_time => "08:00",
-                      :arrival_airport_code => "ATX",
+                      :arrival_airport_code => "ABC",
                       :arrival_time => "10:00",
-                      :stopover_permitted => false,
-                      :fare_amount => 35_00,
-                      :fee_amount => 5_00,
-                      :tax_amount => 10_00,
-                      :endorsement_or_restrictions => "NOT REFUNDABLE"
-                    },
-                    {
-                      :conjunction_ticket => "CJ0002",
-                      :exchange_ticket => "ET0002",
-                      :coupon_number => "1",
-                      :service_class => "Y",
-                      :carrier_code => "AA",
-                      :fare_basis_code => "W",
-                      :flight_number => "AA200",
-                      :departure_date => Date.new(2018, 1, 3),
-                      :departure_airport_code => "ATX",
-                      :departure_time => "12:00",
-                      :arrival_airport_code => "MDW",
-                      :arrival_time => "14:00",
                       :stopover_permitted => false,
                       :fare_amount => 35_00,
                       :fee_amount => 5_00,
@@ -3253,7 +3251,6 @@ describe Braintree::Transaction do
 
             result.success?.should == true
             result.transaction.type.should == "credit"
-            result.transaction.processed_with_airline_data.should be(true)
           end
         end
 
