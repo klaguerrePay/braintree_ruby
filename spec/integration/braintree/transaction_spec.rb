@@ -580,8 +580,8 @@ describe Braintree::Transaction do
               :amount => 1_00,
               :credit_card => {
                 :number => card_number,
-                :expiration_date => "05/2029"
-              }
+                :expiration_date => "05/2029",
+              },
             )
 
             result.success?.should be(true)
@@ -3233,11 +3233,11 @@ describe Braintree::Transaction do
                       :fare_amount => 35_00,
                       :fee_amount => 5_00,
                       :tax_amount => 10_00,
-                      :endorsement_or_restrictions => "NOT REFUNDABLE"
-                    }
+                      :endorsement_or_restrictions => "NOT REFUNDABLE",
+                    },
                   ]
-                }
-              }
+                },
+              },
             )
 
             config = Braintree::Configuration.instantiate
