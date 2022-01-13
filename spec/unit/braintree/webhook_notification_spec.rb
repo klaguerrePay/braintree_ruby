@@ -738,11 +738,11 @@ describe Braintree::WebhookNotification do
   context "payment_method_customer_data_updated" do
     it "builds a sample notification for a payment_method_customer_data_updated webhook" do
       sample_notification = Braintree::WebhookTesting.sample_notification(
-        Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdatedMetadata,
+        Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdated,
         "my_id",
       )
       notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
-      notification.kind.should == Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdatedMetadata
+      notification.kind.should == Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdated
 
       payment_method_customer_data_updated = notification.payment_method_customer_data_updated_metadata
 

@@ -1,6 +1,6 @@
 # Unreleased
 
-* Add `PaymentMethodCustomerDataUpdatedMetadata` webhook notification support
+* Add `PaymentMethodCustomerDataUpdated` webhook notification support
 
 # Changelog
 

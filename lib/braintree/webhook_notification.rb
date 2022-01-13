@@ -38,7 +38,7 @@ module Braintree
       PartnerMerchantDisconnected = "partner_merchant_disconnected"
       PartnerMerchantDeclined = "partner_merchant_declined"
 
-      PaymentMethodCustomerDataUpdatedMetadata = "payment_method_customer_data_updated_metadata"
+      PaymentMethodCustomerDataUpdated = "payment_method_customer_data_updated"
 
       PaymentMethodRevokedByCustomer = "payment_method_revoked_by_customer"
 
@@ -111,7 +111,7 @@ module Braintree
       @local_payment_expired = LocalPaymentExpired._new(@subject[:local_payment_expired]) if @subject.has_key?(:local_payment_expired) && Kind::LocalPaymentExpired == @kind
       @local_payment_funded = LocalPaymentFunded._new(@subject[:local_payment_funded]) if @subject.has_key?(:local_payment_funded) && Kind::LocalPaymentFunded == @kind
       @local_payment_reversed = LocalPaymentReversed._new(@subject[:local_payment_reversed]) if @subject.has_key?(:local_payment_reversed) && Kind::LocalPaymentReversed == @kind
-      @payment_method_customer_data_updated_metadata = PaymentMethodCustomerDataUpdatedMetadata._new(gateway, @subject[:payment_method_customer_data_updated_metadata]) if @subject.has_key?(:payment_method_customer_data_updated_metadata) && Kind::PaymentMethodCustomerDataUpdatedMetadata == @kind
+      @payment_method_customer_data_updated_metadata = PaymentMethodCustomerDataUpdatedMetadata._new(gateway, @subject[:payment_method_customer_data_updated_metadata]) if @subject.has_key?(:payment_method_customer_data_updated_metadata) && Kind::PaymentMethodCustomerDataUpdated == @kind
 
     end
 

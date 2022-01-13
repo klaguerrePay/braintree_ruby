@@ -96,8 +96,8 @@ module Braintree
         _local_payment_funded_sample_xml(id)
       when Braintree::WebhookNotification::Kind::LocalPaymentReversed
         _local_payment_reversed_sample_xml
-      when Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdatedMetadata
-        _payment_method_customer_data_updated_metadata_sample_xml(id)
+      when Braintree::WebhookNotification::Kind::PaymentMethodCustomerDataUpdated
+        _payment_method_customer_data_updated_sample_xml(id)
       else
         _subscription_sample_xml(id)
       end
@@ -975,7 +975,7 @@ module Braintree
       XML
     end
 
-    def _payment_method_customer_data_updated_metadata_sample_xml(id)
+    def _payment_method_customer_data_updated_sample_xml(id)
       <<-XML
         <payment-method-customer-data-updated-metadata>
           <token>TOKEN-12345</token>
