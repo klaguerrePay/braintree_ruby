@@ -750,7 +750,7 @@ describe Braintree::WebhookNotification do
       payment_method_customer_data_updated.datetime_updated.should eq("2022-01-01T21:28:37Z")
 
       enriched_customer_data = payment_method_customer_data_updated.enriched_customer_data
-      enriched_customer_data.fields_updated.should eq([])
+      enriched_customer_data.fields_updated.should eq(["username"])
 
       profile_data = enriched_customer_data.profile_data
       profile_data.first_name.should eq("John")
