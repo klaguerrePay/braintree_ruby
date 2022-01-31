@@ -1,3 +1,7 @@
+# Unreleased
+
+* Add `PaymentMethodCustomerDataUpdated` webhook notification support
+
 # Changelog
 
 ## 4.5.0
