@@ -1,4 +1,6 @@
 # Changelog
+# Unreleased
+* Add `AchReturnCode` to transaction object
 
 # 4.6.0
 
