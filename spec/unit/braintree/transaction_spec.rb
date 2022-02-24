@@ -238,6 +238,14 @@ describe Braintree::Transaction do
       transaction.network_transaction_id.should == "123456789012345"
     end
 
+    it "accepts network_transaction_id" do
+      transaction = Braintree::Transaction._new(
+        :gateway,
+        :ach_return_code => "R1",
+      )
+      expect(transaction.ach_return_code).to eq("R1")
+    end
+
     it "accepts network_response code and network_response_text" do
       transaction = Braintree::Transaction._new(
         :gateway,

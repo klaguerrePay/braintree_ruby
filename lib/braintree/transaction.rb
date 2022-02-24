@@ -91,6 +91,7 @@ module Braintree
     end
 
     attr_reader :acquirer_reference_number
+    attr_reader :ach_return_code
     attr_reader :add_ons
     attr_reader :additional_processor_response          # The raw response from the processor.
     attr_reader :amount
