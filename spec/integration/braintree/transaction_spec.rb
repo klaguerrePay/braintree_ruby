@@ -6941,6 +6941,39 @@ describe Braintree::Transaction do
     end
   end
 
+  describe "retried flag presence in response" do
+    it "creates a retried transaction" do
+      result = Braintree::Transaction.sale(
+        :amount => Braintree::Test::TransactionAmounts::Decline,
+        :payment_method_token => "network_tokenized_credit_card",
+      )
+      transaction = result.transaction
+      transaction.retried.should == true
+    end
+
+    it "creates a non-retried transaction" do
+      result = Braintree::Transaction.sale(
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :payment_method_token => "network_tokenized_credit_card",
+      )
+      transaction = result.transaction
+      transaction.retried.should == nil
+    end
+
+    it "creates a transaction that is ineligible for retries" do
+      result = Braintree::Transaction.sale(
+        :merchant_account_id => SpecHelper::NonDefaultMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        },
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+      )
+      transaction = result.transaction
+      transaction.retried.should == nil
+    end
+  end
+
   describe "installments" do
     it "creates a transaction with an installment count" do
       result = Braintree::Transaction.create(

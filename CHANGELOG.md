@@ -1,6 +1,7 @@
 # Changelog
 # Unreleased
 * Add `AchReturnCode` to transaction object
+* Add `retried` boolean to `Transaction`
 
 # 4.6.0
 

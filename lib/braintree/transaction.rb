@@ -147,6 +147,7 @@ module Braintree
     attr_reader :refund_ids
     attr_reader :refunded_transaction_id
     attr_reader :refunded_installments
+    attr_reader :retried
     attr_reader :retrieval_reference_number
     attr_reader :risk_data
     attr_reader :samsung_pay_card_details
