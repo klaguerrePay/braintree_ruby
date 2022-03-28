@@ -1947,7 +1947,7 @@ describe Braintree::Transaction do
         venmo_account_details.should be_a(Braintree::Transaction::VenmoAccountDetails)
         venmo_account_details.token.should respond_to(:to_str)
         venmo_account_details.username.should == "venmojoe"
-        venmo_account_details.venmo_user_id.should == "Venmo-Joe-1"
+        venmo_account_details.venmo_user_id.should == "1234567891234567891"
         venmo_account_details.image_url.should include(".png")
         venmo_account_details.source_description.should == "Venmo Account: venmojoe"
       end
