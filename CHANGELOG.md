@@ -1,4 +1,7 @@
 # Changelog
+## Unreleased
+* Add LiabilityShift class and `liability_shift` field to RiskData
+
 ## 4.7.0
 * Add `AchReturnCode` to transaction object
 * Add `retried` boolean to `Transaction`
