@@ -1,5 +1,7 @@
 # Changelog
+
 ## Unreleased
+* Add 'ExchangeRateQuoteAPI'
 * Add LiabilityShift class and `liability_shift` field to RiskData
 
 ## 4.7.0
