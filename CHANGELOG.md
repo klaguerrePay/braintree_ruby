@@ -3,6 +3,7 @@
 ## Unreleased
 * Add 'ExchangeRateQuoteAPI'
 * Add LiabilityShift class and `liability_shift` field to RiskData
+* Replace generic errors with api_error_response
 
 ## 4.7.0
 * Add `AchReturnCode` to transaction object
