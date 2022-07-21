@@ -170,6 +170,7 @@ module Braintree
     attr_reader :venmo_account_details
     attr_reader :visa_checkout_card_details
     attr_reader :voice_referral_number
+    attr_reader :ach_return_responses
 
     def self.adjust_authorization(*args)
       Configuration.gateway.transaction.adjust_authorization(*args)

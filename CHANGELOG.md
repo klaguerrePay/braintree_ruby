@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+* Add `ach_return_responses` to `Transaction` for search results that search for transaction that have ach return response related data.
+* Add `ach_return_responses_created_at` range field to to `TransactionSearch`
+* Add `reason_code` to TransactionSearch to search for reason codes on transaction that have ach return responses associated with them.
 * Add 'ExchangeRateQuoteAPI'
 * Add LiabilityShift class and `liability_shift` field to RiskData
 * Replace generic errors with api_error_response
