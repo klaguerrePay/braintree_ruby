@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.8.0
 * Add `ach_return_responses` to `Transaction` for search results that search for transaction that have ach return response related data.
 * Add `ach_return_responses_created_at` range field to to `TransactionSearch`
 * Add `reason_code` to TransactionSearch to search for reason codes on transaction that have ach return responses associated with them.
