@@ -1,7 +1,7 @@
 # Changelog
 
 ## unreleased
-* Add `cardholder_name` attribute reader to `ApplePayCard`
+* Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
 
 ## 4.8.0
 * Add `ach_return_responses` to `Transaction` for search results that search for transaction that have ach return response related data.
