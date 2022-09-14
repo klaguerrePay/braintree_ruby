@@ -10,6 +10,7 @@
 * Add 'ExchangeRateQuoteAPI'
 * Add LiabilityShift class and `liability_shift` field to RiskData
 * Replace generic errors with api_error_response
+* Deprecate `chargeback_protection_level` and add `protection_level` to `Dispute` and `DisputeSearch`
 
 ## 4.7.0
 * Add `AchReturnCode` to transaction object
