@@ -1,7 +1,6 @@
 # Changelog
 
 ## unreleased
-* Add `merchant_advice_code` and `merchant_advice_code_text` to Transaction object
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
 
 ## 4.8.0
