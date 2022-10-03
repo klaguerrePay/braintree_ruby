@@ -2,6 +2,7 @@
 
 ## 4.9.0
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
+* Deprecate `chargeback_protection_level` and add `protection_level` to `Dispute` and `DisputeSearch`
 
 ## 4.8.0
 * Add `ach_return_responses` to `Transaction` for search results that search for transaction that have ach return response related data.
@@ -10,7 +11,6 @@
 * Add 'ExchangeRateQuoteAPI'
 * Add LiabilityShift class and `liability_shift` field to RiskData
 * Replace generic errors with api_error_response
-* Deprecate `chargeback_protection_level` and add `protection_level` to `Dispute` and `DisputeSearch`
 
 ## 4.7.0
 * Add `AchReturnCode` to transaction object
