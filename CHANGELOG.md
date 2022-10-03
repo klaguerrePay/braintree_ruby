@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 4.9.0
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
 
 ## 4.8.0
