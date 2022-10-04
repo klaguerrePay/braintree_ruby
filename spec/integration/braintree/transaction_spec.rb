@@ -5208,7 +5208,7 @@ describe Braintree::Transaction do
       end
     end
 
-    context "Amex Pay with Points" do
+    xit "Amex Pay with Points" do
       context "transaction creation" do
         it "succeeds when submit_for_settlement is true" do
           result = Braintree::Transaction.sale(
