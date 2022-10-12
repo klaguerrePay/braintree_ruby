@@ -5517,7 +5517,7 @@ describe Braintree::Transaction do
       end
     end
 
-    it "succeeds when level 2 data is provided" do
+    xit "succeeds when level 2 data is provided" do
       result = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
         :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
@@ -5541,7 +5541,7 @@ describe Braintree::Transaction do
       result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
     end
 
-    it "succeeds when level 3 data is provided" do
+    xit "succeeds when level 3 data is provided" do
       result = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
         :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
