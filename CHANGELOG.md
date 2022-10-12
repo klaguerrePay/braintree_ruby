@@ -1,5 +1,8 @@
 # Changelog
 
+## unreleased
+* Add `billing_address` attribute reader to `ApplePayCard`
+
 ## 4.9.0
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
 * Deprecate `chargeback_protection_level` and add `protection_level` to `Dispute` and `DisputeSearch`
