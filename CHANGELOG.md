@@ -2,6 +2,7 @@
 
 ## unreleased
 * Add `billing_address` attribute reader to `ApplePayCard`
+* Add `pre_dispute_program` to `Dispute` and `DisputeSearch`
 
 ## 4.9.0
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)
