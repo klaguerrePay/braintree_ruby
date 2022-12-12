@@ -38,6 +38,7 @@ module Braintree
 
     module Status
       Accepted = "accepted"
+      AutoAccepted = "auto_accepted"
       Disputed = "disputed"
       Expired = "expired"
       Open = "open"
