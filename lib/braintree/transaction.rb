@@ -24,6 +24,7 @@ module Braintree
       AVSAndCVV    = "avs_and_cvv"
       CVV          = "cvv"
       Duplicate    = "duplicate"
+      ExcessiveRetry = "excessive_retry"
       Fraud        = "fraud"
       RiskThreshold = "risk_threshold"
       ThreeDSecure = "three_d_secure"

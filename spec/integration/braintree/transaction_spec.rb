@@ -1001,6 +1001,24 @@ describe Braintree::Transaction do
         result.success?.should == false
         result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::TokenIssuance
       end
+
+      it "exposes the excessive_retry gateway rejection reason" do
+        with_duplicate_checking_merchant do
+          result = nil
+          16.times do
+            result = Braintree::Transaction.sale(
+              :amount => Braintree::Test::TransactionAmounts::Decline,
+              :credit_card => {
+                :number => Braintree::Test::CreditCardNumbers::Visa,
+                :expiration_month => "05",
+                :expiration_year => "2011"
+              },
+              )
+          end
+          result.success?.should == false
+          result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::ExcessiveRetry
+        end
+      end
     end
 
     it "accepts credit card expiration month and expiration year" do

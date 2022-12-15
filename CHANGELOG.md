@@ -5,6 +5,7 @@
 * Add `pre_dispute_program` to `Dispute` and `DisputeSearch`
 * Add `AutoAccepted` status to `Dispute` 
 * Add `DisputeAutoAccepted` webhook to `WebhookNotification`
+* Add `ExcessiveRetry` to `GatewayRejectionReason`
 
 ## 4.9.0
 * Add `cardholder_name` attribute reader to `ApplePayCard` (Thanks @AxelTheGerman)

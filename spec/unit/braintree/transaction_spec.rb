@@ -390,4 +390,11 @@ describe Braintree::Transaction do
       transaction.processed_with_network_token?.should == false
     end
   end
+
+  describe "gateway rejection reason" do
+    it "verifies excessive_retry mapping" do
+      transaction = Braintree::Transaction._new(:gateway, :gateway_rejection_reason => "excessive_retry")
+      transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::ExcessiveRetry
+    end
+  end
 end
