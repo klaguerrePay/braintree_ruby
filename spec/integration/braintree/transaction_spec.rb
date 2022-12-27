@@ -2705,7 +2705,7 @@ describe Braintree::Transaction do
         it "can create a transaction" do
           payment_method_result = Braintree::PaymentMethod.create(
             :customer_id => Braintree::Customer.create.customer.id,
-            :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
+            :payment_method_nonce => Braintree::Test::Nonce::PayPalBillingAgreement,
           )
           result = Braintree::Transaction.create(
             :type => "sale",
@@ -4352,7 +4352,7 @@ describe Braintree::Transaction do
       it "returns a validation error if used with an unsupported instrument type" do
         customer = Braintree::Customer.create!
         result = Braintree::PaymentMethod.create(
-          :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
+          :payment_method_nonce => Braintree::Test::Nonce::PayPalBillingAgreement,
           :customer_id => customer.id,
         )
         payment_method_token = result.payment_method.token

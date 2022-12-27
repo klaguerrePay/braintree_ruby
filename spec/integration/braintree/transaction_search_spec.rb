@@ -133,7 +133,7 @@ describe Braintree::Transaction, "search" do
     it "searches on users" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
+        :payment_method_nonce => Braintree::Test::Nonce::PayPalBillingAgreement,
       )
 
       collection = Braintree::Transaction.search do |search|
@@ -146,7 +146,7 @@ describe Braintree::Transaction, "search" do
     it "searches on paypal transactions" do
       transaction = Braintree::Transaction.sale!(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
-        :payment_method_nonce => Braintree::Test::Nonce::PayPalFuturePayment,
+        :payment_method_nonce => Braintree::Test::Nonce::PayPalBillingAgreement,
       )
 
       paypal_details = transaction.paypal_details
