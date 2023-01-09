@@ -69,6 +69,7 @@ module Braintree
       SamsungPayDiscover = "tokensam_fake_discover"
       SamsungPayMasterCard = "tokensam_fake_mastercard"
       SamsungPayVisa = "tokensam_fake_visa"
+      SepaDirectDebit = "fake-sepa-direct-debit-nonce"
     end
   end
 end
