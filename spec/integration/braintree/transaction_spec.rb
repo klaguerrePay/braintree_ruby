@@ -7233,7 +7233,7 @@ describe Braintree::Transaction do
       end
 
       it "returns failure, when transaction authorization type final or undefined" do
-        additional_params = {:transaction_source => "recurring_first"}
+        additional_params = {:transaction_source => "recurring"}
         initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
         expect(initial_transaction.success?).to eq(true)
 
