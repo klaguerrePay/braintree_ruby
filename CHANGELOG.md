@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 4.10.0
 * Add `billing_address` attribute reader to `ApplePayCard`
 * Add `pre_dispute_program` to `Dispute` and `DisputeSearch`
 * Add `AutoAccepted` status to `Dispute` 
