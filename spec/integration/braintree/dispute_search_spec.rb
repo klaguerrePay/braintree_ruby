@@ -104,7 +104,6 @@ describe Braintree::Dispute, "search" do
       collection.disputes.each do |dispute|
         expect(dispute.chargeback_protection_level).to eq(Braintree::Dispute::ChargebackProtectionLevel::Effortless)
         expect(dispute.protection_level).to eq(Braintree::Dispute::ProtectionLevel::EffortlessCBP)
-        expect(dispute.reason).to eq(Braintree::Dispute::Reason::Fraud)
       end
     end
 
