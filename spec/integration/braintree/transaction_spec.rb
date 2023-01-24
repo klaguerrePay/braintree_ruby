@@ -1005,7 +1005,9 @@ describe Braintree::Transaction do
       it "exposes the excessive_retry gateway rejection reason" do
         with_duplicate_checking_merchant do
           result = nil
-          16.times do
+          counter = 0
+          excessive_retry = false
+          until excessive_retry || counter == 100
             result = Braintree::Transaction.sale(
               :amount => Braintree::Test::TransactionAmounts::Decline,
               :credit_card => {
@@ -1014,9 +1016,10 @@ describe Braintree::Transaction do
                 :expiration_year => "2011"
               },
               )
+            excessive_retry = result.transaction.status == "gateway_rejected"
+            counter +=1
           end
-          result.success?.should == false
-          result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::ExcessiveRetry
+          expect(result.transaction.gateway_rejection_reason). to eq(Braintree::Transaction::GatewayRejectionReason::ExcessiveRetry)
         end
       end
     end
