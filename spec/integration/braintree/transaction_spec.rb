@@ -1007,7 +1007,7 @@ describe Braintree::Transaction do
           result = nil
           counter = 0
           excessive_retry = false
-          until excessive_retry || counter == 100
+          until excessive_retry || counter == 20
             result = Braintree::Transaction.sale(
               :amount => Braintree::Test::TransactionAmounts::Decline,
               :credit_card => {
