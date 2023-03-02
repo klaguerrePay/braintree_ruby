@@ -1507,6 +1507,32 @@ describe Braintree::Transaction do
         result.transaction.recurring.should == true
       end
 
+      it "successfully creates a transaction with installment_first" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :transaction_source => "installment_first",
+        )
+        result.success?.should == true
+      end
+
+      it "successfully creates a transaction with installment" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :transaction_source => "installment",
+        )
+        result.success?.should == true
+      end
+
       it "marks a transactions as merchant" do
         result = Braintree::Transaction.create(
           :type => "sale",

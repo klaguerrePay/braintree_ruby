@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+* Add `intended_transaction_source` to `CreditCardVerificationGateway`
+* Add `payment_method_nonce` to `CreditCardVerificationGateway`
+* Add `three_d_secure_authentication_id` to `CreditCardVerificationGateway`
+* Add `three_d_secure_pass_thru` to `CreditCardVerificationGateway`
+
 ## 4.10.0
 * Add `billing_address` attribute reader to `ApplePayCard`
 * Add `pre_dispute_program` to `Dispute` and `DisputeSearch`
