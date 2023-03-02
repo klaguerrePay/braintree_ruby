@@ -1757,35 +1757,6 @@ describe Braintree::Transaction do
       end
     end
 
-    describe "venmo_sdk" do
-      it "can create a card with a venmo sdk payment method code" do
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :venmo_sdk_payment_method_code => Braintree::Test::VenmoSDK::VisaPaymentMethodCode,
-        )
-        result.success?.should == true
-        result.transaction.credit_card_details.bin.should == "400934"
-        result.transaction.credit_card_details.last_4.should == "1881"
-      end
-
-      it "can create a transaction with venmo sdk session" do
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "12/12",
-          },
-          :options => {
-            :venmo_sdk_session => Braintree::Test::VenmoSDK::Session
-          },
-        )
-        result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == false
-      end
-    end
-
     context "client API" do
       it "can create a transaction with a shared card nonce" do
         nonce = nonce_for_new_payment_method(
@@ -6716,38 +6687,6 @@ describe Braintree::Transaction do
         result.success?.should == false
         result.message.should include("Invalid VenmoSDK payment method code")
         result.errors.map(&:code).should include("91727")
-      end
-    end
-
-    describe "venmo_sdk_session" do
-      it "can create a transaction and vault a card when a venmo_sdk_session is present" do
-        result = Braintree::Transaction.sale(
-          :amount => "10.00",
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          },
-          :options => {
-            :venmo_sdk_session => Braintree::Test::VenmoSDK::Session
-          },
-        )
-        result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == false
-      end
-
-      it "venmo_sdk boolean is false when an invalid session is passed" do
-        result = Braintree::Transaction.sale(
-          :amount => "10.00",
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "05/2009"
-          },
-          :options => {
-            :venmo_sdk_session => Braintree::Test::VenmoSDK::InvalidSession
-          },
-        )
-        result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == false
       end
     end
   end
