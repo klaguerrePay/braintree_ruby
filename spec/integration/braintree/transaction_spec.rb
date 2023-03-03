@@ -6668,29 +6668,6 @@ describe Braintree::Transaction do
     Braintree::Transaction.find(transaction.id)
   end
 
-  context "venmo sdk" do
-    describe "venmo_sdk_payment_method_code" do
-      it "can create a transaction with venmo_sdk_payment_method_code" do
-        result = Braintree::Transaction.sale(
-          :amount => "10.00",
-          :venmo_sdk_payment_method_code => Braintree::Test::VenmoSDK.generate_test_payment_method_code(Braintree::Test::CreditCardNumbers::Visa),
-        )
-        result.success?.should == true
-        result.transaction.credit_card_details.venmo_sdk?.should == false
-      end
-
-      it "errors when an invalid payment method code is passed" do
-        result = Braintree::Transaction.sale(
-          :amount => "10.00",
-          :venmo_sdk_payment_method_code => Braintree::Test::VenmoSDK::InvalidPaymentMethodCode,
-        )
-        result.success?.should == false
-        result.message.should include("Invalid VenmoSDK payment method code")
-        result.errors.map(&:code).should include("91727")
-      end
-    end
-  end
-
   context "paypal" do
     it "can create a transaction for a paypal account" do
       result = Braintree::Transaction.sale(
