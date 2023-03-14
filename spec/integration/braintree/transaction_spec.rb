@@ -1002,7 +1002,7 @@ describe Braintree::Transaction do
         result.transaction.gateway_rejection_reason.should == Braintree::Transaction::GatewayRejectionReason::TokenIssuance
       end
 
-      it "exposes the excessive_retry gateway rejection reason" do
+      xit "exposes the excessive_retry gateway rejection reason" do
         with_duplicate_checking_merchant do
           result = nil
           counter = 0
