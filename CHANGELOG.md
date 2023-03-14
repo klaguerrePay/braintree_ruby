@@ -5,6 +5,9 @@
 * Add `payment_method_nonce` to `CreditCardVerificationGateway`
 * Add `three_d_secure_authentication_id` to `CreditCardVerificationGateway`
 * Add `three_d_secure_pass_thru` to `CreditCardVerificationGateway`
+* Add `network_tokenization_attributes` parameter to `Transaction.sale`
+* Add `network_token_details` to Transaction.sale response
+* Add `is_network_tokenized` to `CreditCardDetails`
 
 ## 4.10.0
 * Add `billing_address` attribute reader to `ApplePayCard`

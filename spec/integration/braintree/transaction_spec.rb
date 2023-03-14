@@ -5226,6 +5226,49 @@ describe Braintree::Transaction do
       end
     end
 
+
+    context "3rd party Card on File Network Token" do
+      it "Works with all params" do
+        params = {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009",
+            :network_tokenization_attributes => {
+              :cryptogram => "/wAAAAAAAcb8AlGUF/1JQEkAAAA=",
+              :ecommerce_indicator => "05",
+              :token_requestor_id => "45310020105"
+            },
+          }
+        }
+        result = Braintree::Transaction.sale(params)
+        expect(result.success?).to eq true
+        expect(result.transaction.status).to eq Braintree::Transaction::Status::Authorized
+        expect(result.transaction.processed_with_network_token?).to eq true
+
+        network_token_details = result.transaction.network_token_details
+        expect(network_token_details.is_network_tokenized?).to eq true
+      end
+
+      it "returns errors if validations on cryptogram fails" do
+        params = {
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2009",
+            :network_tokenization_attributes => {
+              :ecommerce_indicator => "05",
+              :token_requestor_id => "45310020105"
+            },
+          }
+        }
+        result = Braintree::Transaction.sale(params)
+
+        expect(result.success?).to eq(false)
+        expect(result.errors.for(:transaction).for(:credit_card).map { |e| e.code }.sort).to eq [Braintree::ErrorCodes::CreditCard::NetworkTokenizationAttributeCryptogramIsRequired]
+      end
+    end
+
     xit "Amex Pay with Points" do
       context "transaction creation" do
         it "succeeds when submit_for_settlement is true" do
