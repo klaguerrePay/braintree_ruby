@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.11.0
 * Add `intended_transaction_source` to `CreditCardVerificationGateway`
 * Add `payment_method_nonce` to `CreditCardVerificationGateway`
 * Add `three_d_secure_authentication_id` to `CreditCardVerificationGateway`
