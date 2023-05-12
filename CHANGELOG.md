@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Add `foreign_retailer` to Transaction
+
 ## 4.20.0
 
 - Deprecate `credit` method in `credit_card` and `credit_card_gateway`

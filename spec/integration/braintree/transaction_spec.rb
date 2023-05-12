@@ -718,6 +718,49 @@ describe Braintree::Transaction do
       end
     end
 
+    context "foreign_retailer" do
+      it "returns true when foreign_retailer param is true" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2025"
+          },
+          :foreign_retailer => true,
+        )
+        expect(result).to be_success
+        expect(result.transaction.foreign_retailer).to be_truthy
+      end
+
+      it "returns nil when foreign_retailer param is false" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2025"
+          },
+          :foreign_retailer => false,
+        )
+        expect(result).to be_success
+        expect(result.transaction.foreign_retailer).to be_nil
+      end
+
+      it "returns nil when foreign_retailer param is nil" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "05/2025"
+          },
+        )
+        expect(result).to be_success
+        expect(result.transaction.foreign_retailer).to be_nil
+      end
+    end
+
     it "returns a successful result if successful" do
       result = Braintree::Transaction.create(
         :type => "sale",
