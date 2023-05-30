@@ -7002,7 +7002,7 @@ describe Braintree::Transaction do
   end
 
   describe "retried_transaction_id and retry_ids presence in transaction response" do
-    context "when it creates a retired transaction" do
+    context "when it creates a retried transaction" do
       it "has retry_ids in the first transaction" do
         result = Braintree::Transaction.sale(
           :amount => Braintree::Test::TransactionAmounts::Decline,
