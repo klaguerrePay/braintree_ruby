@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.12.0
 * Add `merchant_advice_code` and `merchant_advice_code_text` to Transaction object
 
 ## 4.11.0
