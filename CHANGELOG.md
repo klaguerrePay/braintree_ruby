@@ -1,9 +1,11 @@
 # Changelog
 
-## 4.12.0
-* Add `merchant_advice_code` and `merchant_advice_code_text` to Transaction object
+## Unreleased
 * Add `retry_ids` array to `Transaction`
 * Add `retried_transaction_id` string to `Transaction`
+
+## 4.12.0
+* Add `merchant_advice_code` and `merchant_advice_code_text` to Transaction object
 
 ## 4.11.0
 * Add `intended_transaction_source` to `CreditCardVerificationGateway`
