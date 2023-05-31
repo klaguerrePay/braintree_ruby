@@ -6973,6 +6973,7 @@ describe Braintree::Transaction do
         :amount => Braintree::Test::TransactionAmounts::Decline,
         :payment_method_token => "network_tokenized_credit_card",
       )
+
       transaction = result.transaction
       transaction.retried.should == true
     end
@@ -6997,6 +6998,53 @@ describe Braintree::Transaction do
       )
       transaction = result.transaction
       transaction.retried.should == nil
+    end
+  end
+
+  describe "retried_transaction_id and retry_ids presence in transaction response" do
+    context "when it creates a retried transaction" do
+      it "has retry_ids in the first transaction" do
+        result = Braintree::Transaction.sale(
+          :amount => Braintree::Test::TransactionAmounts::Decline,
+          :payment_method_token => "network_tokenized_credit_card",
+          :merchant_account_id => "ma_transaction_multiple_retries",
+        )
+
+        transaction = result.transaction
+        transaction.retried_transaction_id.should == nil
+        transaction.retry_ids.should_not == []
+        transaction.retry_ids.count.should == 2
+
+        # verify retried_transaction_id is in the all retried transactions
+        retry_transaction_1 = transaction.retry_ids[0]
+        collection_1 = Braintree::Transaction.search do |search|
+          search.id.is retry_transaction_1
+        end
+        collection_1.maximum_size.should == 1
+        collection_1.first.retried_transaction_id.should_not == nil
+        collection_1.first.retried_transaction_id.should == transaction.id
+
+        retry_transaction_2 = transaction.retry_ids[1]
+        collection_2 = Braintree::Transaction.search do |search|
+          search.id.is retry_transaction_2
+        end
+        collection_2.maximum_size.should == 1
+        collection_2.first.retried_transaction_id.should_not == nil
+        collection_2.first.retried_transaction_id.should == transaction.id
+      end
+    end
+
+    context "when it creates a non-retried transaction" do
+      it "does not have retried_transaction_id and retry_ids in the transaction" do
+        result = Braintree::Transaction.sale(
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :payment_method_token => "network_tokenized_credit_card",
+        )
+
+        transaction = result.transaction
+        transaction.retried_transaction_id.should == nil
+        transaction.retry_ids.should == []
+      end
     end
   end
 
