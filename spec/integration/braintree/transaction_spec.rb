@@ -1561,6 +1561,19 @@ describe Braintree::Transaction do
         result.transaction.recurring.should == false
       end
 
+      it "marks a transactions as pre_auth" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/26",
+          },
+          :transaction_source => "estimated",
+        )
+        result.success?.should == true
+      end
+
       it "handles validation when transaction source invalid" do
         result = Braintree::Transaction.create(
           :type => "sale",
@@ -7189,7 +7202,8 @@ describe Braintree::Transaction do
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "06/2009"
-        }
+        },
+        :transaction_source => "estimated",
       }
     end
     context "successful authorization" do
