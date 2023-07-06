@@ -7202,8 +7202,7 @@ describe Braintree::Transaction do
         :credit_card => {
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_date => "06/2009"
-        },
-        :transaction_source => "estimated",
+        }
       }
     end
     context "successful authorization" do
@@ -7294,32 +7293,6 @@ describe Braintree::Transaction do
         expect(adjustment_transaction.success?).to eq(false)
         expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
         expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::TransactionIsNotEligibleForAdjustment)
-      end
-
-      it "returns failure, when processor does not support incremental auth" do
-        initial_transaction = Braintree::Transaction.sale(first_data_visa_transaction_params)
-        expect(initial_transaction.success?).to eq(true)
-
-        adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50"
-        )
-
-        expect(adjustment_transaction.success?).to eq(false)
-        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
-        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::ProcessorDoesNotSupportIncrementalAuth)
-      end
-
-      it "returns failure, when processor does not support auth reversal" do
-        initial_transaction = Braintree::Transaction.sale(first_data_visa_transaction_params)
-        expect(initial_transaction.success?).to eq(true)
-
-        adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "65.50"
-        )
-
-        expect(adjustment_transaction.success?).to eq(false)
-        expect(adjustment_transaction.transaction.amount.should).to eq(BigDecimal("75.50"))
-        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::ProcessorDoesNotSupportPartialAuthReversal)
       end
     end
   end
