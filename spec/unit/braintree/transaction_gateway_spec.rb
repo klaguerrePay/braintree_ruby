@@ -74,6 +74,7 @@ describe Braintree::TransactionGateway do
           :skip_avs,
           :skip_cvv,
           {:paypal => [:custom_field, :payee_id, :payee_email, :description, {:supplementary_data => :_any_key_}]},
+          {:processing_overrides => [:customer_email, :customer_first_name, :customer_last_name, :customer_tax_identifier]},
           {:three_d_secure => [:required]},
           {:amex_rewards => [:request_id, :points, :currency_amount, :currency_iso_code]},
           {:venmo => [:profile_id]},

@@ -1668,6 +1668,31 @@ describe Braintree::Transaction do
       end
     end
 
+    context "processing_overrides" do
+      it "creates a successful transaction with options processing_overrides" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :customer => {
+            :last_name => "Doe"
+          },
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::Visa,
+            :expiration_date => "12/12",
+          },
+          :options => {
+            :processing_overrides => {
+              :customer_email => "RubySDK@example.com",
+              :customer_first_name => "RubySDK_test_customer_first_name",
+              :customer_last_name => "RubySDK_test customer_last_name",
+              :customer_tax_identifier => "1.2.3.4.5.6"
+            },
+          },
+        )
+        expect(result.success?).to eq(true)
+      end
+    end
+
     context "service fees" do
       it "allows specifying service fees" do
         result = Braintree::Transaction.create(
