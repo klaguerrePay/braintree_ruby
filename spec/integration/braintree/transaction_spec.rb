@@ -652,11 +652,14 @@ describe Braintree::Transaction do
               :industry => {
                 :industry_type => Braintree::Transaction::IndustryType::TravelAndFlight,
                 :data => {
+                  :passenger_middle_initial => "CD",
                   :fare_amount => -1_23,
                   :issuing_carrier_code => "-AA",
                   :restricted_ticket => false,
+                  :ticket_number => "A" * 30,
                   :legs => [
                     {
+                      :conjunction_ticket => "C"*25,
                       :fare_amount => -1_23,
                       :carrier_code => ".AA",
                     }
@@ -667,26 +670,13 @@ describe Braintree::Transaction do
           result.success?.should be(false)
           [
             Braintree::ErrorCodes::Transaction::Industry::TravelFlight::FareAmountCannotBeNegative,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::PassengerFirstNameIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TicketNumberIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::IssuedDateIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TravelAgencyCodeIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::ArrivalDateIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TicketIssuerAddressIsRequired
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::PassengerMiddleInitialIsTooLong,
+            Braintree::ErrorCodes::Transaction::Industry::TravelFlight::TicketNumberIsTooLong,
           ].should include(*result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort)
           [
             Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::CarrierCodeIsTooLong,
             Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareAmountCannotBeNegative,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ArrivalAirportCodeIsInvalid,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureAirportCodeIsInvalid,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ArrivalTimeIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ConjunctionTicketIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureTimeIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::DepartureDateIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FareBasisCodeIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::FlightNumberIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ServiceClassIsRequired,
-            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::StopoverPermittedIsRequired
+            Braintree::ErrorCodes::Transaction::Industry::Leg::TravelFlight::ConjunctionTicketIsTooLong,
           ].should include(*result.errors.for(:transaction).for(:industry).for(:legs).for(:index_0).map { |e| e.code }.sort)
           end
         end
