@@ -17,7 +17,6 @@ describe Braintree::Dispute do
       :reply_by_date => nil,
       :updated_at => Time.utc(2009, 3, 9, 10, 50, 39),
       :pre_dispute_program => Braintree::Dispute::PreDisputeProgram::None,
-      :evidence_submittable => true,
       :evidence => [
         {
           comment: nil,
@@ -459,11 +458,6 @@ describe Braintree::Dispute do
     it "returns false when not given a dispute" do
       dispute = Braintree::Dispute._new(attributes)
       dispute.should_not == "not a dispute"
-    end
-
-    it "checks that the evidence_submittable field is set to true" do
-      dispute = Braintree::Dispute._new(attributes)
-      dispute.evidence_submittable.should == true
     end
   end
 
