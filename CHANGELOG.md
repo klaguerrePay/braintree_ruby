@@ -3,7 +3,6 @@
 ## Unreleased
 * Add `retry_ids` array to `Transaction`
 * Add `retried_transaction_id` string to `Transaction`
-* Add `evidence_submittable` to Dispute
 * Add `merchant_token_identifier` and `source_card_last4` to ApplePayCard and ApplePayDetails response objects
 * Add `processing_overrides` to `Transaction.sale` options
 
