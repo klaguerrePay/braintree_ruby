@@ -512,7 +512,7 @@ describe Braintree::Transaction do
           end
 
 
-          it "2 step should be processed with AID(Airline data) in step 1" do
+          it "2 step should be processed with AID(Airline Industry data) in step 1" do
             result = Braintree::Transaction.create(
               :type => "sale",
               :merchant_account_id => SpecHelper::FakeFirstDataMerchantAccountId,
@@ -573,7 +573,7 @@ describe Braintree::Transaction do
             result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
           end
 
-          it "2 step should be processed with AID in step2" do
+          it "2 step should be processed with AID in step 2" do
             result = Braintree::Transaction.create(
               :type => "sale",
               :merchant_account_id => SpecHelper::FakeFirstDataMerchantAccountId,
