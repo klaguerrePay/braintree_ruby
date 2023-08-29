@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.13.0
 * Add `retry_ids` array to `Transaction`
 * Add `retried_transaction_id` string to `Transaction`
 * Add `merchant_token_identifier` and `source_card_last4` to ApplePayCard and ApplePayDetails response objects
