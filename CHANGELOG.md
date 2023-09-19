@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.14.0
 
 - Add `payment_receipt` object to `Transaction`
 - Add `global_id` string to `UsBankAccountDetails`
