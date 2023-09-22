@@ -14,9 +14,9 @@ describe Braintree::TransactionGateway do
     it "creates a transactionGateway gateway" do
       result = Braintree::TransactionGateway.new(gateway)
 
-      result.inspect.should include("merchant_id")
-      result.inspect.should include("public_key")
-      result.inspect.should include("private_key")
+      expect(result.inspect).to include("merchant_id")
+      expect(result.inspect).to include("public_key")
+      expect(result.inspect).to include("private_key")
     end
 
     describe "self.create" do
