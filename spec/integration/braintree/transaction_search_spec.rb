@@ -610,6 +610,31 @@ describe Braintree::Transaction, "search" do
         expect(collection.first.id).to eq(transaction_id)
       end
 
+      xit "searches on debit_network" do
+        transaction = Braintree::Transaction.sale!(
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::PinlessDebitMerchantAccountId,
+          :currency_iso_code => "USD",
+          :payment_method_nonce => Braintree::Test::Nonce::TransactablePinlessDebitVisa,
+          :options => {
+            :submit_for_settlement => true
+          },
+        )
+
+        collection = Braintree::Transaction.search do |search|
+          search.id.is transaction.id
+          search.credit_card_card_type.is Braintree::CreditCard::CardType::Visa
+        end
+
+        expect(collection.maximum_size).to be > 0
+
+        collection = Braintree::Transaction.search do |search|
+          search.id.is transaction.id
+          search.debit_network.in Braintree::CreditCard::DebitNetwork::All
+        end
+
+        expect(collection.maximum_size).to be > 0
+      end
     end
 
     context "invalid search" do
@@ -618,6 +643,14 @@ describe Braintree::Transaction, "search" do
           collection = Braintree::Transaction.search do |search|
             search.customer_id.is "9171566"
             search.type.is "settled"
+          end
+        end.to raise_error(ArgumentError)
+      end
+
+      it "raises an exception on invalid debit network" do
+        expect do
+          collection = Braintree::Transaction.search do |search|
+            search.debit_network.is "invalid_network"
           end
         end.to raise_error(ArgumentError)
       end

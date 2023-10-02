@@ -5605,6 +5605,169 @@ describe Braintree::Transaction do
         expect(result.errors.for(:transaction).for(:credit_card).map { |e| e.code }.sort).to eq [Braintree::ErrorCodes::CreditCard::NetworkTokenizationAttributeCryptogramIsRequired]
       end
     end
+
+    xit "Amex Pay with Points" do
+      context "transaction creation" do
+        it "succeeds when submit_for_settlement is true" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :submit_for_settlement => true,
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+
+        it "succeeds even if the card is ineligible" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::IneligibleCard,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :submit_for_settlement => true,
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+
+        it "succeeds even if the card's balance is insufficient" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::InsufficientPoints,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :submit_for_settlement => true,
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+      end
+
+      context "submit for settlement" do
+        it "succeeds" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::Success,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+
+          result = Braintree::Transaction.submit_for_settlement(result.transaction.id)
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+
+        it "succeeds even if the card is ineligible" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::IneligibleCard,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::Authorized
+
+          result = Braintree::Transaction.submit_for_settlement(result.transaction.id)
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+
+        it "succeeds even if the card's balance is insufficient" do
+          result = Braintree::Transaction.sale(
+            :amount => Braintree::Test::TransactionAmounts::Authorize,
+            :merchant_account_id => SpecHelper::FakeAmexDirectMerchantAccountId,
+            :credit_card => {
+              :number => Braintree::Test::CreditCardNumbers::AmexPayWithPoints::IneligibleCard,
+              :expiration_date => "05/2009"
+            },
+            :options => {
+              :amex_rewards => {
+                :request_id => "ABC123",
+                :points => "1000",
+                :currency_amount => "10.00",
+                :currency_iso_code => "USD"
+              }
+            },
+          )
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::Authorized
+
+          result = Braintree::Transaction.submit_for_settlement(result.transaction.id)
+          result.success?.should == true
+          result.transaction.status.should == Braintree::Transaction::Status::SubmittedForSettlement
+        end
+      end
+    end
+
+    context "Pinless debit transaction" do
+      xit "succesfully submits for settlement" do
+        result = Braintree::Transaction.sale(
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::PinlessDebitMerchantAccountId,
+          :currency_iso_code => "USD",
+          :payment_method_nonce => Braintree::Test::Nonce::TransactablePinlessDebitVisa,
+          :options => {
+            :submit_for_settlement => true
+          },
+        )
+        expect(result.success?).to be_truthy
+        expect(result.transaction.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
+        expect(result.transaction.debit_network).not_to be_nil
+      end
+    end
   end
 
   describe "self.sale!" do

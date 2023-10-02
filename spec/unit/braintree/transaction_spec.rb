@@ -341,6 +341,14 @@ describe Braintree::Transaction do
       details = transaction.sepa_direct_debit_account_details
       expect(details.token).to eq("1234")
     end
+
+    it "accepts debit_network" do
+      transaction = Braintree::Transaction._new(
+        :gateway,
+        :debit_network => "STAR",
+      )
+      expect(transaction.debit_network).to eq "STAR"
+    end
   end
 
   describe "inspect" do

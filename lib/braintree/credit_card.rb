@@ -23,6 +23,16 @@ module Braintree
       All = constants.map { |c| const_get(c) }
     end
 
+    module DebitNetwork
+      Accel = "ACCEL"
+      Nyce = "NYCE"
+      Pulse = "PULSE"
+      Star = "STAR"
+      Star_Access = "STAR_ACCESS"
+
+      All = constants.map { |c| const_get(c) }
+    end
+
     module CustomerLocation
       International = "international"
       US = "us"
