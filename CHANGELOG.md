@@ -3,6 +3,7 @@
 ## Unreleased
 * Add `retry_ids`, `retried_transaction_id`, and `debit_network` to `Transaction`
 * Add `evidence_submittable` to Dispute
+* Add `implicitly_vaulted_payment_method_token` and `implicitly_vaulted_payment_method_global_id` to `LocalPaymentDetails`
 * Add `merchant_token_identifier` and `source_card_last4` to ApplePayCard and ApplePayDetails response objects
 * Add `debit_network` to `TransactionSearch`
 * Add `DebitNetwork` enum to `CreditCard`
