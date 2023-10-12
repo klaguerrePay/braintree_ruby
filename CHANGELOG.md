@@ -7,6 +7,7 @@
 * Add `merchant_token_identifier` and `source_card_last4` to ApplePayCard and ApplePayDetails response objects
 * Add `debit_network` to `TransactionSearch`
 * Add `DebitNetwork` enum to `CreditCard`
+* Add `SubscriptionBillingSkipped` webhook notification support
 
 ## 4.14.0
 

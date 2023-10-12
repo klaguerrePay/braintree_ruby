@@ -422,6 +422,21 @@ describe Braintree::WebhookNotification do
     end
 
     context "subscription" do
+      it "builds a sample notification for a subscription billing skipped  webhook" do
+        sample_notification = Braintree::WebhookTesting.sample_notification(
+          Braintree::WebhookNotification::Kind::SubscriptionBillingSkipped,
+          "my_id",
+        )
+
+        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+
+        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::SubscriptionBillingSkipped)
+        expect(notification.subscription.id).to eq("my_id")
+        expect(notification.subscription.transactions.size).to eq(0)
+        expect(notification.subscription.discounts.size).to eq(0)
+        expect(notification.subscription.add_ons.size).to eq(0)
+      end
+
       it "builds a sample notification for a subscription charged successfully webhook" do
         sample_notification = Braintree::WebhookTesting.sample_notification(
           Braintree::WebhookNotification::Kind::SubscriptionChargedSuccessfully,
