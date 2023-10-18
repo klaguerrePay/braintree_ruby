@@ -9,7 +9,7 @@
 * Add `DebitNetwork` enum to `CreditCard`
 * Add `SubscriptionBillingSkipped` webhook notification support
 * Deprecate `three_d_secure_token` in favor of `three_d_secure_authentication_id`
-
+* Deprecate `venmo_sdk_session`, `venmo_sdk_payment_method_code`, and `venmo_sdk?`
 
 ## 4.14.0
 

@@ -20,11 +20,12 @@ describe Braintree::CreditCard do
         :expiration_year,
         :number,
         :token,
-        :venmo_sdk_payment_method_code,
+        :venmo_sdk_payment_method_code, # NEXT_MAJOR_VERSION Remove this attribute
         :device_data,
         :payment_method_nonce,
         {:external_vault=>[:network_transaction_id]},
-        {:options => match_array([:make_default, :skip_advanced_fraud_checking, :verification_merchant_account_id, :verify_card, :verification_amount, :venmo_sdk_session, :fail_on_duplicate_payment_method, :verification_account_type, :verification_currency_iso_code])},
+        {:options => match_array([:make_default, :skip_advanced_fraud_checking, :verification_merchant_account_id, :verify_card, :verification_amount, :venmo_sdk_session, # NEXT_MAJOR_VERSION Remove this attribute
+          :fail_on_duplicate_payment_method, :verification_account_type, :verification_currency_iso_code])},
         {:billing_address => [
           :company,
           :country_code_alpha2,
@@ -66,11 +67,12 @@ describe Braintree::CreditCard do
         :expiration_year,
         :number,
         :token,
-        :venmo_sdk_payment_method_code,
+        :venmo_sdk_payment_method_code, # NEXT_MAJOR_VERSION Remove this attribute
         :device_data,
         :payment_method_nonce,
         {:external_vault=>[:network_transaction_id]},
-        {:options => match_array([:make_default, :skip_advanced_fraud_checking, :verification_merchant_account_id, :verify_card, :verification_amount, :venmo_sdk_session, :fail_on_duplicate_payment_method, :verification_account_type, :verification_currency_iso_code])},
+        {:options => match_array([:make_default, :skip_advanced_fraud_checking, :verification_merchant_account_id, :verify_card, :verification_amount, :venmo_sdk_session, # NEXT_MAJOR_VERSION Remove this attribute
+          :fail_on_duplicate_payment_method, :verification_account_type, :verification_currency_iso_code])},
         {:billing_address => [
           :company,
           :country_code_alpha2,

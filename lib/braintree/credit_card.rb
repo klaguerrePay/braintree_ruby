@@ -170,7 +170,10 @@ module Braintree
     end
 
     # Returns true if the card is associated with Venmo SDK
+    # NEXT_MAJOR_VERSION Remove this method
+    # The old venmo SDK class has been deprecated
     def venmo_sdk?
+      warn "[DEPRECATED] The Venmo SDK integration is Unsupported. Please update your integration to use Pay with Venmo instead."
       @venmo_sdk
     end
 
