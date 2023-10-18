@@ -28,6 +28,8 @@ describe Braintree::TransactionGateway do
       end
     end
 
+    # NEXT_MAJOR_VERSION Remove three_d_secure_token
+    # three_d_secure_token has been deprecated in favor of three_d_secure_authentication_id
     it "creates a transaction gateway signature" do
       expect(Braintree::TransactionGateway._create_signature).to match([
         :amount, :billing_address_id, :channel, :customer_id, :device_data, :discount_amount,
@@ -35,8 +37,8 @@ describe Braintree::TransactionGateway do
         :product_sku, :purchase_order_number, :service_fee_amount, :shared_billing_address_id,
         :shared_customer_id, :shared_payment_method_nonce, :shared_payment_method_token,
         :shared_shipping_address_id, :shipping_address_id, :shipping_amount,
-        :ships_from_postal_code, :tax_amount, :tax_exempt, :three_d_secure_authentication_id,
-        :three_d_secure_token, :transaction_source, :type, :venmo_sdk_payment_method_code,
+        :ships_from_postal_code, :tax_amount, :tax_exempt, :three_d_secure_authentication_id, :three_d_secure_token, #Deprecated
+        :transaction_source, :type, :venmo_sdk_payment_method_code,
         :sca_exemption, :currency_iso_code, :exchange_rate_quote_id,
         {:line_items => [:quantity, :name, :description, :kind, :unit_amount, :unit_tax_amount, :total_amount, :discount_amount, :tax_amount, :unit_of_measure, :product_code, :commodity_code, :url]},
         {:risk_data => [:customer_browser, :customer_device_id, :customer_ip, :customer_location_zip, :customer_tenure]},

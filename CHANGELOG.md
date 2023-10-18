@@ -8,6 +8,8 @@
 * Add `debit_network` to `TransactionSearch`
 * Add `DebitNetwork` enum to `CreditCard`
 * Add `SubscriptionBillingSkipped` webhook notification support
+* Deprecate `three_d_secure_token` in favor of `three_d_secure_authentication_id`
+
 
 ## 4.14.0
 

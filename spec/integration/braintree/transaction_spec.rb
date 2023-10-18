@@ -2528,6 +2528,7 @@ describe Braintree::Transaction do
     end
 
     context "three_d_secure" do
+      # NEXT_MAJOR_VERSION Remove this test. :three_d_secure_token is deprecated in favor of :three_d_secure_authentication_id
       it "can create a transaction with a three_d_secure token" do
         three_d_secure_token = SpecHelper.create_3ds_verification(
           SpecHelper::ThreeDSecureMerchantAccountId,
@@ -2698,6 +2699,8 @@ describe Braintree::Transaction do
         end
       end
 
+      # NEXT_MAJOR_VERSION Remove these tests.
+      # :three_d_secure_token is deprecated in favor of :three_d_secure_authentication_id
       context "with three_d_secure_token" do
         it "can create a transaction with a three_d_secure token" do
           three_d_secure_token = SpecHelper.create_3ds_verification(
