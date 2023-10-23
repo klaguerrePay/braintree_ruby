@@ -1452,8 +1452,7 @@ describe Braintree::Transaction do
 
     it "returns an error if no credit card is given" do
       params = {
-        :transaction => {
-        }
+        :transaction => {}
       }
       result = Braintree::Transaction.create(params[:transaction])
       expect(result.success?).to eq(false)
