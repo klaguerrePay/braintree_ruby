@@ -1,6 +1,11 @@
 # Changelog
 
+## Unreleased
+* Add `industry_data` to `Transaction.submit_for_settlement` options
+* Add `dateOfBirth` and `countryCode` parameters to `Transaction.sale.industry.data`
+
 ## 4.15.0
+
 - Add `retry_ids`, `retried_transaction_id`, and `debit_network` to `Transaction`
 - Add `evidence_submittable` to Dispute
 - Add `implicitly_vaulted_payment_method_token` and `implicitly_vaulted_payment_method_global_id` to `LocalPaymentDetails`
