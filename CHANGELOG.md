@@ -3,6 +3,7 @@
 ## Unreleased
 * Add `industry_data` to `Transaction.submit_for_settlement` options
 * Add `dateOfBirth` and `countryCode` parameters to `Transaction.sale.industry.data`
+* Add `billing_address` and `shipping_address` to `VenmoProfileData`
 
 ## 4.15.0
 
