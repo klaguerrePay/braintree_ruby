@@ -4,6 +4,8 @@
 * Add `industry_data` to `Transaction.submit_for_settlement` options
 * Add `dateOfBirth` and `countryCode` parameters to `Transaction.sale.industry.data`
 * Add `billing_address` and `shipping_address` to `VenmoProfileData`
+- Add `additional_processor_response` to `UsBankAccountVerification`
+- Add `verification_add_ons` to `PaymentMethod` create options for `ACH NetworkCheck`
 
 ## 4.15.0
 

@@ -165,6 +165,7 @@ module Braintree
         :us_bank_account_verification_method,
         :venmo_sdk_session, # Deprecated
         :verification_account_type,
+        :verification_add_ons,
         :verification_amount,
         :verification_currency_iso_code,
         :verification_merchant_account_id,

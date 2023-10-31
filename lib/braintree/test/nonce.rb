@@ -72,6 +72,7 @@ module Braintree
       SamsungPayMasterCard = "tokensam_fake_mastercard"
       SamsungPayVisa = "tokensam_fake_visa"
       SepaDirectDebit = "fake-sepa-direct-debit-nonce"
+      UsBankAccount = "fake-us-bank-account-nonce"
     end
   end
 end
