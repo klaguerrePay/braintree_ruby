@@ -131,8 +131,10 @@ module Braintree
     attr_reader :merchant_account_id
     attr_reader :merchant_advice_code
     attr_reader :merchant_advice_code_text
-    attr_reader :network_response_code
-    attr_reader :network_response_text
+    attr_reader :meta_checkout_card_details
+    attr_reader :meta_checkout_token_details
+    attr_reader :network_response_code                  # Response code from the card network
+    attr_reader :network_response_text                  # Response text from the card network
     attr_reader :network_token_details
     attr_reader :network_transaction_id
     attr_reader :order_id
@@ -313,6 +315,8 @@ module Braintree
       @disbursement_details = DisbursementDetails.new(@disbursement_details)
       @google_pay_details = GooglePayDetails.new(@google_pay_card)
       @local_payment_details = LocalPaymentDetails.new(@local_payment)
+      @meta_checkout_card_details = MetaCheckoutCardDetails.new(attributes[:meta_checkout_card])
+      @meta_checkout_token_details = MetaCheckoutTokenDetails.new(attributes[:meta_checkout_token])
       @payment_instrument_type = attributes[:payment_instrument_type]
       @payment_receipt = PaymentReceipt.new(attributes[:payment_receipt]) if attributes[:payment_receipt]
       @paypal_details = PayPalDetails.new(@paypal)

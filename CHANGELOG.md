@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+
+* Add `meta_checkout_card` and `meta_checkout_token` payment methods 
+* Add `meta_checkout_card_details` and `meta_checkout_token_details` to Transaction
 * Add `industry_data` to `Transaction.submit_for_settlement` options
 * Add `dateOfBirth` and `countryCode` parameters to `Transaction.sale.industry.data`
 * Add `billing_address` and `shipping_address` to `VenmoProfileData`
