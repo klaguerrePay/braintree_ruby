@@ -33,6 +33,12 @@ Layout/IndentationStyle:
 Layout/TrailingWhitespace:
   Enabled: true
 
+Lint/AmbiguousAssignment:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+
 Lint/AmbiguousOperator:
   Enabled: true
 
@@ -57,7 +63,18 @@ Lint/CircularArgumentReference:
 Lint/ConstantDefinitionInBlock:
   Enabled: true
 
+# NEXT_MAJOR_VERSION add ConstantResolution rule and start changing all constants to
+# SCREAMING_SNAKE_CASE
+Lint/ConstantResolution:
+  Enabled: false
+
+Lint/Debugger:
+  Enabled: true
+
 Lint/DeprecatedClassMethods:
+  Enabled: true
+
+Lint/DeprecatedConstants:
   Enabled: true
 
 Lint/DeprecatedOpenSSLConstant:
@@ -78,6 +95,9 @@ Lint/DuplicateHashKey:
 Lint/DuplicateMethods:
   Enabled: true
 
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+
 Lint/DuplicateRequire:
   Enabled: true
 
@@ -88,6 +108,15 @@ Lint/EachWithObjectArgument:
   Enabled: true
 
 Lint/ElseLayout:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: true
+  AllowComments: true
+  Exclude:
+  - spec/integration/braintree/document_upload_spec.rb
+
+Lint/EmptyClass:
   Enabled: true
 
 Lint/EmptyConditionalBody:
