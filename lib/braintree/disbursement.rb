@@ -37,7 +37,7 @@ module Braintree
     def inspect
       nice_attributes = self.class._inspect_attributes.map { |attr| "#{attr}: #{send(attr).inspect}" }
       nice_attributes << "amount: #{self.amount.to_s("F").inspect}"
-      nice_attributes << "disbursement_date: #{self.disbursement_date.to_s}"
+      nice_attributes << "disbursement_date: #{self.disbursement_date}"
       "#<#{self.class} #{nice_attributes.join(', ')}>"
     end
 

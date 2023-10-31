@@ -372,8 +372,8 @@ describe Braintree::Transaction do
           check_out_date_must_follow_check_in_date = Braintree::ErrorCodes::Transaction::Industry::Lodging::CheckOutDateMustFollowCheckInDate
           room_rate_format_is_invalid = Braintree::ErrorCodes::Transaction::Industry::Lodging::RoomRateFormatIsInvalid
           invalid_additional_charge_kind = Braintree::ErrorCodes::Transaction::Industry::AdditionalCharge::KindIsInvalid
-          expect(result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort).to include(*[invalid_folio, check_out_date_must_follow_check_in_date, room_rate_format_is_invalid])
-          expect(result.errors.for(:transaction).for(:industry).for(:additional_charges).for(:index_0).on(:kind).map { |e| e.code }.sort).to include(*[invalid_additional_charge_kind])
+          expect(result.errors.for(:transaction).for(:industry).map { |e| e.code }.sort).to include(invalid_folio, check_out_date_must_follow_check_in_date, room_rate_format_is_invalid)
+          expect(result.errors.for(:transaction).for(:industry).for(:additional_charges).for(:index_0).on(:kind).map { |e| e.code }.sort).to include(invalid_additional_charge_kind)
         end
       end
 
