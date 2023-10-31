@@ -77,9 +77,9 @@ module Braintree
       All = constants.map { |c| const_get(c) }
     end
 
-    module Type # :nodoc:
-      Credit = "credit" # :nodoc:
-      Sale = "sale" # :nodoc:
+    module Type
+      Credit = "credit"
+      Sale = "sale"
 
       All = constants.map { |c| const_get(c) }
     end
@@ -131,8 +131,8 @@ module Braintree
     attr_reader :merchant_account_id
     attr_reader :merchant_advice_code
     attr_reader :merchant_advice_code_text
-    attr_reader :network_response_code                  # Response code from the card network
-    attr_reader :network_response_text                  # Response text from the card network
+    attr_reader :network_response_code
+    attr_reader :network_response_text
     attr_reader :network_token_details
     attr_reader :network_transaction_id
     attr_reader :order_id
@@ -142,12 +142,12 @@ module Braintree
     attr_reader :paypal_details
     attr_reader :paypal_here_details
     attr_reader :plan_id
-    attr_reader :processor_authorization_code           # Authorization code from the processor.
-    attr_reader :processor_response_code                # Response code from the processor.
-    attr_reader :processor_response_text                # Response text from the processor.
-    attr_reader :processor_response_type                # Response type from the processor.
-    attr_reader :processor_settlement_response_code     # Settlement response code from the processor.
-    attr_reader :processor_settlement_response_text     # Settlement response text from the processor.
+    attr_reader :processor_authorization_code
+    attr_reader :processor_response_code
+    attr_reader :processor_response_text
+    attr_reader :processor_response_type
+    attr_reader :processor_settlement_response_code
+    attr_reader :processor_settlement_response_text
     attr_reader :product_sku
     attr_reader :purchase_order_number
     attr_reader :recurring
@@ -175,7 +175,7 @@ module Braintree
     attr_reader :tax_amount
     attr_reader :tax_exempt
     attr_reader :three_d_secure_info
-    attr_reader :type                                   # Will either be "sale" or "credit"
+    attr_reader :type
     attr_reader :updated_at
     attr_reader :us_bank_account_details
     attr_reader :venmo_account_details
@@ -298,7 +298,7 @@ module Braintree
       Configuration.gateway.transaction.void!(*args)
     end
 
-    def initialize(gateway, attributes) # :nodoc:
+    def initialize(gateway, attributes)
       @gateway = gateway
       set_instance_variables_from_hash(attributes)
 
@@ -342,7 +342,7 @@ module Braintree
       refunded_installments.map! { |attrs| Installment.new(attrs) } if refunded_installments
     end
 
-    def inspect # :nodoc:
+    def inspect
       first = [:id, :type, :amount, :status]
       order = first + (self.class._attributes - first)
       nice_attributes = order.map do |attr|
@@ -359,12 +359,10 @@ module Braintree
       @gateway.transaction_line_item.find_all(id)
     end
 
-    # Returns true if the transaction has been refunded. False otherwise.
     def refunded?
       !@refund_id.nil?
     end
 
-    # Returns true if the transaction has been disbursed. False otherwise.
     def disbursed?
       @disbursement_details.valid?
     end
@@ -373,6 +371,7 @@ module Braintree
     # vault_billing_address will return the associated Braintree::Address. Because the
     # vault billing address can be updated after the transaction was created, the attributes
     # on vault_billing_address may not match the attributes on billing_details.
+    # NEXT_MAJOR_VERSION these methods are not documented in the developer docs, remove
     def vault_billing_address
       return nil if billing_details.id.nil?
       @gateway.address.find(customer_details.id, billing_details.id)
@@ -382,6 +381,7 @@ module Braintree
     # vault_credit_card will return the associated Braintree::CreditCard. Because the
     # vault credit card can be updated after the transaction was created, the attributes
     # on vault_credit_card may not match the attributes on credit_card_details.
+    # NEXT_MAJOR_VERSION these methods are not documented in the developer docs, remove
     def vault_credit_card
       return nil if credit_card_details.token.nil?
       @gateway.credit_card.find(credit_card_details.token)
@@ -391,6 +391,7 @@ module Braintree
     # vault_customer will return the associated Braintree::Customer. Because the
     # vault customer can be updated after the transaction was created, the attributes
     # on vault_customer may not match the attributes on customer_details.
+    # NEXT_MAJOR_VERSION these methods are not documented in the developer docs, remove
     def vault_customer
       return nil if customer_details.id.nil?
       @gateway.customer.find(customer_details.id)
@@ -400,6 +401,7 @@ module Braintree
     # vault_shipping_address will return the associated Braintree::Address. Because the
     # vault shipping address can be updated after the transaction was created, the attributes
     # on vault_shipping_address may not match the attributes on shipping_details.
+    # NEXT_MAJOR_VERSION these methods are not documented in the developer docs, remove
     def vault_shipping_address
       return nil if shipping_details.id.nil?
       @gateway.address.find(customer_details.id, shipping_details.id)
@@ -411,12 +413,12 @@ module Braintree
 
     class << self
       protected :new
-      def _new(*args) # :nodoc:
+      def _new(*args)
         self.new(*args)
       end
     end
 
-    def self._attributes # :nodoc:
+    def self._attributes
       [:amount, :created_at, :credit_card_details, :customer_details, :id, :status, :subscription_details, :type, :updated_at, :processed_with_network_token?]
     end
   end

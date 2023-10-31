@@ -33,11 +33,11 @@ module Braintree
     attr_reader :us_bank_account
     attr_reader :created_at
 
-    def initialize(attributes) # :nodoc:
+    def initialize(attributes)
       set_instance_variables_from_hash(attributes)
     end
 
-    def inspect # :nodoc:
+    def inspect
       attr_order = [
         :status,
         :processor_response_code,
@@ -62,7 +62,7 @@ module Braintree
       protected :new
     end
 
-    def self._new(*args) # :nodoc:
+    def self._new(*args)
       self.new(*args)
     end
 

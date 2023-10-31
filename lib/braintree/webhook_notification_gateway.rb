@@ -1,5 +1,5 @@
 module Braintree
-  class WebhookNotificationGateway # :nodoc:
+  class WebhookNotificationGateway
     def initialize(gateway)
       @gateway = gateway
       @config = gateway.config

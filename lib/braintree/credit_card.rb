@@ -1,6 +1,6 @@
 module Braintree
   class CreditCard
-    include BaseModule # :nodoc:
+    include BaseModule
     include Braintree::Util::TokenEquality
 
     module CardType
@@ -124,7 +124,7 @@ module Braintree
       Configuration.gateway.credit_card.update!(*args)
     end
 
-    def initialize(gateway, attributes) # :nodoc:
+    def initialize(gateway, attributes)
       @gateway = gateway
       set_instance_variables_from_hash(attributes)
       @billing_address = attributes[:billing_address] ? Address._new(@gateway, attributes[:billing_address]) : nil
@@ -137,7 +137,6 @@ module Braintree
       CreditCardVerification._new(verification) if verification
     end
 
-    # Returns true if this credit card is the customer's default payment method.
     def default?
       @default
     end
@@ -147,12 +146,11 @@ module Braintree
       "#{expiration_month}/#{expiration_year}"
     end
 
-    # Returns true if the credit card is expired.
     def expired?
       @expired
     end
 
-    def inspect # :nodoc:
+    def inspect
       first = [:token]
       order = first + (self.class._attributes - first)
       nice_attributes = order.map do |attr|
@@ -169,6 +167,7 @@ module Braintree
       @nonce ||= PaymentMethodNonce.create(token)
     end
 
+    # NEXT_MAJOR_VERSION can this be removed? Venmo SDK integration is no more
     # Returns true if the card is associated with Venmo SDK
     # NEXT_MAJOR_VERSION Remove this method
     # The old venmo SDK class has been deprecated
@@ -185,7 +184,7 @@ module Braintree
       protected :new
     end
 
-    def self._attributes # :nodoc:
+    def self._attributes
       [
         :billing_address, :bin, :card_type, :cardholder_name, :created_at, :customer_id, :expiration_month,
         :expiration_year, :last_4, :token, :updated_at, :prepaid, :payroll, :product_id, :commercial, :debit, :durbin_regulated,
@@ -193,7 +192,7 @@ module Braintree
       ]
     end
 
-    def self._new(*args) # :nodoc:
+    def self._new(*args)
       self.new(*args)
     end
   end
