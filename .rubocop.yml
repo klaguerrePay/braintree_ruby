@@ -278,6 +278,38 @@ Lint/RescueType:
 Lint/ReturnInVoidContext:
   Enabled: true
 
+Lint/SafeNavigationChain:
+  Enabled: true
+
+Lint/SafeNavigationConsistency:
+  Enabled: true
+
+Lint/SafeNavigationWithEmpty:
+  Enabled: true
+
+Lint/ScriptPermission:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/SendWithMixinArgument:
+  Enabled: true
+
+Lint/ShadowedArgument:
+  Enabled: true
+
+Lint/ShadowedException:
+  Enabled: true
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: true
+  Exclude:
+   - spec/**/*
+
+Lint/StructNewOverride:
+  Enabled: true
+
 Lint/SuppressedException:
   Enabled: false
 

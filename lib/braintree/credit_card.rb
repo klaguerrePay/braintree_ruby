@@ -133,8 +133,8 @@ module Braintree
     end
 
     def _most_recent_verification(attributes)
-      verification = (attributes[:verifications] || []).sort_by { |verification| verification[:created_at] }.reverse.first
-      CreditCardVerification._new(verification) if verification
+      sorted_verifications = (attributes[:verifications] || []).sort_by { |verification| verification[:created_at] }.reverse.first
+      CreditCardVerification._new(sorted_verifications) if sorted_verifications
     end
 
     def default?
