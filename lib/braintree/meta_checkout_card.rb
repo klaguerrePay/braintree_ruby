@@ -38,7 +38,7 @@ module Braintree
       end
 
       def _most_recent_verification(attributes)
-        verification = (attributes[:verifications] || []).sort_by { |verification| verification[:created_at] }.reverse.first
+        verification = (attributes[:verifications] || []).sort_by { |v| v[:created_at] }.reverse.first
         CreditCardVerification._new(verification) if verification
       end
 
