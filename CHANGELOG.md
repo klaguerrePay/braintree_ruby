@@ -9,6 +9,7 @@
 * Add `billing_address` and `shipping_address` to `VenmoProfileData`
 - Add `additional_processor_response` to `UsBankAccountVerification`
 - Add `verification_add_ons` to `PaymentMethod` create options for `ACH NetworkCheck`
+- Add `Maestro` to `DebitNetwork` enum
 
 ## 4.15.0
 
