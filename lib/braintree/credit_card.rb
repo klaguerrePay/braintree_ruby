@@ -25,6 +25,7 @@ module Braintree
 
     module DebitNetwork
       Accel = "ACCEL"
+      Maestro = "MAESTRO"
       Nyce = "NYCE"
       Pulse = "PULSE"
       Star = "STAR"
