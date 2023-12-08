@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `PickupInStore` to `ShippingMethod` enum
+
 ## 4.16.0
 
 - Add `meta_checkout_card` and `meta_checkout_token` payment methods 
