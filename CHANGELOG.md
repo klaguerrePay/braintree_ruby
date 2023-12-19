@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.17.0
 
 - Add `PickupInStore` to `ShippingMethod` enum
 - Add `external_vault` and `risk_data` to `CreditCardVerification` create request
