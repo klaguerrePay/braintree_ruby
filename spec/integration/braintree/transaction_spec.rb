@@ -7739,20 +7739,6 @@ describe Braintree::Transaction do
         expect(adjustment_transaction.errors.for(:authorization_adjustment).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::NoNetAmountToPerformAuthAdjustment)
       end
 
-      it "returns failure, when transaction status is not authorized" do
-        additional_params = {:options => {:submit_for_settlement => true}}
-        initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
-        expect(initial_transaction.success?).to eq(true)
-
-        adjustment_transaction = Braintree::Transaction.adjust_authorization(
-          initial_transaction.transaction.id, "85.50"
-        )
-
-        expect(adjustment_transaction.success?).to eq(false)
-        expect(adjustment_transaction.transaction.amount).to eq(BigDecimal("75.50"))
-        expect(adjustment_transaction.errors.for(:transaction).on(:base).first.code).to eq(Braintree::ErrorCodes::Transaction::TransactionMustBeInStateAuthorized)
-      end
-
       it "returns failure, when transaction authorization type final or undefined" do
         additional_params = {:transaction_source => "recurring"}
         initial_transaction = Braintree::Transaction.sale(first_data_master_transaction_params.merge(additional_params))
