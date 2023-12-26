@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- Add `package_tracking` method to `transaction_gateway` to make request to add tracking information to transactions
+- Add `packages` to Transaction object
+
 ## 4.17.0
 
 - Add `PickupInStore` to `ShippingMethod` enum

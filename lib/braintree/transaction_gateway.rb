@@ -112,6 +112,16 @@ module Braintree
       return_object_or_raise(:transaction) { sale(*args) }
     end
 
+    def package_tracking(transaction_id, package_tracking_request)
+      raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
+      Util.verify_keys(TransactionGateway._package_tracking_request_signature, package_tracking_request)
+      _do_create "/transactions/#{transaction_id}/shipments", :shipment => package_tracking_request
+    end
+
+    def package_tracking!(*args)
+      return_object_or_raise(:transaction) { package_tracking(*args) }
+    end
+
     def search(&block)
       search = TransactionSearch.new
       block.call(search) if block
@@ -185,6 +195,14 @@ module Braintree
 
     def void!(*args)
       return_object_or_raise(:transaction) { void(*args) }
+    end
+
+    def self._package_tracking_request_signature
+      [
+        :carrier,
+        {:line_items => [:quantity, :name, :description, :kind, :unit_amount, :unit_tax_amount, :total_amount, :discount_amount, :tax_amount, :unit_of_measure, :product_code, :commodity_code, :url]},
+        :notify_payer, :tracking_number,
+      ]
     end
 
     def self._clone_signature
