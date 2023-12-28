@@ -2748,7 +2748,7 @@ describe Braintree::Transaction do
             },
             :three_d_secure_authentication_id => three_d_secure_authentication_id,
             :three_d_secure_pass_thru => {
-              :eci_flag => "02",
+              :eci_flag => "05",
               :cavv => "some_cavv",
               :xid => "some_xid",
               :three_d_secure_version => "1.0.2",
@@ -2835,7 +2835,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "1.0.2",
@@ -2860,7 +2860,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "1.0.2",
@@ -2947,7 +2947,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "invalid",
@@ -2971,7 +2971,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "1.0.2",
@@ -2995,7 +2995,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "1.0.2",
@@ -3019,7 +3019,7 @@ describe Braintree::Transaction do
             :expiration_date => "12/12",
           },
           :three_d_secure_pass_thru => {
-            :eci_flag => "02",
+            :eci_flag => "05",
             :cavv => "some_cavv",
             :xid => "some_xid",
             :three_d_secure_version => "1.0.2",
