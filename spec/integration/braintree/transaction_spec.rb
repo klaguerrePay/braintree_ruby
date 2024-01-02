@@ -2132,8 +2132,9 @@ describe Braintree::Transaction do
         meta_checkout_card_details.cardholder_name.should == "Meta Checkout Card Cardholder"
         meta_checkout_card_details.container_id.should == "container123"
         meta_checkout_card_details.customer_location.should == "US"
-        meta_checkout_card_details.expiration_date.should == "12/2024"
-        meta_checkout_card_details.expiration_year.should == "2024"
+        next_year = Date.today().next_year().year.to_s
+        meta_checkout_card_details.expiration_date.should == "12/".concat(next_year)
+        meta_checkout_card_details.expiration_year.should == next_year
         meta_checkout_card_details.expiration_month.should == "12"
         meta_checkout_card_details.image_url.should == "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=development"
         meta_checkout_card_details.is_network_tokenized.should == false
@@ -2161,8 +2162,9 @@ describe Braintree::Transaction do
         meta_checkout_token_details.cryptogram.should == "AlhlvxmN2ZKuAAESNFZ4GoABFA=="
         meta_checkout_token_details.customer_location.should == "US"
         meta_checkout_token_details.ecommerce_indicator.should == "07"
-        meta_checkout_token_details.expiration_date.should == "12/2024"
-        meta_checkout_token_details.expiration_year.should == "2024"
+        next_year = Date.today().next_year().year.to_s
+        meta_checkout_token_details.expiration_date.should == "12/".concat(next_year)
+        meta_checkout_token_details.expiration_year.should == next_year
         meta_checkout_token_details.expiration_month.should == "12"
         meta_checkout_token_details.image_url.should == "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=development"
         meta_checkout_token_details.is_network_tokenized.should == true
