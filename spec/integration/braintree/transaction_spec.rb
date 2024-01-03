@@ -5822,7 +5822,7 @@ describe Braintree::Transaction do
     end
 
     context "Pinless debit transaction" do
-      xit "succesfully submits for settlement" do
+      it "succesfully submits for settlement" do
         result = Braintree::Transaction.sale(
           :amount => Braintree::Test::TransactionAmounts::Authorize,
           :merchant_account_id => SpecHelper::PinlessDebitMerchantAccountId,
@@ -5835,6 +5835,26 @@ describe Braintree::Transaction do
         expect(result.success?).to be_truthy
         expect(result.transaction.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
         expect(result.transaction.debit_network).not_to be_nil
+      end
+    end
+
+    context "Process debit as credit" do
+      it "succesfully completed pinless eligible transaction in signature" do
+        result = Braintree::Transaction.sale(
+          :amount => Braintree::Test::TransactionAmounts::Authorize,
+          :merchant_account_id => SpecHelper::PinlessDebitMerchantAccountId,
+          :currency_iso_code => "USD",
+          :payment_method_nonce => Braintree::Test::Nonce::TransactablePinlessDebitVisa,
+          :options => {
+            :submit_for_settlement => true,
+            :credit_card => {
+              :process_debit_as_credit => true
+            }
+          },
+        )
+        expect(result.success?).to be_truthy
+        expect(result.transaction.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
+        expect(result.transaction.debit_network).to be_nil
       end
     end
   end

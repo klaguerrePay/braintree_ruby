@@ -262,7 +262,7 @@ module Braintree
           {:three_d_secure => [:required]},
           {:amex_rewards => [:request_id, :points, :currency_amount, :currency_iso_code]},
           {:venmo => [:profile_id]},
-          {:credit_card => [:account_type]},
+          {:credit_card => [:account_type, :process_debit_as_credit]},
         ]
         },
         {:external_vault => [
