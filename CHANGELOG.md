@@ -4,6 +4,7 @@
 - Add `process_debit_as_credit` to `credit_card` field in `options` field during Transaction create
 - Add `package_tracking` method to `transaction_gateway` to make request to add tracking information to transactions
 - Add `packages` to Transaction object
+- Add `image_url`,`upc_code`, and `upc_type` to `LineItems`
 
 ## 4.17.0
 

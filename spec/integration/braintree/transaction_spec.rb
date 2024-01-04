@@ -4607,6 +4607,84 @@ describe Braintree::Transaction do
         expect(result.success?).to eq(false)
         expect(result.errors.for(:transaction).on(:line_items)[0].code).to eq(Braintree::ErrorCodes::Transaction::TooManyLineItems)
       end
+
+      context "UPC code and type" do
+        let(:line_item) do
+          {
+            :quantity => "1",
+            :name => "Name #1",
+            :description => "Description #1",
+            :kind => "debit",
+            :unit_amount => "45.12",
+            :unit_tax_amount => "1.23",
+            :unit_of_measure => "gallon",
+            :discount_amount => "1.02",
+            :tax_amount => "4.50",
+            :total_amount => "45.15",
+            :product_code => "23434",
+            :commodity_code => "9SAASSD8724",
+            :url => "https://example.com/products/23434",
+            :upc_code => "042100005264",
+            :upc_type => "UPC-A",
+            :image_url => "https://google.com/image.png",
+          }
+        end
+
+        it "accepts valid values" do
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => "45.15",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :line_items => [line_item],
+          )
+          expect(result.success?).to eq(true)
+          expect(result.transaction.line_items.length).to eq(1)
+          line_item = result.transaction.line_items[0]
+          expect(line_item.upc_code).to eq("042100005264")
+          expect(line_item.upc_type).to eq("UPC-A")
+        end
+
+        it "returns validation errors for invalid UPC code and type too long" do
+          line_item[:upc_code] = "THISCODELONGERTHAN17CHARS"
+          line_item[:upc_type] = "USB-C"
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => "45.15",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :line_items => [line_item],
+          )
+
+          expect(result.success?).to eq(false)
+          expect(result.errors.for(:transaction).for(:line_items).for(:index_0).on(:upc_code)[0].code).to eq(Braintree::ErrorCodes::TransactionLineItem::UPCCodeIsTooLong)
+          expect(result.errors.for(:transaction).for(:line_items).for(:index_0).on(:upc_type)[0].code).to eq(Braintree::ErrorCodes::TransactionLineItem::UPCTypeIsInvalid)
+        end
+
+        it "returns UPC code missing error when code is not present" do
+          line_item.delete(:upc_code)
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => "45.15",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :line_items => [line_item],
+          )
+
+          expect(result.success?).to eq(false)
+          expect(result.errors.for(:transaction).for(:line_items).for(:index_0).on(:upc_code)[0].code).to eq(Braintree::ErrorCodes::TransactionLineItem::UPCCodeIsMissing)
+        end
+
+        it "returns UPC type missing error when type is not present" do
+          line_item.delete(:upc_type)
+          result = Braintree::Transaction.create(
+            :type => "sale",
+            :amount => "45.15",
+            :payment_method_nonce => Braintree::Test::Nonce::Transactable,
+            :line_items => [line_item],
+          )
+
+          expect(result.success?).to eq(false)
+          expect(result.errors.for(:transaction).for(:line_items).for(:index_0).on(:upc_type)[0].code).to eq(Braintree::ErrorCodes::TransactionLineItem::UPCTypeIsMissing)
+        end
+      end
     end
 
     context "level 3 summary data" do
