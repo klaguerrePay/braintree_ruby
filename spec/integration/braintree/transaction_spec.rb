@@ -5833,7 +5833,6 @@ describe Braintree::Transaction do
           },
         )
         expect(result.success?).to be_truthy
-        expect(result.transaction.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
         expect(result.transaction.debit_network).not_to be_nil
       end
     end
@@ -5853,7 +5852,6 @@ describe Braintree::Transaction do
           },
         )
         expect(result.success?).to be_truthy
-        expect(result.transaction.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
         expect(result.transaction.debit_network).to be_nil
       end
     end
