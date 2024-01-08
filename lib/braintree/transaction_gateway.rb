@@ -200,7 +200,7 @@ module Braintree
     def self._package_tracking_request_signature
       [
         :carrier,
-        {:line_items => [:quantity, :name, :description, :kind, :unit_amount, :unit_tax_amount, :total_amount, :discount_amount, :tax_amount, :unit_of_measure, :product_code, :commodity_code, :url]},
+        {:line_items => [:commodity_code, :description, :discount_amount, :image_url, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :upc_code, :upc_type, :url]},
         :notify_payer, :tracking_number,
       ]
     end
