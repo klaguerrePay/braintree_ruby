@@ -1409,7 +1409,6 @@ describe Braintree::PaymentMethod do
 
     it "raises a NotFoundError exception if payment method cannot be found" do
       token = make_token
-      customer = Braintree::Customer.create!
 
       expect do
         Braintree::PaymentMethod.delete(token)
@@ -1878,7 +1877,7 @@ describe Braintree::PaymentMethod do
         )
 
         updated_token = make_token
-        updated_result = Braintree::PaymentMethod.update(
+        Braintree::PaymentMethod.update(
           original_token,
           :token => updated_token,
         )
@@ -1907,7 +1906,7 @@ describe Braintree::PaymentMethod do
           :customer_id => customer.id,
         ).payment_method.token
 
-        updated_result = Braintree::PaymentMethod.update(
+        Braintree::PaymentMethod.update(
           original_token,
           :options => {:make_default => true},
         )
@@ -1925,7 +1924,7 @@ describe Braintree::PaymentMethod do
           :consent_code => "consent-code",
           :token => first_token,
         )
-        first_result = Braintree::PaymentMethod.create(
+        Braintree::PaymentMethod.create(
           :payment_method_nonce => first_nonce,
           :customer_id => customer.id,
         )
@@ -1934,7 +1933,7 @@ describe Braintree::PaymentMethod do
           :consent_code => "consent-code",
           :token => second_token,
         )
-        second_result = Braintree::PaymentMethod.create(
+        Braintree::PaymentMethod.create(
           :payment_method_nonce => second_nonce,
           :customer_id => customer.id,
         )

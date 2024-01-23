@@ -258,7 +258,7 @@ describe Braintree::Transaction do
     end
 
     it "handles receiving custom as an empty string" do
-      transaction = Braintree::Transaction._new(
+      Braintree::Transaction._new(
         :gateway,
         :custom => "\n    ",
       )

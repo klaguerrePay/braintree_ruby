@@ -1,5 +1,9 @@
 # Changelog
 
+## unreleased
+
+- Cleanup useless assignments in XML::Parser, Util, HTTP, Disbursement, and Configuration classes
+
 ## 4.18.0
 
 - Add `process_debit_as_credit` to `credit_card` field in `options` field during Transaction create

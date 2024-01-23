@@ -649,7 +649,6 @@ describe Braintree::CreditCard do
       end
 
       it "errors with invalid account_type" do
-        customer = Braintree::Customer.create!
         result = Braintree::CreditCard.create(
           :number => Braintree::Test::CreditCardNumbers::Hiper,
           :expiration_month => "11",
@@ -666,7 +665,6 @@ describe Braintree::CreditCard do
       end
 
       it "errors when account_type not supported by merchant" do
-        customer = Braintree::Customer.create!
         result = Braintree::CreditCard.create(
           :number => Braintree::Test::CreditCardNumbers::Visa,
           :expiration_month => "11",

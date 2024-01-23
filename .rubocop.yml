@@ -341,6 +341,12 @@ Lint/UnderscorePrefixedVariableName:
 Lint/UnexpectedBlockArity:
   Enabled: true
 
+Lint/UnifiedInteger:
+  Enabled: true
+
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+
 Lint/UnreachableCode:
   Enabled: true
   Exclude:
@@ -350,6 +356,18 @@ Lint/UnreachableLoop:
   Enabled: true
 
 Lint/UnusedBlockArgument:
+  Enabled: true
+
+Lint/UriEscapeUnescape:
+  Enabled: true
+
+Lint/UriRegexp:
+  Enabled: true
+
+Lint/UselessAccessModifier:
+  Enabled: true
+
+Lint/UselessAssignment:
   Enabled: true
 
 Style/DefWithParentheses:
