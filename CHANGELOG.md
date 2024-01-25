@@ -1,8 +1,10 @@
 # Changelog
 
-## unreleased
+## Unreleased
 
 - Cleanup useless assignments in XML::Parser, Util, HTTP, Disbursement, and Configuration classes
+- Add `UnderReview` status to `Dispute`
+- Add `DisputeUnderReview` webhook to `WebhookNotification`
 
 ## 4.18.0
 
