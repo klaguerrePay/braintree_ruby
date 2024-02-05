@@ -200,8 +200,8 @@ describe Braintree::Transaction do
         },
       )
 
-      expect(transaction.three_d_secure_info.enrolled).to eq("Y")
       expect(transaction.three_d_secure_info.status).to eq("authenticate_successful")
+      expect(transaction.three_d_secure_info.enrolled).to eq("Y")
       expect(transaction.three_d_secure_info.liability_shifted).to eq(true)
       expect(transaction.three_d_secure_info.liability_shift_possible).to eq(true)
     end

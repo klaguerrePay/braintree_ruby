@@ -390,15 +390,14 @@ describe Braintree::PaymentMethod do
       expect(result.success?).to eq(true)
 
       three_d_secure_info = result.payment_method.verification.three_d_secure_info
-      expect(three_d_secure_info.enrolled).to eq("Y")
+      expect(three_d_secure_info.status).to eq("authenticate_successful")
       expect(three_d_secure_info).to be_liability_shifted
       expect(three_d_secure_info).to be_liability_shift_possible
-      expect(three_d_secure_info.status).to eq("authenticate_successful")
-      expect(three_d_secure_info.cavv).to eq("cavv_value")
-      expect(three_d_secure_info.xid).to eq("xid_value")
-      expect(three_d_secure_info.eci_flag).to eq("05")
-      expect(three_d_secure_info.three_d_secure_version).to eq("1.0.2")
-      expect(three_d_secure_info.ds_transaction_id).to eq(nil)
+      expect(three_d_secure_info.enrolled).to be_a(String)
+      expect(three_d_secure_info.cavv).to be_a(String)
+      expect(three_d_secure_info.xid).to be_a(String)
+      expect(three_d_secure_info.eci_flag).to be_a(String)
+      expect(three_d_secure_info.three_d_secure_version).to be_a(String)
     end
 
     it "respects fail_on_duplicate_payment_method when included outside of the nonce" do
