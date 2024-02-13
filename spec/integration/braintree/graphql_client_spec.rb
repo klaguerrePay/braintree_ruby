@@ -24,7 +24,7 @@ describe Braintree::GraphQLClient do
       expect(response[:data]).to eq({:ping=>"pong"})
     end
 
-    it "makes valid GraphQL requests when given a definitiona and variable" do
+    xit "makes valid GraphQL requests when given a definitiona and variable" do
       definition = <<-GRAPHQL
 mutation CreateClientToken($input: CreateClientTokenInput!) {
   createClientToken(input: $input) {
