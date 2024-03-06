@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.19.0
 
 - Add `UnderReview` status to `Dispute`
 - Add `DisputeUnderReview` webhook to `WebhookNotification`
