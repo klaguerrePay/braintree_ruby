@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `domains` parameter support to `ClientToken::generate`
+
 ## 4.19.0
 
 - Add `UnderReview` status to `Dispute`
