@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Deprecate `credit` method in `credit_card` and `credit_card_gateway`
+- Deprecate `sale` method in `credit_card` and `credit_card_gateway`
 - Add `domains` parameter support to `ClientToken::generate`
 
 ## 4.19.0
@@ -11,8 +13,6 @@
 - Cleanup useless assignments in XML::Parser, Util, HTTP, Disbursement, and Configuration classes
 - Fix issue where advanced searches using `between` were not correctly evaluating values
   larger than the minimum
-- Deprecate `credit` method in `credit_card` and `credit_card_gateway`
-- Deprecate `sale` method in `credit_card` and `credit_card_gateway`
 
 ## 4.18.0
 
