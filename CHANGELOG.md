@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Add `foreign_retailer` to Transaction
+* Add `funding_source_description` to PayPalAccount
 
 ## 4.20.0
 
