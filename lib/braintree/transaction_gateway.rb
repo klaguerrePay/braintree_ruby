@@ -225,7 +225,7 @@ module Braintree
         {:line_items => [:commodity_code, :description, :discount_amount, :image_url, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :upc_code, :upc_type, :url]},
         {:risk_data => [:customer_browser, :customer_device_id, :customer_ip, :customer_location_zip, :customer_tenure]},
         {:credit_card => [:token, :cardholder_name, :cvv, :expiration_date, :expiration_month, :expiration_year, :number, {:payment_reader_card_details => [:encrypted_card_data, :key_serial_number]}, {:network_tokenization_attributes => [:cryptogram, :ecommerce_indicator, :token_requestor_id]}]},
-        {:customer => [:id, :company, :email, :fax, :first_name, :last_name, :phone, :international_phone, :website]},
+        {:customer => [:id, :company, :email, :fax, :first_name, :last_name, :phone, :website]},
         {
           :billing => AddressGateway._shared_signature
         },

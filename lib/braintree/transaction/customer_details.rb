@@ -8,9 +8,9 @@ module Braintree
       attr_reader :fax
       attr_reader :first_name
       attr_reader :id
+      attr_reader :international_phone
       attr_reader :last_name
       attr_reader :phone
-      attr_reader :international_phone
       attr_reader :website
 
       def initialize(attributes)

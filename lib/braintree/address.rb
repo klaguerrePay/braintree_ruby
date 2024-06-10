@@ -12,10 +12,10 @@ module Braintree
     attr_reader :extended_address
     attr_reader :first_name
     attr_reader :id
+    attr_reader :international_phone
     attr_reader :last_name
     attr_reader :locality
     attr_reader :phone_number
-    attr_reader :international_phone
     attr_reader :postal_code
     attr_reader :region
     attr_reader :street_address

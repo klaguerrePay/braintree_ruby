@@ -50,8 +50,8 @@ describe Braintree::Customer do
       expect(result.customer.company).to eq("Microsoft")
       expect(result.customer.email).to eq("bill@microsoft.com")
       expect(result.customer.phone).to eq("312.555.1234")
-      expect(result.customer.international_phone.country_code).to eq("1")
-      expect(result.customer.international_phone.national_number).to eq("3121234567")
+      expect(result.customer.international_phone[:country_code]).to eq("1")
+      expect(result.customer.international_phone[:national_number]).to eq("3121234567")
       expect(result.customer.fax).to eq("614.555.5678")
       expect(result.customer.website).to eq("www.microsoft.com")
       expect(result.customer.created_at.between?(Time.now - 10, Time.now)).to eq(true)
@@ -1205,8 +1205,8 @@ describe Braintree::Customer do
       expect(result.customer.id).to eq(customer.id)
       expect(result.customer.first_name).to eq("Mr. Joe")
       expect(result.customer.last_name).to eq("Super Cool")
-      expect(result.customer.international_phone.country_code).to eq("1")
-      expect(result.customer.international_phone.national_number).to eq("3121234567")
+      expect(result.customer.international_phone[:country_code]).to eq("1")
+      expect(result.customer.international_phone[:national_number]).to eq("3121234567")
       expect(result.customer.custom_fields[:store_me]).to eq("a value")
     end
 

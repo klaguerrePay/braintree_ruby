@@ -29,8 +29,8 @@ describe Braintree::Address do
       expect(result.address.locality).to eq("Chicago")
       expect(result.address.region).to eq("Illinois")
       expect(result.address.phone_number).to eq("5551231234")
-      expect(result.address.international_phone.country_code).to eq("1")
-      expect(result.address.international_phone.national_number).to eq("3121234567")
+      expect(result.address.international_phone[:country_code]).to eq("1")
+      expect(result.address.international_phone[:national_number]).to eq("3121234567")
       expect(result.address.postal_code).to eq("60622")
       expect(result.address.country_name).to eq("United States of America")
       expect(result.address.country_code_alpha2).to eq("US")
@@ -256,8 +256,8 @@ describe Braintree::Address do
       expect(result.address.country_code_alpha2).to eq("US")
       expect(result.address.country_code_alpha3).to eq("USA")
       expect(result.address.country_code_numeric).to eq("840")
-      expect(result.address.international_phone.country_code).to eq("1")
-      expect(result.address.international_phone.national_number).to eq("3121234567")
+      expect(result.address.international_phone[:country_code]).to eq("1")
+      expect(result.address.international_phone[:national_number]).to eq("3121234567")
     end
 
     it "accepts country_codes" do

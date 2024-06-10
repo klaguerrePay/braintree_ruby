@@ -465,8 +465,8 @@ describe Braintree::PaymentMethod do
       found_credit_card = Braintree::CreditCard.find(token)
       expect(found_credit_card).not_to be_nil
       expect(found_credit_card.billing_address.street_address).to eq("123 Abc Way")
-      expect(found_credit_card.billing_address.international_phone.country_code).to eq("1")
-      expect(found_credit_card.billing_address.international_phone.national_number).to eq("3121234567")
+      expect(found_credit_card.billing_address.international_phone[:country_code]).to eq("1")
+      expect(found_credit_card.billing_address.international_phone[:national_number]).to eq("3121234567")
     end
 
     it "allows passing a billing address id outside of the nonce" do
@@ -1687,8 +1687,8 @@ describe Braintree::PaymentMethod do
           )
           expect(update_result.success?).to eq(true)
           updated_credit_card = update_result.payment_method
-          expect(updated_credit_card.billing_address.international_phone.country_code).to eq("1")
-          expect(updated_credit_card.billing_address.international_phone.national_number).to eq("3121234567")
+          expect(updated_credit_card.billing_address.international_phone[:country_code]).to eq("1")
+          expect(updated_credit_card.billing_address.international_phone[:national_number]).to eq("3121234567")
           expect(updated_credit_card.billing_address.region).to eq("IL")
           expect(updated_credit_card.billing_address.street_address).to eq("123 Nigeria Ave")
           expect(updated_credit_card.billing_address.id).to eq(credit_card.billing_address.id)

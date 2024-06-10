@@ -15,10 +15,10 @@ module Braintree
     attr_reader :google_pay_cards
     attr_reader :graphql_id
     attr_reader :id
+    attr_reader :international_phone
     attr_reader :last_name
     attr_reader :paypal_accounts
     attr_reader :phone
-    attr_reader :international_phone
     attr_reader :samsung_pay_cards
     attr_reader :sepa_direct_debit_accounts
     attr_reader :tax_identifiers
@@ -149,8 +149,8 @@ module Braintree
 
     def self._attributes
       [
-        :addresses, :company, :credit_cards, :email, :fax, :first_name, :id, :last_name, :phone, :international_phone, :website,
-        :created_at, :updated_at, :tax_identifiers
+        :addresses, :company, :credit_cards, :email, :fax, :first_name, :id, :international_phone,
+        :last_name, :phone, :website, :created_at, :updated_at, :tax_identifiers
       ]
     end
 

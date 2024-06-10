@@ -5250,7 +5250,6 @@ describe Braintree::Transaction do
           :company => "Braintree",
           :email => "dan@example.com",
           :phone => "419-555-1234",
-          :international_phone => {:country_code => "1", :national_number => "3121234567"},
           :fax => "419-555-1235",
           :website => "http://braintreepayments.com"
         },
@@ -5309,8 +5308,6 @@ describe Braintree::Transaction do
       expect(transaction.customer_details.company).to eq("Braintree")
       expect(transaction.customer_details.email).to eq("dan@example.com")
       expect(transaction.customer_details.phone).to eq("419-555-1234")
-      expect(transaction.customer_details.international_phone.country_code).to eq("1")
-      expect(transaction.customer_details.international_phone.national_number).to eq("3121234567")
       expect(transaction.customer_details.fax).to eq("419-555-1235")
       expect(transaction.customer_details.website).to eq("http://braintreepayments.com")
       expect(transaction.billing_details.first_name).to eq("Carl")
