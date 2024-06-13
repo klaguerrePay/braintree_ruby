@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Add `foreign_retailer` to Transaction
+* Add `GooglePayCard` error code
 
 ## 4.20.0
 
