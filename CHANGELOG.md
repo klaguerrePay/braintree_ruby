@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Add `foreign_retailer` to Transaction
+- Add `international_phone` to `Address` and `Customer` 
 
 ## 4.20.0
 
