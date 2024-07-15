@@ -5262,6 +5262,7 @@ describe Braintree::Transaction do
           :locality => "Chicago",
           :region => "IL",
           :phone_number => "122-555-1237",
+          :international_phone => {:country_code => "1", :national_number => "3121234567"},
           :postal_code => "60622",
           :country_name => "United States of America"
         },
@@ -5274,6 +5275,7 @@ describe Braintree::Transaction do
           :locality => "Bartlett",
           :region => "IL",
           :phone_number => "122-555-1236",
+          :international_phone => {:country_code => "1", :national_number => "3121234567"},
           :postal_code => "60103",
           :country_name => "United States of America",
           :shipping_method => Braintree::Transaction::AddressDetails::ShippingMethod::Electronic
@@ -5320,6 +5322,9 @@ describe Braintree::Transaction do
       expect(transaction.billing_details.country_code_alpha2).to eq("US")
       expect(transaction.billing_details.country_code_alpha3).to eq("USA")
       expect(transaction.billing_details.country_code_numeric).to eq("840")
+      expect(transaction.billing_details.phone_number).to eq("122-555-1237")
+      expect(transaction.billing_details.international_phone[:country_code]).to eq("1")
+      expect(transaction.billing_details.international_phone[:national_number]).to eq("3121234567")
       expect(transaction.shipping_details.first_name).to eq("Andrew")
       expect(transaction.shipping_details.last_name).to eq("Mason")
       expect(transaction.shipping_details.company).to eq("Braintree")
@@ -5332,6 +5337,9 @@ describe Braintree::Transaction do
       expect(transaction.shipping_details.country_code_alpha2).to eq("US")
       expect(transaction.shipping_details.country_code_alpha3).to eq("USA")
       expect(transaction.shipping_details.country_code_numeric).to eq("840")
+      expect(transaction.shipping_details.phone_number).to eq("122-555-1236")
+      expect(transaction.shipping_details.international_phone[:country_code]).to eq("1")
+      expect(transaction.shipping_details.international_phone[:national_number]).to eq("3121234567")
     end
 
     it "allows merchant account to be specified" do
