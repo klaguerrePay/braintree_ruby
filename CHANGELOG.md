@@ -2,8 +2,9 @@
 
 ## Unreleased
 
-* Add `foreign_retailer` to Transaction
-* Add `funding_source_description` to PayPalAccount
+- Add `foreign_retailer` to Transaction
+- Add `international_phone` to `Address` and `Customer`
+- Add `funding_source_description` to PayPalAccount
 
 ## 4.20.0
 
