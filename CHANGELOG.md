@@ -6,6 +6,7 @@
 - Add `international_phone` to `Address` and `Customer`
 - Add `funding_source_description` to PayPalAccount
 - Add missing `GooglePayCard` error code
+- Add `REFUND_FAILED` to Webhook Notification
 
 ## 4.20.0
 
