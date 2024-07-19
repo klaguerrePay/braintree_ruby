@@ -6630,6 +6630,39 @@ describe Braintree::Transaction do
       result = Braintree::Transaction.submit_for_partial_settlement(transaction.id, Braintree::Test::TransactionAmounts::Authorize, industry_data_flight_params)
       expect(result.success?).to be_truthy
     end
+
+    it "final_capture indicates the current partial_capture as final" do
+      authorized_transaction = Braintree::Transaction.sale!(
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :merchant_account_id => SpecHelper::DefaultMerchantAccountId,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "06/2009"
+        },
+      )
+
+      result1 = Braintree::Transaction.submit_for_partial_settlement(authorized_transaction.id, 100)
+      expect(result1.success?).to eq(true)
+      partial_settlement_transaction1 = result1.transaction
+      expect(partial_settlement_transaction1.amount).to eq(100)
+      expect(partial_settlement_transaction1.type).to eq(Braintree::Transaction::Type::Sale)
+      expect(partial_settlement_transaction1.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
+      expect(partial_settlement_transaction1.authorized_transaction_id).to eq(authorized_transaction.id)
+      refreshed_authorized_transaction1 = Braintree::Transaction.find(authorized_transaction.id)
+      expect(refreshed_authorized_transaction1.status).to eq(Braintree::Transaction::Status::SettlementPending)
+
+      options = {:final_capture => true}
+      result2 = Braintree::Transaction.submit_for_partial_settlement(authorized_transaction.id, 100, options)
+      expect(result2.success?).to eq(true)
+      partial_settlement_transaction2 = result2.transaction
+      expect(partial_settlement_transaction2.amount).to eq(100)
+      expect(partial_settlement_transaction2.type).to eq(Braintree::Transaction::Type::Sale)
+      expect(partial_settlement_transaction2.status).to eq(Braintree::Transaction::Status::SubmittedForSettlement)
+      expect(partial_settlement_transaction2.authorized_transaction_id).to eq(authorized_transaction.id)
+
+      refreshed_authorized_transaction2 = Braintree::Transaction.find(authorized_transaction.id)
+      expect(refreshed_authorized_transaction2.status).to eq(Braintree::Transaction::Status::SettlementPending)
+    end
   end
 
   describe "self.submit_for_partial_settlement!" do

@@ -178,7 +178,7 @@ module Braintree
 
     def submit_for_partial_settlement(authorized_transaction_id, amount = nil, options = {})
       raise ArgumentError, "authorized_transaction_id is invalid" unless authorized_transaction_id =~ /\A[0-9a-z]+\z/
-      Util.verify_keys(TransactionGateway._submit_for_settlement_signature, options)
+      Util.verify_keys(TransactionGateway._submit_for_partial_settlement_signature, options)
       transaction_params = {:amount => amount}.merge(options)
       response = @config.http.post("#{@config.base_merchant_path}/transactions/#{authorized_transaction_id}/submit_for_partial_settlement", :transaction => transaction_params)
       _handle_transaction_response(response)
@@ -319,6 +319,12 @@ module Braintree
         :shipping_amount,
         :ships_from_postal_code,
         :line_items => [:commodity_code, :description, :discount_amount, :image_url, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :upc_code, :upc_type, :url],
+      ]
+    end
+
+    def self._submit_for_partial_settlement_signature
+      _submit_for_settlement_signature + [
+        :final_capture
       ]
     end
 

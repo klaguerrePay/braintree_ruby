@@ -140,5 +140,9 @@ describe Braintree::TransactionGateway do
         :line_items => [:commodity_code, :description, :discount_amount, :image_url, :kind, :name, :product_code, :quantity, :tax_amount, :total_amount, :unit_amount, :unit_of_measure, :unit_tax_amount, :upc_code, :upc_type, :url],
       ])
     end
+
+    it "creates transaction gateway submit for partial settlement signature" do
+       expect(Braintree::TransactionGateway._submit_for_partial_settlement_signature).to include(:final_capture)
+    end
   end
 end
