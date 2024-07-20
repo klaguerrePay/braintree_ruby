@@ -8,6 +8,7 @@
 - Add missing `GooglePayCard` error code
 - Add `REFUND_FAILED` to Webhook Notification
 - Add `final_capture` to Transaction `_submit_for_partial_settlement_signature`
+- Deprecate `paypal_tracking_id` in favor of `paypal_tracker_id` in `package_details.rb`
 
 ## 4.20.0
 
