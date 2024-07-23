@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.21.0
 
 - Add `foreign_retailer` to Transaction
 - Add `international_phone` to `Address` and `Customer`
