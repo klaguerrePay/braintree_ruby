@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `edit_paypal_vault_id` to PayPalAccount
+
 ## 4.21.0
 
 - Add `foreign_retailer` to Transaction
