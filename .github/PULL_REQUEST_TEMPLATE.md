@@ -3,7 +3,7 @@
 (Please provide any information that can give us context on _why_ you're submitting this PR).
 
 # Checklist
-
+- [ ] Added changelog entry (If there isn't an `#unreleased` section, add that and your changelog entry to the top of the changelog)
 - [ ] Ran unit tests (`rake test:unit`)
 - [ ] If I added a new attribute or parameter, I alphabetically sorted into the existing attributes/parameters, etc
 - [ ] Any necessary comments are provided 
