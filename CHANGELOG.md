@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add new mock merchant for integration test
+
 ## 4.21.0
 
 - Add `foreign_retailer` to Transaction
