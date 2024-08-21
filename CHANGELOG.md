@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Add `ani_first_name_response_code` and `ani_last_name_response_code` to CreditCardVerification
+
 ## 4.21.0
 
 - Add `foreign_retailer` to Transaction
