@@ -319,9 +319,9 @@ describe Braintree::MerchantGateway do
 
     context "merchant has no processor connection supporting apple pay" do
       before do
-        Braintree::Configuration.merchant_id = "forward_payment_method_merchant_id"
-        Braintree::Configuration.public_key = "forward_payment_method_public_key"
-        Braintree::Configuration.private_key = "forward_payment_method_private_key"
+        Braintree::Configuration.merchant_id = "no_apple_pay_merchant_id"
+        Braintree::Configuration.public_key = "no_apple_pay_merchant_public_key"
+        Braintree::Configuration.private_key = "no_apple_pay_merchant_private_key"
       end
 
       it "returns a validation error" do
