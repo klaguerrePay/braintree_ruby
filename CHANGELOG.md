@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-* Add `ani_first_name_response_code` and `ani_last_name_response_code` to CreditCardVerification
+- Add `ani_first_name_response_code` and `ani_last_name_response_code` to CreditCardVerification
+- Add `shipping_tax_amount` to Tranaction
 
 ## 4.21.0
 
