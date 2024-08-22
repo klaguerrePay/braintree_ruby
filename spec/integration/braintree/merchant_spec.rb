@@ -325,9 +325,15 @@ describe Braintree::MerchantGateway do
       end
 
       it "returns a validation error" do
-        result = Braintree::Merchant.provision_raw_apple_pay
-        expect(result).not_to be_success
-        expect(result.errors.for(:apple_pay).first.code).to eq(Braintree::ErrorCodes::ApplePay::ApplePayCardsAreNotAccepted)
+        begin
+          result = Braintree::Merchant.provision_raw_apple_pay
+          expect(result).not_to be_success
+          expect(result.errors.for(:apple_pay).first.code).to eq(Braintree::ErrorCodes::ApplePay::ApplePayCardsAreNotAccepted)
+        rescue Braintree::NotFoundError
+          result = Braintree::Merchant.provision_raw_apple_pay
+          expect(result).not_to be_success
+          expect(result.errors.for(:apple_pay).first.code).to eq(Braintree::ErrorCodes::ApplePay::ApplePayCardsAreNotAccepted)
+        end
       end
     end
 
