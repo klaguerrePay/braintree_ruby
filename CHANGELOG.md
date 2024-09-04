@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add new mock merchant for integration test
+- Removes redundant integration test for provision_raw_apple_pay
 
 ## 4.21.0
 
