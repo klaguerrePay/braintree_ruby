@@ -317,20 +317,6 @@ describe Braintree::MerchantGateway do
       end
     end
 
-    context "merchant has no processor connection supporting apple pay" do
-      before do
-        Braintree::Configuration.merchant_id = "forward_payment_method_merchant_id"
-        Braintree::Configuration.public_key = "forward_payment_method_public_key"
-        Braintree::Configuration.private_key = "forward_payment_method_private_key"
-      end
-
-      it "returns a validation error" do
-        result = Braintree::Merchant.provision_raw_apple_pay
-        expect(result).not_to be_success
-        expect(result.errors.for(:apple_pay).first.code).to eq(Braintree::ErrorCodes::ApplePay::ApplePayCardsAreNotAccepted)
-      end
-    end
-
     def _save_config
       @original_config = {
         :merchant_id => Braintree::Configuration.merchant_id,
