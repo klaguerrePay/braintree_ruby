@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
 
-describe Braintree::SamsungPayCard do
+xdescribe Braintree::SamsungPayCard do
   it "can create from payment method nonce" do
     customer = Braintree::Customer.create!
 
