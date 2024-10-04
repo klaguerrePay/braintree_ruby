@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `blik_aliases` to LocalPaymentCompleted webhook
+
 ## 4.22.0
 
 - Add `payer_name`, `bic` and `iban_last_chars` to LocalPaymentCompleted webhook
