@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add `blik_aliases` to LocalPaymentCompleted webhook
+- Deprecate `samsung_pay_card`
 
 ## 4.22.0
 
