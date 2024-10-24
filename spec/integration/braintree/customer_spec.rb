@@ -620,7 +620,7 @@ describe Braintree::Customer do
           :credit_card => {
             :options => {
               :verify_card => true,
-              :verification_merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+              :verification_merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
               :verification_account_type => "debit",
             }
           },
@@ -1664,7 +1664,7 @@ describe Braintree::Customer do
             :expiration_date => "06/2013",
             :options => {
               :verify_card => true,
-              :verification_merchant_account_id => SpecHelper::HiperBRLMerchantAccountId,
+              :verification_merchant_account_id => SpecHelper::CardProcessorBRLMerchantAccountId,
               :verification_account_type => "debit",
             },
           },
