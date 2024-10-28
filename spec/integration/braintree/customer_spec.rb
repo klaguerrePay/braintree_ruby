@@ -1231,6 +1231,27 @@ describe Braintree::Customer do
       expect(result.errors.for(:customer).for(:credit_card).on(:number)[0].message).to eq("Duplicate card exists in the vault.")
     end
 
+    it "does not update customer with duplicate payment method if fail_on_payment_method_for_customer option set" do
+      customer = Braintree::Customer.create!(
+        :credit_card => {
+          :number => 4111111111111111,
+          :expiration_date => "05/2010",
+        },
+      )
+      result = Braintree::Customer.update(
+        customer.id,
+        :credit_card => {
+          :number => 4111111111111111,
+          :expiration_date => "05/2010",
+          :options=> {
+            :fail_on_duplicate_payment_method_for_customer => true
+          }
+        },
+      )
+      expect(result.success?).to eq(false)
+      expect(result.errors.for(:customer).for(:credit_card).on(:number)[0].message).to eq("Duplicate card exists in the vault for the customer.")
+    end
+
     it "updates the default payment method" do
       customer = Braintree::Customer.create!(
         :first_name => "Joe",
