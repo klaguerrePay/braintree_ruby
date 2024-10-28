@@ -4,6 +4,7 @@
 
 - Add `blik_aliases` to LocalPaymentCompleted webhook
 - Deprecate `samsung_pay_card`
+- Updated expiring pinned vendor SSL certificates
 
 ## 4.22.0
 
