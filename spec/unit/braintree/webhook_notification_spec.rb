@@ -403,39 +403,39 @@ describe Braintree::WebhookNotification do
       end
     end
 
-    context "merchant account" do
-      it "builds a sample notification for a merchant account approved webhook" do
-        sample_notification = Braintree::WebhookTesting.sample_notification(
-          Braintree::WebhookNotification::Kind::SubMerchantAccountApproved,
-          "my_id",
-        )
+    # context "merchant account" do
+    #   it "builds a sample notification for a merchant account approved webhook" do
+    #     sample_notification = Braintree::WebhookTesting.sample_notification(
+    #       Braintree::WebhookNotification::Kind::SubMerchantAccountApproved,
+    #       "my_id",
+    #     )
 
-        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+    #     notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
 
-        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::SubMerchantAccountApproved)
-        expect(notification.merchant_account.id).to eq("my_id")
-        expect(notification.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Active)
-        expect(notification.merchant_account.master_merchant_account.id).to eq("master_ma_for_my_id")
-        expect(notification.merchant_account.master_merchant_account.status).to eq(Braintree::MerchantAccount::Status::Active)
-      end
+    #     expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::SubMerchantAccountApproved)
+    #     expect(notification.merchant_account.id).to eq("my_id")
+    #     expect(notification.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Active)
+    #     expect(notification.merchant_account.master_merchant_account.id).to eq("master_ma_for_my_id")
+    #     expect(notification.merchant_account.master_merchant_account.status).to eq(Braintree::MerchantAccount::Status::Active)
+    #   end
 
-      it "builds a sample notification for a merchant account declined webhook" do
-        sample_notification = Braintree::WebhookTesting.sample_notification(
-          Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined,
-          "my_id",
-        )
+    #   it "builds a sample notification for a merchant account declined webhook" do
+    #     sample_notification = Braintree::WebhookTesting.sample_notification(
+    #       Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined,
+    #       "my_id",
+    #     )
 
-        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+    #     notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
 
-        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined)
-        expect(notification.merchant_account.id).to eq("my_id")
-        expect(notification.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Suspended)
-        expect(notification.merchant_account.master_merchant_account.id).to eq("master_ma_for_my_id")
-        expect(notification.merchant_account.master_merchant_account.status).to eq(Braintree::MerchantAccount::Status::Suspended)
-        expect(notification.message).to eq("Credit score is too low")
-        expect(notification.errors.for(:merchant_account).on(:base).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::DeclinedOFAC)
-      end
-    end
+    #     expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined)
+    #     expect(notification.merchant_account.id).to eq("my_id")
+    #     expect(notification.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Suspended)
+    #     expect(notification.merchant_account.master_merchant_account.id).to eq("master_ma_for_my_id")
+    #     expect(notification.merchant_account.master_merchant_account.status).to eq(Braintree::MerchantAccount::Status::Suspended)
+    #     expect(notification.message).to eq("Credit score is too low")
+    #     expect(notification.errors.for(:merchant_account).on(:base).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::DeclinedOFAC)
+    #   end
+    # end
 
     context "subscription" do
       it "builds a sample notification for a subscription billing skipped  webhook" do

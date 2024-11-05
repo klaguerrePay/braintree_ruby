@@ -84,47 +84,47 @@ module Braintree
     end
 
     # NEXT_MAJOR_VERSION this is part of Marketplace and shouldn't be removed unless we're removing all Marketplace code
-    def self._detect_signature(attributes)
-      if attributes.has_key?(:applicant_details)
-        warn "[DEPRECATED] Passing :applicant_details to create is deprecated. Please use :individual, :business, and :funding."
-        MerchantAccountGateway._deprecated_create_signature
-      else
-        MerchantAccountGateway._create_signature
-      end
+    # def self._detect_signature(attributes)
+    #   if attributes.has_key?(:applicant_details)
+    #     warn "[DEPRECATED] Passing :applicant_details to create is deprecated. Please use :individual, :business, and :funding."
+    #     MerchantAccountGateway._deprecated_create_signature
+    #   else
+    #     MerchantAccountGateway._create_signature
+    #   end
     end
 
     # NEXT_MAJOR_VERSION this is part of Marketplace and shouldn't be removed unless we're removing all Marketplace code
-    def self._deprecated_create_signature
-      [
-        {:applicant_details => [
-          :first_name, :last_name, :email, :date_of_birth, :ssn, :routing_number,
-          :account_number, :tax_id, :company_name, :phone,
-          {:address => [:street_address, :postal_code, :locality, :region]}]
-        },
-        :tos_accepted, :master_merchant_account_id, :id
-      ]
-    end
+    # def self._deprecated_create_signature
+    #   [
+    #     {:applicant_details => [
+    #       :first_name, :last_name, :email, :date_of_birth, :ssn, :routing_number,
+    #       :account_number, :tax_id, :company_name, :phone,
+    #       {:address => [:street_address, :postal_code, :locality, :region]}]
+    #     },
+    #     :tos_accepted, :master_merchant_account_id, :id
+    #   ]
+    # end
 
-    def self._signature
-      [
-        {:individual => [
-          :first_name, :last_name, :email, :date_of_birth, :ssn, :phone,
-          {:address => [:street_address, :locality, :region, :postal_code]}]
-        },
-        {:business => [
-          :dba_name, :legal_name, :tax_id,
-          {:address => [:street_address, :locality, :region, :postal_code]}]
-        },
-        {:funding => [:destination, :email, :mobile_phone, :routing_number, :account_number, :descriptor]}
-      ]
-    end
+    # def self._signature
+    #   [
+    #     {:individual => [
+    #       :first_name, :last_name, :email, :date_of_birth, :ssn, :phone,
+    #       {:address => [:street_address, :locality, :region, :postal_code]}]
+    #     },
+    #     {:business => [
+    #       :dba_name, :legal_name, :tax_id,
+    #       {:address => [:street_address, :locality, :region, :postal_code]}]
+    #     },
+    #     {:funding => [:destination, :email, :mobile_phone, :routing_number, :account_number, :descriptor]}
+    #   ]
+    # end
 
-    def self._create_signature
-      _signature + [:tos_accepted, :master_merchant_account_id, :id]
-    end
+    # def self._create_signature
+    #   _signature + [:tos_accepted, :master_merchant_account_id, :id]
+    # end
 
-    def self._update_signature
-      _signature
-    end
+    # def self._update_signature
+    #   _signature
+    # end
   end
 end

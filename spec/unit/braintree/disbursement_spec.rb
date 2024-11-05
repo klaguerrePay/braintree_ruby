@@ -15,14 +15,13 @@ describe Braintree::Disbursement do
         :gateway,
         :id => "123456",
         :merchant_account => {
-          :id => "sandbox_sub_merchant_account",
+          :id => "sandbox_master_merchant_account",
           :master_merchant_account => {
             :id => "sandbox_master_merchant_account",
             :status => "active"
           },
           :status => "active"
         },
-        :transaction_ids => ["sub_merchant_transaction"],
         :amount => "100.00",
         :disbursement_date => "2013-04-10",
         :exception_message => "invalid_account_number",
@@ -37,7 +36,6 @@ describe Braintree::Disbursement do
       expect(disbursement.inspect).to include("disbursement_date: 2013-04-10")
       expect(disbursement.inspect).to include('follow_up_action: "update"')
       expect(disbursement.inspect).to include("merchant_account: #<Braintree::MerchantAccount: ")
-      expect(disbursement.inspect).to include('transaction_ids: ["sub_merchant_transaction"]')
       expect(disbursement.inspect).to include("retry: false")
       expect(disbursement.inspect).to include("success: false")
     end
@@ -48,7 +46,7 @@ describe Braintree::Disbursement do
       disbursement = Braintree::Disbursement._new(
         :gateway,
         :merchant_account => {
-          :id => "sandbox_sub_merchant_account",
+          :id => "sandbox_master_merchant_account",
           :master_merchant_account => {
             :id => "sandbox_master_merchant_account",
             :status => "active"
@@ -63,7 +61,7 @@ describe Braintree::Disbursement do
       disbursement = Braintree::Disbursement._new(
         :gateway,
         :merchant_account => {
-          :id => "sandbox_sub_merchant_account",
+          :id => "sandbox_master_merchant_account",
           :master_merchant_account => {
             :id => "sandbox_master_merchant_account",
             :status => "active"

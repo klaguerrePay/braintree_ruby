@@ -40,7 +40,7 @@ unless defined?(SPEC_HELPER_LOADED)
     FakeVenmoAccountMerchantAccountId = "fake_first_data_venmo_account"
     HiperBRLMerchantAccountId = "hiper_brl"
     NonDefaultMerchantAccountId = "sandbox_credit_card_non_default"
-    NonDefaultSubMerchantAccountId = "sandbox_sub_merchant_account"
+    # NonDefaultSubMerchantAccountId = "sandbox_sub_merchant_account"
     PinlessDebitMerchantAccountId = "pinless_debit"
     ThreeDSecureMerchantAccountId = "three_d_secure_merchant_account"
     UsBankMerchantAccountId = "us_bank_merchant_account"

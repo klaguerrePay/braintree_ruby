@@ -57,8 +57,8 @@ module Braintree
       SubscriptionWentActive = "subscription_went_active"
       SubscriptionWentPastDue = "subscription_went_past_due"
 
-      SubMerchantAccountApproved = "sub_merchant_account_approved"
-      SubMerchantAccountDeclined = "sub_merchant_account_declined"
+      # SubMerchantAccountApproved = "sub_merchant_account_approved"
+      # SubMerchantAccountDeclined = "sub_merchant_account_declined"
 
       TransactionDisbursed = "transaction_disbursed"
       TransactionReviewed = "transaction_reviewed"

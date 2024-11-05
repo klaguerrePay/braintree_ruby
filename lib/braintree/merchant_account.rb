@@ -18,12 +18,12 @@ module Braintree
       include Braintree::MerchantAccount::FundingDestination
     end
 
-    attr_reader :business_details
+    # attr_reader :business_details
     attr_reader :currency_iso_code
     attr_reader :default
-    attr_reader :funding_details
+    # attr_reader :funding_details
     attr_reader :id
-    attr_reader :individual_details
+    # attr_reader :individual_details
     attr_reader :master_merchant_account
     attr_reader :status
 
@@ -52,9 +52,9 @@ module Braintree
     def initialize(gateway, attributes)
       @gateway = gateway
       set_instance_variables_from_hash(attributes)
-      @individual_details = IndividualDetails.new(@individual)
-      @business_details = BusinessDetails.new(@business)
-      @funding_details = FundingDetails.new(@funding)
+      # @individual_details = IndividualDetails.new(@individual)
+      # @business_details = BusinessDetails.new(@business)
+      # @funding_details = FundingDetails.new(@funding)
       @master_merchant_account = MerchantAccount._new(@gateway, attributes.delete(:master_merchant_account)) if attributes[:master_merchant_account]
     end
 

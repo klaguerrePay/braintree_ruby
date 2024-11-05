@@ -58,10 +58,10 @@ module Braintree
         _partner_merchant_declined_sample_xml(id)
       when Braintree::WebhookNotification::Kind::OAuthAccessRevoked
         _oauth_access_revoked_sample_xml(id)
-      when Braintree::WebhookNotification::Kind::SubMerchantAccountApproved
-        _merchant_account_approved_sample_xml(id)
-      when Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined
-        _merchant_account_declined_sample_xml(id)
+      # when Braintree::WebhookNotification::Kind::SubMerchantAccountApproved
+      #   _merchant_account_approved_sample_xml(id)
+      # when Braintree::WebhookNotification::Kind::SubMerchantAccountDeclined
+      #   _merchant_account_declined_sample_xml(id)
       when Braintree::WebhookNotification::Kind::TransactionDisbursed
         _transaction_disbursed_sample_xml(id)
       when Braintree::WebhookNotification::Kind::TransactionReviewed
