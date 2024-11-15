@@ -142,89 +142,89 @@ describe Braintree::MerchantAccount do
     end
   end
 
-  describe "create" do
-    it "accepts the deprecated parameters" do
-      result = Braintree::MerchantAccount.create(DEPRECATED_APPLICATION_PARAMS)
+  # describe "create" do
+  #   # it "accepts the deprecated parameters" do
+  #   #   result = Braintree::MerchantAccount.create(DEPRECATED_APPLICATION_PARAMS)
 
-      expect(result).to be_success
-      expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
-      expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
-    end
+  #   #   expect(result).to be_success
+  #   #   expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
+  #   #   expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
+  #   # end
 
-    it "creates a merchant account with the new parameters and doesn't require an id" do
-      result = Braintree::MerchantAccount.create(VALID_APPLICATION_PARAMS)
+  #   # it "creates a merchant account with the new parameters and doesn't require an id" do
+  #   #   result = Braintree::MerchantAccount.create(VALID_APPLICATION_PARAMS)
 
-      expect(result).to be_success
-      expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
-      expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
-    end
+  #   #   expect(result).to be_success
+  #   #   expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
+  #   #   expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
+  #   # end
 
-    # it "allows an id to be passed" do
-    #   random_number = rand(10000)
-    #   sub_merchant_account_id = "sub_merchant_account_id#{random_number}"
-    #   result = Braintree::MerchantAccount.create(
-    #     VALID_APPLICATION_PARAMS.merge(
-    #       :id => sub_merchant_account_id,
-    #     ),
-    #   )
+  #   # it "allows an id to be passed" do
+  #   #   random_number = rand(10000)
+  #   #   sub_merchant_account_id = "sub_merchant_account_id#{random_number}"
+  #   #   result = Braintree::MerchantAccount.create(
+  #   #     VALID_APPLICATION_PARAMS.merge(
+  #   #       :id => sub_merchant_account_id,
+  #   #     ),
+  #   #   )
 
-    #   expect(result).to be_success
-    #   expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
-    #   expect(result.merchant_account.id).to eq(sub_merchant_account_id)
-    #   expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
-    # end
+  #   #   expect(result).to be_success
+  #   #   expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
+  #   #   expect(result.merchant_account.id).to eq(sub_merchant_account_id)
+  #   #   expect(result.merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
+  #   # end
 
-    it "handles unsuccessful results" do
-      result = Braintree::MerchantAccount.create({})
-      expect(result).not_to be_success
-      expect(result.errors.for(:merchant_account).on(:master_merchant_account_id).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::MasterMerchantAccountIdIsRequired)
-    end
+  #   # it "handles unsuccessful results" do
+  #   #   result = Braintree::MerchantAccount.create({})
+  #   #   expect(result).not_to be_success
+  #   #   expect(result.errors.for(:merchant_account).on(:master_merchant_account_id).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::MasterMerchantAccountIdIsRequired)
+  #   # end
 
-    it "requires all fields" do
-      result = Braintree::MerchantAccount.create(
-        :master_merchant_account_id => "sandbox_master_merchant_account",
-      )
-      expect(result).not_to be_success
-      expect(result.errors.for(:merchant_account).on(:tos_accepted).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::TosAcceptedIsRequired)
-    end
+  #   # it "requires all fields" do
+  #   #   result = Braintree::MerchantAccount.create(
+  #   #     :master_merchant_account_id => "sandbox_master_merchant_account",
+  #   #   )
+  #   #   expect(result).not_to be_success
+  #   #   expect(result.errors.for(:merchant_account).on(:tos_accepted).first.code).to eq(Braintree::ErrorCodes::MerchantAccount::TosAcceptedIsRequired)
+  #   # end
 
-    context "funding destination" do
-      it "accepts a bank" do
-        params = VALID_APPLICATION_PARAMS.dup
-        params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::Bank
-        result = Braintree::MerchantAccount.create(params)
+  #   # context "funding destination" do
+  #   #   it "accepts a bank" do
+  #   #     params = VALID_APPLICATION_PARAMS.dup
+  #   #     params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::Bank
+  #   #     result = Braintree::MerchantAccount.create(params)
 
-        expect(result).to be_success
-      end
+  #   #     expect(result).to be_success
+  #   #   end
 
-      it "accepts an email" do
-        params = VALID_APPLICATION_PARAMS.dup
-        params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::Email
-        params[:funding][:email] = "joebloggs@compuserve.com"
-        result = Braintree::MerchantAccount.create(params)
+  #     # it "accepts an email" do
+  #     #   params = VALID_APPLICATION_PARAMS.dup
+  #     #   params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::Email
+  #     #   params[:funding][:email] = "joebloggs@compuserve.com"
+  #     #   result = Braintree::MerchantAccount.create(params)
 
-        expect(result).to be_success
-      end
+  #     #   expect(result).to be_success
+  #     # end
 
-      it "accepts a mobile_phone" do
-        params = VALID_APPLICATION_PARAMS.dup
-        params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::MobilePhone
-        params[:funding][:mobile_phone] = "3125882300"
-        result = Braintree::MerchantAccount.create(params)
+  #     # it "accepts a mobile_phone" do
+  #     #   params = VALID_APPLICATION_PARAMS.dup
+  #     #   params[:funding][:destination] = ::Braintree::MerchantAccount::FundingDestination::MobilePhone
+  #     #   params[:funding][:mobile_phone] = "3125882300"
+  #     #   result = Braintree::MerchantAccount.create(params)
 
-        expect(result).to be_success
-      end
-    end
-  end
+  #     #   expect(result).to be_success
+  #     # end
+  #   end
+  # end
 
-  describe "create!" do
-    it "creates a merchant account with the new parameters and doesn't require an id" do
-      merchant_account = Braintree::MerchantAccount.create!(VALID_APPLICATION_PARAMS)
+  # describe "create!" do
+  #   it "creates a merchant account with the new parameters and doesn't require an id" do
+  #     merchant_account = Braintree::MerchantAccount.create!(VALID_APPLICATION_PARAMS)
 
-      expect(merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
-      expect(merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
-    end
-  end
+  #     expect(merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
+  #     expect(merchant_account.master_merchant_account.id).to eq("sandbox_master_merchant_account")
+  #   end
+  # end
 
   describe "create_for_currency" do
     it "creates a new merchant account for currency" do
@@ -330,17 +330,17 @@ describe Braintree::MerchantAccount do
   end
 
   describe "find" do
-    it "finds the merchant account with the given token" do
-      result = Braintree::MerchantAccount.create(VALID_APPLICATION_PARAMS)
-      expect(result).to be_success
-      expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
+    # it "finds the merchant account with the given token" do
+    #   result = Braintree::MerchantAccount.create(VALID_APPLICATION_PARAMS)
+    #   expect(result).to be_success
+    #   expect(result.merchant_account.status).to eq(Braintree::MerchantAccount::Status::Pending)
 
-      id = result.merchant_account.id
-      merchant_account = Braintree::MerchantAccount.find(id)
+    #   id = result.merchant_account.id
+    #   merchant_account = Braintree::MerchantAccount.find(id)
 
-      expect(merchant_account.individual_details.first_name).to eq(VALID_APPLICATION_PARAMS[:individual][:first_name])
-      expect(merchant_account.individual_details.last_name).to eq(VALID_APPLICATION_PARAMS[:individual][:last_name])
-    end
+    #   expect(merchant_account.individual_details.first_name).to eq(VALID_APPLICATION_PARAMS[:individual][:first_name])
+    #   expect(merchant_account.individual_details.last_name).to eq(VALID_APPLICATION_PARAMS[:individual][:last_name])
+    # end
 
     it "retrieves the currency iso code for an existing master merchant account" do
       merchant_account = Braintree::MerchantAccount.find("sandbox_master_merchant_account")
