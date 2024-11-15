@@ -31,15 +31,15 @@ module Braintree
       return_object_or_raise(:transaction) { cancel_release(*args) }
     end
 
-    def hold_in_escrow(transaction_id)
-      raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
-      response = @config.http.put("#{@config.base_merchant_path}/transactions/#{transaction_id}/hold_in_escrow")
-      _handle_transaction_response(response)
-    end
+    # def hold_in_escrow(transaction_id)
+    #   raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
+    #   response = @config.http.put("#{@config.base_merchant_path}/transactions/#{transaction_id}/hold_in_escrow")
+    #   _handle_transaction_response(response)
+    # end
 
-    def hold_in_escrow!(*args)
-      return_object_or_raise(:transaction) { hold_in_escrow(*args) }
-    end
+    # def hold_in_escrow!(*args)
+    #   return_object_or_raise(:transaction) { hold_in_escrow(*args) }
+    # end
 
     def _handle_transaction_response(response)
       if response[:transaction]
@@ -135,15 +135,15 @@ module Braintree
       end
     end
 
-    def release_from_escrow(transaction_id)
-      raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
-      response = @config.http.put("#{@config.base_merchant_path}/transactions/#{transaction_id}/release_from_escrow")
-      _handle_transaction_response(response)
-    end
+    # def release_from_escrow(transaction_id)
+    #   raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/
+    #   response = @config.http.put("#{@config.base_merchant_path}/transactions/#{transaction_id}/release_from_escrow")
+    #   _handle_transaction_response(response)
+    # end
 
-    def release_from_escrow!(*args)
-      return_object_or_raise(:transaction) { release_from_escrow(*args) }
-    end
+    # def release_from_escrow!(*args)
+    #   return_object_or_raise(:transaction) { release_from_escrow(*args) }
+    # end
 
     def submit_for_settlement(transaction_id, amount = nil, options = {})
       raise ArgumentError, "transaction_id is invalid" unless transaction_id =~ /\A[0-9a-z]+\z/

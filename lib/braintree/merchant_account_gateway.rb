@@ -20,15 +20,15 @@ module Braintree
       PaginatedResult.new(body[:total_items], body[:page_size], merchant_accounts)
     end
 
-    def create(attributes)
-      signature = MerchantAccountGateway._detect_signature(attributes)
-      Util.verify_keys(signature, attributes)
-      _do_create "/merchant_accounts/create_via_api", :merchant_account => attributes
-    end
+    # def create(attributes)
+    #   signature = MerchantAccountGateway._detect_signature(attributes)
+    #   Util.verify_keys(signature, attributes)
+    #   _do_create "/merchant_accounts/create_via_api", :merchant_account => attributes
+    # end
 
-    def create!(*args)
-      return_object_or_raise(:merchant_account) { create(*args) }
-    end
+    # def create!(*args)
+    #   return_object_or_raise(:merchant_account) { create(*args) }
+    # end
 
     def find(merchant_account_id)
       raise ArgumentError if merchant_account_id.nil? || merchant_account_id.to_s.strip == ""
@@ -38,36 +38,36 @@ module Braintree
       raise NotFoundError, "Merchant account with id #{merchant_account_id} not found"
     end
 
-    def update(merchant_account_id, attributes)
-      Util.verify_keys(MerchantAccountGateway._update_signature, attributes)
-      _do_update "/merchant_accounts/#{merchant_account_id}/update_via_api", :merchant_account => attributes
-    end
+    # def update(merchant_account_id, attributes)
+    #   Util.verify_keys(MerchantAccountGateway._update_signature, attributes)
+    #   _do_update "/merchant_accounts/#{merchant_account_id}/update_via_api", :merchant_account => attributes
+    # end
 
-    def update!(*args)
-      return_object_or_raise(:merchant_account) { update(*args) }
-    end
+    # def update!(*args)
+    #   return_object_or_raise(:merchant_account) { update(*args) }
+    # end
 
     def create_for_currency(params)
       _create_for_currency(params)
     end
 
-    def _do_create(path, params=nil)
-      response = @config.http.post("#{@config.base_merchant_path}#{path}", params)
-      if response[:api_error_response]
-        ErrorResult.new(@gateway, response[:api_error_response])
-      else
-        SuccessfulResult.new(:merchant_account => MerchantAccount._new(@gateway, response[:merchant_account]))
-      end
-    end
+    # def _do_create(path, params=nil)
+    #   response = @config.http.post("#{@config.base_merchant_path}#{path}", params)
+    #   if response[:api_error_response]
+    #     ErrorResult.new(@gateway, response[:api_error_response])
+    #   else
+    #     SuccessfulResult.new(:merchant_account => MerchantAccount._new(@gateway, response[:merchant_account]))
+    #   end
+    # end
 
-    def _do_update(path, params=nil)
-      response = @config.http.put("#{@config.base_merchant_path}#{path}", params)
-      if response[:api_error_response]
-        ErrorResult.new(@gateway, response[:api_error_response])
-      else
-        SuccessfulResult.new(:merchant_account => MerchantAccount._new(@gateway, response[:merchant_account]))
-      end
-    end
+    # def _do_update(path, params=nil)
+    #   response = @config.http.put("#{@config.base_merchant_path}#{path}", params)
+    #   if response[:api_error_response]
+    #     ErrorResult.new(@gateway, response[:api_error_response])
+    #   else
+    #     SuccessfulResult.new(:merchant_account => MerchantAccount._new(@gateway, response[:merchant_account]))
+    #   end
+    # end
 
     def _create_for_currency(params)
       response = @config.http.post("#{@config.base_merchant_path}/merchant_accounts/create_for_currency", :merchant_account => params)
@@ -91,7 +91,7 @@ module Braintree
     #   else
     #     MerchantAccountGateway._create_signature
     #   end
-    end
+    # end
 
     # NEXT_MAJOR_VERSION this is part of Marketplace and shouldn't be removed unless we're removing all Marketplace code
     # def self._deprecated_create_signature

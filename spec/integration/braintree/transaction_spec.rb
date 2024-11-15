@@ -6674,13 +6674,13 @@ describe Braintree::Transaction do
     end
   end
 
-  describe "self.release_from_escrow" do
-    it "returns the transaction if successful" do
-      original_transaction = create_escrowed_transcation
+  # describe "self.release_from_escrow" do
+  #   it "returns the transaction if successful" do
+  #     original_transaction = create_escrowed_transcation
 
-      result = Braintree::Transaction.release_from_escrow(original_transaction.id)
-      expect(result.transaction.escrow_status).to eq(Braintree::Transaction::EscrowStatus::ReleasePending)
-    end
+  #     result = Braintree::Transaction.release_from_escrow(original_transaction.id)
+  #     expect(result.transaction.escrow_status).to eq(Braintree::Transaction::EscrowStatus::ReleasePending)
+  #   end
 
     # it "returns an error result if escrow_status is not HeldForEscrow" do
     #   transaction = Braintree::Transaction.sale!(
@@ -6698,7 +6698,7 @@ describe Braintree::Transaction do
     #   result = Braintree::Transaction.release_from_escrow(transaction.id)
     #   expect(result.errors.for(:transaction).on(:base)[0].code).to eq(Braintree::ErrorCodes::Transaction::CannotReleaseFromEscrow)
     # end
-  end
+  # end
 
   # describe "self.release_from_escrow!" do
   #   it "returns the transaction when successful" do

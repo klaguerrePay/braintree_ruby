@@ -675,7 +675,7 @@ module Braintree
       #     StreetAddressIsInvalid = "82661"
       #     StreetAddressIsRequired = "82657"
       #   end
-      end
+      # end
 
       # module Business
       #   DbaNameIsInvalid = "82646"

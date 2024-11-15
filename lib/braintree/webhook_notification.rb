@@ -13,7 +13,7 @@ module Braintree
       ConnectedMerchantPayPalStatusChanged = "connected_merchant_paypal_status_changed"
       ConnectedMerchantStatusTransitioned = "connected_merchant_status_transitioned"
       Disbursement = "disbursement"
-      DisbursementException = "disbursement_exception"
+      # DisbursementException = "disbursement_exception"
 
       DisputeAccepted = "dispute_accepted"
       DisputeAutoAccepted = "dispute_auto_accepted"

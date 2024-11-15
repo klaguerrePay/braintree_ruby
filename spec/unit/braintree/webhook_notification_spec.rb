@@ -310,24 +310,24 @@ describe Braintree::WebhookNotification do
         expect(notification.transaction.disbursement_details.disbursement_date).to eq(Date.parse("2013-07-09"))
       end
 
-      it "builds a sample notification for a disbursement_exception webhook" do
-        sample_notification = Braintree::WebhookTesting.sample_notification(
-          Braintree::WebhookNotification::Kind::DisbursementException,
-          "my_id",
-        )
+      # it "builds a sample notification for a disbursement_exception webhook" do
+      #   sample_notification = Braintree::WebhookTesting.sample_notification(
+      #     Braintree::WebhookNotification::Kind::DisbursementException,
+      #     "my_id",
+      #   )
 
-        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+      #   notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
 
-        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::DisbursementException)
-        expect(notification.disbursement.id).to eq("my_id")
-        expect(notification.disbursement.transaction_ids).to eq(%W{ afv56j kj8hjk })
-        expect(notification.disbursement.retry).to be(false)
-        expect(notification.disbursement.success).to be(false)
-        expect(notification.disbursement.exception_message).to eq("bank_rejected")
-        expect(notification.disbursement.disbursement_date).to eq(Date.parse("2014-02-10"))
-        expect(notification.disbursement.follow_up_action).to eq("update_funding_information")
-        expect(notification.disbursement.merchant_account.id).to eq("merchant_account_token")
-      end
+      #   expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::DisbursementException)
+      #   expect(notification.disbursement.id).to eq("my_id")
+      #   expect(notification.disbursement.transaction_ids).to eq(%W{ afv56j kj8hjk })
+      #   expect(notification.disbursement.retry).to be(false)
+      #   expect(notification.disbursement.success).to be(false)
+      #   expect(notification.disbursement.exception_message).to eq("bank_rejected")
+      #   expect(notification.disbursement.disbursement_date).to eq(Date.parse("2014-02-10"))
+      #   expect(notification.disbursement.follow_up_action).to eq("update_funding_information")
+      #   expect(notification.disbursement.merchant_account.id).to eq("merchant_account_token")
+      # end
 
       it "builds a sample notification for a disbursement webhook" do
         sample_notification = Braintree::WebhookTesting.sample_notification(

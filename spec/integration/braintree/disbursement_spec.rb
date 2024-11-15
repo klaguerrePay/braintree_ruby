@@ -6,11 +6,7 @@ describe Braintree::Disbursement do
       attributes = {
         :id => "123456",
         :merchant_account => {
-          :id => "sandbox_master_merchant_account",
-          :master_merchant_account => {
-            :id => "sandbox_master_merchant_account",
-            :status => "active"
-          },
+          :id => "ma_card_processor_brazil",
           :status => "active"
         },
         :amount => "100.00",
@@ -24,6 +20,7 @@ describe Braintree::Disbursement do
       disbursement = Braintree::Disbursement._new(Braintree::Configuration.gateway, attributes)
       expect(disbursement.transactions.maximum_size).to eq(1)
       transaction = disbursement.transactions.first
+      expect(transaction.id).to eq("transaction_with_installments_and_adjustments")
     end
   end
 end

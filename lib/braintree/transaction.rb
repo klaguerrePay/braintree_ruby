@@ -9,14 +9,14 @@ module Braintree
       Unrecognized = "unrecognized"
     end
 
-    module EscrowStatus
-      HoldPending    = "hold_pending"
-      Held           = "held"
-      ReleasePending = "release_pending"
-      Released       = "released"
-      Refunded       = "refunded"
-      Unrecognized   = "unrecognized"
-    end
+    # module EscrowStatus
+    #   HoldPending    = "hold_pending"
+    #   Held           = "held"
+    #   ReleasePending = "release_pending"
+    #   Released       = "released"
+    #   Refunded       = "refunded"
+    #   Unrecognized   = "unrecognized"
+    # end
 
     module GatewayRejectionReason
       ApplicationIncomplete = "application_incomplete"
@@ -118,7 +118,7 @@ module Braintree
     attr_reader :discount_amount
     attr_reader :discounts
     attr_reader :disputes
-    attr_reader :escrow_status
+    # attr_reader :escrow_status
     attr_reader :facilitated_details
     attr_reader :facilitator_details
     attr_reader :foreign_retailer
@@ -235,13 +235,13 @@ module Braintree
       Configuration.gateway.transaction_line_item.find_all(*args)
     end
 
-    def self.hold_in_escrow(*args)
-      Configuration.gateway.transaction.hold_in_escrow(*args)
-    end
+    # def self.hold_in_escrow(*args)
+    #   Configuration.gateway.transaction.hold_in_escrow(*args)
+    # end
 
-    def self.hold_in_escrow!(*args)
-      Configuration.gateway.transaction.hold_in_escrow!(*args)
-    end
+    # def self.hold_in_escrow!(*args)
+    #   Configuration.gateway.transaction.hold_in_escrow!(*args)
+    # end
 
     def self.refund(*args)
       Configuration.gateway.transaction.refund(*args)
@@ -263,13 +263,13 @@ module Braintree
       Configuration.gateway.transaction.search(&block)
     end
 
-    def self.release_from_escrow(*args)
-      Configuration.gateway.transaction.release_from_escrow(*args)
-    end
+    # def self.release_from_escrow(*args)
+    #   Configuration.gateway.transaction.release_from_escrow(*args)
+    # end
 
-    def self.release_from_escrow!(*args)
-      Configuration.gateway.transaction.release_from_escrow!(*args)
-    end
+    # def self.release_from_escrow!(*args)
+    #   Configuration.gateway.transaction.release_from_escrow!(*args)
+    # end
 
     def self.submit_for_settlement(*args)
       Configuration.gateway.transaction.submit_for_settlement(*args)
