@@ -9,6 +9,7 @@ describe Braintree::Disbursement do
           :id => "ma_card_processor_brazil",
           :status => "active"
         },
+        transactionIds: ["transaction_with_installments_and_adjustments"],
         :amount => "100.00",
         :disbursement_date => "2013-04-10",
         :exception_message => "invalid_account_number",
