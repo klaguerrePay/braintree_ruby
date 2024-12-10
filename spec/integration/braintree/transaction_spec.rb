@@ -7139,6 +7139,29 @@ describe Braintree::Transaction do
       expect(result.transaction.status).to eq(Braintree::Transaction::Status::Voided)
     end
 
+    it "returns a successful result if contact details passed in" do
+      transaction = Braintree::Transaction.sale!(
+        :amount => Braintree::Test::TransactionAmounts::Authorize,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2009"
+        },
+        :options => {
+          :paypal => {
+            :recipient_email => "test@paypal.com",
+            :recipient_phone => {
+              :country_code => "US",
+              :national_number => "4082222222"
+            }
+          }
+        },
+      )
+      result = Braintree::Transaction.void(transaction.id)
+      expect(result.success?).to eq(true)
+      expect(result.transaction.id).to eq(transaction.id)
+      expect(result.transaction.status).to eq(Braintree::Transaction::Status::Voided)
+    end
+
     it "returns an error result if unsuccessful" do
       transaction = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Decline,
