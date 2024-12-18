@@ -21,6 +21,8 @@ describe Braintree::Transaction::PayPalDetails do
         :payer_last_name => "Hopper",
         :payer_status =>"status",
         :payment_id => "payment-id",
+        :recipient_email => "test@paypal.com",
+        :recipient_phone => [:country_coude => "1", :national_number => "4082222222"],
         :refund_from_transaction_fee_amount => "1.00",
         :refund_from_transaction_fee_currency_iso_code => "123",
         :refund_id => "refund-id",
