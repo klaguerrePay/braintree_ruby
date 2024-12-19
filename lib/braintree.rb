@@ -86,7 +86,7 @@ require "braintree/transaction/local_payment_details"
 require "braintree/merchant"
 require "braintree/merchant_gateway"
 require "braintree/merchant_account"
-require "braintree/merchant_account_gateway"
+require "braintree/merchant_account_gateway" #NEXT_MAJOR_VERSION remove merchant_account_gateway
 require "braintree/merchant_account/individual_details"
 require "braintree/merchant_account/business_details"
 require "braintree/merchant_account/funding_details"

@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased 
+- Deprecate `merchant_account_gateway` 
+
 ## 4.23.0
 
 - Add `fail_on_duplicate_payment_method_for_customer` option to 
