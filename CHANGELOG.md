@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+- Add `account_information_inquiry` to
+    - `CreditCardVerification#create`
+    - `PaymentMethod#create` and `PaymentMethod#update`
+    - `CreditCard#create` and `CreditCard#update`
+
 ## 4.27.0
 
 - Remove marketplace features
