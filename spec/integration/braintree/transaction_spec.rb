@@ -7175,7 +7175,7 @@ describe Braintree::Transaction do
       )
       result = Braintree::Transaction.void(transaction.id)
       expect(result.success?).to eq(true)
-      expect(result.paypal_details.recipient_email).to eq("test@paypal.com")
+      expect(result.transaction.paypal_details.recipient_email).to eq("test@paypal.com")
       expect(result.transaction.id).to eq(transaction.id)
       expect(result.transaction.status).to eq(Braintree::Transaction::Status::Voided)
     end

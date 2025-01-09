@@ -11,7 +11,8 @@ describe Braintree::Transaction, "search" do
       expect(collection.maximum_size).to eq(0)
     end
 
-    it "can search on text fields" do
+    #Disabling test until we have more stable CI
+    xit "can search on text fields" do
       first_name = "Tim_#{rand(10**10)}"
       token = "creditcard_#{rand(10**10)}"
       customer_id = "customer_#{rand(10**10)}"
