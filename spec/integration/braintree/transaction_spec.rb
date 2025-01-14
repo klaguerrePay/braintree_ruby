@@ -7166,9 +7166,9 @@ describe Braintree::Transaction do
     end
 
     it "returns a successful result if contact details passed in" do
-      result = Braintree::Transaction.sale!(
+      result = Braintree::Transaction.sale(
         :payment_method_nonce => Braintree::Test::Nonce::PayPalOneTimePayment,
-        :amount => 10_00,
+        :amount => "10",
         :options => {
           :paypal => {}
         },
