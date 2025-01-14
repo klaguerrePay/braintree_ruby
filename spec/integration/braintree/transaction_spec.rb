@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
+require "json"
 
 describe Braintree::Transaction do
   let(:industry_data_flight_params) do
