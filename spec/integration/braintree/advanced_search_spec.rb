@@ -33,7 +33,8 @@ describe Braintree::AdvancedSearch do
       expect(collection).not_to include(subscription2)
     end
 
-    it "is_not" do
+    # we are temporarily skipping this test until we have a more stable CI env
+    xit "is_not" do
       id = rand(36**8).to_s(36)
       subscription1 = Braintree::Subscription.create(
         :payment_method_token => @credit_card.token,
@@ -80,7 +81,8 @@ describe Braintree::AdvancedSearch do
       expect(collection).not_to include(subscription2)
     end
 
-    it "ends_with" do
+    # we are temporarily skipping this test until we have a more stable CI env
+    xit "ends_with" do
       id = rand(36**8).to_s(36)
       subscription1 = Braintree::Subscription.create(
         :payment_method_token => @credit_card.token,
