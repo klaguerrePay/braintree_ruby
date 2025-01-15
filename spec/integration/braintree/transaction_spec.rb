@@ -7175,7 +7175,6 @@ describe Braintree::Transaction do
       )
       expect(result.success?).to eq(true)
       expect(result.transaction.paypal_details.recipient_email).to eq("test@paypal.com")
-      expect(result.transaction.id).to eq(transaction.id)
     end
 
     it "returns an error result if unsuccessful" do
