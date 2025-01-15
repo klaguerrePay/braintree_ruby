@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
-require "json"
 
 describe Braintree::Transaction do
   let(:industry_data_flight_params) do
@@ -7175,7 +7174,6 @@ describe Braintree::Transaction do
         },
       )
       expect(result.success?).to eq(true)
-      puts "result paypal details value #{result.transaction.paypal_details.to_json}"
       expect(result.transaction.paypal_details.recipient_email).to eq("test@paypal.com")
       expect(result.transaction.id).to eq(transaction.id)
     end
