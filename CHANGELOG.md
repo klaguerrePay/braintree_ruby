@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.25.0
 
 - Add support for creating and updating PayPal customer session
 - Add support for getting PayPal customer recommendations
