@@ -6,7 +6,7 @@ pipeline {
   agent {
     node {
       label "ec2"
-      customWorkspace "workspace/braintree_js"
+      customWorkspace "workspace/braintree-ruby"
     }
   }
   environment {
