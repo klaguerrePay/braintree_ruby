@@ -6880,6 +6880,18 @@ describe Braintree::Transaction do
       expect(result.transaction.status).to eq(Braintree::Transaction::Status::Voided)
     end
 
+    it "returns a successful result if contact details passed in" do
+      result = Braintree::Transaction.sale(
+        :payment_method_nonce => Braintree::Test::Nonce::PayPalOneTimePayment,
+        :amount => "10",
+        :options => {
+          :paypal => {}
+        },
+      )
+      expect(result.success?).to eq(true)
+      expect(result.transaction.paypal_details.recipient_email).to eq("test@paypal.com")
+    end
+
     it "returns an error result if unsuccessful" do
       transaction = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Decline,
