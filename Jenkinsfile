@@ -23,7 +23,7 @@ pipeline {
     stage("CodeQL") {
       steps {
         script {
-          codeQL("ruby": true)
+          codeQLv2(ruby: true)
         }
       }
 
