@@ -1,7 +1,8 @@
 # Changelog
 
 ## Unreleased 
-- Deprecate `merchant_account_gateway` 
+- Add `prepaid_reloadable` from the bin data to credit card responses
+- Remove `marketplace` features 
 
 ## 4.25.0
 
