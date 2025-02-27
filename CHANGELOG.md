@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Add `prepaid_reloadable` from the bin data to credit card responses
+
 ## 4.25.0
 
 - Add support for creating and updating PayPal customer session
