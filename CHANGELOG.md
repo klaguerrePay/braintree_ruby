@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Add `prepaid_reloadable` from the bin data to credit card responses
+- Add support for `PayPalPaymentResource` requests
 
 ## 4.25.0
 
