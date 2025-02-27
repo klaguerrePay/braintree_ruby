@@ -89,7 +89,7 @@ module Braintree
     def merchant
       MerchantGateway.new(self)
     end
-  #NEXT_MAJOR_VERSION remove merchant_account
+
     def merchant_account
       MerchantAccountGateway.new(self)
     end
