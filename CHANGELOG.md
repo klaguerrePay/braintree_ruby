@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased 
+## 4.26.0
+
 - Add `prepaid_reloadable` from the bin data to credit card responses
-- Remove `marketplace` features 
+- Add support for `PayPalPaymentResource` requests
 
 ## 4.25.0
 
