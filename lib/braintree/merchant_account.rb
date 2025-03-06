@@ -8,6 +8,12 @@ module Braintree
       Suspended = "suspended"
     end
 
+    module FundingDestination
+      Bank = "bank"
+      MobilePhone = "mobile_phone"
+      Email = "email"
+    end
+
     attr_reader :business_details
     attr_reader :currency_iso_code
     attr_reader :default
@@ -30,7 +36,7 @@ module Braintree
       @funding_details = FundingDetails.new(@funding)
       @master_merchant_account = MerchantAccount._new(@gateway, attributes.delete(:master_merchant_account)) if attributes[:master_merchant_account]
       set_instance_variables_from_hash(attributes)
-        end
+    end
 
     class << self
       protected :new

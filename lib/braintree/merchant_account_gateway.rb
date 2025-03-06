@@ -1,5 +1,4 @@
 module Braintree
-  # NEXT_MAJOR_VERSION Remove this class
   class MerchantAccountGateway
     include BaseModule
 
