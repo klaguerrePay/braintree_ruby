@@ -6,7 +6,7 @@ describe Braintree::Disbursement do
       attributes = {
         :id => "123456",
         :merchant_account => {
-          :id => "ma_card_processor_brazil",
+          :id => "card_processor_brl",
           :status => "active"
         },
         transactionIds: ["transaction_with_installments_and_adjustments"],
@@ -20,7 +20,7 @@ describe Braintree::Disbursement do
 
       disbursement = Braintree::Disbursement._new(Braintree::Configuration.gateway, attributes)
       transaction = disbursement.transactions.first
-      expect(transaction.id).to eq("transaction_with_installments_and_adjustments")
+      expect(transaction.id).to eq("mhqvbpbs")
     end
   end
 end
