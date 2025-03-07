@@ -14,6 +14,10 @@ module Braintree
       Email = "email"
     end
 
+    module FundingDestinations
+      include Braintree::MerchantAccount::FundingDestination
+    end
+
     attr_reader :business_details
     attr_reader :currency_iso_code
     attr_reader :default
