@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased 
+- Remove marketplace features
+
 ## 4.26.0
 
 - Add `prepaid_reloadable` from the bin data to credit card responses
