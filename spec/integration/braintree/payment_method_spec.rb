@@ -1228,7 +1228,7 @@ describe Braintree::PaymentMethod do
         expect(apple_pay_card.image_url).to match(/apple_pay/)
         expect(apple_pay_card.expiration_month.to_i).to be > 0
         expect(apple_pay_card.expiration_year.to_i).to be > 0
-        expect(apple_pay_card.source_description).to eq("Visa 8886")
+        expect(apple_pay_card.source_description).to eq("Visa 2006")
         expect(apple_pay_card.customer_id).to eq(customer.id)
         apple_pay_card.merchant_token_identifier == "DNITHE302308980427388297"
         apple_pay_card.source_card_last4 == "2006"
