@@ -126,8 +126,8 @@ describe Braintree::PaymentMethod do
       expect(apple_pay_card.bin).not_to be_nil
       expect(apple_pay_card.token).to eq(token)
       expect(apple_pay_card.card_type).to eq(Braintree::ApplePayCard::CardType::Visa)
-      expect(apple_pay_card.payment_instrument_name).to eq("Visa 8886")
-      expect(apple_pay_card.source_description).to eq("Visa 8886")
+      expect(apple_pay_card.payment_instrument_name).to eq("Visa 2006")
+      expect(apple_pay_card.source_description).to eq("Visa 2006")
       expect(apple_pay_card.default).to eq(true)
       expect(apple_pay_card.image_url).to match(/apple_pay/)
       expect(apple_pay_card.expiration_month.to_i).to be > 0
