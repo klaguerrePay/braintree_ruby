@@ -34,6 +34,7 @@ unless defined?(SPEC_HELPER_LOADED)
     AibSwedenMaMerchantAccountId = "aib_swe_ma"
     AnotherUsBankMerchantAccountId = "another_us_bank_merchant_account"
     CardProcessorBRLMerchantAccountId = "card_processor_brl"
+    CardProcessorBRLPayFacMerchantAccountId = "card_processor_brl_payfac"
     DefaultMerchantAccountId = "sandbox_credit_card"
     FakeAmexDirectMerchantAccountId = "fake_amex_direct_usd"
     FakeFirstDataMerchantAccountId = "fake_first_data_merchant_account"

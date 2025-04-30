@@ -5637,7 +5637,6 @@ describe Braintree::Transaction do
       end
     end
 
-
     context "3rd party Card on File Network Token" do
       it "Works with all params" do
         params = {

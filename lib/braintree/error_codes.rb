@@ -190,6 +190,10 @@ module Braintree
       AndroidPayCardsAreNotAccepted = "83708"
     end
 
+    module PaymentFacilitator
+      PaymentFacilitatorNotApplicable = "97405"
+    end
+
     module PayPalAccount
       AuthExpired = "92911"
       CannotHaveBothAccessTokenAndConsentCode = "82903"
@@ -460,6 +464,7 @@ module Braintree
       UnsupportedVoiceAuthorization = "91539"
       UsBankAccountNonceMustBePlaidVerified = "915171"
       UsBankAccountNotVerified = "915172"
+
 
       module Options
         SubmitForSettlementIsRequiredForCloning = "91544"

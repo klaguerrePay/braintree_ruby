@@ -2,6 +2,7 @@
 
 ## Unreleased 
 - Remove marketplace features
+- Add support for capturing payment facilitator and sub-merchant details with transactions 
 
 ## 4.26.0
 
