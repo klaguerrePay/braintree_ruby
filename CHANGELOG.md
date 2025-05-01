@@ -1,6 +1,7 @@
 # Changelog
 
-## Unreleased 
+## 4.27.0
+
 - Remove marketplace features
 - Add support for capturing payment facilitator and sub-merchant details with transactions 
 
