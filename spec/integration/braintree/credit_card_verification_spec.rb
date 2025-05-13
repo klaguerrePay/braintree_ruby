@@ -368,6 +368,102 @@ describe Braintree::CreditCardVerification, "search" do
         found_verification = Braintree::CreditCardVerification.find(verification_id)
         expect(found_verification.credit_card[:prepaid_reloadable]).to eq(Braintree::CreditCard::PrepaidReloadable::Yes)
       end
+
+      it "returns business on a business card" do
+        cardholder_name = "Tom #{rand(1_000_000)} Smith"
+
+        Braintree::Customer.create(
+          :credit_card => {
+          :cardholder_name => cardholder_name,
+          :expiration_date => "05/2012",
+          :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Business,
+          :cvv => "200",
+          :options => {
+            :verify_card => true
+        }
+        })
+
+        search_results = Braintree::CreditCardVerification.search do |search|
+          search.credit_card_cardholder_name.is cardholder_name
+        end
+
+        verification_id = search_results.first.id
+
+        found_verification = Braintree::CreditCardVerification.find(verification_id)
+        expect(found_verification.credit_card[:business]).to eq(Braintree::CreditCard::Business::Yes)
+      end
+
+      it "returns consumer on a consumer card" do
+        cardholder_name = "Tom #{rand(1_000_000)} Smith"
+
+        Braintree::Customer.create(
+          :credit_card => {
+          :cardholder_name => cardholder_name,
+          :expiration_date => "05/2012",
+          :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Consumer,
+          :cvv => "200",
+          :options => {
+            :verify_card => true
+        }
+        })
+
+        search_results = Braintree::CreditCardVerification.search do |search|
+          search.credit_card_cardholder_name.is cardholder_name
+        end
+
+        verification_id = search_results.first.id
+
+        found_verification = Braintree::CreditCardVerification.find(verification_id)
+        expect(found_verification.credit_card[:consumer]).to eq(Braintree::CreditCard::Consumer::Yes)
+      end
+
+      it "returns corporate on a corporate card" do
+        cardholder_name = "Tom #{rand(1_000_000)} Smith"
+
+        Braintree::Customer.create(
+          :credit_card => {
+          :cardholder_name => cardholder_name,
+          :expiration_date => "05/2012",
+          :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Corporate,
+          :cvv => "200",
+          :options => {
+            :verify_card => true
+        }
+        })
+
+        search_results = Braintree::CreditCardVerification.search do |search|
+          search.credit_card_cardholder_name.is cardholder_name
+        end
+
+        verification_id = search_results.first.id
+
+        found_verification = Braintree::CreditCardVerification.find(verification_id)
+        expect(found_verification.credit_card[:corporate]).to eq(Braintree::CreditCard::Corporate::Yes)
+      end
+
+      it "returns purchase on a purchase card" do
+        cardholder_name = "Tom #{rand(1_000_000)} Smith"
+
+        Braintree::Customer.create(
+          :credit_card => {
+          :cardholder_name => cardholder_name,
+          :expiration_date => "05/2012",
+          :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Purchase,
+          :cvv => "200",
+          :options => {
+            :verify_card => true
+        }
+        })
+
+        search_results = Braintree::CreditCardVerification.search do |search|
+          search.credit_card_cardholder_name.is cardholder_name
+        end
+
+        verification_id = search_results.first.id
+
+        found_verification = Braintree::CreditCardVerification.find(verification_id)
+        expect(found_verification.credit_card[:purchase]).to eq(Braintree::CreditCard::Purchase::Yes)
+      end
     end
   end
 
