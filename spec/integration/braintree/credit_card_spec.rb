@@ -1450,4 +1450,57 @@ describe Braintree::CreditCard do
       expect(credit_card_vaulted.is_network_tokenized?).to eq(false)
     end
   end
+
+  describe "account information inquiry" do
+    it "includes ani response when account information inquiry is sent in options" do
+      customer = Braintree::Customer.create!
+      result = Braintree::CreditCard.create(
+        :cardholder_name => "John Doe",
+        :customer_id => customer.id,
+        :cvv => "123",
+        :number => Braintree::Test::CreditCardNumbers::Visa,
+        :expiration_date => "05/2027",
+        :billing_address => {
+          :first_name => "John",
+          :last_name => "Doe",
+        },
+        :options => {
+          :account_information_inquiry => "send_data",
+          :verify_card => true,
+        },
+      )
+
+      expect(result).to be_success
+      verification = result.credit_card.verification
+      expect(verification.ani_first_name_response_code).not_to be_nil
+      expect(verification.ani_last_name_response_code).not_to be_nil
+    end
+
+    it "includes ani response  after updating the options with account information inquiry" do
+      customer = Braintree::Customer.create!
+      credit_card = Braintree::CreditCard.create!(
+        :cardholder_name => "Original Holder",
+        :customer_id => customer.id,
+        :cvv => "123",
+        :number => Braintree::Test::CreditCardNumbers::Visa,
+        :expiration_date => "05/2027",
+      )
+      updated_result = Braintree::CreditCard.update(credit_card.token,
+        :options => {
+          :verify_card => true,
+          :account_information_inquiry => "send_data",
+        },
+      )
+
+      expect(updated_result).to be_success
+      verification = updated_result.credit_card.verification
+      expect(verification.ani_first_name_response_code).not_to be_nil
+      expect(verification.ani_last_name_response_code).not_to be_nil
+    end
+  end
 end
+
+
+
+
+

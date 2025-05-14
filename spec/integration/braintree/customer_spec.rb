@@ -1750,6 +1750,57 @@ describe Braintree::Customer do
     end
   end
 
+  describe "account information inquiry" do
+    it "includes ani response when account information inquiry is sent in options" do
+      result = Braintree::Customer.create(
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "05/2027",
+          :cvv => "100",
+          :billing_address => {
+            :first_name => "John",
+            :last_name => "Doe",
+          },
+          :options => {
+            :account_information_inquiry => "send_data",
+            :verify_card => true,
+          },
+        },
+      )
+
+      expect(result).to be_success
+      verification = result.customer.credit_cards.first.verification
+      expect(verification.ani_first_name_response_code).not_to be_nil
+      expect(verification.ani_last_name_response_code).not_to be_nil
+    end
+
+    it "includes ani response after updating the options with account information inquiry" do
+      customer = Braintree::Customer.create!(
+        :first_name => "Joe",
+      )
+      updated_result = Braintree::Customer.update(
+        customer.id,
+        :credit_card => {
+          :number => Braintree::Test::CreditCardNumbers::Visa,
+          :expiration_date => "12/2029",
+          :billing_address => {
+            :first_name => "John",
+            :last_name => "Doe",
+          },
+          :options => {
+            :account_information_inquiry => "send_data",
+            :verify_card => true,
+          },
+        },
+      )
+
+      expect(updated_result).to be_success
+      verification = updated_result.customer.credit_cards.first.verification
+      expect(verification.ani_first_name_response_code).not_to be_nil
+      expect(verification.ani_last_name_response_code).not_to be_nil
+    end
+  end
+
   describe "paypal" do
     context "future" do
       it "creates a customer with a future paypal account" do
