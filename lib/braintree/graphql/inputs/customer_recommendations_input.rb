@@ -1,5 +1,7 @@
 # Represents the input to request PayPal customer session recommendations.
 
+#Experimental
+# This class is experimental and may change in future releases.
 module Braintree
     class CustomerRecommendationsInput
         include BaseModule

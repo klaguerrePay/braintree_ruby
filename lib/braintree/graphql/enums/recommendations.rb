@@ -1,7 +1,7 @@
 # Represents available types of customer recommendations that can be retrieved using a PayPal customer session.
 
 #Experimental
-# This is a work in progress and may change in the future.
+# This enum is experimental and may change in future releases.
 module Braintree
   module Recommendations
     PAYMENT_RECOMMENDATIONS = "PAYMENT_RECOMMENDATIONS"

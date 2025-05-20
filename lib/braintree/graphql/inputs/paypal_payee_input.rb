@@ -1,5 +1,5 @@
 #Experimental
-# This is a work in progress and may change in the future.
+# This class is experimental and may change in future releases.
 module Braintree
     class PayPalPayeeInput
         include BaseModule
