@@ -3,7 +3,7 @@
 #Experimental
 # This is a work in progress and may change in the future.
 module Braintree
-    class PaymentOptions
+    class PaymentRecommendations
         include BaseModule
 
         attr_reader :attrs
