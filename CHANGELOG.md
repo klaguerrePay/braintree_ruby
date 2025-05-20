@@ -2,9 +2,12 @@
 
 ## Unreleased
 - Add `account_information_inquiry` to
-    - `CreditCardVerification#create`
-    - `PaymentMethod#create` and `PaymentMethod#update`
-    - `CreditCard#create` and `CreditCard#update`
+  - `CreditCardVerification#create`
+  - `PaymentMethod#create` and `PaymentMethod#update`
+  - `CreditCard#create` and `CreditCard#update`
+- Enhancements to PayPal customer recommendations
+  - Create a session and get recommendations in one call
+  - Hash customer email and phone number
 
 ## 4.27.0
 
