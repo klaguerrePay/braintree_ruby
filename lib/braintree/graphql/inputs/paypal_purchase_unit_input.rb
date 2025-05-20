@@ -10,6 +10,9 @@ module Braintree
 
         def initialize(attributes)
             @attrs = attributes.keys
+            unless attributes[:amount]
+                raise ArgumentError, "Expected hash to contain a :amount"
+            end
             set_instance_variables_from_hash(attributes)
             @payee = attributes[:payee] ? PayPalPayeeInput.new(attributes[:payee]) : nil
             @amount = attributes[:amount] ? MonetaryAmountInput.new(attributes[:amount]) : nil
