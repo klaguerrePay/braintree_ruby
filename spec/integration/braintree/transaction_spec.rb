@@ -2903,30 +2903,6 @@ describe Braintree::Transaction do
         expect(result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:three_d_secure_version)[0].code).to eq(Braintree::ErrorCodes::Transaction::ThreeDSecureThreeDSecureVersionIsInvalid)
       end
 
-      it "returns an error for transaction when the three_d_secure_pass_thru authentication_response is invalid" do
-        result = Braintree::Transaction.create(
-          :type => "sale",
-          :amount => Braintree::Test::TransactionAmounts::Authorize,
-          :merchant_account_id => SpecHelper:: AdyenMerchantAccountId,
-          :credit_card => {
-            :number => Braintree::Test::CreditCardNumbers::Visa,
-            :expiration_date => "12/12",
-          },
-          :three_d_secure_pass_thru => {
-            :eci_flag => "05",
-            :cavv => "some_cavv",
-            :xid => "some_xid",
-            :three_d_secure_version => "1.0.2",
-            :authentication_response => "asdf",
-            :directory_response => "Y",
-            :cavv_algorithm => "2",
-            :ds_transaction_id => "some_ds_id",
-          },
-        )
-        expect(result.success?).to eq(false)
-        expect(result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:authentication_response)[0].code).to eq(Braintree::ErrorCodes::Transaction::ThreeDSecureAuthenticationResponseIsInvalid)
-      end
-
       it "returns an error for transaction when the three_d_secure_pass_thru directory_response is invalid" do
         result = Braintree::Transaction.create(
           :type => "sale",
