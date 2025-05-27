@@ -280,6 +280,58 @@ describe Braintree::Transaction do
         expect(result.transaction.credit_card_details.prepaid_reloadable).to eq(Braintree::CreditCard::PrepaidReloadable::Yes)
         expect(result.transaction.payment_instrument_type).to eq(Braintree::PaymentInstrumentType::CreditCard)
       end
+
+      it "sets the business field if the card is business" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => 1_00,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Business,
+            :expiration_date => "05/2009"
+          },
+        )
+        expect(result.transaction.credit_card_details.business).to eq(Braintree::CreditCard::Business::Yes)
+        expect(result.transaction.payment_instrument_type).to eq(Braintree::PaymentInstrumentType::CreditCard)
+      end
+
+      it "sets the consumer field if the card is consumer" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => 1_00,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Consumer,
+            :expiration_date => "05/2009"
+          },
+        )
+        expect(result.transaction.credit_card_details.consumer).to eq(Braintree::CreditCard::Consumer::Yes)
+        expect(result.transaction.payment_instrument_type).to eq(Braintree::PaymentInstrumentType::CreditCard)
+      end
+
+      it "sets the corporate field if the card is corporate" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => 1_00,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Corporate,
+            :expiration_date => "05/2009"
+          },
+        )
+        expect(result.transaction.credit_card_details.corporate).to eq(Braintree::CreditCard::Corporate::Yes)
+        expect(result.transaction.payment_instrument_type).to eq(Braintree::PaymentInstrumentType::CreditCard)
+      end
+
+      it "sets the purchase field if the card is purchase" do
+        result = Braintree::Transaction.create(
+          :type => "sale",
+          :amount => 1_00,
+          :credit_card => {
+            :number => Braintree::Test::CreditCardNumbers::CardTypeIndicators::Purchase,
+            :expiration_date => "05/2009"
+          },
+        )
+        expect(result.transaction.credit_card_details.purchase).to eq(Braintree::CreditCard::Purchase::Yes)
+        expect(result.transaction.payment_instrument_type).to eq(Braintree::PaymentInstrumentType::CreditCard)
+      end
     end
 
     describe "sca_exemption" do
@@ -2081,9 +2133,12 @@ describe Braintree::Transaction do
         meta_checkout_card_details = result.transaction.meta_checkout_card_details
         meta_checkout_card_details.should_not be_nil
         meta_checkout_card_details.bin.should == "401288"
+        meta_checkout_card_details.business.should == "Unknown"
         meta_checkout_card_details.card_type.should == Braintree::CreditCard::CardType::Visa
         meta_checkout_card_details.cardholder_name.should == "Meta Checkout Card Cardholder"
+        meta_checkout_card_details.consumer.should == "Unknown"
         meta_checkout_card_details.container_id.should == "container123"
+        meta_checkout_card_details.corporate.should == "Unknown"
         meta_checkout_card_details.customer_location.should == "US"
         next_year = Date.today().next_year().year.to_s
         meta_checkout_card_details.expiration_date.should == "12/".concat(next_year)
@@ -2095,6 +2150,7 @@ describe Braintree::Transaction do
         meta_checkout_card_details.masked_number.should == "401288******1881"
         meta_checkout_card_details.prepaid.should == "No"
         meta_checkout_card_details.prepaid_reloadable.should == "Unknown"
+        meta_checkout_card_details.purchase.should == "Unknown"
       end
 
       it "can create a transaction with a fake meta checkout token nonce" do
@@ -2110,9 +2166,12 @@ describe Braintree::Transaction do
 
         meta_checkout_token_details.should_not be_nil
         meta_checkout_token_details.bin.should == "401288"
+        meta_checkout_token_details.business.should == "Unknown"
         meta_checkout_token_details.card_type.should == Braintree::CreditCard::CardType::Visa
         meta_checkout_token_details.cardholder_name.should == "Meta Checkout Token Cardholder"
+        meta_checkout_token_details.consumer.should == "Unknown"
         meta_checkout_token_details.container_id.should == "container123"
+        meta_checkout_token_details.corporate.should == "Unknown"
         meta_checkout_token_details.cryptogram.should == "AlhlvxmN2ZKuAAESNFZ4GoABFA=="
         meta_checkout_token_details.customer_location.should == "US"
         meta_checkout_token_details.ecommerce_indicator.should == "07"
@@ -2126,6 +2185,7 @@ describe Braintree::Transaction do
         meta_checkout_token_details.masked_number.should == "401288******1881"
         meta_checkout_token_details.prepaid.should == "No"
         meta_checkout_token_details.prepaid_reloadable.should == "Unknown"
+        meta_checkout_token_details.purchase.should == "Unknown"
       end
 
       it "can create a transaction with a fake apple pay nonce" do
