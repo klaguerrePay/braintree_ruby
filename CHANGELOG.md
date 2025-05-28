@@ -1,6 +1,7 @@
 # Changelog
 
-## Unreleased
+## 4.28.0
+
 - Add `account_information_inquiry` to
   - `CreditCardVerification#create`
   - `PaymentMethod#create` and `PaymentMethod#update`
