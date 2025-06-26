@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.29.0
 
 - Add Session Id to Customer Recommendations Payload
 
