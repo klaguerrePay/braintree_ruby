@@ -171,6 +171,7 @@ module Braintree
     attr_reader :tax_exempt
     attr_reader :three_d_secure_info
     attr_reader :type
+    attr_reader :upcoming_retry_date
     attr_reader :updated_at
     attr_reader :us_bank_account_details
     attr_reader :venmo_account_details

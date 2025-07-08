@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `upcoming_retry_date` to `Transaction`
+
 ## 4.29.0
 
 - Add Session Id to Customer Recommendations Payload
