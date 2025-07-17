@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add `upcoming_retry_date` to `Transaction`
+- Add `remaining_file_evidence_storage` to Dispute
 
 ## 4.29.0
 
