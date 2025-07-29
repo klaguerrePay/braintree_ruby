@@ -5,6 +5,7 @@
 - Add `ach_reject_reason` to `Transaction`
 - Add `sender` and `receiver` to `transfer` in `Transaction`
 - Add `is_device_token` to `ApplePayCard` and `ApplePayDetails`
+- Add extra fields to `sender` and `receiver` in `transfer` in `Transaction`
 
 ## 4.30.0
 

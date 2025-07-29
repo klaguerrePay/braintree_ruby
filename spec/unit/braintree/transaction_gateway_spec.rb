@@ -135,13 +135,16 @@ describe Braintree::TransactionGateway do
             {:sender => [
               :first_name,
               :last_name,
+              :middle_name,
               :account_reference_number,
               :tax_id,
+              :date_of_birth,
               :address => Braintree::AddressGateway._address_attributes
             ]},
             {:receiver => [
               :first_name,
               :last_name,
+              :middle_name,
               :account_reference_number,
               :tax_id,
               :address => Braintree::AddressGateway._address_attributes

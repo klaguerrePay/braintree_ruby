@@ -15,7 +15,29 @@ describe Braintree::Transaction do
         },
         :transfer => {
           :type => "wallet_transfer",
-        },
+          :receiver => {
+            :first_name => "John",
+            :middle_name => "D",
+            :last_name => "Smith",
+            :address => {
+              :country_code => "US",
+              :locality => "LA",
+              :region => "CA",
+              :street_address => "1st Main"
+            }
+          },
+          :sender => {
+            :first_name => "Lisa",
+            :last_name => "Ray",
+            :account_reference_number => "123456789",
+            :dat_of_birth => Date.new(2002, 1, 2),
+            :address => {
+              :country_code => "US",
+              :locality => "LA",
+              :region => "CA",
+              :street_address => "12th Main"
+            }
+         },
       }
 
       result = Braintree::Transaction.sale(transaction_params)

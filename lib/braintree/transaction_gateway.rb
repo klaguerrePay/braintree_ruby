@@ -287,8 +287,10 @@ module Braintree
               :sender => [
                 :first_name,
                 :last_name,
+                :middle_name,
                 :account_reference_number,
                 :tax_id,
+                :date_of_birth,
                 {:address => AddressGateway._address_attributes}
               ]
             },
@@ -296,6 +298,7 @@ module Braintree
               :receiver => [
                 :first_name,
                 :last_name,
+                :middle_name,
                 :account_reference_number,
                 :tax_id,
                 {:address => AddressGateway._address_attributes}
