@@ -82,6 +82,7 @@ module Braintree
       end
     end
 
+    attr_reader :account_funding_transaction
     attr_reader :ach_return_code
     attr_reader :ach_return_responses
     attr_reader :acquirer_reference_number
