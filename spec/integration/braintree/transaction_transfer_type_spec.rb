@@ -20,7 +20,7 @@ describe Braintree::Transaction do
             :middle_name => "D",
             :last_name => "Smith",
             :address => {
-              :country_code => "US",
+              :country_code_alpha2 => "US",
               :locality => "LA",
               :region => "CA",
               :street_address => "1st Main"
@@ -29,15 +29,17 @@ describe Braintree::Transaction do
           :sender => {
             :first_name => "Lisa",
             :last_name => "Ray",
+            :middle_name => "D",
             :account_reference_number => "123456789",
-            :dat_of_birth => Date.new(2002, 1, 2),
+            :date_of_birth => Date.new(2002, 1, 2),
             :address => {
-              :country_code => "US",
+              :country_code_alpha2 => "US",
               :locality => "LA",
               :region => "CA",
               :street_address => "12th Main"
             }
-         },
+          },
+        }
       }
 
       result = Braintree::Transaction.sale(transaction_params)
