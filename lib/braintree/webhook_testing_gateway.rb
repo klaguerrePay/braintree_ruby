@@ -280,7 +280,6 @@ module Braintree
           <status>submitted_for_settlement</status>
           <type>sale</type>
           <currency-iso-code>USD</currency-iso-code>
-          <merchant-account-id>merchant_account_token</merchant-account-id>
           <retried-transaction-id>original_txn_id</retried-transaction-id>
         </transaction>
       XML

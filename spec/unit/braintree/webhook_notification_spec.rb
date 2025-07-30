@@ -330,6 +330,23 @@ describe Braintree::WebhookNotification do
       end
     end
 
+    context "transaction retried" do
+      it "builds a sample notification for a transaction retried webhook" do
+        sample_notification = Braintree::WebhookTesting.sample_notification(
+          Braintree::WebhookNotification::Kind::TransactionRetried,
+          "my_id",
+        )
+
+        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
+
+        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::TransactionRetried)
+        expect(notification.transaction.id).to eq("my_id")
+        expect(notification.transaction.amount).to eq(1_00)
+        expect(notification.transaction.status).to eq("submitted_for_settlement")
+        expect(notification.transaction.retried_transaction_id).to eq("original_txn_id")
+      end
+    end
+
     context "transaction review" do
       it " builds a sample notification for a transaction reviewed webhook" do
         sample_notification = Braintree::WebhookTesting.sample_notification(
@@ -345,23 +362,6 @@ describe Braintree::WebhookNotification do
         expect(notification.transaction_review.reviewer_email).to eq("hey@girl.com")
         expect(notification.transaction_review.reviewer_note).to eq("i reviewed this")
         expect(notification.transaction_review.reviewed_time).to_not be_nil
-      end
-    end
-
-    context "transaction retried" do
-      it "builds a sample notification for a transaction retried webhook" do
-        sample_notification = Braintree::WebhookTesting.sample_notification(
-          Braintree::WebhookNotification::Kind::TransactionRetried,
-          "my_id",
-        )
-
-        notification = Braintree::WebhookNotification.parse(sample_notification[:bt_signature], sample_notification[:bt_payload])
-
-        expect(notification.kind).to eq(Braintree::WebhookNotification::Kind::TransactionRetried)
-        expect(notification.transaction.id).to eq("my_id")
-        expect(notification.transaction.amount).to eq(1_00)
-        expect(notification.transaction.status).to eq("submitted_for_settlement")
-        expect(notification.transaction.retried_transaction_id).to eq("original_txn_id")
       end
     end
 
