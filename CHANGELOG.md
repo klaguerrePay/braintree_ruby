@@ -4,6 +4,7 @@
 
 - Add `upcoming_retry_date` to `Transaction`
 - Add `remaining_file_evidence_storage` to Dispute
+- Add `transfer_type` to Transaction
 - Add `transaction_retried` webhook
 
 ## 4.29.0
