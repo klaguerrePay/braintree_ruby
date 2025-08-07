@@ -15,11 +15,12 @@ module Braintree
 
     module VerificationMethod
       IndependentCheck = "independent_check"
+      InstantVerification = "instant_verification"
       NetworkCheck = "network_check"
       TokenizedCheck = "tokenized_check"
       MicroTransfers = "micro_transfers"
 
-      All = [IndependentCheck, NetworkCheck, TokenizedCheck, MicroTransfers]
+      All = [IndependentCheck, InstantVerification, NetworkCheck, TokenizedCheck, MicroTransfers]
     end
 
     module VerificationAddOns

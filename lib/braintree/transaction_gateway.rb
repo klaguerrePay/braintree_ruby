@@ -285,6 +285,12 @@ module Braintree
             :type,
           ]
         },
+        {
+          :us_bank_account => [
+            :ach_mandate_text,
+            :ach_mandate_accepted_at,
+          ]
+        },
       ]
     end
 
