@@ -10,8 +10,8 @@ module Braintree
     end
 
     def to_graphql_variables
-      variables = { :input => {} }
-      
+      variables = {:input => {}}
+
       variables[:input][:business_name] = business_name if business_name
       variables[:input][:return_url] = return_url if return_url
       variables[:input][:cancel_url] = cancel_url if cancel_url

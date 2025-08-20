@@ -7,16 +7,16 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-client-id"
+        :client_mutation_id => "test-client-id",
       )
 
       variables = request.to_graphql_variables
 
       expect(variables).not_to be_nil
       expect(variables).to have_key(:input)
-      
+
       input = variables[:input]
-      
+
       expect(input[:business_name]).to eq("Test Business")
       expect(input[:return_url]).to eq("https://example.com/success")
       expect(input[:cancel_url]).to eq("https://example.com/cancel")
@@ -26,13 +26,13 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
     it "only includes non-null fields" do
       request = Braintree::BankAccountInstantVerificationTokenRequest.new(
         :business_name => "Test Business",
-        :return_url => "https://example.com/success"
+        :return_url => "https://example.com/success",
       )
 
       variables = request.to_graphql_variables
 
       input = variables[:input]
-      
+
       expect(input[:business_name]).to eq("Test Business")
       expect(input[:return_url]).to eq("https://example.com/success")
       expect(input).not_to have_key(:cancel_url)
@@ -44,7 +44,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
 
       variables = request.to_graphql_variables
 
-      expect(variables).to eq({ :input => {} })
+      expect(variables).to eq({:input => {}})
     end
   end
 
@@ -68,7 +68,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-client-id"
+        :client_mutation_id => "test-client-id",
       )
 
       expect(request.business_name).to eq("Test Business")

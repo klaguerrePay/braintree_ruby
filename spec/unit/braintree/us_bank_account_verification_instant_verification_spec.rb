@@ -8,13 +8,13 @@ describe Braintree::UsBankAccountVerification do
 
     it "includes InstantVerification in All array" do
       expect(Braintree::UsBankAccountVerification::VerificationMethod::All).to include(
-        Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification
+        Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification,
       )
     end
 
     it "includes all verification methods" do
       all_methods = Braintree::UsBankAccountVerification::VerificationMethod::All
-      
+
       expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::IndependentCheck)
       expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification)
       expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::MicroTransfers)

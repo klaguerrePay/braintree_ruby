@@ -17,7 +17,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-mutation-id"
+        :client_mutation_id => "test-mutation-id",
       )
     end
 
@@ -71,7 +71,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       expect(graphql_client).to receive(:query).with(
         /mutation CreateBankAccountInstantVerificationToken/,
-        request
+        {:input=>{:business_name=>"Test Business", :cancel_url=>"https://example.com/cancel", :client_mutation_id=>"test-mutation-id", :return_url=>"https://example.com/success"}},
       ).and_return(mock_response)
 
       bank_account_instant_verification_gateway.create_token(request)
@@ -80,7 +80,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
     it "works with minimal request" do
       minimal_request = Braintree::BankAccountInstantVerificationTokenRequest.new(
         :business_name => "Test Business",
-        :return_url => "https://example.com/success"
+        :return_url => "https://example.com/success",
       )
 
       mock_response = {

@@ -43,6 +43,7 @@ module Braintree
 
     def initialize(attributes)
       set_instance_variables_from_hash(attributes)
+      @us_bank_account = UsBankAccount._new(nil, attributes[:us_bank_account]) if attributes[:us_bank_account]
     end
 
     def inspect
