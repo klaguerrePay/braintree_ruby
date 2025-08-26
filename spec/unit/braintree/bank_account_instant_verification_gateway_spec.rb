@@ -11,9 +11,9 @@ describe Braintree::BankAccountInstantVerificationGateway do
     allow(gateway).to receive(:graphql_client).and_return(graphql_client)
   end
 
-  describe "create_token" do
+  describe "create_jwt" do
     let(:request) do
-      Braintree::BankAccountInstantVerificationTokenRequest.new(
+      Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
@@ -24,8 +24,8 @@ describe Braintree::BankAccountInstantVerificationGateway do
     it "returns success result with valid response" do
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_token => {
-            :token => "test-jwt-token",
+          :create_bank_account_instant_verification_jwt => {
+            :jwt => "test-jwt-token",
             :client_mutation_id => "test-mutation-id"
           }
         }
@@ -33,12 +33,12 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       allow(graphql_client).to receive(:query).and_return(mock_response)
 
-      result = bank_account_instant_verification_gateway.create_token(request)
+      result = bank_account_instant_verification_gateway.create_jwt(request)
 
       expect(result.success?).to eq(true)
-      expect(result.bank_account_instant_verification_token).not_to be_nil
-      expect(result.bank_account_instant_verification_token.token).to eq("test-jwt-token")
-      expect(result.bank_account_instant_verification_token.client_mutation_id).to eq("test-mutation-id")
+      expect(result.bank_account_instant_verification_jwt).not_to be_nil
+      expect(result.bank_account_instant_verification_jwt.jwt).to eq("test-jwt-token")
+      expect(result.bank_account_instant_verification_jwt.client_mutation_id).to eq("test-mutation-id")
     end
 
     it "returns error result with validation errors" do
@@ -53,7 +53,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       allow(graphql_client).to receive(:query).and_return(mock_response)
 
-      result = bank_account_instant_verification_gateway.create_token(request)
+      result = bank_account_instant_verification_gateway.create_jwt(request)
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil
@@ -62,31 +62,31 @@ describe Braintree::BankAccountInstantVerificationGateway do
     it "calls GraphQL client with correct mutation" do
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_token => {
-            :token => "test-jwt-token",
+          :create_bank_account_instant_verification_jwt => {
+            :jwt => "test-jwt-token",
             :client_mutation_id => "test-mutation-id"
           }
         }
       }
 
       expect(graphql_client).to receive(:query).with(
-        /mutation CreateBankAccountInstantVerificationToken/,
+        /mutation CreateBankAccountInstantVerificationJwt/,
         {:input=>{:business_name=>"Test Business", :cancel_url=>"https://example.com/cancel", :client_mutation_id=>"test-mutation-id", :return_url=>"https://example.com/success"}},
       ).and_return(mock_response)
 
-      bank_account_instant_verification_gateway.create_token(request)
+      bank_account_instant_verification_gateway.create_jwt(request)
     end
 
     it "works with minimal request" do
-      minimal_request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      minimal_request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
       )
 
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_token => {
-            :token => "test-jwt-token",
+          :create_bank_account_instant_verification_jwt => {
+            :jwt => "test-jwt-token",
             :client_mutation_id => nil
           }
         }
@@ -94,10 +94,10 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       allow(graphql_client).to receive(:query).and_return(mock_response)
 
-      result = bank_account_instant_verification_gateway.create_token(minimal_request)
+      result = bank_account_instant_verification_gateway.create_jwt(minimal_request)
 
       expect(result.success?).to eq(true)
-      expect(result.bank_account_instant_verification_token.token).to eq("test-jwt-token")
+      expect(result.bank_account_instant_verification_jwt.jwt).to eq("test-jwt-token")
     end
   end
 end

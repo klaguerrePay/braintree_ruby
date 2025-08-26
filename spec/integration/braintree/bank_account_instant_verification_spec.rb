@@ -10,50 +10,50 @@ describe Braintree::BankAccountInstantVerificationGateway do
     )
   end
 
-  describe "create_token" do
-    it "creates a token with valid request" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+  describe "create_jwt" do
+    it "creates a jwt with valid request" do
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "PP",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
         :client_mutation_id => "test-mutation-#{Time.now.to_i}",
       )
 
-      result = @gateway.bank_account_instant_verification.create_token(request)
+      result = @gateway.bank_account_instant_verification.create_jwt(request)
 
       expect(result.success?).to eq(true)
-      expect(result.bank_account_instant_verification_token).not_to be_nil
-      expect(result.bank_account_instant_verification_token.token).not_to be_nil
-      expect(result.bank_account_instant_verification_token.token).not_to be_empty
+      expect(result.bank_account_instant_verification_jwt).not_to be_nil
+      expect(result.bank_account_instant_verification_jwt.jwt).not_to be_nil
+      expect(result.bank_account_instant_verification_jwt.jwt).not_to be_empty
 
       # JWT tokens should start with "eyJ" when base64 encoded
-      expect(result.bank_account_instant_verification_token.token).to start_with("eyJ")
+      expect(result.bank_account_instant_verification_jwt.jwt).to start_with("eyJ")
 
       if request.client_mutation_id
-        expect(result.bank_account_instant_verification_token.client_mutation_id).to eq(request.client_mutation_id)
+        expect(result.bank_account_instant_verification_jwt.client_mutation_id).to eq(request.client_mutation_id)
       end
     end
 
     it "fails with invalid business name" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "", # Empty business name should cause validation error
         :return_url => "https://example.com/return",
       )
 
-      result = @gateway.bank_account_instant_verification.create_token(request)
+      result = @gateway.bank_account_instant_verification.create_jwt(request)
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil
     end
 
     it "fails with invalid URLs" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "PP",
         :return_url => "not-a-valid-url",
         :cancel_url => "also-not-valid",
       )
 
-      result = @gateway.bank_account_instant_verification.create_token(request)
+      result = @gateway.bank_account_instant_verification.create_jwt(request)
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil

@@ -1,11 +1,11 @@
 module Braintree
   class BankAccountInstantVerificationGateway
 
-    CREATE_TOKEN_MUTATION =
-      "mutation CreateBankAccountInstantVerificationToken($input: CreateBankAccountInstantVerificationTokenInput!) { " +
-      "createBankAccountInstantVerificationToken(input: $input) {" +
+    CREATE_JWT_MUTATION =
+      "mutation CreateBankAccountInstantVerificationJwt($input: CreateBankAccountInstantVerificationJwtInput!) { " +
+      "createBankAccountInstantVerificationJwt(input: $input) {" +
       "    clientMutationId" +
-      "    token" +
+      "    jwt" +
       "  }" +
       "}"
 
@@ -14,24 +14,24 @@ module Braintree
       @config = gateway.config
     end
 
-    def create_token(request)
+    def create_jwt(request)
       variables = request.to_graphql_variables
 
       begin
-        response = @gateway.graphql_client.query(CREATE_TOKEN_MUTATION, variables)
+        response = @gateway.graphql_client.query(CREATE_JWT_MUTATION, variables)
         errors = GraphQLClient.get_validation_errors(response)
 
         if errors
           ErrorResult.new(@gateway, {errors: errors})
         else
-          data = response[:data][:create_bank_account_instant_verification_token]
+          data = response[:data][:create_bank_account_instant_verification_jwt]
 
-          token_attrs = {
-            :token => data[:token],
+          jwt_attrs = {
+            :jwt => data[:jwt],
             :client_mutation_id => data[:client_mutation_id]
           }
 
-          SuccessfulResult.new(:bank_account_instant_verification_token => BankAccountInstantVerificationToken._new(token_attrs))
+          SuccessfulResult.new(:bank_account_instant_verification_jwt => BankAccountInstantVerificationJwt._new(jwt_attrs))
         end
       rescue StandardError => e
         raise UnexpectedException, "Couldn't parse response: #{e.message}"

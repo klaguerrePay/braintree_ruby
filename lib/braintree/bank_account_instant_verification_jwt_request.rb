@@ -1,5 +1,5 @@
 module Braintree
-  class BankAccountInstantVerificationTokenRequest
+  class BankAccountInstantVerificationJwtRequest
     attr_accessor :business_name, :return_url, :cancel_url, :client_mutation_id
 
     def initialize(attributes = {})

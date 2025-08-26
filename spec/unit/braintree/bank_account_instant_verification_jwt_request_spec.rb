@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
-describe Braintree::BankAccountInstantVerificationTokenRequest do
+describe Braintree::BankAccountInstantVerificationJwtRequest do
   describe "to_graphql_variables" do
     it "includes all fields when present" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
@@ -24,7 +24,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
     end
 
     it "only includes non-null fields" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
       )
@@ -40,7 +40,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
     end
 
     it "handles empty request" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new
 
       variables = request.to_graphql_variables
 
@@ -50,7 +50,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
 
   describe "attribute accessors" do
     it "allows setting and getting all attributes" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new
 
       request.business_name = "Test Business"
       request.return_url = "https://example.com/success"
@@ -64,7 +64,7 @@ describe Braintree::BankAccountInstantVerificationTokenRequest do
     end
 
     it "initializes with hash of attributes" do
-      request = Braintree::BankAccountInstantVerificationTokenRequest.new(
+      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
