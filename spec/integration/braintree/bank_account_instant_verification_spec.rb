@@ -1,12 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
+require File.expand_path(File.dirname(__FILE__) + "/client_api/spec_helper")
 
 describe Braintree::BankAccountInstantVerificationGateway do
   before do
     @gateway = Braintree::Gateway.new(
       :environment => :development,
-      :merchant_id => "integration2_merchant_id",
-      :public_key => "integration2_public_key",
-      :private_key => "integration2_private_key",
+      :merchant_id => "integration_merchant_id",
+      :public_key => "integration_public_key",
+      :private_key => "integration_private_key",
     )
   end
 
@@ -61,21 +62,12 @@ describe Braintree::BankAccountInstantVerificationGateway do
   end
 
   describe "transaction with ACH mandate" do
-    before do
-      @us_bank_gateway = Braintree::Gateway.new(
-        :environment => :development,
-        :merchant_id => "integration_merchant_id",
-        :public_key => "integration_public_key",
-        :private_key => "integration_private_key",
-      )
-    end
-
     it "creates transaction with ACH mandate" do
-      customer_result = @us_bank_gateway.customer.create({})
+      customer_result = @gateway.customer.create({})
       expect(customer_result.success?).to eq(true)
       customer = customer_result.customer
 
-      nonce = generate_valid_us_bank_account_nonce(@us_bank_gateway)
+      nonce = generate_valid_us_bank_account_nonce(@gateway)
       payment_method_request = {
         :customer_id => customer.id,
         :payment_method_nonce => nonce,
@@ -84,7 +76,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         }
       }
 
-      payment_method_result = @us_bank_gateway.payment_method.create(payment_method_request)
+      payment_method_result = @gateway.payment_method.create(payment_method_request)
       expect(payment_method_result.success?).to eq(true)
 
       us_bank_account = payment_method_result.payment_method
@@ -104,7 +96,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         }
       }
 
-      result = @us_bank_gateway.transaction.sale(transaction_request)
+      result = @gateway.transaction.sale(transaction_request)
 
       expect(result.success?).to eq(true)
       transaction = result.transaction
@@ -116,11 +108,11 @@ describe Braintree::BankAccountInstantVerificationGateway do
     end
 
     it "creates transaction with only ACH mandate text" do
-      customer_result = @us_bank_gateway.customer.create({})
+      customer_result = @gateway.customer.create({})
       expect(customer_result.success?).to eq(true)
       customer = customer_result.customer
 
-      nonce = generate_valid_us_bank_account_nonce(@us_bank_gateway)
+      nonce = generate_valid_us_bank_account_nonce(@gateway)
       payment_method_request = {
         :customer_id => customer.id,
         :payment_method_nonce => nonce,
@@ -129,7 +121,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         }
       }
 
-      payment_method_result = @us_bank_gateway.payment_method.create(payment_method_request)
+      payment_method_result = @gateway.payment_method.create(payment_method_request)
       expect(payment_method_result.success?).to eq(true)
 
       us_bank_account = payment_method_result.payment_method
@@ -147,7 +139,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         }
       }
 
-      result = @us_bank_gateway.transaction.sale(transaction_request)
+      result = @gateway.transaction.sale(transaction_request)
 
       expect(result.success?).to eq(true)
       transaction = result.transaction
@@ -158,21 +150,12 @@ describe Braintree::BankAccountInstantVerificationGateway do
   end
 
   describe "us bank account verification with instant verification method" do
-    before do
-      @us_bank_gateway = Braintree::Gateway.new(
-        :environment => :development,
-        :merchant_id => "integration_merchant_id",
-        :public_key => "integration_public_key",
-        :private_key => "integration_private_key",
-      )
-    end
-
     it "verifies bank account with instant verification method" do
-      customer_result = @us_bank_gateway.customer.create({})
+      customer_result = @gateway.customer.create({})
       expect(customer_result.success?).to eq(true)
       customer = customer_result.customer
 
-      nonce = generate_valid_us_bank_account_nonce(@us_bank_gateway)
+      nonce = generate_valid_us_bank_account_nonce(@gateway)
       request = {
         :customer_id => customer.id,
         :payment_method_nonce => nonce,
@@ -181,7 +164,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         }
       }
 
-      result = @us_bank_gateway.payment_method.create(request)
+      result = @gateway.payment_method.create(request)
       expect(result.success?).to eq(true)
 
       us_bank_account = result.payment_method
@@ -205,8 +188,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
   private
 
   def generate_valid_us_bank_account_nonce(gateway)
-    # This would be generated by the client-side flow in a real implementation
-    # For testing, we'll use the test helper pattern from existing tests
-    "fake-valid-us-bank-account-nonce"
+    generate_non_plaid_us_bank_account_nonce
   end
 end

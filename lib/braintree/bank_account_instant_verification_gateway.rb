@@ -19,7 +19,7 @@ module Braintree
 
       begin
         response = @gateway.graphql_client.query(CREATE_JWT_MUTATION, variables)
-        errors = GraphQLClient.get_validation_errors(response)
+        errors = Braintree::GraphQLClient.get_validation_errors(response)
 
         if errors
           ErrorResult.new(@gateway, {errors: errors})
