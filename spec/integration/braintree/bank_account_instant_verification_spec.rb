@@ -22,6 +22,11 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
 
+      unless result.success?
+        puts "DEBUG: Result failed!"
+        puts "DEBUG: Errors: #{result.errors.inspect}" if result.respond_to?(:errors)
+      end
+
       expect(result.success?).to eq(true)
       expect(result.bank_account_instant_verification_jwt).not_to be_nil
       expect(result.bank_account_instant_verification_jwt.jwt).not_to be_nil
@@ -39,9 +44,15 @@ describe Braintree::BankAccountInstantVerificationGateway do
       request = Braintree::BankAccountInstantVerificationJwtRequest.new(
         :business_name => "", # Empty business name should cause validation error
         :return_url => "https://example.com/return",
+        :cancel_url => "https://example.com/cancel",
       )
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
+
+      # Skip test if Bank Account Instant Verification is not enabled for this merchant
+      if !result.success? && result.errors.to_s.include?("Bank Account Instant Verification not enabled")
+        pending "Bank Account Instant Verification not enabled for test merchant"
+      end
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil
@@ -55,6 +66,11 @@ describe Braintree::BankAccountInstantVerificationGateway do
       )
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
+
+      # Skip test if Bank Account Instant Verification is not enabled for this merchant
+      if !result.success? && result.errors.to_s.include?("Bank Account Instant Verification not enabled")
+        pending "Bank Account Instant Verification not enabled for test merchant"
+      end
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil

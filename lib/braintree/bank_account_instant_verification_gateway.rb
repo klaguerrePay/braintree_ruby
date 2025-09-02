@@ -5,7 +5,7 @@ module Braintree
       "mutation CreateBankAccountInstantVerificationJwt($input: CreateBankAccountInstantVerificationJwtInput!) { " +
       "createBankAccountInstantVerificationJwt(input: $input) {" +
       "    clientMutationId" +
-      "    jwt" +
+      "    token" +
       "  }" +
       "}"
 
@@ -34,7 +34,7 @@ module Braintree
           SuccessfulResult.new(:bank_account_instant_verification_jwt => BankAccountInstantVerificationJwt._new(jwt_attrs))
         end
       rescue StandardError => e
-        raise UnexpectedException, "Couldn't parse response: #{e.message}"
+        raise UnexpectedError, "Couldn't parse response: #{e.message}"
       end
     end
   end
