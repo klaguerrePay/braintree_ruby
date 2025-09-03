@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `ach_reject_reason` to `Transaction`
+
 ## 4.30.0
 
 - Add `upcoming_retry_date` to `Transaction`
