@@ -19,14 +19,12 @@ module Braintree
 
       begin
         response = @gateway.graphql_client.query(CREATE_JWT_MUTATION, variables)
-        puts "DEBUG: GraphQL response: #{response.inspect}"
         errors = Braintree::GraphQLClient.get_validation_errors(response)
 
         if errors
           ErrorResult.new(@gateway, {errors: errors})
         else
           data = response.dig(:data, :createBankAccountInstantVerificationJwt)
-          puts "DEBUG: GraphQL response: #{data.inspect}"
 
           if data.nil?
             raise UnexpectedError, "Unexpected response structure: missing data"
