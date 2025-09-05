@@ -93,6 +93,11 @@ def generate_non_plaid_us_bank_account_nonce(account_number="1000000000")
   }
 
   json = _send_graphql_request(graphql_request)
+  puts "DEBUG: Trying to access data structure for tokenizeUsBankAccount"
+  puts "DEBUG: json['data']: #{json["data"].inspect}"
+  if json["data"]
+    puts "DEBUG: json['data']['tokenizeUsBankAccount']: #{json["data"]["tokenizeUsBankAccount"].inspect}"
+  end
   json["data"]["tokenizeUsBankAccount"]["paymentMethod"]["id"]
 end
 
@@ -186,7 +191,10 @@ def _send_graphql_request(graphql_request)
     http.request(request)
   end
 
-  JSON.parse(resp.body)
+  result = JSON.parse(resp.body)
+  puts "DEBUG: GraphQL request body: #{graphql_request.to_json}"
+  puts "DEBUG: GraphQL response: #{result.inspect}"
+  result
 end
 
 class ClientApiHttp
