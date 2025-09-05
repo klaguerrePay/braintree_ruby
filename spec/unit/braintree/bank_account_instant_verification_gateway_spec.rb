@@ -71,7 +71,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       expect(graphql_client).to receive(:query).with(
         /mutation CreateBankAccountInstantVerificationJwt/,
-        {:input=>{:business_name=>"Test Business", :cancel_url=>"https://example.com/cancel", :client_mutation_id=>"test-mutation-id", :return_url=>"https://example.com/success"}},
+        {:input=>{:businessName=>"Test Business", :cancelUrl=>"https://example.com/cancel", :clientMutationId=>"test-mutation-id", :returnUrl=>"https://example.com/success"}},
       ).and_return(mock_response)
 
       bank_account_instant_verification_gateway.create_jwt(request)

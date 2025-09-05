@@ -5,7 +5,7 @@ module Braintree
       "mutation CreateBankAccountInstantVerificationJwt($input: CreateBankAccountInstantVerificationJwtInput!) { " +
       "createBankAccountInstantVerificationJwt(input: $input) {" +
       "    clientMutationId" +
-      "    token" +
+      "    jwt" +
       "  }" +
       "}"
 

@@ -17,10 +17,10 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
 
       input = variables[:input]
 
-      expect(input[:business_name]).to eq("Test Business")
-      expect(input[:return_url]).to eq("https://example.com/success")
-      expect(input[:cancel_url]).to eq("https://example.com/cancel")
-      expect(input[:client_mutation_id]).to eq("test-client-id")
+      expect(input[:businessName]).to eq("Test Business")
+      expect(input[:returnUrl]).to eq("https://example.com/success")
+      expect(input[:cancelUrl]).to eq("https://example.com/cancel")
+      expect(input[:clientMutationId]).to eq("test-client-id")
     end
 
     it "only includes non-null fields" do
@@ -33,10 +33,10 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
 
       input = variables[:input]
 
-      expect(input[:business_name]).to eq("Test Business")
-      expect(input[:return_url]).to eq("https://example.com/success")
-      expect(input).not_to have_key(:cancel_url)
-      expect(input).not_to have_key(:client_mutation_id)
+      expect(input[:businessName]).to eq("Test Business")
+      expect(input[:returnUrl]).to eq("https://example.com/success")
+      expect(input).not_to have_key(:cancelUrl)
+      expect(input).not_to have_key(:clientMutationId)
     end
 
     it "handles empty request" do
