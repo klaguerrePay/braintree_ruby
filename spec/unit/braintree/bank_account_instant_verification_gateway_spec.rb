@@ -24,9 +24,9 @@ describe Braintree::BankAccountInstantVerificationGateway do
     it "returns success result with valid response" do
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_jwt => {
+          :createBankAccountInstantVerificationJwt => {
             :jwt => "test-jwt-token",
-            :client_mutation_id => "test-mutation-id"
+            :clientMutationId => "test-mutation-id"
           }
         }
       }
@@ -62,9 +62,9 @@ describe Braintree::BankAccountInstantVerificationGateway do
     it "calls GraphQL client with correct mutation" do
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_jwt => {
+          :createBankAccountInstantVerificationJwt => {
             :jwt => "test-jwt-token",
-            :client_mutation_id => "test-mutation-id"
+            :clientMutationId => "test-mutation-id"
           }
         }
       }
@@ -85,9 +85,9 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       mock_response = {
         :data => {
-          :create_bank_account_instant_verification_jwt => {
+          :createBankAccountInstantVerificationJwt => {
             :jwt => "test-jwt-token",
-            :client_mutation_id => nil
+            :clientMutationId => nil
           }
         }
       }

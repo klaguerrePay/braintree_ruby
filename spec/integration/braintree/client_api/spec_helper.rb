@@ -73,8 +73,8 @@ def generate_non_plaid_us_bank_account_nonce(account_number="1000000000")
         :routingNumber => "021000021",
         :accountType => "CHECKING",
         :individualOwner => {
-          :firstName => "John",
-          :lastName => "Doe",
+          :firstName => "Dan",
+          :lastName => "Schulman",
         },
         :billingAddress => {
           :streetAddress => "123 Ave",
@@ -93,11 +93,6 @@ def generate_non_plaid_us_bank_account_nonce(account_number="1000000000")
   }
 
   json = _send_graphql_request(graphql_request)
-  puts "DEBUG: Trying to access data structure for tokenizeUsBankAccount"
-  puts "DEBUG: json['data']: #{json["data"].inspect}"
-  if json["data"]
-    puts "DEBUG: json['data']['tokenizeUsBankAccount']: #{json["data"]["tokenizeUsBankAccount"].inspect}"
-  end
   json["data"]["tokenizeUsBankAccount"]["paymentMethod"]["id"]
 end
 
@@ -152,6 +147,92 @@ def generate_invalid_us_bank_account_nonce
   nonce + "_xxx"
 end
 
+def generate_us_bank_account_nonce_via_open_banking
+  # This function mimics the Node.js generateUsBankAccountNonceWithoutAchMandate
+  # by calling the Open Banking REST API directly
+
+  # Use the integration2 merchant configuration like the bank account tests
+  config = Braintree::Configuration.new(
+    :environment => :development,
+    :merchant_id => "integration2_merchant_id",
+    :public_key => "integration2_public_key",
+    :private_key => "integration2_private_key",
+  )
+
+  # Request body for Open Banking tokenization (matching Node.js structure)
+  request_body = {
+    :account_details => {
+      :account_number => "567891234",
+      :account_type => "CHECKING",
+      :classification => "PERSONAL",
+      :tokenized_account => true,
+      :last_4 => "1234"
+    },
+    :institution_details => {
+      :bank_id => {
+        :bank_code => "021000021",
+        :country_code => "US"
+      }
+    },
+    :account_holders => [
+      {
+        :ownership => "PRIMARY",
+        :full_name => {
+          :name => "Dan Schulman"
+        },
+        :name => {
+          :given_name => "Dan",
+          :surname => "Schulman",
+          :full_name => "Dan Schulman"
+        }
+      }
+    ]
+  }
+
+  # Build the API URL (matching Node.js pattern)
+  graphql_base_url = config.graphql_base_url
+  atmosphere_base_url = graphql_base_url.gsub("/graphql", "")
+  url = "#{atmosphere_base_url}/v1/open-finance/tokenize-bank-account-details"
+
+  uri = URI.parse(url)
+  connection = Net::HTTP.new(uri.host, uri.port)
+
+  if uri.scheme == "https"
+    connection.use_ssl = true
+    connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    connection.ca_file = config.ca_file if config.ca_file
+  end
+
+  response = connection.start do |http|
+    request = Net::HTTP::Post.new(uri.path)
+    request["Content-Type"] = "application/json"
+    request["Accept"] = "application/json"
+    request["Braintree-Version"] = "2019-01-01"
+    request["User-Agent"] = "Braintree Ruby Library #{Braintree::Version::String}"
+    request["X-ApiVersion"] = config.api_version
+
+    # Basic auth like Node.js
+    auth_string = "#{config.public_key}:#{config.private_key}"
+    request["Authorization"] = "Basic #{Base64.strict_encode64(auth_string)}"
+
+    request.body = request_body.to_json
+
+    http.request(request)
+  end
+
+  if response.code.to_i != 200
+    raise "HTTP #{response.code}: #{response.body}"
+  end
+
+  result = JSON.parse(response.body)
+
+  unless result["tenant_token"]
+    raise "Open Banking tokenization failed: #{result.inspect}"
+  end
+
+  result["tenant_token"]
+end
+
 def _cosmos_post(token, url, payload)
   uri = URI::parse(url)
   connection = Net::HTTP.new(uri.host, uri.port)
@@ -192,8 +273,6 @@ def _send_graphql_request(graphql_request)
   end
 
   result = JSON.parse(resp.body)
-  puts "DEBUG: GraphQL request body: #{graphql_request.to_json}"
-  puts "DEBUG: GraphQL response: #{result.inspect}"
   result
 end
 
