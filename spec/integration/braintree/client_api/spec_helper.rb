@@ -73,8 +73,8 @@ def generate_non_plaid_us_bank_account_nonce(account_number="1000000000")
         :routingNumber => "021000021",
         :accountType => "CHECKING",
         :individualOwner => {
-          :firstName => "Dan",
-          :lastName => "Schulman",
+          :firstName => "John",
+          :lastName => "Doe",
         },
         :billingAddress => {
           :streetAddress => "123 Ave",
