@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add `ach_reject_reason` to `Transaction`
+- Add `sender` and `receiver` to `transfer` in `Transaction`
 
 ## 4.30.0
 
