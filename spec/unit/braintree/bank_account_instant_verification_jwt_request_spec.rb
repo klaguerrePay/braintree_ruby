@@ -48,33 +48,30 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
     end
   end
 
-  describe "attribute accessors" do
-    it "allows setting and getting all attributes" do
-      request = Braintree::BankAccountInstantVerificationJwtRequest.new
+describe "attribute accessors" do
+  it "allows setting and getting all attributes and initializes with hash of attributes" do
+    request = Braintree::BankAccountInstantVerificationJwtRequest.new(
+      :business_name => "Test Business",
+      :return_url => "https://example.com/success",
+      :cancel_url => "https://example.com/cancel",
+      :client_mutation_id => "test-client-id",
+    )
 
-      request.business_name = "Test Business"
-      request.return_url = "https://example.com/success"
-      request.cancel_url = "https://example.com/cancel"
-      request.client_mutation_id = "test-client-id"
+    expect(request.business_name).to eq("Test Business")
+    expect(request.return_url).to eq("https://example.com/success")
+    expect(request.cancel_url).to eq("https://example.com/cancel")
+    expect(request.client_mutation_id).to eq("test-client-id")
 
-      expect(request.business_name).to eq("Test Business")
-      expect(request.return_url).to eq("https://example.com/success")
-      expect(request.cancel_url).to eq("https://example.com/cancel")
-      expect(request.client_mutation_id).to eq("test-client-id")
-    end
+    new_request = Braintree::BankAccountInstantVerificationJwtRequest.new
 
-    it "initializes with hash of attributes" do
-      request = Braintree::BankAccountInstantVerificationJwtRequest.new(
-        :business_name => "Test Business",
-        :return_url => "https://example.com/success",
-        :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-client-id",
-      )
+    new_request.business_name = "Updated Business"
+    new_request.return_url = "https://example.com/updated"
+    new_request.cancel_url = "https://example.com/updated-cancel"
+    new_request.client_mutation_id = "updated-client-id"
 
-      expect(request.business_name).to eq("Test Business")
-      expect(request.return_url).to eq("https://example.com/success")
-      expect(request.cancel_url).to eq("https://example.com/cancel")
-      expect(request.client_mutation_id).to eq("test-client-id")
-    end
+    expect(new_request.business_name).to eq("Updated Business")
+    expect(new_request.return_url).to eq("https://example.com/updated")
+    expect(new_request.cancel_url).to eq("https://example.com/updated-cancel")
+    expect(new_request.client_mutation_id).to eq("updated-client-id")
   end
 end
