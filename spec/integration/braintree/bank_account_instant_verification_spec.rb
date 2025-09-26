@@ -24,7 +24,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
         :business_name => "PP",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-mutation-#{Time.now.to_i}",
       )
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
@@ -41,10 +40,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       # JWT tokens should start with "eyJ" when base64 encoded
       expect(result.bank_account_instant_verification_jwt.jwt).to start_with("eyJ")
-
-      if request.client_mutation_id
-        expect(result.bank_account_instant_verification_jwt.client_mutation_id).to eq(request.client_mutation_id)
-      end
     end
 
     it "fails with invalid business name" do

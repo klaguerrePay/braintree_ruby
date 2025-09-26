@@ -2,7 +2,7 @@ module Braintree
   class BankAccountInstantVerificationJwt
     include BaseModule
 
-    attr_reader :jwt, :client_mutation_id
+    attr_reader :jwt
 
     def initialize(attributes)
       set_instance_variables_from_hash(attributes)
@@ -13,7 +13,7 @@ module Braintree
     end
 
     def inspect
-      attr_order = [:jwt, :client_mutation_id]
+      attr_order = [:jwt]
       formatted_attrs = attr_order.map do |attr|
         "#{attr}: #{send(attr).inspect}"
       end

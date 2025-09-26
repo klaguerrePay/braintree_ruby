@@ -7,7 +7,6 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-client-id",
       )
 
       variables = request.to_graphql_variables
@@ -20,7 +19,6 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
       expect(input[:businessName]).to eq("Test Business")
       expect(input[:returnUrl]).to eq("https://example.com/success")
       expect(input[:cancelUrl]).to eq("https://example.com/cancel")
-      expect(input[:clientMutationId]).to eq("test-client-id")
     end
 
     it "only includes non-null fields" do
@@ -36,7 +34,6 @@ describe Braintree::BankAccountInstantVerificationJwtRequest do
       expect(input[:businessName]).to eq("Test Business")
       expect(input[:returnUrl]).to eq("https://example.com/success")
       expect(input).not_to have_key(:cancelUrl)
-      expect(input).not_to have_key(:clientMutationId)
     end
 
     it "handles empty request" do
@@ -54,24 +51,20 @@ describe "attribute accessors" do
       :business_name => "Test Business",
       :return_url => "https://example.com/success",
       :cancel_url => "https://example.com/cancel",
-      :client_mutation_id => "test-client-id",
     )
 
     expect(request.business_name).to eq("Test Business")
     expect(request.return_url).to eq("https://example.com/success")
     expect(request.cancel_url).to eq("https://example.com/cancel")
-    expect(request.client_mutation_id).to eq("test-client-id")
 
     new_request = Braintree::BankAccountInstantVerificationJwtRequest.new
 
     new_request.business_name = "Updated Business"
     new_request.return_url = "https://example.com/updated"
     new_request.cancel_url = "https://example.com/updated-cancel"
-    new_request.client_mutation_id = "updated-client-id"
 
     expect(new_request.business_name).to eq("Updated Business")
     expect(new_request.return_url).to eq("https://example.com/updated")
     expect(new_request.cancel_url).to eq("https://example.com/updated-cancel")
-    expect(new_request.client_mutation_id).to eq("updated-client-id")
   end
 end

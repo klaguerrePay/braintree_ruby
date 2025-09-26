@@ -17,7 +17,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
         :business_name => "Test Business",
         :return_url => "https://example.com/success",
         :cancel_url => "https://example.com/cancel",
-        :client_mutation_id => "test-mutation-id",
       )
     end
 
@@ -25,8 +24,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
       mock_response = {
         :data => {
           :createBankAccountInstantVerificationJwt => {
-            :jwt => "test-jwt-token",
-            :clientMutationId => "test-mutation-id"
+            :jwt => "test-jwt-token"
           }
         }
       }
@@ -38,7 +36,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
       expect(result.success?).to eq(true)
       expect(result.bank_account_instant_verification_jwt).not_to be_nil
       expect(result.bank_account_instant_verification_jwt.jwt).to eq("test-jwt-token")
-      expect(result.bank_account_instant_verification_jwt.client_mutation_id).to eq("test-mutation-id")
     end
 
     it "returns error result with validation errors" do
@@ -63,15 +60,14 @@ describe Braintree::BankAccountInstantVerificationGateway do
       mock_response = {
         :data => {
           :createBankAccountInstantVerificationJwt => {
-            :jwt => "test-jwt-token",
-            :clientMutationId => "test-mutation-id"
+            :jwt => "test-jwt-token"
           }
         }
       }
 
       expect(graphql_client).to receive(:query).with(
         /mutation CreateBankAccountInstantVerificationJwt/,
-        {:input=>{:businessName=>"Test Business", :cancelUrl=>"https://example.com/cancel", :clientMutationId=>"test-mutation-id", :returnUrl=>"https://example.com/success"}},
+        {:input=>{:businessName=>"Test Business", :cancelUrl=>"https://example.com/cancel", :returnUrl=>"https://example.com/success"}},
       ).and_return(mock_response)
 
       bank_account_instant_verification_gateway.create_jwt(request)
@@ -86,8 +82,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
       mock_response = {
         :data => {
           :createBankAccountInstantVerificationJwt => {
-            :jwt => "test-jwt-token",
-            :clientMutationId => nil
+            :jwt => "test-jwt-token"
           }
         }
       }

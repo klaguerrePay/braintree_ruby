@@ -4,7 +4,6 @@ module Braintree
     CREATE_JWT_MUTATION =
       "mutation CreateBankAccountInstantVerificationJwt($input: CreateBankAccountInstantVerificationJwtInput!) { " +
       "createBankAccountInstantVerificationJwt(input: $input) {" +
-      "    clientMutationId" +
       "    jwt" +
       "  }" +
       "}"
@@ -31,8 +30,7 @@ module Braintree
           end
 
           jwt_attrs = {
-            :jwt => data[:jwt],
-            :client_mutation_id => data[:clientMutationId]
+            :jwt => data[:jwt]
           }
 
           SuccessfulResult.new(:bank_account_instant_verification_jwt => BankAccountInstantVerificationJwt._new(jwt_attrs))
