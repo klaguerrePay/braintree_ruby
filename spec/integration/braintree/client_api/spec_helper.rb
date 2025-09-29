@@ -267,8 +267,7 @@ def _send_graphql_request(graphql_request)
     http.request(request)
   end
 
-  result = JSON.parse(resp.body)
-  result
+  JSON.parse(resp.body)
 end
 
 class ClientApiHttp
