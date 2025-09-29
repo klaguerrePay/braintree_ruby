@@ -51,11 +51,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
 
-      # Skip test if Bank Account Instant Verification is not enabled for this merchant
-      if !result.success? && result.errors.to_s.include?("Bank Account Instant Verification not enabled")
-        pending "Bank Account Instant Verification not enabled for test merchant"
-      end
-
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil
     end
@@ -68,11 +63,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
       )
 
       result = @gateway.bank_account_instant_verification.create_jwt(request)
-
-      # Skip test if Bank Account Instant Verification is not enabled for this merchant
-      if !result.success? && result.errors.to_s.include?("Bank Account Instant Verification not enabled")
-        pending "Bank Account Instant Verification not enabled for test merchant"
-      end
 
       expect(result.success?).to eq(false)
       expect(result.errors).not_to be_nil
@@ -247,8 +237,6 @@ describe Braintree::BankAccountInstantVerificationGateway do
   end
 
   def generate_bank_account_instant_verification_nonce(gateway)
-    # This method should generate a nonce specifically for instant verification testing
-    # Using Open Banking approach like Node.js tests
     generate_us_bank_account_nonce_via_open_banking
   end
 end
