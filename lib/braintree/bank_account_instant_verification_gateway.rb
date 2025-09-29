@@ -15,28 +15,23 @@ module Braintree
 
     def create_jwt(request)
       variables = request.to_graphql_variables
+      response = @gateway.graphql_client.query(CREATE_JWT_MUTATION, variables)
+      errors = Braintree::GraphQLClient.get_validation_errors(response)
 
-      begin
-        response = @gateway.graphql_client.query(CREATE_JWT_MUTATION, variables)
-        errors = Braintree::GraphQLClient.get_validation_errors(response)
+      if errors
+        ErrorResult.new(@gateway, {errors: errors})
+      else
+        data = response.dig(:data, :createBankAccountInstantVerificationJwt)
 
-        if errors
-          ErrorResult.new(@gateway, {errors: errors})
-        else
-          data = response.dig(:data, :createBankAccountInstantVerificationJwt)
-
-          if data.nil?
-            raise UnexpectedError, "Unexpected response structure: missing data"
-          end
-
-          jwt_attrs = {
-            :jwt => data[:jwt]
-          }
-
-          SuccessfulResult.new(:bank_account_instant_verification_jwt => BankAccountInstantVerificationJwt._new(jwt_attrs))
+        if data.nil?
+          raise UnexpectedError, "expected :createBankAccountInstantVerificationJwt"
         end
-      rescue StandardError => e
-        raise UnexpectedError, "Couldn't parse response: #{e.message}"
+
+        jwt_attrs = {
+          :jwt => data[:jwt]
+        }
+
+        SuccessfulResult.new(:bank_account_instant_verification_jwt => BankAccountInstantVerificationJwt._new(jwt_attrs))
       end
     end
   end
