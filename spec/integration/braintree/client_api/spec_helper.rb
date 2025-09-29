@@ -148,10 +148,7 @@ def generate_invalid_us_bank_account_nonce
 end
 
 def generate_us_bank_account_nonce_via_open_banking
-  # This function mimics the Node.js generateUsBankAccountNonceWithoutAchMandate
-  # by calling the Open Banking REST API directly
 
-  # Use the integration2 merchant configuration like the bank account tests
   config = Braintree::Configuration.new(
     :environment => :development,
     :merchant_id => "integration2_merchant_id",
@@ -159,7 +156,6 @@ def generate_us_bank_account_nonce_via_open_banking
     :private_key => "integration2_private_key",
   )
 
-  # Request body for Open Banking tokenization (matching Node.js structure)
   request_body = {
     :account_details => {
       :account_number => "567891234",
@@ -189,7 +185,6 @@ def generate_us_bank_account_nonce_via_open_banking
     ]
   }
 
-  # Build the API URL (matching Node.js pattern)
   graphql_base_url = config.graphql_base_url
   atmosphere_base_url = graphql_base_url.gsub("/graphql", "")
   url = "#{atmosphere_base_url}/v1/open-finance/tokenize-bank-account-details"
