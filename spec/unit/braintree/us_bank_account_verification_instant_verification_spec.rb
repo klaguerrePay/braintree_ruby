@@ -4,10 +4,6 @@ describe Braintree::UsBankAccountVerification do
   it "verifies VerificationMethod constants, All array, and parses instant_verification method" do
     expect(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification).to eq("instant_verification")
 
-    expect(Braintree::UsBankAccountVerification::VerificationMethod::All).to include(
-      Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification,
-    )
-
     all_methods = Braintree::UsBankAccountVerification::VerificationMethod::All
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::IndependentCheck)
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification)
@@ -19,7 +15,7 @@ describe Braintree::UsBankAccountVerification do
       <us-bank-account-verification>
         <status>verified</status>
         <gateway-rejection-reason nil="true"/>
-        <merchant-account-id>ygmxmpdxthqrrtfyisqahvclo</merchant-account-id>
+        <merchant-account-id>us_bank_merchant_account</merchant-account-id>
         <processor-response-code>1000</processor-response-code>
         <processor-response-text>Approved</processor-response-text>
         <id>inst_verification_id</id>
