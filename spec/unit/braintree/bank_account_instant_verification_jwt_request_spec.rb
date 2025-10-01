@@ -68,3 +68,4 @@ describe "attribute accessors" do
     expect(new_request.cancel_url).to eq("https://example.com/updated-cancel")
   end
 end
+end

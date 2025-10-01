@@ -1,12 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
 describe Braintree::UsBankAccountVerification do
-  it "verifies VerificationMethod constants, All array, and parses instant_verification method" do
-    expect(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification).to eq("instant_verification")
+  it "verifies VerificationMethod constants, All array, and parses instant_verification_account_validation method" do
+    expect(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation).to eq("instant_verification_account_validation")
 
     all_methods = Braintree::UsBankAccountVerification::VerificationMethod::All
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::IndependentCheck)
-    expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification)
+    expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation)
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::MicroTransfers)
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::NetworkCheck)
     expect(all_methods).to include(Braintree::UsBankAccountVerification::VerificationMethod::TokenizedCheck)
@@ -19,7 +19,7 @@ describe Braintree::UsBankAccountVerification do
         <processor-response-code>1000</processor-response-code>
         <processor-response-text>Approved</processor-response-text>
         <id>inst_verification_id</id>
-        <verification-method>instant_verification</verification-method>
+        <verification-method>instant_verification_account_validation</verification-method>
         <us-bank-account>
           <token>instant_token</token>
           <last-4>5678</last-4>
@@ -36,7 +36,7 @@ describe Braintree::UsBankAccountVerification do
     verification = Braintree::UsBankAccountVerification._new(node)
 
     expect(verification.status).to eq(Braintree::UsBankAccountVerification::Status::Verified)
-    expect(verification.verification_method).to eq(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification)
+    expect(verification.verification_method).to eq(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation)
     expect(verification.id).to eq("inst_verification_id")
     expect(verification.us_bank_account.token).to eq("instant_token")
   end

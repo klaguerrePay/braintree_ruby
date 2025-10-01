@@ -141,7 +141,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         expect(verification.verification_method).not_to be_nil
 
         expect([
-          Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification,
+          Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation,
           Braintree::UsBankAccountVerification::VerificationMethod::IndependentCheck,
           Braintree::UsBankAccountVerification::VerificationMethod::MicroTransfers,
           Braintree::UsBankAccountVerification::VerificationMethod::NetworkCheck,
@@ -224,6 +224,84 @@ describe Braintree::BankAccountInstantVerificationGateway do
       expect(transaction.us_bank_account_details.ach_mandate.accepted_at).not_to be_nil
 
       expect(transaction.us_bank_account_details.account_holder_name).to eq("Dan Schulman")
+      expect(transaction.us_bank_account_details.last_4).to eq("1234")
+      expect(transaction.us_bank_account_details.routing_number).to eq("021000021")
+      expect(transaction.us_bank_account_details.account_type).to eq("checking")
+    end
+  end
+
+  describe "Open Finance flow with INSTANT_VERIFICATION_ACCOUNT_VALIDATION" do
+    it "tokenizes bank account via Open Finance API, vaults with INSTANT_VERIFICATION_ACCOUNT_VALIDATION, and charges" do
+      # This test mirrors the Open Finance flow from Atmosphere:
+      # 1. Tokenize bank account via Open Finance REST API
+      # 2. Vault payment method with INSTANT_VERIFICATION_ACCOUNT_VALIDATION and ACH mandate
+      # 3. Charge the vaulted payment method
+
+      # Step 1: Generate nonce that simulates Open Finance tokenization
+      nonce = generate_bank_account_instant_verification_nonce(@gateway)
+
+      # Step 2: Create customer for vaulting
+      customer_result = @gateway.customer.create({})
+      expect(customer_result.success?).to eq(true)
+      customer = customer_result.customer
+
+      mandate_accepted_at = Time.now - 300 # 5 minutes ago
+
+      # Step 3: Vault payment method with INSTANT_VERIFICATION_ACCOUNT_VALIDATION and ACH mandate
+      payment_method_request = {
+        :customer_id => customer.id,
+        :payment_method_nonce => nonce,
+        :us_bank_account => {
+          :ach_mandate_text => "I authorize this transaction and future debits",
+          :ach_mandate_accepted_at => mandate_accepted_at
+        },
+        :options => {
+          :verification_merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
+          :us_bank_account_verification_method => Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation
+        }
+      }
+
+      payment_method_result = @gateway.payment_method.create(payment_method_request)
+      expect(payment_method_result.success?).to eq(true), "Expected payment method creation success but got failure with validation errors"
+
+      us_bank_account = payment_method_result.payment_method
+
+      # Verify the payment method was created with correct verification method
+      expect(us_bank_account.verifications).not_to be_empty
+      verification = us_bank_account.verifications.first
+      expect(verification.verification_method).to eq(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation)
+
+      # Verify ACH mandate is present
+      expect(us_bank_account.ach_mandate).not_to be_nil
+      expect(us_bank_account.ach_mandate.text).to eq("I authorize this transaction and future debits")
+      expect(us_bank_account.ach_mandate.accepted_at).not_to be_nil
+
+      # Step 4: Charge the vaulted payment method
+      transaction_request = {
+        :amount => "12.34",
+        :payment_method_token => us_bank_account.token,
+        :merchant_account_id => SpecHelper::AnotherUsBankMerchantAccountId,
+        :options => {
+          :submit_for_settlement => true
+        }
+      }
+
+      transaction_result = @gateway.transaction.sale(transaction_request)
+      expect(transaction_result.success?).to eq(true), "Expected transaction success but got failure"
+      transaction = transaction_result.transaction
+
+      # Verify transaction details
+      expect(transaction.id).not_to be_nil
+      expect(transaction.amount).to eq(BigDecimal("12.34"))
+      expect(transaction.us_bank_account_details).not_to be_nil
+      expect(transaction.us_bank_account_details.token).to eq(us_bank_account.token)
+
+      # Verify ACH mandate is included in transaction details
+      expect(transaction.us_bank_account_details.ach_mandate).not_to be_nil
+      expect(transaction.us_bank_account_details.ach_mandate.text).to eq("I authorize this transaction and future debits")
+      expect(transaction.us_bank_account_details.ach_mandate.accepted_at).not_to be_nil
+
+      # Verify bank account details
       expect(transaction.us_bank_account_details.last_4).to eq("1234")
       expect(transaction.us_bank_account_details.routing_number).to eq("021000021")
       expect(transaction.us_bank_account_details.account_type).to eq("checking")

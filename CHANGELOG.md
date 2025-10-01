@@ -4,7 +4,7 @@
 
 - Add Bank Account Instant Verification Gateway with JWT creation support
 - Add ACH mandate support to transactions with `ach_mandate_text` and `ach_mandate_accepted_at` fields in `us_bank_account`
-- Add `InstantVerification` method to `UsBankAccountVerification::VerificationMethod`
+- Add `InstantVerificationAccountValidation` method to `UsBankAccountVerification::VerificationMethod` (replaces `InstantVerification`)
 - Add `upcoming_retry_date` to `Transaction`
 - Add `remaining_file_evidence_storage` to Dispute
 - Add `transfer_type` to Transaction
