@@ -73,8 +73,8 @@ def generate_non_plaid_us_bank_account_nonce(account_number="1000000000")
         :routingNumber => "021000021",
         :accountType => "CHECKING",
         :individualOwner => {
-          :firstName => "John",
-          :lastName => "Doe",
+          :firstName => "Dan",
+          :lastName => "Schulman",
         },
         :billingAddress => {
           :streetAddress => "123 Ave",
@@ -151,9 +151,9 @@ def generate_us_bank_account_nonce_via_open_banking
 
   config = Braintree::Configuration.new(
     :environment => :development,
-    :merchant_id => "integration2_merchant_id",
-    :public_key => "integration2_public_key",
-    :private_key => "integration2_private_key",
+    :merchant_id => "integration_merchant_id",
+    :public_key => "integration_public_key",
+    :private_key => "integration_private_key",
   )
 
   request_body = {

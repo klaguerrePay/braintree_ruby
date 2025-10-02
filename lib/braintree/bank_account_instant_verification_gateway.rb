@@ -3,7 +3,7 @@ module Braintree
 
     CREATE_JWT_MUTATION =
       "mutation CreateBankAccountInstantVerificationJwt($input: CreateBankAccountInstantVerificationJwtInput!) { " +
-      "createBankAccountInstantVerificationJwt(input: $input) {" +
+      "  createBankAccountInstantVerificationJwt(input: $input) {" +
       "    jwt" +
       "  }" +
       "}"
