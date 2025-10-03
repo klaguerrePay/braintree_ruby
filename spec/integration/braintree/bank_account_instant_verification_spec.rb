@@ -130,7 +130,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
         },
         :options => {
           :verification_merchant_account_id => SpecHelper::UsBankMerchantAccountId,
-          :us_bank_account_verification_method => Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation
+          :us_bank_account_verification_method => Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification
         }
       }
 
@@ -142,7 +142,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
       expected_us_bank_account = {
         verifications: a_collection_containing_exactly(
           have_attributes(
-            verification_method: Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation,
+            verification_method: Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification,
             status: "verified",
           ),
         ),
@@ -155,7 +155,7 @@ describe Braintree::BankAccountInstantVerificationGateway do
       expect(us_bank_account).to have_attributes(expected_us_bank_account)
 
       verification = us_bank_account.verifications.first
-      expect(verification.verification_method).to eq(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerificationAccountValidation)
+      expect(verification.verification_method).to eq(Braintree::UsBankAccountVerification::VerificationMethod::InstantVerification)
 
       transaction_request = {
         :amount => "12.34",
