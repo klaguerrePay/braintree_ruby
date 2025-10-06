@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.31.0
 
 - Add Bank Account Instant Verification Gateway with JWT creation support
 - Add ACH mandate support to transactions with `ach_mandate_text` and `ach_mandate_accepted_at` fields in `us_bank_account`
