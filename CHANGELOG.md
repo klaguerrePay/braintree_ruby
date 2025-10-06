@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add Bank Account Instant Verification Gateway with JWT creation support
+- Add ACH mandate support to transactions with `ach_mandate_text` and `ach_mandate_accepted_at` fields in `us_bank_account`
+- Add `InstantVerificationAccountValidation` method to `UsBankAccountVerification::VerificationMethod`
 - Add `ach_reject_reason` to `Transaction`
 - Add `sender` and `receiver` to `transfer` in `Transaction`
 - Add `is_device_token` to `ApplePayCard` and `ApplePayDetails`
@@ -12,6 +15,8 @@
 - Add `remaining_file_evidence_storage` to Dispute
 - Add `transfer_type` to Transaction
 - Add `transaction_retried` webhook
+- Add `ach_reject_reason` to `Transaction`
+- Add `sender` and `receiver` to `transfer` in `Transaction`
 
 ## 4.29.0
 
