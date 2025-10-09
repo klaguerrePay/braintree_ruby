@@ -6815,6 +6815,34 @@ describe Braintree::Transaction do
       expect(transaction.acquirer_reference_number).to eq("123456789 091019")
     end
 
+    it "finds a transaction and returns a payment_account_reference if the transaction has one" do
+      transaction = Braintree::Transaction.find("aft_txn")
+
+      expect(transaction.credit_card_details).not_to be_nil
+      expect(transaction.credit_card_details).to respond_to(:payment_account_reference)
+    end
+
+    it "finds a transaction and returns a payment_account_reference in apple_pay_details if the transaction has one" do
+      transaction = Braintree::Transaction.find("apple_pay_transaction")
+
+      expect(transaction.apple_pay_details).not_to be_nil
+      expect(transaction.apple_pay_details).to respond_to(:payment_account_reference)
+    end
+
+    it "finds a transaction and returns a payment_account_reference in google_pay_details if the transaction has one" do
+      transaction = Braintree::Transaction.find("android_pay_card_transaction")
+
+      expect(transaction.google_pay_details).not_to be_nil
+      expect(transaction.google_pay_details).to respond_to(:payment_account_reference)
+    end
+
+    it "finds a transaction and returns a payment_account_reference in google_pay_details for network token if the transaction has one" do
+      transaction = Braintree::Transaction.find("android_pay_network_token_transaction")
+
+      expect(transaction.google_pay_details).not_to be_nil
+      expect(transaction.google_pay_details).to respond_to(:payment_account_reference)
+    end
+
     context "disbursement_details" do
       it "includes disbursement_details on found transactions" do
         found_transaction = Braintree::Transaction.find("deposittransaction")
