@@ -5321,7 +5321,7 @@ describe Braintree::Transaction do
           :number => "4111111111111111",
           :expiration_date => "05/2023"
         },
-        :processing_merchant_category_code => "invalid"
+        :processing_merchant_category_code => "54111"
       )
 
       expect(result.success?).to eq(false)
