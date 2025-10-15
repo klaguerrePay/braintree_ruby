@@ -5301,6 +5301,61 @@ describe Braintree::Transaction do
       expect(transaction.shipping_details.international_phone[:national_number]).to eq("3121234567")
     end
 
+    it "accepts processing_merchant_category_code" do
+      result = Braintree::Transaction.sale(
+        :amount => "100.00",
+        :credit_card => {
+          :number => "4111111111111111",
+          :expiration_date => "05/2023"
+        },
+        :processing_merchant_category_code => "5411"
+      )
+
+      expect(result.success?).to eq(true)
+    end
+
+    it "returns validation error for invalid processing_merchant_category_code" do
+      result = Braintree::Transaction.sale(
+        :amount => "100.00",
+        :credit_card => {
+          :number => "4111111111111111",
+          :expiration_date => "05/2023"
+        },
+        :processing_merchant_category_code => "invalid"
+      )
+
+      expect(result.success?).to eq(false)
+      expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
+    end
+
+    it "returns validation error for alphanumeric processing_merchant_category_code" do
+      result = Braintree::Transaction.sale(
+        :amount => "100.00",
+        :credit_card => {
+          :number => "4111111111111111",
+          :expiration_date => "05/2023"
+        },
+        :processing_merchant_category_code => "541A"
+      )
+
+      expect(result.success?).to eq(false)
+      expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
+    end
+
+    it "returns validation error for too short processing_merchant_category_code" do
+      result = Braintree::Transaction.sale(
+        :amount => "100.00",
+        :credit_card => {
+          :number => "4111111111111111",
+          :expiration_date => "05/2023"
+        },
+        :processing_merchant_category_code => "541"
+      )
+
+      expect(result.success?).to eq(false)
+      expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
+    end
+
     it "allows merchant account to be specified" do
       result = Braintree::Transaction.sale(
         :amount => Braintree::Test::TransactionAmounts::Authorize,
