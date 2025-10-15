@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
+- Add extra fields to `sender` and `receiver` in `transfer` in `Transaction`
+
 ## 4.31.0
 
 - Add Bank Account Instant Verification Gateway with JWT creation support
@@ -8,8 +12,6 @@
 - Add `ach_reject_reason` to `Transaction`
 - Add `sender` and `receiver` to `transfer` in `Transaction`
 - Add `is_device_token` to `ApplePayCard` and `ApplePayDetails`
-- Add extra fields to `sender` and `receiver` in `transfer` in `Transaction`
-- Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
 
 ## 4.30.0
 
