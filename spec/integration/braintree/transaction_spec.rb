@@ -5306,7 +5306,7 @@ describe Braintree::Transaction do
         :amount => "100.00",
         :credit_card => {
           :number => "4111111111111111",
-          :expiration_date => "05/2023"
+          :expiration_date => "05/2028"
         },
         :processing_merchant_category_code => "5411",
       )
@@ -5314,12 +5314,12 @@ describe Braintree::Transaction do
       expect(result.success?).to eq(true)
     end
 
-    it "returns validation error for invalid processing_merchant_category_code" do
+    it "returns validation error for a too long processing_merchant_category_code" do
       result = Braintree::Transaction.sale(
         :amount => "100.00",
         :credit_card => {
           :number => "4111111111111111",
-          :expiration_date => "05/2023"
+          :expiration_date => "05/2028"
         },
         :processing_merchant_category_code => "54111",
       )
@@ -5328,12 +5328,12 @@ describe Braintree::Transaction do
       expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
     end
 
-    it "returns validation error for alphanumeric processing_merchant_category_code" do
+    it "returns validation error for an alphanumeric processing_merchant_category_code" do
       result = Braintree::Transaction.sale(
         :amount => "100.00",
         :credit_card => {
           :number => "4111111111111111",
-          :expiration_date => "05/2023"
+          :expiration_date => "05/2028"
         },
         :processing_merchant_category_code => "541A",
       )
@@ -5342,12 +5342,12 @@ describe Braintree::Transaction do
       expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
     end
 
-    it "returns validation error for too short processing_merchant_category_code" do
+    it "returns validation error a for too short processing_merchant_category_code" do
       result = Braintree::Transaction.sale(
         :amount => "100.00",
         :credit_card => {
           :number => "4111111111111111",
-          :expiration_date => "05/2023"
+          :expiration_date => "05/2028"
         },
         :processing_merchant_category_code => "541",
       )
