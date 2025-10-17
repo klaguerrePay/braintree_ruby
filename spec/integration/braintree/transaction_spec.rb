@@ -5342,7 +5342,7 @@ describe Braintree::Transaction do
       expect(result.errors.for(:transaction).on(:processing_merchant_category_code)[0].code).to eq(Braintree::ErrorCodes::Transaction::ProcessingMerchantCategoryCodeIsInvalid)
     end
 
-    it "returns validation error a for too short processing_merchant_category_code" do
+    it "returns validation error for a too short processing_merchant_category_code" do
       result = Braintree::Transaction.sale(
         :amount => "100.00",
         :credit_card => {
