@@ -3,7 +3,7 @@
 ## Unreleased
 - Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
 - Add `processing_merchant_category_code` in `Transaction`
-- Add extra fields to `sender` and `receiver` in `transfer` in `Transaction`
+- Add `middle_name` to sender and receiver, and `date_of_birth` to sender in transfer on `Transaction`
 
 ## 4.31.0
 

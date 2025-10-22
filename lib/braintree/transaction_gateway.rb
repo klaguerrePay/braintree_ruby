@@ -285,21 +285,21 @@ module Braintree
             :type,
             {
               :sender => [
+                :account_reference_number,
+                :date_of_birth,
                 :first_name,
                 :last_name,
                 :middle_name,
-                :account_reference_number,
                 :tax_id,
-                :date_of_birth,
                 {:address => AddressGateway._address_attributes}
               ]
             },
             {
               :receiver => [
+                :account_reference_number,
                 :first_name,
                 :last_name,
                 :middle_name,
-                :account_reference_number,
                 :tax_id,
                 {:address => AddressGateway._address_attributes}
               ]

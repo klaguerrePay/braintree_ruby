@@ -17,8 +17,8 @@ describe Braintree::Transaction do
           :type => "wallet_transfer",
           :receiver => {
             :first_name => "John",
-            :middle_name => "D",
             :last_name => "Smith",
+            :middle_name => "D",
             :address => {
               :country_code_alpha2 => "US",
               :locality => "LA",
@@ -27,11 +27,11 @@ describe Braintree::Transaction do
             }
           },
           :sender => {
+            :account_reference_number => "123456789",
+            :date_of_birth => Date.new(2002, 1, 2),
             :first_name => "Lisa",
             :last_name => "Ray",
             :middle_name => "D",
-            :account_reference_number => "123456789",
-            :date_of_birth => Date.new(2002, 1, 2),
             :address => {
               :country_code_alpha2 => "US",
               :locality => "LA",
