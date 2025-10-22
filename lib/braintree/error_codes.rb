@@ -395,6 +395,7 @@ module Braintree
       PaymentMethodNonceUnknown = "91565"
       PaymentMethodTokenCardTypeIsNotAccepted = "91517"
       PaymentMethodTokenIsInvalid = "91518"
+      ProcessingMerchantCategoryCodeIsInvalid = "915265"
       ProcessorAuthorizationCodeCannotBeSet = "91519"
       ProcessorAuthorizationCodeIsInvalid = "81520"
       ProcessorDoesNotSupportAuths = "915104"
