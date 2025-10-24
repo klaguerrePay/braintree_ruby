@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.33.0
 - Switch from libxml-ruby to Nokogiri to allow use with JRuby. 
 
 ## 4.32.0
