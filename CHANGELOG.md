@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Switch from libxml-ruby to Nokogiri to allow use with JRuby. 
+
 ## 4.32.0
 - Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
 - Add `processing_merchant_category_code` in `Transaction`
