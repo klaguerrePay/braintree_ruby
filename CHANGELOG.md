@@ -4,7 +4,8 @@
 - Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
 - Add `processing_merchant_category_code` in `Transaction`
 - Add missing `transfer` validation error codes in `Transaction`
-
+- Replace libxml-ruby with nokogiri to address JRuby incompatability
+ 
 ## 4.31.0
 
 - Add Bank Account Instant Verification Gateway with JWT creation support
