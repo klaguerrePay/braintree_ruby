@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.33.1
 - Bug fix for Nokogiri XML parsing
 
 ## 4.33.0
