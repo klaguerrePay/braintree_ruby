@@ -1,10 +1,19 @@
 # Changelog
 
+##Unreleased 
+- Add `middle_name` to sender and receiver, and `date_of_birth` to sender in transfer on `Transaction`
+
+## 4.33.1
+- Bug fix for Nokogiri XML parsing
+
+## 4.33.0
+- Switch from libxml-ruby to Nokogiri to allow use with JRuby. 
+
 ## 4.32.0
 - Add `payment_account_reference` to `Transaction::ApplePayDetails`, `Transaction::GooglePayDetails`, `Transaction::CreditCardDetails`, and `CreditCardVerification`
 - Add `processing_merchant_category_code` in `Transaction`
 - Add missing `transfer` validation error codes in `Transaction`
-- Add `middle_name` to sender and receiver, and `date_of_birth` to sender in transfer on `Transaction`
+- Replace libxml-ruby with nokogiri to address JRuby incompatability
 
 ## 4.31.0
 
