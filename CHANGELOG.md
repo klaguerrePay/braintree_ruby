@@ -1,7 +1,7 @@
 # Changelog
 
 ##Unreleased 
-- Add `middle_name` to sender and receiver, and `date_of_birth` to sender in transfer on `Transaction`
+- Add `middle_name` to `sender` and `receiver`, and `date_of_birth` to `sender` in transfer on `Transaction`
 
 ## 4.33.1
 - Bug fix for Nokogiri XML parsing
