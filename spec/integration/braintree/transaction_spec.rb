@@ -7768,7 +7768,7 @@ describe Braintree::Transaction do
 
         expect(adjustment_transaction.success?).to eq(false)
         expect(adjustment_transaction.transaction.amount).to eq(BigDecimal("75.50"))
-        expect(adjustment_transaction.errors.for(:authorization_adjustment).on(:amount).first.code).to eq(Braintree::ErrorCodes::Transaction::AdjustmentAmountMustBeGreaterThanZero)
+        expect(adjustment_transaction.errors.for(:transaction).on(:amount).first.code).to eq(Braintree::ErrorCodes::Transaction::AmountMustBeGreaterThanZero)
       end
 
       it "returns failure response, when adjusted amount submitted same as authorized amount" do
