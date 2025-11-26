@@ -2335,8 +2335,9 @@ describe Braintree::Transaction do
         expect(google_pay_details).not_to be_nil
         expect(google_pay_details.card_type).to eq(Braintree::CreditCard::CardType::MasterCard)
         expect(google_pay_details.virtual_card_type).to eq(Braintree::CreditCard::CardType::MasterCard)
-        expect(google_pay_details.last_4).to eq("0005")
-        expect(google_pay_details.virtual_card_last_4).to eq("0005")
+        expect(google_pay_details.last_4).to eq("4444")
+        expect(google_pay_details.virtual_card_last_4).to eq("4444")
+        expect(google_pay_details.source_card_last_4).to eq("0005")
         expect(google_pay_details.source_description).to eq("MasterCard 0005")
         expect(google_pay_details.expiration_month.to_i).to be > 0
         expect(google_pay_details.expiration_year.to_i).to be > 0
