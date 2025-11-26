@@ -3038,8 +3038,9 @@ describe Braintree::Transaction do
             :ds_transaction_id => "some_ds_id",
           },
         )
+
         expect(result.success?).to eq(false)
-        expect(result.errors.for(:transaction).for(:three_d_secure_pass_thru).on(:cavv_algorithm)[0].code).to eq(Braintree::ErrorCodes::Transaction::ThreeDSecureCavvAlgorithmIsInvalid)
+        expect(result.errors.for(:transaction).for(:credit_card).on(:cvv)[0].code).to eq(Braintree::ErrorCodes::CreditCard::CvvIsRequired)
       end
     end
 
