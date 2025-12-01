@@ -6,61 +6,6 @@ describe Braintree::CreditCardVerification, "search" do
       search.credit_card_cardholder_name.is "thisnameisnotreal"
     end
 
-    puts "\n=== DEBUG: Credit Card Verification Search Results ==="
-    puts "Collection class: #{collection.class}"
-    puts "Maximum size: #{collection.maximum_size}"
-
-    # Try different ways to access the results
-    results_array = collection.to_a
-    puts "Results array length: #{results_array.length}"
-    puts "Results array class: #{results_array.class}"
-
-    # Check if collection responds to other methods
-    puts "Collection responds to each?: #{collection.respond_to?(:each)}"
-    puts "Collection responds to first?: #{collection.respond_to?(:first)}"
-    puts "Collection responds to count?: #{collection.respond_to?(:count)}"
-
-    # Try to get first result
-    if collection.respond_to?(:first)
-      begin
-        first_result = collection.first
-        puts "First result: #{first_result.inspect}"
-        puts "First result class: #{first_result.class}" if first_result
-      rescue => e
-        puts "Error getting first result: #{e.message}"
-      end
-    end
-
-    # Try to iterate and see if we get any items
-    puts "\nAttempting to iterate through collection:"
-    count = 0
-    begin
-      collection.each do |verification|
-        count += 1
-        puts "  Found verification #{count}: #{verification.id}"
-        puts "    Cardholder Name: #{verification.credit_card[:cardholder_name]}"
-        puts "    Status: #{verification.status}"
-        puts "    Created At: #{verification.created_at}"
-        break if count >= 5 # Limit output
-      end
-    rescue => e
-      puts "Error during iteration: #{e.message}"
-    end
-    puts "Total items found during iteration: #{count}"
-
-    # Check instance variables
-    puts "\nCollection instance variables:"
-    collection.instance_variables.each do |var|
-      begin
-        value = collection.instance_variable_get(var)
-        puts "  #{var}: #{value.inspect}"
-      rescue => e
-        puts "  #{var}: Error reading - #{e.message}"
-      end
-    end
-
-    puts "=== END DEBUG ==="
-
     expect(collection.maximum_size).to eq(0)
   end
 
