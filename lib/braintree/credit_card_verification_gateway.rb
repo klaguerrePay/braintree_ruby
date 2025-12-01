@@ -18,7 +18,11 @@ module Braintree
       search = CreditCardVerificationSearch.new
       block.call(search) if block
 
+      puts "\n=== DEBUG search ==="
+      puts "Search criteria: #{search.to_hash.inspect}"
       response = @config.http.post("#{@config.base_merchant_path}/verifications/advanced_search_ids", {:search => search.to_hash})
+      puts "Search IDs response: #{response.inspect}"
+      puts "=== END DEBUG search ===\n"
       ResourceCollection.new(response) { |ids| _fetch_verifications(search, ids) }
     end
 
@@ -39,9 +43,16 @@ module Braintree
 
     def _fetch_verifications(search, ids)
       search.ids.in ids
+      puts "\n=== DEBUG _fetch_verifications ==="
+      puts "Fetching verifications for IDs: #{ids.inspect}"
       response = @config.http.post("#{@config.base_merchant_path}/verifications/advanced_search", {:search => search.to_hash})
+      puts "Response keys: #{response.keys.inspect}"
       attributes = response[:credit_card_verifications]
-      Util.extract_attribute_as_array(attributes, :verification).map { |attrs| CreditCardVerification._new(attrs) }
+      puts "Attributes: #{attributes.inspect}"
+      result = Util.extract_attribute_as_array(attributes, :verification).map { |attrs| CreditCardVerification._new(attrs) }
+      puts "Extracted #{result.length} verifications"
+      puts "=== END DEBUG _fetch_verifications ===\n"
+      result
     end
 
     def self._create_signature
