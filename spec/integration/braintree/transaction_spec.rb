@@ -1216,27 +1216,32 @@ describe Braintree::Transaction do
           :client_secret => "client_secret$#{Braintree::Configuration.environment}$integration_client_secret",
           :logger => Logger.new("/dev/null"),
         )
-        result = gateway.merchant.create(
-          :email => "name@email.com",
-          :country_code_alpha3 => "GBR",
-          :payment_methods => ["credit_card", "paypal"],
+
+        code = Braintree::OAuthTestHelper.create_grant(gateway, {
+          :merchant_public_id => "partner_merchant_id",
+          :scope => "read_write"
+        })
+
+        result = gateway.oauth.create_token_from_code(
+          :code => code,
+          :scope => "read_write",
         )
 
-        gateway = Braintree::Gateway.new(
+        merchant_gateway = Braintree::Gateway.new(
           :access_token => result.credentials.access_token,
           :logger => Logger.new("/dev/null"),
         )
 
-        result = gateway.transaction.create(
+        transaction_result = merchant_gateway.transaction.create(
           :type => "sale",
-          :amount => "4000.00",
+          :amount => "5001.00",
           :credit_card => {
             :number => Braintree::Test::CreditCardNumbers::Visa,
             :expiration_date => "05/2020"
           },
         )
-        expect(result.success?).to eq(false)
-        expect(result.transaction.gateway_rejection_reason).to eq(Braintree::Transaction::GatewayRejectionReason::ApplicationIncomplete)
+        expect(transaction_result.success?).to eq(false)
+        expect(transaction_result.transaction.gateway_rejection_reason).to eq(Braintree::Transaction::GatewayRejectionReason::ApplicationIncomplete)
       end
 
       it "exposes the avs gateway rejection reason" do
