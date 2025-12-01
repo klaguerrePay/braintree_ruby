@@ -6,6 +6,28 @@ describe Braintree::CreditCardVerification, "search" do
       search.credit_card_cardholder_name.is "thisnameisnotreal"
     end
 
+    puts "\n=== DEBUG: Credit Card Verification Search Results ==="
+    puts "Maximum size: #{collection.maximum_size}"
+    puts "Actual results count: #{collection.to_a.length}"
+
+    if collection.maximum_size > 0
+      puts "\nFound records with cardholder name 'thisnameisnotreal':"
+      collection.to_a.each_with_index do |verification, index|
+        puts "  Record #{index + 1}:"
+        puts "    ID: #{verification.id}"
+        puts "    Cardholder Name: #{verification.credit_card[:cardholder_name]}"
+        puts "    Credit Card Number: #{verification.credit_card[:last_4] ? "****#{verification.credit_card[:last_4]}" : verification.credit_card[:number]}"
+        puts "    Status: #{verification.status}"
+        puts "    Created At: #{verification.created_at}"
+        puts "    Customer ID: #{verification.credit_card[:customer_id] if verification.credit_card[:customer_id]}"
+        puts "    Credit Card Token: #{verification.credit_card[:token] if verification.credit_card[:token]}"
+        puts ""
+      end
+    else
+      puts "No records found (as expected)"
+    end
+    puts "=== END DEBUG ==="
+
     expect(collection.maximum_size).to eq(0)
   end
 
