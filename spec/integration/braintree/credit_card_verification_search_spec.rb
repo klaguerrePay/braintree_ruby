@@ -7,25 +7,58 @@ describe Braintree::CreditCardVerification, "search" do
     end
 
     puts "\n=== DEBUG: Credit Card Verification Search Results ==="
+    puts "Collection class: #{collection.class}"
     puts "Maximum size: #{collection.maximum_size}"
-    puts "Actual results count: #{collection.to_a.length}"
 
-    if collection.maximum_size > 0
-      puts "\nFound records with cardholder name 'thisnameisnotreal':"
-      collection.to_a.each_with_index do |verification, index|
-        puts "  Record #{index + 1}:"
-        puts "    ID: #{verification.id}"
+    # Try different ways to access the results
+    results_array = collection.to_a
+    puts "Results array length: #{results_array.length}"
+    puts "Results array class: #{results_array.class}"
+
+    # Check if collection responds to other methods
+    puts "Collection responds to each?: #{collection.respond_to?(:each)}"
+    puts "Collection responds to first?: #{collection.respond_to?(:first)}"
+    puts "Collection responds to count?: #{collection.respond_to?(:count)}"
+
+    # Try to get first result
+    if collection.respond_to?(:first)
+      begin
+        first_result = collection.first
+        puts "First result: #{first_result.inspect}"
+        puts "First result class: #{first_result.class}" if first_result
+      rescue => e
+        puts "Error getting first result: #{e.message}"
+      end
+    end
+
+    # Try to iterate and see if we get any items
+    puts "\nAttempting to iterate through collection:"
+    count = 0
+    begin
+      collection.each do |verification|
+        count += 1
+        puts "  Found verification #{count}: #{verification.id}"
         puts "    Cardholder Name: #{verification.credit_card[:cardholder_name]}"
-        puts "    Credit Card Number: #{verification.credit_card[:last_4] ? "****#{verification.credit_card[:last_4]}" : verification.credit_card[:number]}"
         puts "    Status: #{verification.status}"
         puts "    Created At: #{verification.created_at}"
-        puts "    Customer ID: #{verification.credit_card[:customer_id] if verification.credit_card[:customer_id]}"
-        puts "    Credit Card Token: #{verification.credit_card[:token] if verification.credit_card[:token]}"
-        puts ""
+        break if count >= 5 # Limit output
       end
-    else
-      puts "No records found (as expected)"
+    rescue => e
+      puts "Error during iteration: #{e.message}"
     end
+    puts "Total items found during iteration: #{count}"
+
+    # Check instance variables
+    puts "\nCollection instance variables:"
+    collection.instance_variables.each do |var|
+      begin
+        value = collection.instance_variable_get(var)
+        puts "  #{var}: #{value.inspect}"
+      rescue => e
+        puts "  #{var}: Error reading - #{e.message}"
+      end
+    end
+
     puts "=== END DEBUG ==="
 
     expect(collection.maximum_size).to eq(0)
