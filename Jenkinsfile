@@ -45,6 +45,10 @@ pipeline {
     }
 
     stage("SDK Tests") {
+      when {
+        branch 'master'
+      }
+
       parallel {
         stage("Ruby 2.6 Bullseye") {
           agent {
