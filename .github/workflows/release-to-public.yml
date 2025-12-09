@@ -1,0 +1,104 @@
+name: Release to Public GitHub
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - automated_release_test
+
+jobs:
+  release:
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: gh-2-core-ubuntu-latest
+
+    steps:
+      - name: Checkout automated_release_test branch
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          # Debug: Check if GH_PAT is set (without exposing the value)
+          if [ -z "$GH_PAT" ]; then
+            echo "ERROR: GH_PAT is not set or is empty"
+            exit 1
+          fi
+          echo "GH_PAT is set (length: ${#GH_PAT} characters)"
+
+          echo "Cloning braintree-ruby repository with HTTPS..."
+          git clone https://x-access-token:${GH_PAT}@github.com/PayPal-Braintree/braintree-ruby.git .
+          echo "Checking out automated_release_test branch..."
+          git checkout automated_release_test
+          echo "Successfully checked out braintree-ruby at $(git rev-parse HEAD)"
+
+      - name: Extract version from CHANGELOG.md
+        id: get_version
+        run: |
+          # Find the first line that matches "## X.Y.Z" pattern
+          version_line=$(grep -m 1 -E '^##\s+[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md || echo "")
+
+          if [ -z "$version_line" ]; then
+            echo "Error: Could not find version in CHANGELOG.md"
+            echo "Expected format: '## X.Y.Z' (e.g., '## 1.2.3')"
+            echo "First 10 lines of CHANGELOG.md:"
+            head -n 10 CHANGELOG.md
+            exit 1
+          fi
+
+          echo "Found version line: $version_line"
+
+          # Extract just the version number
+          version=$(echo "$version_line" | grep -oP '[0-9]+\.[0-9]+\.[0-9]+')
+
+          echo "Extracted version: $version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Setup SSH for public repository
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.AUTO_DEPLOY_KEY }}
+        run: |
+          # Set up SSH key for authentication
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          # Configure SSH to use the deploy key
+          cat >> ~/.ssh/config <<EOF
+          Host github.com
+            HostName github.com
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking no
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Configure Git
+        run: |
+          git config user.name 'Braintree'
+          git config user.email 'code@getbraintree.com'
+
+      - name: Push to public repository
+        env:
+          VERSION: ${{ steps.get_version.outputs.version }}
+        run: |
+          # Add the public repository as a remote using SSH
+          git remote add public git@github.com:klaguerrePay/braintree_ruby.git
+
+          # Fetch and pull the current state of public master
+          git pull public master
+
+          # Merge changes from automated_release_test with squash
+          git merge --squash automated_release_test
+
+          # Remove internal .github directory (should not be public)
+          git rm -rf .github
+
+          # Commit with the release message
+          git commit -m "releasing version ${VERSION}"
+
+          # Create an annotated tag for this version
+          git tag ${VERSION} -a -m "${VERSION}"
+
+          # Push the tag to public repository
+          git push public ${VERSION}
+
+          # Push to public master
+          git push public HEAD:master
