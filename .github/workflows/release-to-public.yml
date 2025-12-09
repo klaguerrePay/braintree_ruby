@@ -17,6 +17,13 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
+          # Debug: Check if GH_PAT is set (without exposing the value)
+          if [ -z "$GH_PAT" ]; then
+            echo "ERROR: GH_PAT is not set or is empty"
+            exit 1
+          fi
+          echo "GH_PAT is set (length: ${#GH_PAT} characters)"
+
           echo "Cloning braintree-ruby repository with HTTPS..."
           git clone https://x-access-token:${GH_PAT}@github.com/PayPal-Braintree/braintree-ruby.git .
           echo "Checking out automated_release_test branch..."
