@@ -18,6 +18,7 @@ jobs:
         with:
           ref: automated_release_test
           fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
 
       - name: Extract version from CHANGELOG.md
         id: get_version
@@ -73,6 +74,9 @@ jobs:
 
           # Merge changes from automated_release_test with squash
           git merge --squash automated_release_test
+
+          # Remove internal .github directory (should not be public)
+          git rm -rf .github
 
           # Commit with the release message
           git commit -m "releasing version ${VERSION}"
