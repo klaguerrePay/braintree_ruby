@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.2
+- This is not a real version 
+
 ## 4.33.1
 - Bug fix for Nokogiri XML parsing
 
@@ -11,7 +14,7 @@
 - Add `processing_merchant_category_code` in `Transaction`
 - Add missing `transfer` validation error codes in `Transaction`
 - Replace libxml-ruby with nokogiri to address JRuby incompatability
- 
+
 ## 4.31.0
 
 - Add Bank Account Instant Verification Gateway with JWT creation support
