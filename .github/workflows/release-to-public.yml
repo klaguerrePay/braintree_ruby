@@ -14,11 +14,14 @@ jobs:
 
     steps:
       - name: Checkout automated_release_test branch
-        uses: actions/checkout@v4
-        with:
-          ref: automated_release_test
-          fetch-depth: 0
-          token: ${{ secrets.GH_PAT }}
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Cloning braintree-ruby repository with HTTPS..."
+          git clone https://x-access-token:${GH_PAT}@github.com/PayPal-Braintree/braintree-ruby.git .
+          echo "Checking out automated_release_test branch..."
+          git checkout automated_release_test
+          echo "Successfully checked out braintree-ruby at $(git rev-parse HEAD)"
 
       - name: Extract version from CHANGELOG.md
         id: get_version
