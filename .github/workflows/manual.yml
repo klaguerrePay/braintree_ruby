@@ -1,0 +1,87 @@
+name: Release to Public GitHub
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - automated_release_test
+
+jobs:
+  release:
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout automated_release_test branch
+        uses: actions/checkout@v4
+        with:
+          ref: automated_release_test
+          fetch-depth: 0
+
+      - name: Extract version from CHANGELOG.md
+        id: get_version
+        run: |
+          # Read the first line of CHANGELOG.md
+          first_line=$(head -n 1 CHANGELOG.md)
+          echo "First line of CHANGELOG: $first_line"
+
+          # Extract version number - expecting format like "## 1.2.3" or "# 1.2.3"
+          version=$(echo "$first_line" | grep -oP '##?\s*\K[0-9]+\.[0-9]+\.[0-9]+' || echo "")
+
+          if [ -z "$version" ]; then
+            echo "Error: Could not extract version from CHANGELOG.md"
+            echo "First line was: $first_line"
+            exit 1
+          fi
+
+          echo "Extracted version: $version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Setup SSH for public repository
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PUBLIC_REPO_DEPLOY_KEY }}
+        run: |
+          # Set up SSH key for authentication
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          # Configure SSH to use the deploy key
+          cat >> ~/.ssh/config <<EOF
+          Host github.com
+            HostName github.com
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking no
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Configure Git
+        run: |
+          git config user.name 'Braintree'
+          git config user.email 'code@getbraintree.com'
+
+      - name: Push to public repository
+        env:
+          VERSION: ${{ steps.get_version.outputs.version }}
+        run: |
+          # Add the public repository as a remote using SSH
+          git remote add public git@github.com:klaguerrePay/braintree_ruby.git
+
+          # Fetch and pull the current state of public master
+          git pull public master
+
+          # Merge changes from automated_release_test with squash
+          git merge --squash automated_release_test
+
+          # Commit with the release message
+          git commit -m "releasing version ${VERSION}"
+
+          # Create an annotated tag for this version
+          git tag ${VERSION} -a -m "${VERSION}"
+
+          # Push the tag to public repository
+          git push public ${VERSION}
+
+          # Push to public master
+          git push public HEAD:master
