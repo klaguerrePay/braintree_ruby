@@ -1,10 +1,7 @@
 # Changelog
 
-## Unreleased 
-- Add `middle_name` to `sender` and `receiver`, and `date_of_birth` to `sender` in transfer on `Transaction`
-- Add `rspec-retry` gem to Gemfile
-- Update `pry` gem to 0.14.0
-- Filter `Braintree::CreditCardVerification.search` to only return credit card verifications
+## 0.0.1
+- This is not a real version 
 
 ## 4.33.1
 - Bug fix for Nokogiri XML parsing
