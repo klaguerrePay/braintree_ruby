@@ -33,18 +33,21 @@ jobs:
       - name: Extract version from CHANGELOG.md
         id: get_version
         run: |
-          # Read the first line of CHANGELOG.md
-          first_line=$(head -n 1 CHANGELOG.md)
-          echo "First line of CHANGELOG: $first_line"
+          # Find the first line that matches "## X.Y.Z" pattern
+          version_line=$(grep -m 1 -E '^##\s+[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md || echo "")
 
-          # Extract version number - expecting format like "## 1.2.3" or "# 1.2.3"
-          version=$(echo "$first_line" | grep -oP '##?\s*\K[0-9]+\.[0-9]+\.[0-9]+' || echo "")
-
-          if [ -z "$version" ]; then
-            echo "Error: Could not extract version from CHANGELOG.md"
-            echo "First line was: $first_line"
+          if [ -z "$version_line" ]; then
+            echo "Error: Could not find version in CHANGELOG.md"
+            echo "Expected format: '## X.Y.Z' (e.g., '## 1.2.3')"
+            echo "First 10 lines of CHANGELOG.md:"
+            head -n 10 CHANGELOG.md
             exit 1
           fi
+
+          echo "Found version line: $version_line"
+
+          # Extract just the version number
+          version=$(echo "$version_line" | grep -oP '[0-9]+\.[0-9]+\.[0-9]+')
 
           echo "Extracted version: $version"
           echo "version=$version" >> $GITHUB_OUTPUT
