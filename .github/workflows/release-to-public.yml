@@ -54,7 +54,7 @@ jobs:
 
       - name: Setup SSH for public repository
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.PUBLIC_REPO_DEPLOY_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.AUTO_DEPLOY_KEY }}
         run: |
           # Set up SSH key for authentication
           mkdir -p ~/.ssh
